@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.ArrayList,com.ssafy.happyhouse.model.dto.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="dong" value="${dong}"/>
 <%
 	String root = request.getContextPath();
 	String ct = (String) session.getAttribute("ct");
@@ -366,72 +367,37 @@
 	<div class="container">
 		<div class="row mt-5 mb-5">
 			<div class="col-sm-4">
-				<h2>거래 내역</h2>
-				<%
-					if(realtd ==null)	{
-				%>
-				<div>
-					<%
-						if(tlist==null || tlist.size()==0){
-					%>
-						<h4>거래내역이 없습니다</h4>
-					<%
-						}else{
-								for (HouseDealDto h : tlist) {
-					%>
-					<div class="media-body">
+				<h2>거래 내역</h2>			
+				<hr>
+				  <c:if test="${tlist.size() == 0}">
+				  <h4>거래내역이 없습니다</h4>
+				  </c:if>
+				  <c:if test="${tlist.size() != 0}">
+	  			<c:forEach var="t" items="${tlist}">
+	  			<div class="media-body">
 					</div>
 						<h4>
-							<a href='#'><%=h.getAptname()%></a>
+							<a href='#'>${t.aptname}</a>
 						</h4>
 
 						<h6 class="media-heading" id='deal'>
-							거래금액 :	<%=h.getDealAmount()%>만원
+							거래금액 :	${t.dealAmount}만원
 						</h6>
 						<h6 class="media-heading" id='deal'>
-							면적:	<%=h.getArea()%></h6>
+							면적:	${t.area}</h6>
 						<div>
 							<p class="small margin-clear">
 							<div class="fa fa-calendar pr-10"></div>
-							<%=h.getDealYear()%>.<%=h.getDealMonth()%>.<%=h.getDealDay()%>
+							${t.dealYear}.${t.dealMonth}.${t.dealDay}
 							</p>
 						</div>
-					<%
-						}
-								}
-					%>
-				</div>
-				<%
-					}else{
-				%>
-					<h4><a href='#'><%=realtd.get(0).getAptname()%></a>	</h4>
-					<div>
-					<%
-						for (HouseDealDto h : realtd) {
-					%>
-					<div class="media-body">
-						<h6 class="media-heading" id='deal'>
-							거래금액 :	<%=h.getDealAmount()%>만원
-						</h6>
-						<h6 class="media-heading" id='deal'>
-							면적:	<%=h.getArea()%></h6>
-						<div>
-							<p class="small margin-clear">
-							<div class="fa fa-calendar pr-10"></div>
-							<%=h.getDealYear()%>.<%=h.getDealMonth()%>.<%=h.getDealDay()%>
-							</p>
-						</div>
-					</div>
-					<%
-						}
-					%>
-				</div>
-				<%
-					session.removeAttribute("real");
-							}
-				%>
-				<hr>
+						<hr>
+	  		</c:forEach>
+
+	  		</c:if>
 			</div>
+			
+			
 			<div class="col-sm-8" style="margin: 0 auto;">
 
 				<!-- Google Map start -->
