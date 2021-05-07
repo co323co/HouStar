@@ -32,7 +32,7 @@
       </head>
       <body>
              
-         <%@ include file="/WEB-INF/views/include/header.jsp" %>
+        <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
        
         <div class="container" >
@@ -43,9 +43,7 @@
                 
                   <div class="font-weight-bold mb-3 mt-3">공지 사항 등록</div>
                   
-                    <form method="post" action="<%=root%>/notice" class="form-horizontal was-validated">
-    					<input type="hidden" name="act" value="post_notice"> 
-    					                
+                    <form method="post" action="<%=root%>/notice/write" class="form-horizontal was-validated">
                         <div class="form-group row">
                           <label class="col-sm-3 text-md-right" for="title">제목<span class="text-danger small">*</span></label>
                           <div class="col-sm-8">

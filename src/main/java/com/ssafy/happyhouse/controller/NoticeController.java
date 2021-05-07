@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -18,7 +19,13 @@ public class NoticeController {
 //		return "/board/notice_update";
 //	}
 
-	@GetMapping("write")
+	//notice_submit.jsp로 이동
+	@GetMapping("writeForm")
+	public String mvWriteForm() {
+		return "/board/notice_submit";
+	}
+
+	@PostMapping
 	public String write() {
 		return "/board/notice_submit";
 	}

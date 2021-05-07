@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.NoticeMapper">
+
+	<insert id="insert" parameterType="NoticeDto">
+		insert into notices (id, title, content, views, userId)
+		values (#{id}, #{title}, #{content}, #{views}, #{userId})
+	</insert>
+	
+	<select id="list" parameterType="map" resultType="NoticeDto">
+		select id, title, content, views, userId
+		from notices
+		<if test="word != null and word != ''">
+			<if test="key == 'subject'">
+				where subject like concat('%', #{word}, '%')
+			</if>
+			<if test="key != 'subject'">
+				where ${key} = #{word}
+			</if>
+		</if>
+		order by id desc
+<!-- 		limit #{start}, #{spp} -->
+	</select>
+	
+<!-- 	<select id="getTotalCount" parameterType="map" resultType="int"> -->
+<!-- 		select count(articleno) -->
+<!-- 		from guestbook -->
+<!-- 		<if test="word != null and word != ''"> -->
+<!-- 			<if test="key == 'subject'"> -->
+<!-- 				where subject like concat('%', #{word}, '%') -->
+<!-- 			</if> -->
+<!-- 			<if test="key != 'subject'"> -->
+<!-- 				where ${key} = #{word} -->
+<!-- 			</if> -->
+<!-- 		</if> -->
+<!-- 	</select> -->
+	
+	<select id="search" parameterType="int" resultType="NoticeDto">
+		select id, title, content, views, userId
+		from notices
+		where id = #{id}
+	</select>
+	
+	<update id="update" parameterType="NoticeDto">
+		update notices
+		set title = #{title}, content = #{content}, views = #{views}, userId = #{userId} 
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from notices
+		where id = #{id}
+	</delete>
+	
+</mapper>

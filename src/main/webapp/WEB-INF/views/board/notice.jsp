@@ -60,7 +60,7 @@
               <form method="post" action="<%=root%>/notice/search" class="form-inline">
                 <input type="text" name="search_value" class="form-control mb-2 mr-sm-2" placeholder="제목으로 검색하기">
                 <button type="submit" class="btn btn-primary mb-2">검색</button>
-                <button onClick="location.href='<%=root%>/notice/write'" type="button" class="btn btn-primary mb-2 ml-3">공지 등록</button>
+                <button onClick="location.href='<%=root%>/notice/writeForm'" type="button" class="btn btn-primary mb-2 ml-3">공지 등록</button>
               </form>
             
 
