@@ -22,29 +22,29 @@ public class HousedealServiceImpl implements HousedealService {
 
 	@Override
 	public List<String> gungu(String city) {
-		return HousedealDAOImpl.getHousedealDAO().gungu(city);
+		return HouseDealDAOImpl.getHousedealDAO().gungu(city);
 	}
 
 	@Override
 	public List<String> dong(String gu) {
-		return HousedealDAOImpl.getHousedealDAO().dong(gu);
+		return HouseDealDAOImpl.getHousedealDAO().dong(gu);
 	}
 	@Override
 	public List<HouseDealDto> treadInfo(String dong) {
-		return HousedealDAOImpl.getHousedealDAO().treadInfo(dong);
+		return HouseDealDAOImpl.getHousedealDAO().treadInfo(dong);
 	}
 	@Override
 	public List<HouseDealDto> getReal(String name) {
 		
-		return HousedealDAOImpl.getHousedealDAO().getReal(name);
+		return HouseDealDAOImpl.getHousedealDAO().getReal(name);
 	}
 	@Override
 	public List<CoronaDto> getCorona(String gu) {
-		return HousedealDAOImpl.getHousedealDAO().getCorona(gu);
+		return HouseDealDAOImpl.getHousedealDAO().getCorona(gu);
 	}
 	@Override
 	public List<Hospital> getHospital(String gu) {
-		return HousedealDAOImpl.getHousedealDAO().getHospital(gu);
+		return HouseDealDAOImpl.getHousedealDAO().getHospital(gu);
 	}
 
 }

@@ -6,7 +6,7 @@ import com.ssafy.happyhouse.model.dto.CoronaDto;
 import com.ssafy.happyhouse.model.dto.HospitalDto;
 import com.ssafy.happyhouse.model.dto.HouseDealDto;
 
-public interface HouseDealDAO {
+public interface HouseDealMapper {
 	
 	public List<HouseDealDto> treadInfo(String dong);
 	public List<String> gungu(String city);
@@ -14,4 +14,5 @@ public interface HouseDealDAO {
 	public List<HouseDealDto> getReal(String name);
 	public List<CoronaDto> getCorona(String gu);
 	public List<HospitalDto> getHospital(String gu);
+	
 }

@@ -8,21 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ssafy.model.CoronaDto;
-import com.ssafy.model.Hospital;
-import com.ssafy.model.HouseDealDto;
-import com.ssafy.util.DBUtil;
-
-
-public class HousedealDAOImpl implements HousedealDAO {
-	private static HousedealDAO housedealDao;
+public class HouseDealDAOImpl implements HouseDealDAO {
+	private static HouseDealDAO housedealDao;
 	
-	private HousedealDAOImpl() {}
+	private HouseDealDAOImpl() {}
 	
-	public static HousedealDAO getHousedealDAO()
+	public static HouseDealDAO getHousedealDAO()
 	{
 		if(housedealDao == null)
-			housedealDao = new HousedealDAOImpl();
+			housedealDao = new HouseDealDAOImpl();
 		return housedealDao;
 	}
 	
