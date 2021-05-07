@@ -78,6 +78,14 @@
     				}
     			});
     		});
+    		
+    		// 회워 탈퇴.
+    		$(document).on("click", ".delBtn", function() {
+    			if(confirm("정말 회원 탈퇴하시겠습니까??")) {
+    				let delid = $("#target").text();
+    				
+    			}
+    		});
 
         	function makeList(users){
         		$("#userlist").empty();
@@ -89,7 +97,7 @@
                               <div class="row">
                                 <label class="col-sm-3 text-md-right" for="Id">아이디<span class="text-danger small">*</span></label>
                                 <div class="col-sm-8">
-                                  <label >${'${user.userId}'}</label>
+                                  <label id="target">${'${user.userId}'}</label>
                                 </div>
                               </div>
                               <div class="row">
@@ -120,7 +128,8 @@
       			            <div class="pl-5 pr-3 pb-3">
       			              <button type="button" class="modiBtn btn btn-dark" >수정</button>
       			              <!-- 수정하면 새로운 페이지에서 수정-->
-      			              <button type="button" class="delBtn btn btn-dark" >삭제(탈퇴)</button>
+      			            <button type="button" onClick="location.href='${root}/user/delete'"class="btn btn-dark" >삭제(탈퇴)</button>
+      			            <!--<button type="button" onClick="location.href='user/delete'"class="delBtn btn btn-dark" >삭제(탈퇴)</button> !-->
       						<br>
                			   </div>
                     </div> 
@@ -160,7 +169,7 @@
   			            <div class="pl-5 pr-3 pb-3">
   			              <button type="button" class="modifyBtn btn btn-dark" >수정</button>
   			              <!-- 수정하면 새로운 페이지에서 수정-->
-  			              <button type="button" class="cancelBtn btn btn-dark" >삭제(탈퇴)</button>
+  			          
   						<br>
            			   </div>
                 </div>
@@ -172,7 +181,7 @@
         	//삭제 누르면 회원정보 삭제 하고 빈 표 보이기 
             $("#delete").on('click',function () {
                 alert("회원 탈퇴 되었습니다.");
-                location.href = "index.jsp"
+              
               });
             
             
@@ -196,6 +205,11 @@
           <!-- 중앙 메인 컨테이너-->
           <div class="row justify-content-center " align="center"> 
             <div id="userlist" class="col-sm-8 mt-5 mb-1  " style="background-color: gainsboro; border-radius: 10px; "></div>
+            	<!--
+            	    <button type="button" class="cancelBtn btn btn-dark" >삭제(탈퇴)</button> -->	
+            </div>
+            <div align="center" class="ml-4">
+          <%--   <a id="out" class="nav-link" href='${root }/user/detele'>"탈퇴"</a> --%>
             </div>
             
         </div>

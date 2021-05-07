@@ -34,9 +34,9 @@
 		where userId = #{userId}
 	</update>
 	
-	<!-- <delete id="userDelete" parameterType="String">
-		delete from ssafy_member
-		where userid = #{userid}
-	</delete>  -->
+	 <delete id="deleteMember" parameterType="String">
+		delete from members
+		where userId = #{userId}
+	</delete>  
 	
 </mapper>

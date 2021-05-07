@@ -35,6 +35,12 @@ public class MemberServiceImpl implements MemberService {
 		sqlSession.getMapper(MemberMapper.class).update(memberDto);
 		
 	}
+
+	@Override
+	public void deleteMember(String id) {
+		sqlSession.getMapper(MemberMapper.class).deleteMember(id);
+		
+	}
 	
 	
 //	@Override

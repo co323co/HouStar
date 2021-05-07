@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Delete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -89,6 +91,24 @@ public class MemberController {
 		memberDto = memberService.lookupmember(userId);
 		return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 	}
+	//회원 탈퇴
+//	@DeleteMapping(value="/rest/user/{userId}")
+//	public @ResponseBody ResponseEntity<String> userDelete(@PathVariable("userId") String userId,HttpSession session) {
+//		memberService.deleteMember(userId);
+//		session.invalidate();
+//		String msg = "회원 탈퇴가 완료되었습니다";
+//		return new ResponseEntity<String>(msg, HttpStatus.OK);
+//	}
+	//회원탈퇴
+	@GetMapping(value="/user/delete")
+	public String delete(HttpSession session) {
+		System.out.println("삭제진행");
+		String userId = (String)session.getAttribute("userId");
+		memberService.deleteMember(userId);
+		session.invalidate();
+		return "index";
+	}
+	
 //		
 //		else if("gungu".equals(act)) gungu(request,response);
 //		else if("dong".equals(act))	dong(request,response);

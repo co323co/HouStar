@@ -12,7 +12,7 @@ public interface MemberService {
 //	
 //	public void insertMember(Member member);
 	public void update(MemberDto memberDto);
-//	public void deleteMember(String id);
+	public void deleteMember(String id);
 	public MemberDto lookupmember(String id);
 //	public String findPassword(String id, String name, String phoneNumber);
 	
