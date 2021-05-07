@@ -16,8 +16,7 @@ public interface MemberMapper {
 	public void deleteMember(String id);
 	public MemberDto lookupmember(String id);
 	public List<MemberDto> userList();
-	public List<MemberDto> searchUser(Map<String, String> map);
 	public List<MemberDto> searchbyid(String word);
-//	public String findPassword(String id, String name, String phoneNumber);
+	public Map<String, String> findPassword(Map<String, String> map);
 	
 }

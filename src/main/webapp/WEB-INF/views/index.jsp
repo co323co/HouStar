@@ -175,7 +175,7 @@
 			<div class="col-md-12" style="margin: 0 auto;">
 				<div class="row grid-space-10">
 					<div class='col-md-4'>
-						<img src='img/sideAD.jpg'>
+						<img src='${root}/img/sideAD.jpg'>
 					</div>
 					<div class="col-md-4">
 						<h3 class="title">주택 관련 기사</h3>

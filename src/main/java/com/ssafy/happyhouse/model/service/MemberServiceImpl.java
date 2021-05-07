@@ -1,6 +1,5 @@
 package com.ssafy.happyhouse.model.service;
 
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Map;
 
@@ -16,16 +15,15 @@ import com.ssafy.happyhouse.model.mapper.MemberMapper;
 @Service
 public class MemberServiceImpl implements MemberService {
 	
-	
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
 	public boolean login(Map<String, String> map) {
-		if(map.get("userId") == null || map.get("userPwd") == null)
+		if(map.get("login_userId") == null || map.get("login_userPwd") == null)
 			return false;
 		else{
-//			System.out.println(map.get("userId") +" "+map.get("userPwd"));	
+//			System.out.println(map.get("login_userId") +" "+map.get("login_userPwd"));	
 			return sqlSession.getMapper(MemberMapper.class).login(map);
 		}
 	}
@@ -59,14 +57,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberDto> searchUser(Map<String, String> map) {
-		return sqlSession.getMapper(MemberMapper.class).searchUser(map);
-	}
-
-	@Override
 	public List<MemberDto> searchbyid(String word) {	
 		return sqlSession.getMapper(MemberMapper.class).searchbyid(word);
 	}
 
+	@Override
+	public Map<String, String> findPassword(Map<String, String> map) {
+		return sqlSession.getMapper(MemberMapper.class).findPassword(map);
+	}
 
 }

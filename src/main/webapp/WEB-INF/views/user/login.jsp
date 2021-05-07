@@ -37,26 +37,23 @@
                   </div>
                  
                   <br>
-                    <form class="form-horizontal" method="post" action="<%=root%>/ayj">
-                    
-                   		<input type="hidden" name="act" value="login">
-                    
+                    <form class="form-horizontal" method="post" action="${root}/user/login">
                         <div class="form-group row">
-                          <label class="col-sm-3 text-md-right" for="userid">아이디<span class="text-danger small">*</span></label>
+                          <label class="col-sm-3 text-md-right" for="login_userId">아이디<span class="text-danger small">*</span></label>
                           <div class="col-sm-8">
-                            <input name ="userid" type="text" class="form-control" placeholder="" id="userid">
+                            <input name ="login_userId" type="text" class="form-control" placeholder="" id="login_userId">
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label class="col-sm-3 text-md-right" for="userpwd">비밀번호<span class="text-danger small">*</span></label>
+                          <label class="col-sm-3 text-md-right" for="login_userPwd">비밀번호<span class="text-danger small">*</span></label>
                           <div class="col-sm-8">
-                            <input name ="userpwd" type="text" class="form-control" placeholder="영문 숫자 포함 6자리 이상" id="userpwd">
+                            <input name ="login_userPwd" type="text" class="form-control" placeholder="영문 숫자 포함 6자리 이상" id="login_userPwd">
                           </div>
                         </div>
                         <div class="form-group row text-right mr-5">
                           <div class="ml-md-auto col-md-9">
                             <button type="submit" class="btn btn-group btn-warning btn-animated">로그인</button>
-                            <button type="button" class="btn btn-group btn-info btn-animated" onClick="location.href='passfind.jsp'">비밀번호 찾기</button>
+                            <button type="button" class="btn btn-group btn-info btn-animated" onClick="location.href='${root}/user/passfindform'">비밀번호 찾기</button>
                           </div>
                         </div>
                       </form>

@@ -30,17 +30,6 @@
       }
       
     </style>
-   	<!-- 로그인 이벤트 처리 -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            
-            $("#bnt-login").on('click',function () {
-                document.getElementById("bnt-login").submit();
-            });
-
-
-        });
-        </script>
 </head>
 <body>
 	<header>
@@ -52,7 +41,7 @@
 	                  <li class="nav-item">
 	                    
 	                    <c:choose>
-	                    	<c:when test="${empty userId }">
+	                    	<c:when test="${empty userId}">
 	                    	 <li class="nav-item">
         						<a id="enter" class="nav-link" href="<%=croot%>/user/insertform" style="color: white;">Sign Up</a>
        						</li>
@@ -62,15 +51,15 @@
 		                          Login
 		                      </button>
 		                      <div class="dropdown-menu bg-dark p-3" style="color: white; font-size: small;">
-			                      <form method="get" action="${croot}/user/login">
+			                      <form method="POST" action="${croot}/user/login">
 				                          <div class="form-group" style="width : 150px;">
-				                              <label for="usr">아 이 디</label>
-				                              <input name = "userId"type="text" class="form-control mb-2" id="userId">
-				                              <label for="pwd">비밀번호</label>
-				                              <input name = "userPwd" type="password" class="form-control" id="userPwd">
+				                              <label for="login_userId">아 이 디</label>
+				                              <input name = "login_userId"type="text" class="form-control mb-2" id="login_userId">
+				                              <label for="login_userPwd">비밀번호</label>
+				                              <input name = "login_userPwd" type="password" class="form-control" id="login_userPwd">
 				                          </div>
 				                          <button id="bnt-login" class="btn btn-light mb-2" style="font-size: small; padding: 2px 10px; display: block;">로 그 인</button>
-				                          <button type="button" onClick="location.href='passfind'" class="btn btn-dark" style="font-size: small; padding: 2px 10px; background-color: rgb(73, 73, 90);">비밀번호 찾기</button>
+				                          <button type="button" onClick="location.href='${root}/user/passfindform'" class="btn btn-dark" style="font-size: small; padding: 2px 10px; background-color: rgb(73, 73, 90);">비밀번호 찾기</button>
 				                  </form>
 		                      </div>
 		                   </div>
@@ -81,7 +70,7 @@
 				         		
 					        </li>
 	                    	 <li class="nav-item">
-				         		<a id="out" class="nav-link" href='${croot }/user' style= "color: white;">Logout</a>
+				         		<a id="out" class="nav-link" href='${croot }/user/logout' style= "color: white;">Logout</a>
 					        </li>
 					        <li class="nav-item">
 					         	<a id="member" class="nav-link" href="${croot }/user/userInfo" style= "color: white;">User Info</a>

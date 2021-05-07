@@ -7,7 +7,11 @@
 	<select id="login" parameterType="map" resultType="boolean">
 		select  IF(COUNT(*) = 1, 1, 0)
 		from members
-		where userId = #{userId} and userPwd = #{userPwd}
+		where userId = #{login_userId} and userPwd = #{login_userPwd}
+	</select>
+
+	<select id="findPassword" parameterType="map" resultType="map">
+		select userPwd as password from members where userId=#{id} and userName=#{name} and userPhone=#{phone};
 	</select>
 
 	<select id="userList" resultType="memberDto">

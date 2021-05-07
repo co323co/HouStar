@@ -1,10 +1,10 @@
 package com.ssafy.happyhouse.controller;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,14 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,20 +33,18 @@ public class MemberController {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
-	private MemberService memberService;
+	private MemberService mSer;
 
-	@GetMapping("/user/login")
-	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session, HttpServletResponse response) {
-		
-		logger.debug("로그인실행");
-		boolean login = memberService.login(map);
-		String userId = map.get("userId");		
+	@PostMapping("/user/login")
+	public String login(@RequestParam Map<String, String> map, HttpSession session) {
+		logger.debug("로그인 실행");
+		boolean login = mSer.login(map);
 		if(login) {			
+			String userId = map.get("login_userId");		
 			session.setAttribute("userId", userId);		
 			return "index";
 		}else {
-			model.addAttribute("msg","아이디 비번 확인후로그인");
-			return "index";
+			return "/user/login";
 		}	
 	}
 	
@@ -56,6 +52,26 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@GetMapping("/user/loginform")
+	public String mvLoginForm() {
+		return "/user/login";
+	}
+
+	@GetMapping("/user/passfindform")
+	public String mvPassFind() {
+		return "/user/passfind";
+	}
+
+	@GetMapping("/user/findpassword/{id}/{name}/{phone}")
+	@ResponseBody
+	public Map<String, String> findPassWord(@PathVariable String id, @PathVariable String name, @PathVariable String phone) {
+		Map<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("name", name);
+		map.put("phone", phone);
+		return mSer.findPassword(map);
 	}
 	
 	//인포페이지로 이동
@@ -68,7 +84,7 @@ public class MemberController {
 	public @ResponseBody ResponseEntity<MemberDto> userInfo(HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
 		
-		MemberDto memberDto = memberService.lookupmember(userId);
+		MemberDto memberDto = mSer.lookupmember(userId);
 		if(memberDto != null)
 			return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 		else
@@ -78,9 +94,9 @@ public class MemberController {
 	@PutMapping("/api/user")
 	public @ResponseBody ResponseEntity<MemberDto> userModify(@RequestBody MemberDto memberDto) {
 		System.out.println(memberDto.toString());
-		memberService.update(memberDto);		
+		mSer.update(memberDto);		
 		String userId = memberDto.getUserId();		
-		memberDto = memberService.lookupmember(userId);
+		memberDto = mSer.lookupmember(userId);
 		return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 	}
 	//회원탈퇴
@@ -88,7 +104,7 @@ public class MemberController {
 	public String delete(HttpSession session) {
 		System.out.println("삭제진행");
 		String userId = (String)session.getAttribute("userId");
-		memberService.deleteMember(userId);
+		mSer.deleteMember(userId);
 		session.invalidate();
 		return "index";
 	}
@@ -103,7 +119,7 @@ public class MemberController {
 	}
 	@PostMapping(value="/user/register")
 	public String register(MemberDto memberdto) {
-		memberService.insertMember(memberdto);
+		mSer.insertMember(memberdto);
 		return "index";
 	}
 //		
