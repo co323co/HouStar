@@ -7,7 +7,7 @@ public class MemberDto {
 	private String userAddress;
 	private String userPhone;
 	
-	
+	public MemberDto() {}
 	public MemberDto(String userPwd, String userName, String userAddress, String userPhone) {
 		this.userPwd = userPwd;
 		this.userName = userName;
@@ -54,6 +54,11 @@ public class MemberDto {
 	}
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
+	}
+	@Override
+	public String toString() {
+		return "MemberDto [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", userAddress="
+				+ userAddress + ", userPhone=" + userPhone + "]";
 	}
 	
 	

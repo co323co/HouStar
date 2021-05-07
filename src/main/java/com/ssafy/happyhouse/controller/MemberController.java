@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -10,81 +11,84 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.ssafy.happyhouse.model.dto.MemberDto;
 import com.ssafy.happyhouse.model.service.MemberService;
+
+import io.swagger.annotations.ApiParam;
 
 
 
 @Controller
+@CrossOrigin("*")
+//@RequestMapping("/user")
 public class MemberController {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	private MemberService memberService;
-//	
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//		String act = request.getParameter("act");
-//		String root = request.getContextPath();
-//
-//		System.out.println(act);
-//		
-//		if("login".equals(act)) {
-//			login(request,response);
-//			
-//		}else if("logout".equals(act)) {
-//			logout(request,response);
-//			
-//		}else if("insertform".equals(act)) {
-//			System.out.println("회원가입 버튼누름");
-//			response.sendRedirect("enter.jsp");
-//			
-//		}else if("insertmember".equals(act)) {
-//			System.out.println("회원등록 버튼누름");
-//			insertmember(request,response);
-//			
-//		}else if("lookupmember".equals(act)) {
-//			System.out.println("회원정보 버튼누름");
-//			lookupmember(request,response);
-//		}else if("updateform".equals(act)) {
-//			System.out.println("수정하기 버튼누름");
-//			response.sendRedirect("memberupdate.jsp");
-//		}
-//		else if("updatemember".equals(act)) {
-//			System.out.println("수정메소드 실행");
-//			updatemember(request,response);
-//		}else if("deletemember".equals(act)) {
-//			System.out.println("회원탈퇴 실행");
-//			deletemember(request,response);
-//		}else if("inner_submit_form".equals(act)) {
-//			System.out.println("관심지역 등록 메뉴  누름");
-//			response.sendRedirect("inter_submit.jsp");
-//		}else if("inter_submit".equals(act)) {
-//			System.out.println("관심지역 등록");
-//			inner_submit(request,response);	
-//		}else if("inter_search".equals(act)) {
-//			System.out.println("관심지역탐방");
-//			inner_search(request,response);
-//		}else if("findpassword".equals(act)) {
-//			findPassword(request, response);
-//		}else if("citychange".equals(act)) {
-//			citychange(request,response);
-//		}else if("inter_delete".equals(act)) {
-//			inter_delete(request,response);
-//		}
-//		
-//		
-//		
-//		
-//		
-//		
+
+
+	@PostMapping(value="/user")
+	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session, HttpServletResponse response) {
+		
+		logger.debug("로그인실행");
+		boolean login = memberService.login(map);
+		String id = map.get("userId");		
+		if(login) {			
+			session.setAttribute("userId", id);		
+		}else {
+			model.addAttribute("msg","아이디 비번 확인후로그인");
+		}	
+		return "index";
+	}
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	//인포페이지로 이동
+	@GetMapping(value="/user/userInfo")
+	public String mvuserInfo() {
+		return "user/member";
+	}
+	//rest로 Userinfo 입장 시 로그인정보 뿌리기
+	@GetMapping(value="/rest/user")
+	public @ResponseBody ResponseEntity<MemberDto> userInfo(HttpSession session) {
+		String userId = (String)session.getAttribute("userId");
+		
+		MemberDto memberDto = memberService.lookupmember(userId);
+		if(memberDto != null)
+			return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
+		else
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+	}
+	
+	@PutMapping(value="/rest/user")
+	public @ResponseBody ResponseEntity<MemberDto> userModify(@RequestBody MemberDto memberDto) {
+		System.out.println(memberDto.toString());
+		memberService.update(memberDto);
+		
+		String userId = memberDto.getUserId();
+		
+		memberDto = memberService.lookupmember(userId);
+		return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
+	}
 //		
 //		else if("gungu".equals(act)) gungu(request,response);
 //		else if("dong".equals(act))	dong(request,response);
@@ -283,34 +287,7 @@ public class MemberController {
 //		
 //	}
 
-//	private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//		HttpSession session = request.getSession();
-////		session.removeAttribute("userinfo");	//하나씩 지울때
-//		session.invalidate();//세션 다 날려버리기
-//		response.sendRedirect(request.getContextPath() + "/index.jsp");//로그아웃했으니 보내버리기
-//		System.out.println("로그아웃함");
-//		
-//	}
-	@PostMapping(value="/user")
-	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session, HttpServletResponse response) {
-		
-		logger.debug("로그인실행");
-
-		boolean login = memberService.login(map);
-		String id = map.get("userId");
-		
-		if(login) {			
-			session.setAttribute("userId", id);		
-		}else {
-			model.addAttribute("msg","아이디 비번 확인후로그인");
-		}	
-		return "index";
-	}
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
+	
 //	
 //	private void citychange(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		String val = request.getParameter("city");

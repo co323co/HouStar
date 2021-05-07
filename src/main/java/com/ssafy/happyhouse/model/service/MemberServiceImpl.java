@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.model.service;
 
+import java.lang.reflect.Member;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,6 +28,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDto lookupmember(String id) {	
 		return sqlSession.getMapper(MemberMapper.class).lookupmember(id);
+	}
+
+	@Override
+	public void update(MemberDto memberDto) {
+		sqlSession.getMapper(MemberMapper.class).update(memberDto);
+		
 	}
 	
 	

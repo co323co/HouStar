@@ -11,11 +11,11 @@
 	</select>
 	
 	
-	<!-- <select id="userList" resultType="memberDto">
+	 <!-- <select id="userList" resultType="memberDto">
 		select userid, userpwd, username, email, address, date_format(joindate, '%y.%m.%d') joindate
 		from ssafy_member
 		order by joindate desc;
-	</select> -->
+	</select>  -->
 	
 	<select id="lookupmember" parameterType="String" resultType="memberDto">
 		select *
@@ -23,20 +23,20 @@
 		where userId = #{userId}
 	</select>
 	
-	<!-- <insert id="userRegister" parameterType="MemberDto">
+	<!--  <insert id="userRegister" parameterType="MemberDto">
 		insert into ssafy_member (userid, userpwd, username, email, address, joindate)
 		values (#{userid}, #{userpwd}, #{username}, #{email}, #{address}, now())
 	</insert>
-	
-	<update id="userModify" parameterType="MemberDto">
-		update ssafy_member
-		set userpwd = #{userpwd}, email = #{email}, address = #{address}
-		where userid = #{userid}
+	 -->
+	<update id="update" parameterType="memberDto">
+		update members
+		set userPwd = #{userPwd}, userName = #{userName}, userAddress = #{userAddress}, userPhone = #{userPhone}
+		where userId = #{userId}
 	</update>
 	
-	<delete id="userDelete" parameterType="String">
+	<!-- <delete id="userDelete" parameterType="String">
 		delete from ssafy_member
 		where userid = #{userid}
-	</delete> -->
+	</delete>  -->
 	
 </mapper>
