@@ -88,7 +88,7 @@
 				         		<a id="out" class="nav-link" href='${croot }/user' style= "color: white;">Logout</a>
 					        </li>
 					        <li class="nav-item">
-					         	<a id="member" class="nav-link" href="<%=croot%>/userInfo" style= "color: white;">User Info</a>
+					         	<a id="member" class="nav-link" href="${croot }/user/userInfo" style= "color: white;">User Info</a>
 					        </li>
 	                    	</c:otherwise>
 	                    </c:choose>   
