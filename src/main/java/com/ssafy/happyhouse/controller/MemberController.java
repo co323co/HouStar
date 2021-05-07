@@ -1,4 +1,4 @@
-package com.ssafy.controller;
+package com.ssafy.happyhouse.controller;
 
 import java.beans.beancontext.BeanContext;
 import java.io.IOException;
@@ -37,7 +37,7 @@ import com.ssafy.model.service.MemberServiceImpl;
 
 
 @WebServlet("/ayj")
-public class MemberServlet extends HttpServlet {
+public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	HousedealService pro;
 	MemberService memSer;

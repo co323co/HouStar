@@ -63,13 +63,13 @@
 		                          Login
 		                      </button>
 		                      <div class="dropdown-menu bg-dark p-3" style="color: white; font-size: small;">
-			                      <form method="post" action="<%=croot%>/ayj">
+			                      <form method="post" action="${croot }/user">
 				                      <input type="hidden" name="act"value="login">
 				                          <div class="form-group" style="width : 150px;">
 				                              <label for="usr">아 이 디</label>
-				                              <input name = "userid"type="text" class="form-control mb-2" id="usr">
+				                              <input name = "userId"type="text" class="form-control mb-2" id="userId">
 				                              <label for="pwd">비밀번호</label>
-				                              <input name = "userpwd" type="password" class="form-control" id="pwd">
+				                              <input name = "userPwd" type="password" class="form-control" id="userPwd">
 				                          </div>
 				                          <button id="bnt-login" class="btn btn-light mb-2" style="font-size: small; padding: 2px 10px; display: block;">로 그 인</button>
 				                          <button type="button" onClick="location.href='passfind'" class="btn btn-dark" style="font-size: small; padding: 2px 10px; background-color: rgb(73, 73, 90);">비밀번호 찾기</button>
