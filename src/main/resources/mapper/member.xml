@@ -15,7 +15,7 @@
 		from members
 		order by #{userId};
 	</select> 
-	
+	<!-- 
 	<select id="searchUser" parameterType="map" resultMap="memberDto">
 		select *
 		from members
@@ -30,7 +30,7 @@
 				where ${key} = #{word}
 			</if>
 		</if>
-	</select>
+	</select> -->
 	
 	
 	<select id="lookupmember" parameterType="String" resultType="memberDto">
