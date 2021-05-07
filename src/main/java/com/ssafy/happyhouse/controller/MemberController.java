@@ -19,41 +19,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ssafy.model.HouseDealDto;
-import com.ssafy.model.InterestArea;
-import com.ssafy.model.Mart;
-import com.ssafy.model.Member;
-import com.ssafy.model.dao.MartDAO;
-import com.ssafy.model.service.BcodeService;
-import com.ssafy.model.service.BcodeServicelmpl;
-import com.ssafy.model.service.HousedealService;
-import com.ssafy.model.service.HousedealServiceImpl;
-import com.ssafy.model.service.InterestAreaService;
-import com.ssafy.model.service.InterestAreaServicelmpl;
-import com.ssafy.model.service.MartService;
-import com.ssafy.model.service.MartServicelmpl;
-import com.ssafy.model.service.MemberService;
-import com.ssafy.model.service.MemberServiceImpl;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-
-@WebServlet("/ayj")
-public class MemberController extends HttpServlet {
+@Controller
+@RequestMapping("/user")
+public class MemberController {
 	private static final long serialVersionUID = 1L;
-	HousedealService pro;
-	MemberService memSer;
-	MartService marSer;
-	InterestAreaService intSer;
-	BcodeService bSer;
-	
-	@Override
-	public void init() throws ServletException {
-		super.init();
-//		pro = new HousedealServiceImpl();
-		memSer = new MemberServiceImpl();
-		marSer = new MartServicelmpl();
-		intSer = new InterestAreaServicelmpl();
-		bSer = new BcodeServicelmpl();
-	}
+//	HousedealService pro;
+//	MemberService memSer;
+//	MartService marSer;
+//	InterestAreaService intSer;
+//	BcodeService bSer;
+//	
+
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
