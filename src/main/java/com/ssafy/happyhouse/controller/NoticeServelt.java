@@ -1,4 +1,4 @@
-package com.ssafy.controller;
+package com.ssafy.happyhouse.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,10 +14,10 @@ import com.ssafy.model.Notice;
 import com.ssafy.model.service.NoticeServiceImpl;
 
 @WebServlet("/notice")
-public class NoticeServlet extends HttpServlet {
+public class NoticeServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public NoticeServlet() {
+    public NoticeServelt() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -55,7 +55,7 @@
 	                    <c:choose>
 	                    	<c:when test="${empty id }">
 	                    	 <li class="nav-item">
-        						<a id="enter" class="nav-link" href="<%=croot%>/ayj?act=insertform" style="color: white;">Sign Up</a>
+        						<a id="enter" class="nav-link" href="<%=croot%>/insertform" style="color: white;">Sign Up</a>
        						</li>
 	                    	<li class="nav-item">
 		                    <div class="dropdown">
@@ -72,7 +72,7 @@
 				                              <input name = "userpwd" type="password" class="form-control" id="pwd">
 				                          </div>
 				                          <button id="bnt-login" class="btn btn-light mb-2" style="font-size: small; padding: 2px 10px; display: block;">로 그 인</button>
-				                          <button type="button" onClick="location.href='passfind.jsp'" class="btn btn-dark" style="font-size: small; padding: 2px 10px; background-color: rgb(73, 73, 90);">비밀번호 찾기</button>
+				                          <button type="button" onClick="location.href='passfind'" class="btn btn-dark" style="font-size: small; padding: 2px 10px; background-color: rgb(73, 73, 90);">비밀번호 찾기</button>
 				                  </form>
 		                      </div>
 		                   </div>
@@ -83,10 +83,10 @@
 				         		
 					        </li>
 	                    	 <li class="nav-item">
-				         		<a id="out" class="nav-link" href='<%=croot%>/ayj?act=logout' style= "color: white;">Logout</a>
+				         		<a id="out" class="nav-link" href='<%=croot%>/logout' style= "color: white;">Logout</a>
 					        </li>
 					        <li class="nav-item">
-					         	<a id="member" class="nav-link" href="<%=croot%>/ayj?act=lookupmember" style= "color: white;">User Info</a>
+					         	<a id="member" class="nav-link" href="<%=croot%>/userInfo" style= "color: white;">User Info</a>
 					        </li>
 	                    	</c:otherwise>
 	                    </c:choose>   
@@ -101,7 +101,7 @@
 	    <div>
 	        <nav class="navbar navbar-expand-md bg-light navbar-light">
 	            <div class="container">
-	                <a class="navbar-brand" href="index.jsp">
+	                <a class="navbar-brand" href="/">
 	                    <img src="img/header_logo.jpg" alt="Logo" style="width:120px;">
 	                </a>
 	            
@@ -120,32 +120,32 @@
 	                   <c:choose>
 	                    	<c:when test="${empty id }">
 	                    	  <li class="nav-item">
-		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice?act=mvnotice">공지사항</a>
+		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
-		                      <a class="nav-link" href="news.jsp">오늘의 뉴스</a>
+		                      <a class="nav-link" href="news">오늘의 뉴스</a>
 		                    </li>
 		                    <li class="nav-item">
-					          <a class="nav-link" href="./around_search.jsp">주변 탐방</a>
+					          <a class="nav-link" href="./around_search">주변 탐방</a>
 					        </li>
 				        
 	                    	</c:when>
 	                    	<c:otherwise>
 	                    	<li class="nav-item">
-		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice?act=mvnotice">공지사항</a>
+		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
-		                      <a class="nav-link" href="news.jsp">오늘의 뉴스</a>
+		                      <a class="nav-link" href="news">오늘의 뉴스</a>
 		                    </li>
 		                    <li class="nav-item">
-					          <a class="nav-link" href="./around_search.jsp">주변 탐방</a>
+					          <a class="nav-link" href="./around_search">주변 탐방</a>
 					        </li>
 					        
 					        <li class="nav-item">
-					          <a id="inter_submit" class="nav-link" href="<%=croot%>/ayj?act=inner_submit_form">관심 지역 등록</a>
+					          <a id="inter_submit" class="nav-link" href="<%=croot%>/inner_submit_form">관심 지역 등록</a>
 					        </li>
 					        <li class="nav-item ">
-					          <a id="inter_search" class="nav-link"  href="<%=croot%>/ayj?act=inter_search">관심 지역 탐방</a>
+					          <a id="inter_search" class="nav-link"  href="<%=croot%>/inter_search">관심 지역 탐방</a>
 					        </li>
 	                    	</c:otherwise>
 	                    </c:choose> 
