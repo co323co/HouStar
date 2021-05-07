@@ -1,49 +1,48 @@
 package com.ssafy.happyhouse.model.dto;
 
 public class HouseDealDto {
-	private int no;
+	private String hno;
 	private String dong;
-	private String aptName;
+	private String aptname;
 	private String code;
 	private String dealAmount;
-	private String buildYear;
 	private String dealYear;
 	private String dealMonth;
 	private String dealDay;
 	private String area;
-	private String floor;
+	private String lat;
+	private String lng;
 	private String jibun;
-	private String type;
-	private String rentMoney;
 	
-	public HouseDealDto() {}
-	
-	public HouseDealDto(int no, String dong, String aptName, String code, String dealAmount, String buildYear,
-			String dealYear, String dealMonth, String dealDay, String area, String floor, String jibun, String type,
-			String rentMoney) {
-		super();
-		this.no = no;
-		this.dong = dong;
-		this.aptName = aptName;
-		this.code = code;
-		this.dealAmount = dealAmount;
-		this.buildYear = buildYear;
-		this.dealYear = dealYear;
-		this.dealMonth = dealMonth;
-		this.dealDay = dealDay;
-		this.area = area;
-		this.floor = floor;
+	public String getJibun() {
+		return jibun;
+	}
+	public void setJibun(String jibun) {
 		this.jibun = jibun;
-		this.type = type;
-		this.rentMoney = rentMoney;
 	}
-	
-	
-	public int getNo() {
-		return no;
+	public String getLat() {
+		return lat;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+	@Override
+	public String toString() {
+		return "HouseDealDto [hno=" + hno + ", dong=" + dong + ", aptname=" + aptname + ", code=" + code
+				+ ", dealAmount=" + dealAmount + ", dealYear=" + dealYear + ", dealMonth=" + dealMonth + ", dealDay="
+				+ dealDay + ", area=" + area + ", lat=" + lat + ", lng=" + lng + ", jibun=" + jibun + "]";
+	}
+	public String getHno() {
+		return hno;
+	}
+	public void setHno(String hno) {
+		this.hno = hno;
 	}
 	public String getDong() {
 		return dong;
@@ -51,11 +50,11 @@ public class HouseDealDto {
 	public void setDong(String dong) {
 		this.dong = dong;
 	}
-	public String getAptName() {
-		return aptName;
+	public String getAptname() {
+		return aptname;
 	}
-	public void setAptName(String aptName) {
-		this.aptName = aptName;
+	public void setAptname(String aptname) {
+		this.aptname = aptname;
 	}
 	public String getCode() {
 		return code;
@@ -68,12 +67,6 @@ public class HouseDealDto {
 	}
 	public void setDealAmount(String dealAmount) {
 		this.dealAmount = dealAmount;
-	}
-	public String getBuildYear() {
-		return buildYear;
-	}
-	public void setBuildYear(String buildYear) {
-		this.buildYear = buildYear;
 	}
 	public String getDealYear() {
 		return dealYear;
@@ -99,28 +92,5 @@ public class HouseDealDto {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public String getFloor() {
-		return floor;
-	}
-	public void setFloor(String floor) {
-		this.floor = floor;
-	}
-	public String getJibun() {
-		return jibun;
-	}
-	public void setJibun(String jibun) {
-		this.jibun = jibun;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getRentMoney() {
-		return rentMoney;
-	}
-	public void setRentMoney(String rentMoney) {
-		this.rentMoney = rentMoney;
-	}
+	
 }
