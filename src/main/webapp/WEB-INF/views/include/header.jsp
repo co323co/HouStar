@@ -122,13 +122,13 @@
 	                   <c:choose>
 	                    	<c:when test="${empty userId }">
 	                    	  <li class="nav-item">
-		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice/board">공지사항</a>
+		                      <a class="nav-link" href=${croot}"/notice/board">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
 		                      <a class="nav-link" href=${croot}"/news">오늘의 뉴스</a>
 		                    </li>
 		                    <li class="nav-item">
-					          <a class="nav-link" href="./around_search">주변 탐방</a>
+					          <a class="nav-link" href=${croot}"/around_search">주변 탐방</a>
 					        </li>
 				        
 	                    	</c:when>
@@ -137,21 +137,21 @@
 		                      <a class="nav-link" href=${croot}"/notice/board">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
-		                      <a class="nav-link" href="news">오늘의 뉴스</a>
+		                      <a class="nav-link" href=${croot}"/news">오늘의 뉴스</a>
 		                    </li>
 		                    <li class="nav-item">
-					          <a class="nav-link" href="./around_search">주변 탐방</a>
+					          <a class="nav-link" href=${croot}"/around_search">주변 탐방</a>
 					        </li>
 					        
 					        <li class="nav-item">
-					          <a id="inter_submit" class="nav-link" href="<%=croot%>/inner_submit_form">관심 지역 등록</a>
+					          <a id="inter_submit" class="nav-link" href=${croot}"/inner_submit_form">관심 지역 등록</a>
 					        </li>
 					        <li class="nav-item ">
-					          <a id="inter_search" class="nav-link"  href="<%=croot%>/inter_search">관심 지역 탐방</a>
+					          <a id="inter_search" class="nav-link"  href=${croot}"/inter_search">관심 지역 탐방</a>
 					        </li>
 					         <c:if test="${userId eq 'admin'}">
 					        <li class="nav-item">
-					          <a id="inter_submit" class="nav-link" href="<%=croot%>/user/mvadmin">관리자 페이지</a>
+					          <a id="inter_submit" class="nav-link" href=${croot}"/user/mvadmin">관리자 페이지</a>
 					        </li>
 					        </c:if>
 	                    	</c:otherwise>

@@ -70,7 +70,7 @@ public class NoticeController {
 	}
 
 	
-	@PostMapping
+	@PostMapping("")
 	//jsp에서 form action으로 넘겨서 @RequestBody 쓰면 에러남 (나중에 이유 찾기)
 	public ModelAndView write(NoticeDto notice) {
 		nSer.insert(notice);
@@ -80,7 +80,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@PutMapping
+	@PutMapping("")
 	@ResponseBody
 	public String modify(@RequestBody NoticeDto notice) {
 		nSer.update(notice);

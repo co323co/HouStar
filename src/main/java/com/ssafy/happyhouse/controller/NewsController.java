@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("news")
 public class NewsController {
 
-	@GetMapping
+	@GetMapping("")
 	public String mvNotice() {
 		return "/news/news";
 	}
