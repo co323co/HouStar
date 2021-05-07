@@ -149,6 +149,11 @@
 					        <li class="nav-item ">
 					          <a id="inter_search" class="nav-link"  href="<%=croot%>/inter_search">관심 지역 탐방</a>
 					        </li>
+					         <c:if test="${userId eq 'admin'}">
+					        <li class="nav-item">
+					          <a id="inter_submit" class="nav-link" href="<%=croot%>/user/mvadmin">관리자 페이지</a>
+					        </li>
+					        </c:if>
 	                    	</c:otherwise>
 	                    </c:choose> 
 				        
