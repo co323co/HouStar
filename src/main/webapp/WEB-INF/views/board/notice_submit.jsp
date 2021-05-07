@@ -26,7 +26,6 @@
                 document.getElementById("btn-post").submit();
             });
 
-
         });
         </script>
       </head>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.ssafy.happyhouse.model.dto.NoticeDto;
 import com.ssafy.happyhouse.model.service.NoticeService;
 
@@ -32,25 +33,18 @@ public class NoticeController {
 		return "/board/notice";
 	}
 	
-//	@GetMapping("/api/list")
-////	@GetMapping("/api/list/{word}")
-//	@ResponseBody
-////	public List<NoticeDto> list(@PathVariable("word") String word) {
-//	public List<NoticeDto> list() {
-//		Map<String, String> map = new HashMap<>();
-////		map.put("word", word);
-//		return nSer.list(map);
-////		return nSer.list(new HashMap<>());
-//	}
-	@GetMapping("/api/list")
-//	@GetMapping("/api/list/{word}")
+	@GetMapping("/api/list/{word}")
 	@ResponseBody
-//	public List<NoticeDto> list(@PathVariable("word") String word) {
-	public List<NoticeDto> list() {
+	public List<NoticeDto> listByTitle(@PathVariable("word") String word) {
 		Map<String, String> map = new HashMap<>();
-//		map.put("word", word);
+		map.put("word", word);
 		return nSer.list(map);
-//		return nSer.list(new HashMap<>());
+	}
+	
+	@GetMapping("/api/list")
+	@ResponseBody
+	public List<NoticeDto> list() {
+		return nSer.list(new HashMap<>());
 	}
 	
 	//notice_submit.jsp로 이동
@@ -58,20 +52,39 @@ public class NoticeController {
 	public String mvWriteForm() {
 		return "/board/notice_submit";
 	}
+	
+	//notice_update.jsp로 이동
+	@GetMapping("modifyForm/{id}")
+	public ModelAndView mvModifyForm(@PathVariable("id") int id) {
+		ModelAndView mv = new ModelAndView("/board/notice_update");
+		mv.addObject("notice", nSer.search(id));
+		return mv;
+	}
+	
+	@GetMapping("view/{id}")
+	public ModelAndView view(@PathVariable("id") int id) {
+		ModelAndView mv = new ModelAndView("board/notice_view");
+		mv.addObject("notice", nSer.search(id));
+		return mv;
+	}
 
+	
 	@PostMapping
+	//jsp에서 form action으로 넘겨서 @RequestBody 쓰면 에러남 (나중에 이유 찾기)
 	public ModelAndView write(NoticeDto notice) {
 		nSer.insert(notice);
 		//삽입했으면 notice 게시판으로 다시 이동
-		ModelAndView mv = new ModelAndView("redirect:notice/list");
-		mv.addObject("notices", nSer.list(new HashMap<>()));
+		ModelAndView mv = new ModelAndView("redirect:notice/board");
+//		mv.addObject("notices", nSer.list(new HashMap<>()));
 		return mv;
 	}
 	
 	@PutMapping
-	public String modify(NoticeDto notice) {
+	@ResponseBody
+	public String modify(@RequestBody NoticeDto notice) {
 		nSer.update(notice);
-		return "/board/notice";
+//		System.out.println(notice);
+		return "{\"url\" : \"notice/view/" + notice.getId() + "\"}";
 	}
 	
 	@DeleteMapping

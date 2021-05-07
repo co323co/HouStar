@@ -32,8 +32,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public NoticeDto search(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.getMapper(NoticeMapper.class).search(id);
 	}
 
 	@Override

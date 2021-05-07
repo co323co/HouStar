@@ -2,9 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	NoticeDto notice = (NoticeDto)request.getAttribute("notice");
-%> 
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -52,7 +49,7 @@
               </div>
             </div>
             <div class="text-center mt-1">
-              <button onclick="location.href='${root}/notice?act=mv_noticeupdate&nid=${notice.id}'" type="button" class="btn btn-dark">수정</button>
+              <button onclick="location.href='${root}/notice/modifyForm/'+${notice.id}" type="button" class="btn btn-dark">수정</button>
               <button onclick="location.href='${root}/notice?act=delete_notice&nid=${notice.id}'" type="button" class="btn btn-dark">삭제</button>
 
             </div>

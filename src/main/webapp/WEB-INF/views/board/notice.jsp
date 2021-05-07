@@ -35,6 +35,23 @@ file="/WEB-INF/views/include/header.jsp" %>
           });
         }
 
+        function loadListByTitle(word) {
+          $.ajax({
+            type: "get",
+            url: "${croot}/notice/api/list/" + word,
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+              console.log("${croot}/notice/api/list/" + word);
+              console.log(response);
+              makeList(response);
+            },
+            error: function (xhr, status, msg) {
+              console.log("상태값 : " + status + " / Http 에러메시지 : " + msg);
+            },
+          });
+        }
+
         function makeList(list) {
           let content = "";
           $("#list").empty();
@@ -44,15 +61,20 @@ file="/WEB-INF/views/include/header.jsp" %>
                       <td>${"${notice.id}"}</td>
                       <td>${"${notice.title}"}</td>
                       <td>${"${notice.views}"}</td>
-                      <td><button onClick="location.href='<%=croot%>/notice?act=mvnoticeview&nid=$'${
-                        notice.id
-                      }'}'" type="button" class="btn btn-secondary ">조회</button></td>
+                      <td><button onClick=" location.href='<%=croot%>/notice/view/${'${notice.id}'} ' " type="button" class="btn btn-secondary ">조회</button></td>
                   </tr>
                   `;
           });
 
           $("#list").append(content);
         }
+
+        //검색 버튼 누르면
+        $("#btn_search").click(function (e) {
+          let word = $("#search_word").val();
+          console.log(word);
+          loadListByTitle(word);
+        });
       });
     </script>
 
@@ -82,14 +104,15 @@ file="/WEB-INF/views/include/header.jsp" %>
             <tbody id="list"></tbody>
           </table>
 
-          <form method="post" action="<%=croot%>/notice/search" class="form-inline">
+          <form class="form-inline">
             <input
               type="text"
-              name="search_value"
+              name="search_word"
+              id="search_word"
               class="form-control mb-2 mr-sm-2"
               placeholder="제목으로 검색하기"
             />
-            <button type="submit" class="btn btn-primary mb-2">검색</button>
+            <button id="btn_search" type="button" class="btn btn-primary mb-2">검색</button>
             <button
               onClick="location.href='<%=croot%>/notice/writeForm'"
               type="button"

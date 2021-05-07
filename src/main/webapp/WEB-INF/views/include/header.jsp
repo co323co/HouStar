@@ -120,7 +120,7 @@
 	                  <ul class="navbar-nav">
 	                  
 	                   <c:choose>
-	                    	<c:when test="${empty id }">
+	                    	<c:when test="${empty userId }">
 	                    	  <li class="nav-item">
 		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice/board">공지사항</a>
 		                    </li>
@@ -134,7 +134,7 @@
 	                    	</c:when>
 	                    	<c:otherwise>
 	                    	<li class="nav-item">
-		                      <a class="nav-link" href="<%=request.getContextPath()%>/noitce/board">공지사항</a>
+		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice/board">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
 		                      <a class="nav-link" href="news">오늘의 뉴스</a>

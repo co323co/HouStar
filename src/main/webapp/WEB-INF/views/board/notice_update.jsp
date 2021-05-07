@@ -12,6 +12,46 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+          $(document).ready(function () {
+              $("#btn_modify").click(function (e) { 
+                let id = '${notice.id}';
+                let title = $("#title").val();
+                let content = $("#content").val();
+                let views =  '${notice.views}';
+                let userId =  '${notice.userId}';
+                    
+                let noticeInfo = JSON.stringify(
+                  {
+                     id:id,
+                     title:title,
+                     content:content,
+                     views:views,
+                     userId:userId 
+                  }
+                );
+
+                console.log(noticeInfo);
+
+                $.ajax({
+                  //async: false, //비동기. 페이지 바로 넘어가게
+                  type: "PUT",
+                  url: "${root}/notice",
+                  data: noticeInfo,
+                  dataType: "json",
+                  contentType: 'application/json',
+                  success: function (map) {
+                    location.href='${croot}/'+map.url;
+                  },  
+                  error: function (xhr, status, msg) {
+                    console.log("상태값 : " + status + " / Http 에러메시지 : " + msg);
+                  }
+                });
+                
+              });
+          });
+        
+        </script>
         <style>
             .banner.dark-translucent-bg {
             min-height: 250px;
@@ -30,8 +70,7 @@
               <div class="col-8 mt-5 mb-5 " style="background-color: gainsboro; border-radius: 10px;">
                 
                   <div class="font-weight-bold mb-3 mt-3">공지 내용 수정</div>
-                    <form method="post" action="<%=root%>/notice" class="form-horizontal">
-    					<input type="hidden" name="act" value="update_notice">
+                    <form class="form-horizontal">
     					<input type="hidden" name="nid" value=<%=request.getParameter("nid")%>> 
                         <div class="form-group row">
                           <label class="col-sm-3 text-md-right" for="title">제목<span class="text-danger small">*</span></label>
@@ -48,7 +87,7 @@
                        
                         <div class="form-group row">
                           <div class="ml-md-auto col-md-9">
-                            <button type="submit" class="btn btn-group btn-warning btn-animated">
+                            <button id="btn_modify" type="button" class="btn btn-group btn-warning btn-animated">
                 		              수정하기 <i class="fa fa-check"></i>
                             </button>
                           </div>
