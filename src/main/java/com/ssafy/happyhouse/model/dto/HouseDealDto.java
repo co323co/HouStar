@@ -13,7 +13,7 @@ public class HouseDealDto {
 	private String lat;
 	private String lng;
 	private String jibun;
-	
+	public HouseDealDto ( ) {}
 	public String getJibun() {
 		return jibun;
 	}

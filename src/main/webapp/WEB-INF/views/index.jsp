@@ -65,8 +65,8 @@
 					
 					//dong change
 					$("#dong").change(function() {
-						
-						location.href="${root}/housedeal/list";
+						let dong = $("#dong").val();
+						location.href="${root}/housedeal/list/" + dong;
 						
 // 						$.get("${root}/map"
 // 								,{act:"apt", dong:$("#dong").val()}

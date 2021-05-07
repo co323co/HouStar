@@ -33,6 +33,7 @@
 </script>
 <%
 	ArrayList<HouseDealDto> tlist = (ArrayList) session.getAttribute("tradeinfo");
+	/* var tlist = "${tlist}"; */
 	ArrayList<CoronaDto> co = (ArrayList) session.getAttribute("corona");
 	ArrayList<HospitalDto> hos = (ArrayList) session.getAttribute("hospital");
 %>
