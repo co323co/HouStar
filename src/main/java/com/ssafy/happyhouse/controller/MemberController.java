@@ -117,7 +117,11 @@ public class MemberController {
 	public String mventer() {
 		return "user/enter";
 	}
-	
+	@PostMapping(value="/user/register")
+	public String register(MemberDto memberdto) {
+		memberService.insertMember(memberdto);
+		return "index";
+	}
 //		
 //		else if("gungu".equals(act)) gungu(request,response);
 //		else if("dong".equals(act))	dong(request,response);
