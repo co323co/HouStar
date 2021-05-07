@@ -1,11 +1,13 @@
 package com.ssafy.happyhouse.model.service;
 
 import java.lang.reflect.Member;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.ssafy.happyhouse.model.dto.MemberDto;
 import com.ssafy.happyhouse.model.mapper.MemberMapper;
@@ -22,7 +24,10 @@ public class MemberServiceImpl implements MemberService {
 	public boolean login(Map<String, String> map) {
 		if(map.get("userId") == null || map.get("userPwd") == null)
 			return false;
-		return sqlSession.getMapper(MemberMapper.class).login(map);
+		else{
+//			System.out.println(map.get("userId") +" "+map.get("userPwd"));	
+			return sqlSession.getMapper(MemberMapper.class).login(map);
+		}
 	}
 
 	@Override
@@ -41,46 +46,17 @@ public class MemberServiceImpl implements MemberService {
 		sqlSession.getMapper(MemberMapper.class).deleteMember(id);
 		
 	}
-	
-	
-//	@Override
-//	public void insertMember(com.ssafy.happyhouse.model.service.Member member) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//
-//	@Override
-//	public void update(com.ssafy.happyhouse.model.service.Member member) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void deleteMember(String id) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public com.ssafy.happyhouse.model.service.Member lookupmember(String id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public String findPassword(String id, String name, String phoneNumber) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//
 
-	
-	
-	
-	
-	
-	
+	@Override
+	public void insertMember(MemberDto memberDto) {
+		sqlSession.getMapper(MemberMapper.class).insertMember(memberDto);
+		
+	}
+
+	@Override
+	public List<MemberDto> userList() {
+		return sqlSession.getMapper(MemberMapper.class).userList();
+	}
+
 
 }

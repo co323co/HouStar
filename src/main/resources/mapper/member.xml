@@ -5,17 +5,16 @@
 <mapper namespace="com.ssafy.happyhouse.model.mapper.MemberMapper">
 
 	<select id="login" parameterType="map" resultType="boolean">
-		select *
+		select  IF(COUNT(*) = 1, 1, 0)
 		from members
 		where userId = #{userId} and userPwd = #{userPwd}
 	</select>
-	
-	
-	 <!-- <select id="userList" resultType="memberDto">
-		select userid, userpwd, username, email, address, date_format(joindate, '%y.%m.%d') joindate
-		from ssafy_member
-		order by joindate desc;
-	</select>  -->
+
+	<select id="userList" resultType="memberDto">
+		select *
+		from members
+		order by #{userId};
+	</select> 
 	
 	<select id="lookupmember" parameterType="String" resultType="memberDto">
 		select *
@@ -23,11 +22,11 @@
 		where userId = #{userId}
 	</select>
 	
-	<!--  <insert id="userRegister" parameterType="MemberDto">
-		insert into ssafy_member (userid, userpwd, username, email, address, joindate)
-		values (#{userid}, #{userpwd}, #{username}, #{email}, #{address}, now())
+	<insert id="insertMember" parameterType="memberDto">
+		insert into members (userId, userPwd, userName, userAddress, userPhone)
+		values (#{userId}, #{userPwd}, #{userName}, #{userAddress}, #{userPhone})
 	</insert>
-	 -->
+	
 	<update id="update" parameterType="memberDto">
 		update members
 		set userPwd = #{userPwd}, userName = #{userName}, userAddress = #{userAddress}, userPhone = #{userPhone}

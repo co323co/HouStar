@@ -86,7 +86,14 @@
     				
     			}
     		});
-
+			
+    		// 회워 정보 수정 취소.
+    		$(document).on("click", ".cancelBtn", function() {
+    			let mid = $(this).parents("tr").attr("data-id");
+    			$("#view").css("display", "");
+    			$("#mview").css("display", "none");
+    		});
+    		
         	function makeList(users){
         		$("#userlist").empty();
         		$(users).each(function(index, user) {
@@ -168,6 +175,7 @@
                           <br>
   			            <div class="pl-5 pr-3 pb-3">
   			              <button type="button" class="modifyBtn btn btn-dark" >수정</button>
+  			            <button type="button" class="cancelBtn btn btn-dark ">취소</button>
   			              <!-- 수정하면 새로운 페이지에서 수정-->
   			          
   						<br>

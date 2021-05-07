@@ -51,9 +51,9 @@ public class MemberController {
 		
 		logger.debug("로그인실행");
 		boolean login = memberService.login(map);
-		String id = map.get("userId");		
+		String userId = map.get("userId");		
 		if(login) {			
-			session.setAttribute("userId", id);		
+			session.setAttribute("userId", userId);		
 		}else {
 			model.addAttribute("msg","아이디 비번 확인후로그인");
 		}	
@@ -84,10 +84,8 @@ public class MemberController {
 	@PutMapping(value="/rest/user")
 	public @ResponseBody ResponseEntity<MemberDto> userModify(@RequestBody MemberDto memberDto) {
 		System.out.println(memberDto.toString());
-		memberService.update(memberDto);
-		
-		String userId = memberDto.getUserId();
-		
+		memberService.update(memberDto);		
+		String userId = memberDto.getUserId();		
 		memberDto = memberService.lookupmember(userId);
 		return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 	}
@@ -107,6 +105,17 @@ public class MemberController {
 		memberService.deleteMember(userId);
 		session.invalidate();
 		return "index";
+	}
+
+
+	
+	@GetMapping(value="/user/mvadmin")
+	public String mvadmin() {
+		return "user/admin";
+	}
+	@GetMapping(value="/user/insertform")
+	public String mventer() {
+		return "user/enter";
 	}
 	
 //		

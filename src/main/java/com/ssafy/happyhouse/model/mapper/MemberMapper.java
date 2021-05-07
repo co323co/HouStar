@@ -11,10 +11,11 @@ public interface MemberMapper {
 	
 	public boolean login(Map<String, String> map);
 	
-//	public void insertMember(Member member);
+	public void insertMember(MemberDto memberDto);
 	public void update(MemberDto memberDto);
 	public void deleteMember(String id);
 	public MemberDto lookupmember(String id);
+	public List<MemberDto> userList();
 //	public String findPassword(String id, String name, String phoneNumber);
 	
 }
