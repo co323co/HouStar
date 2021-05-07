@@ -15,23 +15,11 @@
 		from members
 		order by #{userId};
 	</select> 
-	<!-- 
-	<select id="searchUser" parameterType="map" resultMap="memberDto">
-		select *
-		from members
-		<if test="word != null and word != ''">
-			<if test="key == 'userId'">
-				where ${key} = #{word}
-			</if>
-			<if test="key == 'userName'">
-				where ${key} = #{word}
-			</if>
-			<if test="key == 'userAddress'">
-				where ${key} = #{word}
-			</if>
-		</if>
-	</select> -->
 	
+	<select id="searchbyid" parameterType="String" resultType="memberDto">
+	select * from members
+	where 
+	</select>
 	
 	<select id="lookupmember" parameterType="String" resultType="memberDto">
 		select *
