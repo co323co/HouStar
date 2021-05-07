@@ -1,11 +1,11 @@
-package com.ssafy.happyhouse.model.dao;
+package com.ssafy.happyhouse.model.mapper;
 
 import java.util.List;
 
-import com.ssafy.happyhouse.model.HouseInfoDto;
-import com.ssafy.happyhouse.model.SidoGugunCodeDto;
+import com.ssafy.happyhouse.model.dto.HouseInfoDto;
+import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
 
-public interface HouseMapDao {
+public interface HouseMapMapper {
 
 	List<SidoGugunCodeDto> getSido() throws Exception;
 	List<SidoGugunCodeDto> getGugunInSido(String sido) throws Exception;

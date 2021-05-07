@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HouseDealDAOImpl implements HouseDealDAO {
-	private static HouseDealDAO housedealDao;
+public class HouseDealDAOImpl implements HouseDealMapper {
+	private static HouseDealMapper housedealDao;
 	
 	private HouseDealDAOImpl() {}
 	
-	public static HouseDealDAO getHousedealDAO()
+	public static HouseDealMapper getHousedealDAO()
 	{
 		if(housedealDao == null)
 			housedealDao = new HouseDealDAOImpl();

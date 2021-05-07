@@ -55,7 +55,7 @@ public class HouseServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		System.out.println(name);
 		
-		ArrayList<HouseDealDto> real = (ArrayList<HouseDealDto>) HousedealServiceImpl.getHousedealService().getReal(name);
+		ArrayList<HouseDealDto> real = (ArrayList<HouseDealDto>) HouseDealServiceImpl.getHousedealService().getReal(name);
 		String path = "/around_search.jsp";
 		
 		for(int i=0;i<real.size();i++)
@@ -74,9 +74,9 @@ public class HouseServlet extends HttpServlet {
 		
 		System.out.println(dong);
 		
-		ArrayList<HouseDealDto> house = (ArrayList<HouseDealDto>) HousedealServiceImpl.getHousedealService().treadInfo(dong);
-		List<CoronaDto> corona = HousedealServiceImpl.getHousedealService().getCorona(gu);
-		List<Hospital> hospital = HousedealServiceImpl.getHousedealService().getHospital(gu);
+		ArrayList<HouseDealDto> house = (ArrayList<HouseDealDto>) HouseDealServiceImpl.getHousedealService().treadInfo(dong);
+		List<CoronaDto> corona = HouseDealServiceImpl.getHousedealService().getCorona(gu);
+		List<Hospital> hospital = HouseDealServiceImpl.getHousedealService().getHospital(gu);
 		
 //		for(int i=0;i<house.size();i++)
 //			System.out.println(house.get(i).toString());
@@ -105,7 +105,7 @@ public class HouseServlet extends HttpServlet {
 		
 		if(gu!=null)
 		{
-		List<String> dong = HousedealServiceImpl.getHousedealService().dong(gu);
+		List<String> dong = HouseDealServiceImpl.getHousedealService().dong(gu);
 		
 		
 		System.out.println(dong);
@@ -124,7 +124,7 @@ public class HouseServlet extends HttpServlet {
 			System.out.println("구2");
 			gu2 = request.getParameter("gu2");
 			
-			List<String> dong = HousedealServiceImpl.getHousedealService().dong(gu2);
+			List<String> dong = HouseDealServiceImpl.getHousedealService().dong(gu2);
 			
 			System.out.println(dong);
 			String path = "/around_search.jsp";
@@ -148,7 +148,7 @@ public class HouseServlet extends HttpServlet {
 			System.out.println("시2");
 			city2 = request.getParameter("city2");
 
-			List<String> gu = HousedealServiceImpl.getHousedealService().gungu(city2);
+			List<String> gu = HouseDealServiceImpl.getHousedealService().gungu(city2);
 
 //			System.out.println(gu);
 			String path = "/around_search.jsp";
@@ -161,7 +161,7 @@ public class HouseServlet extends HttpServlet {
 			disp.forward(request, response);
 		} else {
 			
-			List<String> gu = HousedealServiceImpl.getHousedealService().gungu(city);
+			List<String> gu = HouseDealServiceImpl.getHousedealService().gungu(city);
 
 //			System.out.println(gu);
 			String path = "/index.jsp";

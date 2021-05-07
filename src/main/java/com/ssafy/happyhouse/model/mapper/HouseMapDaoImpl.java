@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model.dao;
+package com.ssafy.happyhouse.model.mapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,17 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ssafy.happyhouse.model.HouseInfoDto;
-import com.ssafy.happyhouse.model.SidoGugunCodeDto;
-import com.ssafy.util.DBUtil;
+import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
 
-public class HouseMapDaoImpl implements HouseMapDao {
+public class HouseMapDaoImpl implements HouseMapMapper {
 	
-	private static HouseMapDao houseMapDao;
+	private static HouseMapMapper houseMapDao;
 	
 	private HouseMapDaoImpl() {}
 	
-	public static HouseMapDao getHouseMapDao() {
+	public static HouseMapMapper getHouseMapDao() {
 		if(houseMapDao == null)
 			houseMapDao = new HouseMapDaoImpl();
 		return houseMapDao;

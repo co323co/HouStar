@@ -1,4 +1,4 @@
-package com.ssafy.model.service;
+package com.ssafy.happyhouse.model.service;
 
 import java.util.List;
 
@@ -7,14 +7,14 @@ import com.ssafy.model.Hospital;
 import com.ssafy.model.HouseDealDto;
 import com.ssafy.model.dao.HousedealDAOImpl;
 
-public class HousedealServiceImpl implements HousedealService {
+public class HouseDealServiceImpl implements HouseDealService {
 	
-	private static HousedealService housedealservice;
-	private HousedealServiceImpl() {}
-	public static HousedealService getHousedealService()
+	private static HouseDealService housedealservice;
+	private HouseDealServiceImpl() {}
+	public static HouseDealService getHousedealService()
 	{
 		if(housedealservice == null)
-			housedealservice = new HousedealServiceImpl();
+			housedealservice = new HouseDealServiceImpl();
 		return housedealservice;
 	}
 		
