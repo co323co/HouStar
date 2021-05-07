@@ -1,14 +1,12 @@
 package com.ssafy.happyhouse.controller;
 
 
-import java.util.List;
 import java.util.Map;
 
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Delete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,14 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ssafy.happyhouse.model.dto.MemberDto;
 import com.ssafy.happyhouse.model.service.MemberService;
-
-import io.swagger.annotations.ApiParam;
-
-
 
 @Controller
 @CrossOrigin("*")
@@ -46,7 +37,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@PostMapping(value="/user")
+	@GetMapping("/user/login")
 	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session, HttpServletResponse response) {
 		
 		logger.debug("로그인실행");
@@ -54,23 +45,26 @@ public class MemberController {
 		String userId = map.get("userId");		
 		if(login) {			
 			session.setAttribute("userId", userId);		
+			return "index";
 		}else {
 			model.addAttribute("msg","아이디 비번 확인후로그인");
+			return "index";
 		}	
-		return "index";
 	}
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	
+	@GetMapping("/user/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
 	//인포페이지로 이동
 	@GetMapping(value="/user/userInfo")
 	public String mvuserInfo() {
 		return "user/member";
 	}
 	//rest로 Userinfo 입장 시 로그인정보 뿌리기
-	@GetMapping(value="/rest/user")
+	@GetMapping(value="/api/user")
 	public @ResponseBody ResponseEntity<MemberDto> userInfo(HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
 		
@@ -78,10 +72,10 @@ public class MemberController {
 		if(memberDto != null)
 			return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 		else
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<MemberDto>(HttpStatus.NO_CONTENT);
 	}
 	
-	@PutMapping(value="/rest/user")
+	@PutMapping("/api/user")
 	public @ResponseBody ResponseEntity<MemberDto> userModify(@RequestBody MemberDto memberDto) {
 		System.out.println(memberDto.toString());
 		memberService.update(memberDto);		

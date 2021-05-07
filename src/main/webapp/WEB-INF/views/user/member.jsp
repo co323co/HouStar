@@ -20,7 +20,7 @@
           
         	//들어오자마자 회원정보 뿌리기 
         	$.ajax({ 
-			url:'${root}/rest/user' ,
+			url:'${root}/api/user' ,
 			type:'GET',		
 			dataType:'json',
 			success:function(users) {
@@ -64,7 +64,7 @@
     						"userPhone" : $("#userPhone" + mid).val()
     					   });
     			$.ajax({
-    				url:'${root}/rest/user',  
+    				url:'${root}/api/user',  
     				type:'PUT',
     				contentType:'application/json;charset=utf-8',
     				dataType:'json',

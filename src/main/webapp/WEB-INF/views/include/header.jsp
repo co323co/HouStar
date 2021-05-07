@@ -35,10 +35,7 @@
         $(document).ready(function () {
             
             $("#bnt-login").on('click',function () {
-               
-                
                 document.getElementById("bnt-login").submit();
-                
             });
 
 
@@ -65,8 +62,7 @@
 		                          Login
 		                      </button>
 		                      <div class="dropdown-menu bg-dark p-3" style="color: white; font-size: small;">
-			                      <form method="post" action="${croot }/user">
-				                      <input type="hidden" name="act"value="login">
+			                      <form method="get" action="${croot}/user/login">
 				                          <div class="form-group" style="width : 150px;">
 				                              <label for="usr">아 이 디</label>
 				                              <input name = "userId"type="text" class="form-control mb-2" id="userId">
