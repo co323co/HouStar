@@ -13,12 +13,7 @@
 		select id, title, content, views, userId
 		from notices
 		<if test="word != null and word != ''">
-			<if test="key == 'subject'">
-				where subject like concat('%', #{word}, '%')
-			</if>
-			<if test="key != 'subject'">
-				where ${key} = #{word}
-			</if>
+				where title like concat('%', #{word}, '%')
 		</if>
 		order by id desc
 <!-- 		limit #{start}, #{spp} -->

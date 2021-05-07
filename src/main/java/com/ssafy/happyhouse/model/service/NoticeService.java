@@ -1,16 +1,16 @@
-package com.ssafy.model.service;
+package com.ssafy.happyhouse.model.service;
 
 import java.util.List;
+import java.util.Map;
 
-import com.ssafy.model.Notice;
+import com.ssafy.happyhouse.model.dto.NoticeDto;
 
 public interface NoticeService {
 
-	public List<Notice> searchAll();
-	public Notice searchById(int id);
-	public List<Notice> searchByTitle(String str);
-	public boolean insertNotice(Notice notice);
-	public boolean deleteNoticeById(int id);
-	public boolean updateNotice(Notice notice);
+	public List<NoticeDto> list(Map<String, String> map);
+	public NoticeDto search(int id);
+	public boolean insert(NoticeDto notice);
+	public boolean delete(int id);
+	public boolean update(NoticeDto notice);
 	
 }

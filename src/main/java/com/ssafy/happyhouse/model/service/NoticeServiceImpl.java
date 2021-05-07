@@ -1,52 +1,57 @@
-package com.ssafy.model.service;
+package com.ssafy.happyhouse.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.ssafy.model.Notice;
-import com.ssafy.model.dao.NoticeDaoImpl;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.model.dto.NoticeDto;
+import com.ssafy.happyhouse.model.mapper.NoticeMapper;
+
+@Service
 public class NoticeServiceImpl implements NoticeService {
 
-	private static NoticeService noticeService;
-	
-	private NoticeServiceImpl() {}
-	
-	public static NoticeService getNoticeService()
-	{
-		if(noticeService == null)
-			noticeService = new NoticeServiceImpl();
-		return noticeService;
-	}
-	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	@Override
-	public List<Notice> searchAll() {
-		return NoticeDaoImpl.getNoticeDao().searchAll();
+	public List<NoticeDto> list(Map<String, String> map) {
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("key", map.get("key") == null ? "" : map.get("key"));
+		param.put("word", map.get("word") == null ? "" : map.get("word"));
+//		int currentPage = Integer.parseInt(map.get("pg"));
+//		int sizePerPage = Integer.parseInt(map.get("spp"));
+//		int start = (currentPage - 1) * sizePerPage;
+//		param.put("start", start);
+//		param.put("spp", sizePerPage);
+		return sqlSession.getMapper(NoticeMapper.class).list(param);
 	}
 
 	@Override
-	public boolean insertNotice(Notice notice) {
-		return NoticeDaoImpl.getNoticeDao().insertNotice(notice);
+	public NoticeDto search(int id) {
+		return sqlSession.getMapper(NoticeMapper.class).search(id);
 	}
 
 	@Override
-	public boolean deleteNoticeById(int id) {
-		return NoticeDaoImpl.getNoticeDao().deleteNoticeById(id);
+	public boolean insert(NoticeDto notice) {
+		if(sqlSession.getMapper(NoticeMapper.class).insert(notice)!=0) return true;
+		return false;
 	}
 
 	@Override
-	public boolean updateNotice(Notice notice) {
-		return NoticeDaoImpl.getNoticeDao().updateNotice(notice);
+	public boolean delete(int id) {
+		if(sqlSession.getMapper(NoticeMapper.class).delete(id)!=0) return true;
+		return false;
 	}
 
 	@Override
-	public Notice searchById(int id) {
-		return NoticeDaoImpl.getNoticeDao().searchById(id);
+	public boolean update(NoticeDto notice) {
+		if(sqlSession.getMapper(NoticeMapper.class).update(notice)!=0) return true;
+		return false;
 	}
 
-	@Override
-	public List<Notice> searchByTitle(String str) {
-		return NoticeDaoImpl.getNoticeDao().searchByTitle(str);
-	}
 
 }

@@ -60,10 +60,10 @@ public class NoticeServelt extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
-		Notice notice = NoticeServiceImpl.getNoticeService().searchById(id);
+		Notice notice = NoticeServiceImpl_.getNoticeService().searchById(id);
 		notice.setTitle(title);
 		notice.setContent(content);
-		NoticeServiceImpl.getNoticeService().updateNotice(notice);
+		NoticeServiceImpl_.getNoticeService().updateNotice(notice);
 		
 		request.setAttribute("notice", notice);
 		RequestDispatcher disp = request.getRequestDispatcher("noticeview.jsp");
@@ -75,16 +75,16 @@ public class NoticeServelt extends HttpServlet {
 	private void delteNotice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id = Integer.parseInt(request.getParameter("nid"));
-		NoticeServiceImpl.getNoticeService().deleteNoticeById(id);
+		NoticeServiceImpl_.getNoticeService().deleteNoticeById(id);
 		mvNotice(request, response);
 	}
 
 	private void mvNoticeView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id = Integer.parseInt(request.getParameter("nid"));
-		Notice notice = NoticeServiceImpl.getNoticeService().searchById(id);
+		Notice notice = NoticeServiceImpl_.getNoticeService().searchById(id);
 		notice.setViews(notice.getViews()+1);
-		NoticeServiceImpl.getNoticeService().updateNotice(notice);
+		NoticeServiceImpl_.getNoticeService().updateNotice(notice);
 		request.setAttribute("notice", notice);
 		
 		RequestDispatcher disp = request.getRequestDispatcher("noticeview.jsp");
@@ -99,11 +99,11 @@ public class NoticeServelt extends HttpServlet {
 		
 		//제목 검색 없이 들어옴. 목차 전부 보여줌
 		if(search_value==null) {
-			noticeList = NoticeServiceImpl.getNoticeService().searchAll();
+			noticeList = NoticeServiceImpl_.getNoticeService().searchAll();
 		}
 		//제목 검색으로 들어옴
 		else {
-			noticeList = NoticeServiceImpl.getNoticeService().searchByTitle(search_value);
+			noticeList = NoticeServiceImpl_.getNoticeService().searchByTitle(search_value);
 		}
 
 		request.setAttribute("noticeList", noticeList);
@@ -118,7 +118,7 @@ public class NoticeServelt extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 
-		NoticeServiceImpl.getNoticeService().insertNotice(new Notice(title, content));
+		NoticeServiceImpl_.getNoticeService().insertNotice(new Notice(title, content));
 		mvNotice(request,response);		
 	}
 
