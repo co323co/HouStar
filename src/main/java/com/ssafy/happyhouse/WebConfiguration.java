@@ -7,20 +7,23 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.ssafy.happyhouse.intercepter.ConfirmInterceptor;
+
 
 // web에 관련된 설정 java file
 @Configuration 
 // 환경설정파일임을 알려줘야한다.
 public class WebConfiguration implements WebMvcConfigurer{
 	// 인터셉터 설정
-//	@Autowired
-//	private ConfirmInterceptor confirmInterceptor;
-//	
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
+	@Autowired
+	private ConfirmInterceptor confirmInterceptor;
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		//나중에 설정하고
 //		registry.addInterceptor(confirmInterceptor).addPathPatterns("/article/**");
 //		registry.addInterceptor(confirmInterceptor).addPathPatterns("/article/**"," 주소","주소 ");
-//	}
+	}
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

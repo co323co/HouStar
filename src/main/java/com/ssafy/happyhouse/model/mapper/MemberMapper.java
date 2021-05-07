@@ -1,15 +1,16 @@
-package com.ssafy.happyhouse.model.service;
+package com.ssafy.happyhouse.model.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import com.ssafy.happyhouse.model.dto.MemberDto;
 
 
 
-public interface MemberService {
+public interface MemberMapper {
 	
 	public boolean login(Map<String, String> map);
-//	
+	
 //	public void insertMember(Member member);
 //	public void update(Member member);
 //	public void deleteMember(String id);

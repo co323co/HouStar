@@ -53,7 +53,7 @@
 	                  <li class="nav-item">
 	                    
 	                    <c:choose>
-	                    	<c:when test="${empty id }">
+	                    	<c:when test="${empty userId }">
 	                    	 <li class="nav-item">
         						<a id="enter" class="nav-link" href="<%=croot%>/insertform" style="color: white;">Sign Up</a>
        						</li>
@@ -83,7 +83,7 @@
 				         		
 					        </li>
 	                    	 <li class="nav-item">
-				         		<a id="out" class="nav-link" href='<%=croot%>/logout' style= "color: white;">Logout</a>
+				         		<a id="out" class="nav-link" href='${croot }/user' style= "color: white;">Logout</a>
 					        </li>
 					        <li class="nav-item">
 					         	<a id="member" class="nav-link" href="<%=croot%>/userInfo" style= "color: white;">User Info</a>
