@@ -4,7 +4,27 @@
 
 <mapper namespace="com.ssafy.happyhouse.model.mapper.HouseMapMapper">
 
-	<select id="getSido">
+	<select id="getSido" resultType="SidoGugunCodeDto">
+		SELECT left(sido_code,2) sidoCode, sido_name as sidoName FROM sidocode
+		ORDER BY sido_code
+	</select>
+	
+	<select id="getGugunInSido" parameterType="string" resultType="SidoGugunCodeDto">
+		SELECT left(gugun_code,5) gugunCode, gugun_name as gugunName FROM guguncode
+		where left(gugun_code,2) = #{sido} <!-- 시도 코드 (앞 두글자) ex) 서울 : 11 -->
+		ORDER BY gugun_code
+	</select>
+	
+	<select id="getDongInGugun" parameterType="string" resultType="HouseInfoDto">
+		SELECT distinct dong, code FROM houseinfo
+		where code = #{gugun}
+		ORDER BY dong
+	</select>
+	
+	<select id="getAptInDong" parameterType="string" resultType="HouseInfoDto">
+		SELECT no,dong,AptName,code,jibun FROM houseinfo WHERE dong
+		= #{dong}
+		ORDER BY AptName
 	</select>
 	
 </mapper>

@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.model.dto;
 
 public class SidoGugunCodeDto {
 	
+	//시도 코드 (앞 두글자) ex) 서울 : 11
 	private String sidoCode;
 	private String sidoName;
 	private String gugunCode;
