@@ -57,7 +57,7 @@
 	                    <c:choose>
 	                    	<c:when test="${empty userId }">
 	                    	 <li class="nav-item">
-        						<a id="enter" class="nav-link" href="<%=croot%>/insertform" style="color: white;">Sign Up</a>
+        						<a id="enter" class="nav-link" href="<%=croot%>/user/insertform" style="color: white;">Sign Up</a>
        						</li>
 	                    	<li class="nav-item">
 		                    <div class="dropdown">
