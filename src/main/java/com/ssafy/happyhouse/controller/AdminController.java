@@ -74,5 +74,7 @@ public class AdminController {
 		List<MemberDto> list = memberService.userList();
 		return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
 	}
+	//아이디 이름 주소로 검색
+	
 	
 }
