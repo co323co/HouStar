@@ -13,6 +13,25 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+          $(document).ready(function () {
+
+            $("#btn_remove").click(function (e) { 
+
+              $.ajax({
+                type: "DELETE",
+                url: "${root}/notice/${notice.id}",
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (map) {
+                  location.href = "${root}/"+map.url;
+                }
+              });
+              
+            });
+
+          });
+        </script>
         <style>
             .banner.dark-translucent-bg {
             min-height: 250px;
@@ -50,7 +69,7 @@
             </div>
             <div class="text-center mt-1">
               <button onclick="location.href='${root}/notice/modifyForm/'+${notice.id}" type="button" class="btn btn-dark">수정</button>
-              <button onclick="location.href='${root}/notice?act=delete_notice&nid=${notice.id}'" type="button" class="btn btn-dark">삭제</button>
+              <button id="btn_remove" type="button" class="btn btn-dark">삭제</button>
 
             </div>
         </div>

@@ -125,7 +125,7 @@
 		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice/board">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
-		                      <a class="nav-link" href="news">오늘의 뉴스</a>
+		                      <a class="nav-link" href=${croot}"/news">오늘의 뉴스</a>
 		                    </li>
 		                    <li class="nav-item">
 					          <a class="nav-link" href="./around_search">주변 탐방</a>
@@ -134,7 +134,7 @@
 	                    	</c:when>
 	                    	<c:otherwise>
 	                    	<li class="nav-item">
-		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice/board">공지사항</a>
+		                      <a class="nav-link" href=${croot}"/notice/board">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
 		                      <a class="nav-link" href="news">오늘의 뉴스</a>

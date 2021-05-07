@@ -34,7 +34,6 @@
                 console.log(noticeInfo);
 
                 $.ajax({
-                  //async: false, //비동기. 페이지 바로 넘어가게
                   type: "PUT",
                   url: "${root}/notice",
                   data: noticeInfo,
@@ -47,7 +46,7 @@
                     console.log("상태값 : " + status + " / Http 에러메시지 : " + msg);
                   }
                 });
-                
+
               });
           });
         
@@ -75,13 +74,13 @@
                         <div class="form-group row">
                           <label class="col-sm-3 text-md-right" for="title">제목<span class="text-danger small">*</span></label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" placeholder="제목" id="title" name="title">
+                            <input type="text" class="form-control" placeholder="제목" id="title" name="title" value=${notice.title}>
                           </div>
                         </div>
                         <div class="form-group row">
                           <label class="col-sm-3 text-md-right" for="content">내용<span class="text-danger small">*</span></label>
                           <div class="col-sm-8">
-                             <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+                             <textarea class="form-control" rows="5" id="content" name="content">${notice.content}</textarea>
                           </div>
                         </div>
                        

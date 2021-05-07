@@ -64,7 +64,10 @@ public class NoticeController {
 	@GetMapping("view/{id}")
 	public ModelAndView view(@PathVariable("id") int id) {
 		ModelAndView mv = new ModelAndView("board/notice_view");
-		mv.addObject("notice", nSer.search(id));
+		NoticeDto notice = nSer.search(id);
+		notice.setViews(notice.getViews()+1);	//조회수 1 올려줌
+		nSer.update(notice);
+		mv.addObject("notice", notice);
 		return mv;
 	}
 
@@ -87,10 +90,11 @@ public class NoticeController {
 		return "{\"url\" : \"notice/view/" + notice.getId() + "\"}";
 	}
 	
-	@DeleteMapping
-	public String remove(int id) {
+	@DeleteMapping("{id}")
+	@ResponseBody
+	public String remove(@PathVariable("id") int id) {
 		nSer.delete(id);
-		return "/board/notice";
+		return "{\"url\" : \"notice/board\"}";
 	}
 	
 }
