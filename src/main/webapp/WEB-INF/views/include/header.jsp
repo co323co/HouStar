@@ -122,7 +122,7 @@
 	                   <c:choose>
 	                    	<c:when test="${empty userId }">
 	                    	  <li class="nav-item">
-		                      <a class="nav-link" href=${croot}"/notice/board">공지 사항</a>
+		                      <a class="nav-link" href=${croot}"/notice/board">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
 		                      <a class="nav-link" href=${croot}"/news">오늘의 뉴스</a>
