@@ -7,7 +7,7 @@
 <title>banner</title>
 </head>
 <body>
-	<div class=title_box style="height: 200px; background-image: url('img/banner.jpg'); background-size: cover; background-position: 50% 32%;">
+	<div class=title_box style="height: 200px; background-image: url('/img/banner.jpg'); background-size: cover; background-position: 50% 32%;">
         <div class="text-center" style="vertical-align: middle; height: 100%; background-color: rgba(0, 0, 0, 0.356);">
             <div style="height: 60px;"></div>
             <h4 class="m-0 p-0" style="font-weight: bold; color: white;">HAPPY HOUSE</h4>
