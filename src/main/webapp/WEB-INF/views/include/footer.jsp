@@ -117,7 +117,7 @@
 		       <div class="row">
 		        <div class="col-md-1">
 		           <div class="footer-content">
-		             <img alt="" src="./img/footer_logo.png" width="80">
+		             <img alt="" src="/img/footer_logo.png" width="80">
 		           </div>
 		         </div>
 		         <div class="col-md-8">

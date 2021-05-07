@@ -102,7 +102,7 @@
 	        <nav class="navbar navbar-expand-md bg-light navbar-light">
 	            <div class="container">
 	                <a class="navbar-brand" href="/">
-	                    <img src="img/header_logo.jpg" alt="Logo" style="width:120px;">
+	                    <img src="/img/header_logo.jpg" alt="Logo" style="width:120px;">
 	                </a>
 	            
 	                <!-- Toggler/collapsibe Button -->
