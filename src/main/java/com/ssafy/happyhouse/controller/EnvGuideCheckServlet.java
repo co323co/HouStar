@@ -1,4 +1,4 @@
-package com.ssafy.controller;
+package com.ssafy.happyhouse.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.ssafy.happyhouse.model.dto.EnvInfoDto;
+import com.ssafy.happyhouse.model.service.EnvGuideCheckServiceImpl;
 
-import com.ssafy.model.EnvInfoDto;
-import com.ssafy.model.service.EnvGuideCheckServiceImpl;
 
 @WebServlet("/envguidecheck")
 public class EnvGuideCheckServlet extends HttpServlet {
