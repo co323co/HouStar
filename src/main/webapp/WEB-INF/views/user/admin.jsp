@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@ include file="/WEB-INF/views/include/header.jsp" %>
-     <%
+    <%
 	String root = request.getContextPath();
 
-%>   
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,17 +16,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
      	<script>
     	$(document).ready(function() {
-    		
-    		
-    		
-    		
-			$("#searchBtn").click(function() {
-				
-				if($("#sword").val() == "") {
-					alert("모든 목록 조회!!");
-				} 
-				$("#searchform").attr("action", "${root}/admin/search").submit();
-			});
     		
     		
     		//회원 목록
@@ -86,9 +75,10 @@
     			let vid = $(this).attr("data-id");
     			console.log(vid);
     			$.ajax({
-    				url:'${root}/admin/user/' + vid,  
+    				url:'${root}/admin/user/detail/' + vid,  
     				type:'GET',
     				contentType:'application/json;charset=utf-8',
+    				dataType:'json',
     				success:function(user) {
     					$("#vid").text(user.userId);
     					$("#vname").text(user.userPwd);
@@ -164,13 +154,15 @@
     		//아이디값으로검색
     		$(document).on("click", "#searchBtn", function() { 
     			let word = $("#sword").val()
+    			console.log(word);
     			$.ajax({
-    				url:'${root}/admin/user' + word,  
+    				url:'${root}/admin/user/' + word,  
     				type:'GET',
     				contentType:'application/json;charset=utf-8',
-    				dataType:'json',
+        			dataType:'json',
     				success:function(users) {
     					makeList(users);
+    					console.log("성공");
     				},
     				error:function(xhr,status,msg){
     					console.log("상태값 : " + status + " Http에러메시지 : "+msg);
@@ -232,7 +224,7 @@
 	  <table class="table table-borderless">
 	  	<tr>
 	  		<td align="right">
-			  <input type="text" class="form-control" placeholder="검색어 입력." name="word" id="sword">
+			  <input type="text" class="form-control" placeholder="아이디 검색 " name="word" id="sword" style="width: 300px;">
 			  <button type="button" id="searchBtn" class="btn btn-primary">검색</button>
 			</td>
 	  	</tr>

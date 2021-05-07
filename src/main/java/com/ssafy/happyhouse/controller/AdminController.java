@@ -51,9 +51,10 @@ public class AdminController {
 			return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
 	}
 	//상세검색
-	@GetMapping(value = "/user/{userId}")
+	@GetMapping(value = "/user/detail/{userId}")
 	public ResponseEntity<MemberDto> userInfo(@PathVariable("userId") String userId) {
-		logger.debug("파라미터 : {}", userId);
+	
+		System.out.println(userId);
 		MemberDto memberDto = memberService.lookupmember(userId);
 		if(memberDto != null)
 			return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
@@ -61,11 +62,15 @@ public class AdminController {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 	
+	//아이디로 검색
 	@GetMapping(value = "/user/{word}")
-	public ResponseEntity<MemberDto> search(@PathVariable("word") String word) {
-		
-	
-
+	public ResponseEntity<List<MemberDto>> search(@PathVariable("word") String word) {	
+		System.out.println(word);
+		List<MemberDto> list = memberService.searchbyid(word);
+		if(list != null && !list.isEmpty()) {
+			return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
+		}
+		else return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 	//수정
 	@PutMapping(value = "/user")

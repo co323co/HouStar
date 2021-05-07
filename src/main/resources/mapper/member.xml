@@ -17,8 +17,11 @@
 	</select> 
 	
 	<select id="searchbyid" parameterType="String" resultType="memberDto">
-	select * from members
-	where 
+		select * 
+		from members
+		<if test="word != null and word !=''">
+			where userId like concat('%', #{word}, '%')
+		</if>
 	</select>
 	
 	<select id="lookupmember" parameterType="String" resultType="memberDto">
