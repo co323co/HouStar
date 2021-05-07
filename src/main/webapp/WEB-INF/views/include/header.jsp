@@ -7,6 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 	<meta charset="UTF-8">
 	<title>HEADER</title>
 	
@@ -120,7 +122,7 @@
 	                   <c:choose>
 	                    	<c:when test="${empty id }">
 	                    	  <li class="nav-item">
-		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice">공지사항</a>
+		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice/board">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
 		                      <a class="nav-link" href="news">오늘의 뉴스</a>
@@ -132,7 +134,7 @@
 	                    	</c:when>
 	                    	<c:otherwise>
 	                    	<li class="nav-item">
-		                      <a class="nav-link" href="<%=request.getContextPath()%>/notice">공지사항</a>
+		                      <a class="nav-link" href="<%=request.getContextPath()%>/noitce/board">공지사항</a>
 		                    </li>
 		                    <li class="nav-item">
 		                      <a class="nav-link" href="news">오늘의 뉴스</a>
