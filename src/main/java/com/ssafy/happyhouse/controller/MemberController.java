@@ -40,11 +40,11 @@ import io.swagger.annotations.ApiParam;
 @CrossOrigin("*")
 //@RequestMapping("/user")
 public class MemberController {
+	
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	private MemberService memberService;
-
 
 	@PostMapping(value="/user")
 	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session, HttpServletResponse response) {
@@ -89,14 +89,6 @@ public class MemberController {
 		memberDto = memberService.lookupmember(userId);
 		return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 	}
-	//회원 탈퇴
-//	@DeleteMapping(value="/rest/user/{userId}")
-//	public @ResponseBody ResponseEntity<String> userDelete(@PathVariable("userId") String userId,HttpSession session) {
-//		memberService.deleteMember(userId);
-//		session.invalidate();
-//		String msg = "회원 탈퇴가 완료되었습니다";
-//		return new ResponseEntity<String>(msg, HttpStatus.OK);
-//	}
 	//회원탈퇴
 	@GetMapping(value="/user/delete")
 	public String delete(HttpSession session) {
@@ -107,8 +99,6 @@ public class MemberController {
 		return "index";
 	}
 
-
-	
 	@GetMapping(value="/user/mvadmin")
 	public String mvadmin() {
 		return "user/admin";
