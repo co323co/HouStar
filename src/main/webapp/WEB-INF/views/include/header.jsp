@@ -140,7 +140,7 @@
 		                      <a class="nav-link" href=${croot}"/news">오늘의 뉴스</a>
 		                    </li>
 		                    <li class="nav-item">
-					          <a class="nav-link" href=${croot}"/around_search">주변 탐방</a>
+					          <a class="nav-link" href=${croot}"/house/deal">주변 탐방</a>
 					        </li>
 					        
 					        <li class="nav-item">
