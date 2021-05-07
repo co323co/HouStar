@@ -21,7 +21,7 @@
 		from members
 		where userId = #{userId}
 	</select>
-	
+	<!--  -->
 	<insert id="insertMember" parameterType="memberDto">
 		insert into members (userId, userPwd, userName, userAddress, userPhone)
 		values (#{userId}, #{userPwd}, #{userName}, #{userAddress}, #{userPhone})
