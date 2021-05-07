@@ -160,6 +160,26 @@
     				});
     			}
     		});
+    	
+    		//아이디값으로검색
+    		$(document).on("click", "#searchBtn", function() { 
+    			let word = $("#sword").val()
+    			$.ajax({
+    				url:'${root}/admin/user' + word,  
+    				type:'GET',
+    				contentType:'application/json;charset=utf-8',
+    				dataType:'json',
+    				success:function(users) {
+    					makeList(users);
+    				},
+    				error:function(xhr,status,msg){
+    					console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+    				}
+    			});
+    		});
+    		
+    		
+    	
     	});
     	
     	function makeList(users) {
@@ -192,6 +212,9 @@
     			$("#userlist").append(str);
     		});//each
     	}
+    	
+    	
+    	
      	</script>
 </head>
 <body>
@@ -204,22 +227,18 @@
     <div align="right"><button type="button" class="modiBtn btn btn-outline-info" data-toggle="modal" data-target="#userRegModal">등록</button></div>
     <br> <br>
     <!-- 검색 폼 -->
-     <form id="searchform" method="get" class="form-inline" action="">
-	
+    
+    <!--  <form id="searchform" method="get" class="form-inline" action=""> -->
 	  <table class="table table-borderless">
 	  	<tr>
 	  		<td align="right">
-		  	  <select class="form-control" name="key" id="skey">
-			    <option value="userid" selected="selected">아이디</option>
-			    <option value="articleno">이름</option>
-			    <option value="subject">주소</option>
-			  </select>
 			  <input type="text" class="form-control" placeholder="검색어 입력." name="word" id="sword">
 			  <button type="button" id="searchBtn" class="btn btn-primary">검색</button>
 			</td>
 	  	</tr>
 	  </table>
-	  </form>
+	<!--   </form> -->
+	  
     <br> <br>
     <div align="center">
     <table class="table table-hover text-center">

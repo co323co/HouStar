@@ -63,5 +63,10 @@ public class MemberServiceImpl implements MemberService {
 		return sqlSession.getMapper(MemberMapper.class).searchUser(map);
 	}
 
+	@Override
+	public List<MemberDto> searchbyid(String word) {	
+		return sqlSession.getMapper(MemberMapper.class).searchbyid(word);
+	}
+
 
 }

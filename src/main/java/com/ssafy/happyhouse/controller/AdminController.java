@@ -60,6 +60,13 @@ public class AdminController {
 		else
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
+	
+	@GetMapping(value = "/user/{word}")
+	public ResponseEntity<MemberDto> search(@PathVariable("word") String word) {
+		
+	
+
+	}
 	//수정
 	@PutMapping(value = "/user")
 	public ResponseEntity<List<MemberDto>> userModify(@RequestBody MemberDto memberDto) {
@@ -74,7 +81,7 @@ public class AdminController {
 		List<MemberDto> list = memberService.userList();
 		return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
 	}
-	//아이디 이름 주소로 검색
+	 
 	
 	
 }
