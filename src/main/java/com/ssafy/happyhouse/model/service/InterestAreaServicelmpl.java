@@ -17,8 +17,8 @@ public class InterestAreaServicelmpl implements InterestAreaService {
 	private SqlSession sqlSession;
 
 	@Override
-	public int insert(InterestAreaDto interestArea) {	
-		return sqlSession.getMapper(InterestAreaMapper.class).insert(interestArea);
+	public int insert(Map<String, String> map) {	//String userId, String code
+		return sqlSession.getMapper(InterestAreaMapper.class).insert(map);
 	}
 
 	@Override
@@ -29,5 +29,10 @@ public class InterestAreaServicelmpl implements InterestAreaService {
 	@Override
 	public List<InterestAreaDto> list(String userId) {
 		return sqlSession.getMapper(InterestAreaMapper.class).list(userId);
+	}
+
+	@Override
+	public String addressToCode(Map<String, String> map) {
+		return sqlSession.getMapper(InterestAreaMapper.class).addressToCode(map);
 	}
 }

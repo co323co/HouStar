@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,8 +32,11 @@ public class InterestAreaController {
 	
 	@PostMapping("/api/interest")
 	@ResponseBody
-	int insert(InterestAreaDto interestArea) {
-		return iSer.insert(interestArea);
+	int insert(@RequestBody String code, HttpSession session) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("code", code);
+		map.put("userId", (String) session.getAttribute("userId"));
+		return iSer.insert(map);
 	}
 	
 	@DeleteMapping("/api/interest")
@@ -48,5 +54,16 @@ public class InterestAreaController {
 	List<InterestAreaDto> list(@PathVariable String userId) {
 		return iSer.list(userId);
 	}
+	
+	//sido, gugun, dong 이름을 받아서 code로 반환
+	@GetMapping("/api/interest/covert")
+	@ResponseBody
+	Map<String, String> addressToCode(@RequestParam Map<String, String> map) {
+		Map<String, String> rs = new HashMap<String, String>();
+		rs.put("code", iSer.addressToCode(map));
+		return rs;
+	}
+	
+	
 	
 }

@@ -75,21 +75,55 @@
 								, "json"
 						);//get
 					});
+
+
+					//등록 버튼 눌렀을 때
+					$("#btn_regist").click(function (e) { 
+						
+						let info = {
+							sido : $("#sido option:selected").text(),
+							gugun : $("#gugun option:selected").text(),
+							dong : $("#dong option:selected").text()
+						}
+						$.ajax({
+							type: "GET",
+							url: "${croot}/api/interest/covert",
+							contentType: 'application/json',
+							data: info,
+							dataType: "json",
+							success: function (map) {
+								code = map.code;
+								console.log(code);
+								if(code){	//제대로 선택 다 했으면
+									registInterest(code);
+								}
+							},
+							error:function(xhr,status,msg){
+								console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+							}
+						});
+					});
+
+					function registInterest(code){
+						$.ajax({
+							type: "POST",
+							url: "${croot}/api/interest",
+							data: code,
+							dataType : "json",
+							contentType: 'application/json',
+							success: function (response) {
+								console.log(response);
+								console.log({ code : code });
+							},
+							error:function(xhr,status,msg){
+								console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+								console.log({ code : code });
+							}
+						});
+					}
+
 				});//ready
 				
-				//등록 버튼 눌렀을 때
-				$("#btn_regist").click(function (e) { 
-
-					$.ajax({
-						type: "POST",
-						url: "${croot}/api/interest",
-						data: "data",
-						dataType: "json",
-						success: function (response) {
-							
-						}
-					});
-				});
 			</script>
 				<!-- 시군구 select -->
 				<div class="section pt-4 pb-4 mt-2 mb-5">

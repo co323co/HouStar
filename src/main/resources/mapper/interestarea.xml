@@ -5,9 +5,9 @@
 <mapper
 	namespace="com.ssafy.happyhouse.model.mapper.InterestAreaMapper">
 
-	<select id="insert" parameterType="InterestAreaDto">
-		insert into interestarea values ((select code from baseaddress where dong = #{dong}),#{userid} )
-	</select>
+	<insert id="insert" parameterType="InterestAreaDto">
+		insert into interestarea values (#{code},#{userId})
+	</insert>
 	
 	<delete id="delete" parameterType="map">
 		delete from interestarea where userid = #{code} and code = #{userId}
@@ -17,6 +17,10 @@
 			select #{userId} as userid, code as code, dong as dong, gugun as gu, city as si
 			from baseaddress
 			where code in (select code from interestarea where userid = #{userId})
+	</select>
+
+	<select id="addressToCode" parameterType="map" resultType="String">
+			select code from baseaddress where city = #{sido} and gugun = #{gugun} and dong = #{dong}
 	</select>
 
 </mapper>
