@@ -33,7 +33,8 @@
 		<level value="info"></level>
 	</logger>
 	<!-- RULES for logging DEBUG < INFO < WARN < ERROR < FATAL. -->
-	<logger name="springweb" additivity="false">
+	<!-- <logger name="springweb" additivity="false"> -->
+	<logger name="com.ssafy.happyhouse.controller" additivity="false">
 		<level value="INFO" />
 		<appender-ref ref="LOGFILE" />
 		<appender-ref ref="CONSOLE" />
