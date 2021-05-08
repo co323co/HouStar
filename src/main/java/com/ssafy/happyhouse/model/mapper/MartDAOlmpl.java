@@ -10,7 +10,7 @@ import java.util.List;
 import com.ssafy.model.Mart;
 import com.ssafy.util.DBUtil;
 
-public class MartDAOlmpl implements MartDAO {
+public class MartDAOlmpl implements MartMapper {
 
 	@Override
 	public List<Mart> getinfo(String code) {

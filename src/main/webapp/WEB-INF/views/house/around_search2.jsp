@@ -256,8 +256,8 @@
 			map.setZoom(Zoomlevel);
 		}, 1000);
 	};
-
-	$(function() {
+	
+<%-- 	$(function() {
 		///////////////////////////////시, 도 선택 이벤트 처리 
 		$('#city').change(function() {
 			var city = $(this).val();
@@ -281,7 +281,7 @@
 			location.href = '<%=root%>/KMain?act=trade&city=<%=ct%>&dongcode=<%=gg%>&dong='+dong;
 			//$('#frm').submit();
 		})
-	})
+	}) --%>
 </script>
 <style>
 .banner.dark-translucent-bg {
@@ -298,7 +298,148 @@
 	<div class="bg-dark section pt-4 pb-5">
 		<div class="container-fluid ">
 			<!-- filters start -->
-			<div
+			<section id="select_map">
+		<!-- 시군구 선택 자바스크립트 코드 -->
+		<script>
+				//맨 처음에 시 목록을 불러옴
+				let colorArr = ['table-primary','table-success','table-danger'];
+				$(document).ready(function(){
+					$.get("${root}/housemap/sido"
+						,function(data, status){
+							$.each(data, function(index, vo) {
+								$("#sido").append("<option value='"+vo.sidoCode+"'>"+vo.sidoName+"</option>");
+							});//each
+						}//function
+						, "json"
+					);//get
+				});
+				
+				//ready
+				$(document).ready(function(){
+					//sido change
+					$("#sido").change(function() {
+						$.get("${root}/housemap/gugun/"+$("#sido").val()
+								,function(data, status){
+									$("#gugun").empty();
+									$("#gugun").append('<option value="0">선택</option>');
+									$.each(data, function(index, vo) {
+										$("#gugun").append("<option value='"+vo.gugunCode+"'>"+vo.gugunName+"</option>");
+									});//each
+								}//function
+								, "json"
+						);//get
+					});
+					
+					//gugun change
+					$("#gugun").change(function() {
+					
+						$.get("${root}/housemap/dong/"+$("#gugun").val()
+								,function(data, status){
+									$("#dong").empty();
+									$("#dong").append('<option value="0">선택</option>');
+									$.each(data, function(index, vo) {
+										$("#dong").append("<option value='"+vo.dong+"'>"+vo.dong+"</option>");
+									});//each
+								}//function
+								, "json"
+						);//get
+					});
+					
+					//dong change
+					$("#dong").change(function() {
+						let gugun = $("#gugun").val();
+						let dong = $("#dong").val();
+						location.href="${root}/housedeal/list/" + dong + "/"+ gugun ;
+						
+// 						$.get("${root}/map"
+// 								,{act:"apt", dong:$("#dong").val()}
+// 								,function(data, status){
+// 									$("#searchResult").empty();
+// 									$.each(data, function(index, vo) {
+// 										let str = "<tr class="+colorArr[index%3]+">"
+// 										+ "<td>" + vo.no + "</td>"
+// 										+ "<td>" + vo.dong + "</td>"
+// 										+ "<td>" + vo.aptName + "</td>"
+// 										+ "<td>" + vo.jibun + "</td>"
+// 										+ "<td>" + vo.code
+// 										+ "</td><td id='lat_"+index+"'></td><td id='lng_"+index+"'></td></tr>";
+// 										$("tbody").append(str);
+// 										$("#searchResult").append(vo.dong+" "+vo.aptName+" "+vo.jibun+"<br>");
+// 									});//each
+// 									geocode(data);
+// 								}//function
+// 								, "json"
+// 						);//get
+					});
+				});//ready
+				function geocode(jsonData) {
+					let idx = 0;
+					$.each(jsonData, function(index, vo) {
+						let tmpLat;
+						let tmpLng;
+						$.get("https://maps.googleapis.com/maps/api/geocode/json"
+								,{	key:'${GoogleAPIKey}'
+									, address:vo.dong+"+"+vo.aptName+"+"+vo.jibun
+								}
+								, function(data, status) {
+									//alert(data.results[0].geometry.location.lat);
+									tmpLat = data.results[0].geometry.location.lat;
+									tmpLng = data.results[0].geometry.location.lng;
+									$("#lat_"+index).text(tmpLat);
+									$("#lng_"+index).text(tmpLng);
+									addMarker(tmpLat, tmpLng, vo.aptName);
+								}
+								, "json"
+						);//get
+					});//each
+				}
+		</script>
+		<!-- 시군구 select -->
+		<div class="bg-dark section pt-4 pb-4" style="height:50px;">
+			<div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+				<div class="form-group mr-2">
+					<select class="form-control bgPink" name="sido" id="sido">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group md-5">
+					<select class="form-control" name="gugun" id="gugun">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group ml-2">
+					<select class="form-control" name="dong" id="dong">
+						<option value="0">선택</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- 		
+	<section id="select_map">
+		
+		시군구 select
+		<div class="bg-dark section pt-4 pb-4">
+			<div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+				<div class="form-group mr-2">
+					<select class="form-control bgPink" name="sido" id="sido">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group md-5">
+					<select class="form-control" name="gugun" id="gugun">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group ml-2">
+					<select class="form-control" name="dong" id="dong">
+						<option value="0">선택</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</section> -->
+			<%-- <div
 				class="sorting-filters text-center mb-20 d-flex justify-content-center">
 				<form class="form-inline" id="frm">
 				<input type="hidden" name="act" value="trade">
@@ -361,7 +502,7 @@
 						</select>
 					</div>
 				</form>
-			</div>
+			</div> --%>
 			<!-- filters end -->
 		</div>
 	</div>
@@ -413,11 +554,9 @@
 					</div>
 				</div>
 				<br><input type="button" value="코로나 선별 진료소" id="cor" onclick = "div_show()"/>
-				<input type="button" value="안심병원 검색" id="hos" onclick = "div_show2()"/>
-				
+				<input type="button" value="안심병원 검색" id="hos" onclick = "div_show2()"/>				
 				<div id="corona_s" style="display: none">
-					<h2>코로나 선별 진료소</h2>===================================
-					
+					<h2>코로나 선별 진료소</h2>===================================				
 				  <c:if test="${clist.size() != 0}">
 				  	<c:forEach var="c" items="${clist}">
 				  	<br>
@@ -431,8 +570,6 @@
 					<br>
 					<input type="button" value="숨기기" id="cor_h" onclick = "div_hide()"/>
 				</div>
-				
-				
 				<div id="hospital_s" style="display: none">
 					<h2>동네 안심병원</h2>===================================
 					 <c:if test="${hlist.size() != 0}">
