@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,5 +92,30 @@ public class InterestAreaController {
 		String code = list.get(0).getCode();
 		List<MartDto> martlist = martService.getinfo(code);
 		return martlist;
+	}
+	// 상호업종 대분류명 가꼬와서 리스트새로만들어서뿌려
+	@GetMapping("/api/interest/mart/{city}")
+	@ResponseBody
+	public List<MartDto> newmartlist (@PathVariable("city") String city, HttpSession session){
+		if(city.contains("temp")) {
+			city = city.replaceAll("temp", "/");
+		}
+		System.out.println(city);
+		String userId = (String) session.getAttribute("userId");	
+		List<InterestAreaDto> list =iSer.list(userId);
+		String code = list.get(0).getCode();
+		List<MartDto> martlist = martService.getinfo(code);
+		if(city.equals("all")) {
+			return martlist;
+		}
+		List<MartDto> newmartlist = new ArrayList<>();
+		for (MartDto m : martlist) {
+			if(m.getBictitle().equals(city)) {
+				newmartlist.add(m);
+				System.out.println("담아써 새거에" + m.toString());
+			}
+		}
+		
+		return newmartlist;
 	}
 }

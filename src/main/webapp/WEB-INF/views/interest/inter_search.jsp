@@ -275,6 +275,27 @@
 		});//each
 		
 	}// end function
+	
+
+	$(function() {
+		///////////////////////////////상가 종류 선택하면 상가정보 리셋하고 다시뿌려어
+		$('#city').change(function() {
+			var city = $(this).val();
+			console.log('city 선택해써', city)
+			$.ajax({
+				url:'${root}/api/interest/mart/' + city,   
+				type:'GET',
+				success:function(area) {
+					console.log("상가리스트 선태갱개객");
+					makemartist(area);
+				},
+				error:function(xhr,status,msg){
+					console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+				}
+			});	//and ajax
+			
+		})
+	})
 </script>
         <style>
             .banner.dark-translucent-bg {
@@ -297,13 +318,13 @@
                       <!-- <input type="hidden" id="code"  name="code" value="code"/> -->
                       <div class="form-group md">
                         <select class="form-control bgPink" name="city" id="city">
-                          <option value="all">상가 종류</option>
+                          <option value="all">전체 선택</option>
                           <option value="음식">음식</option>
-                          <option value="학문/교육">학문/교육</option>
+                          <option value="학문temp교육">학문/교육</option>
                           <option value="소매">소매</option>
                           <option value="생활서비스">생활서비스</option>
                           <option value="부동산">부동산</option>
-                          <option value="관광/여가/오락">관광/여가/오락</option>
+                          <option value="관광temp여가temp오락">관광/여가/오락</option>
                           <option value="숙박">숙박</option>
                         </select>
                       </div>
