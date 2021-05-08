@@ -4,6 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.ArrayList,com.ssafy.happyhouse.model.dto.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="dong" value="${dong}"/>
+<c:set var="gugun" value="${gugun}"/>
 <%
 	String root = request.getContextPath();
 	String ct = (String) session.getAttribute("ct");
@@ -254,8 +256,8 @@
 			map.setZoom(Zoomlevel);
 		}, 1000);
 	};
-
-	$(function() {
+	
+<%-- 	$(function() {
 		///////////////////////////////시, 도 선택 이벤트 처리 
 		$('#city').change(function() {
 			var city = $(this).val();
@@ -279,7 +281,7 @@
 			location.href = '<%=root%>/KMain?act=trade&city=<%=ct%>&dongcode=<%=gg%>&dong='+dong;
 			//$('#frm').submit();
 		})
-	})
+	}) --%>
 </script>
 <style>
 .banner.dark-translucent-bg {
@@ -296,7 +298,148 @@
 	<div class="bg-dark section pt-4 pb-5">
 		<div class="container-fluid ">
 			<!-- filters start -->
-			<div
+			<section id="select_map">
+		<!-- 시군구 선택 자바스크립트 코드 -->
+		<script>
+				//맨 처음에 시 목록을 불러옴
+				let colorArr = ['table-primary','table-success','table-danger'];
+				$(document).ready(function(){
+					$.get("${root}/housemap/sido"
+						,function(data, status){
+							$.each(data, function(index, vo) {
+								$("#sido").append("<option value='"+vo.sidoCode+"'>"+vo.sidoName+"</option>");
+							});//each
+						}//function
+						, "json"
+					);//get
+				});
+				
+				//ready
+				$(document).ready(function(){
+					//sido change
+					$("#sido").change(function() {
+						$.get("${root}/housemap/gugun/"+$("#sido").val()
+								,function(data, status){
+									$("#gugun").empty();
+									$("#gugun").append('<option value="0">선택</option>');
+									$.each(data, function(index, vo) {
+										$("#gugun").append("<option value='"+vo.gugunCode+"'>"+vo.gugunName+"</option>");
+									});//each
+								}//function
+								, "json"
+						);//get
+					});
+					
+					//gugun change
+					$("#gugun").change(function() {
+					
+						$.get("${root}/housemap/dong/"+$("#gugun").val()
+								,function(data, status){
+									$("#dong").empty();
+									$("#dong").append('<option value="0">선택</option>');
+									$.each(data, function(index, vo) {
+										$("#dong").append("<option value='"+vo.dong+"'>"+vo.dong+"</option>");
+									});//each
+								}//function
+								, "json"
+						);//get
+					});
+					
+					//dong change
+					$("#dong").change(function() {
+						let gugun = $("#gugun").val();
+						let dong = $("#dong").val();
+						location.href="${root}/housedeal/list/" + dong + "/"+ gugun ;
+						
+// 						$.get("${root}/map"
+// 								,{act:"apt", dong:$("#dong").val()}
+// 								,function(data, status){
+// 									$("#searchResult").empty();
+// 									$.each(data, function(index, vo) {
+// 										let str = "<tr class="+colorArr[index%3]+">"
+// 										+ "<td>" + vo.no + "</td>"
+// 										+ "<td>" + vo.dong + "</td>"
+// 										+ "<td>" + vo.aptName + "</td>"
+// 										+ "<td>" + vo.jibun + "</td>"
+// 										+ "<td>" + vo.code
+// 										+ "</td><td id='lat_"+index+"'></td><td id='lng_"+index+"'></td></tr>";
+// 										$("tbody").append(str);
+// 										$("#searchResult").append(vo.dong+" "+vo.aptName+" "+vo.jibun+"<br>");
+// 									});//each
+// 									geocode(data);
+// 								}//function
+// 								, "json"
+// 						);//get
+					});
+				});//ready
+				function geocode(jsonData) {
+					let idx = 0;
+					$.each(jsonData, function(index, vo) {
+						let tmpLat;
+						let tmpLng;
+						$.get("https://maps.googleapis.com/maps/api/geocode/json"
+								,{	key:'${GoogleAPIKey}'
+									, address:vo.dong+"+"+vo.aptName+"+"+vo.jibun
+								}
+								, function(data, status) {
+									//alert(data.results[0].geometry.location.lat);
+									tmpLat = data.results[0].geometry.location.lat;
+									tmpLng = data.results[0].geometry.location.lng;
+									$("#lat_"+index).text(tmpLat);
+									$("#lng_"+index).text(tmpLng);
+									addMarker(tmpLat, tmpLng, vo.aptName);
+								}
+								, "json"
+						);//get
+					});//each
+				}
+		</script>
+		<!-- 시군구 select -->
+		<div class="bg-dark section pt-4 pb-4" style="height:50px;">
+			<div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+				<div class="form-group mr-2">
+					<select class="form-control bgPink" name="sido" id="sido">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group md-5">
+					<select class="form-control" name="gugun" id="gugun">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group ml-2">
+					<select class="form-control" name="dong" id="dong">
+						<option value="0">선택</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- 		
+	<section id="select_map">
+		
+		시군구 select
+		<div class="bg-dark section pt-4 pb-4">
+			<div class="sorting-filters text-center mb-20 d-flex justify-content-center">
+				<div class="form-group mr-2">
+					<select class="form-control bgPink" name="sido" id="sido">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group md-5">
+					<select class="form-control" name="gugun" id="gugun">
+						<option value="0">선택</option>
+					</select>
+				</div>
+				<div class="form-group ml-2">
+					<select class="form-control" name="dong" id="dong">
+						<option value="0">선택</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</section> -->
+			<%-- <div
 				class="sorting-filters text-center mb-20 d-flex justify-content-center">
 				<form class="form-inline" id="frm">
 				<input type="hidden" name="act" value="trade">
@@ -359,79 +502,45 @@
 						</select>
 					</div>
 				</form>
-			</div>
+			</div> --%>
 			<!-- filters end -->
 		</div>
 	</div>
 	<div class="container">
 		<div class="row mt-5 mb-5">
 			<div class="col-sm-4">
-				<h2>거래 내역</h2>
-				<%
-					if(realtd ==null)	{
-				%>
-				<div>
-					<%
-						if(tlist==null || tlist.size()==0){
-					%>
-						<h4>거래내역이 없습니다</h4>
-					<%
-						}else{
-								for (HouseDealDto h : tlist) {
-					%>
-					<div class="media-body">
+		<%-- 	${gugun } --%>
+				<h2>거래 내역</h2>			
+				<hr>
+				  <c:if test="${tlist.size() == 0}">
+				  <h4>거래내역이 없습니다</h4>
+				  </c:if>
+				  <c:if test="${tlist.size() != 0}">
+	  			<c:forEach var="t" items="${tlist}">
+	  			<div class="media-body">
 					</div>
 						<h4>
-							<a href='#'><%=h.getAptname()%></a>
+							<a href='#'>${t.aptname}</a>
 						</h4>
 
 						<h6 class="media-heading" id='deal'>
-							거래금액 :	<%=h.getDealAmount()%>만원
+							거래금액 :	${t.dealAmount}만원
 						</h6>
 						<h6 class="media-heading" id='deal'>
-							면적:	<%=h.getArea()%></h6>
+							면적:	${t.area}</h6>
 						<div>
 							<p class="small margin-clear">
 							<div class="fa fa-calendar pr-10"></div>
-							<%=h.getDealYear()%>.<%=h.getDealMonth()%>.<%=h.getDealDay()%>
+							${t.dealYear}.${t.dealMonth}.${t.dealDay}
 							</p>
 						</div>
-					<%
-						}
-								}
-					%>
-				</div>
-				<%
-					}else{
-				%>
-					<h4><a href='#'><%=realtd.get(0).getAptname()%></a>	</h4>
-					<div>
-					<%
-						for (HouseDealDto h : realtd) {
-					%>
-					<div class="media-body">
-						<h6 class="media-heading" id='deal'>
-							거래금액 :	<%=h.getDealAmount()%>만원
-						</h6>
-						<h6 class="media-heading" id='deal'>
-							면적:	<%=h.getArea()%></h6>
-						<div>
-							<p class="small margin-clear">
-							<div class="fa fa-calendar pr-10"></div>
-							<%=h.getDealYear()%>.<%=h.getDealMonth()%>.<%=h.getDealDay()%>
-							</p>
-						</div>
-					</div>
-					<%
-						}
-					%>
-				</div>
-				<%
-					session.removeAttribute("real");
-							}
-				%>
-				<hr>
+						<hr>
+	  		</c:forEach>
+
+	  		</c:if>
 			</div>
+			
+			
 			<div class="col-sm-8" style="margin: 0 auto;">
 
 				<!-- Google Map start -->
@@ -445,45 +554,34 @@
 					</div>
 				</div>
 				<br><input type="button" value="코로나 선별 진료소" id="cor" onclick = "div_show()"/>
-				<input type="button" value="안심병원 검색" id="hos" onclick = "div_show2()"/>
+				<input type="button" value="안심병원 검색" id="hos" onclick = "div_show2()"/>				
 				<div id="corona_s" style="display: none">
-					<h2>코로나 선별 진료소</h2>===================================
-					<%
-						if(co != null)
-									{
-								for(CoronaDto corona : co){
-					%>
-						<br>
-						<div><%=corona.getCname()%><br> <%=corona.getAddress()%><br>평일: <%=corona.getOtime()%><br>토요일: <%=corona.getOtime()%><br>일/공휴일: <%=corona.getOtime()%><br>번호: <%=corona.getPhone()%></div>
+					<h2>코로나 선별 진료소</h2>===================================				
+				  <c:if test="${clist.size() != 0}">
+				  	<c:forEach var="c" items="${clist}">
+				  	<br>
+						<div>${c.cname }<br> ${c.cname }<br>평일: ${c.otime }<br>토요일: ${c.stime }<br>일/공휴일: ${c.htime }<br>번호:  ${c.phone }</div>
 						===================================
-					<%
- 	} }
- 				else{
- %>
-						<br>근처 코로나 선별소가 없습니다.
-					<%
-							}
-						%>
+				  	</c:forEach>
+				  </c:if>
+					  <c:if test="${clist.size() == 0}">
+					  <br>근처 코로나 선별소가 없습니다.
+					  </c:if>
 					<br>
 					<input type="button" value="숨기기" id="cor_h" onclick = "div_hide()"/>
 				</div>
 				<div id="hospital_s" style="display: none">
 					<h2>동네 안심병원</h2>===================================
-					<%
-						if(hos != null)
-									{
-									for(HospitalDto h : hos){
-					%>
-						<br>
-						<div><%=h.getHname() %><br><%=h.getAddress() %><br><%=h.getType() %><br><%=h.getPhone() %><br> </div>
+					 <c:if test="${hlist.size() != 0}">
+				  	<c:forEach var="h" items="${hlist}">
+				  		<br>
+						<div>${h.hname }<br>${h.address }<br>${h.type }<br>${h.phone }<br> </div>
 						===================================
-					<%		}
-						}else{
-					%>
-						<br>근처 안심 병원이 없습니다!
-					<% 	
-						}
-					%>
+				  	</c:forEach>
+				  	</c:if>
+					 <c:if test="${hlist.size() == 0}">
+					 	<br>근처 안심 병원이 없습니다!
+					 </c:if>
 					<br>
 					<input type="button" value="숨기기" id="cor_h" onclick = "div_hide2()"/>
 				</div>

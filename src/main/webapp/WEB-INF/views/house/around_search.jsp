@@ -509,7 +509,8 @@
 	<div class="container">
 		<div class="row mt-5 mb-5">
 			<div class="col-sm-4">
-		<%-- 	${gugun } --%>
+			
+		 	${gugun }  ${dong }
 				<h2>거래 내역</h2>			
 				<hr>
 				  <c:if test="${tlist.size() == 0}">
