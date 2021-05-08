@@ -51,6 +51,7 @@
 					
 					//gugun change
 					$("#gugun").change(function() {
+					
 						$.get("${root}/housemap/dong/"+$("#gugun").val()
 								,function(data, status){
 									$("#dong").empty();
@@ -65,8 +66,9 @@
 					
 					//dong change
 					$("#dong").change(function() {
+						let gugun = $("#gugun").val();
 						let dong = $("#dong").val();
-						location.href="${root}/housedeal/list/" + dong;
+						location.href="${root}/housedeal/list/" + dong + "/"+ gugun ;
 						
 // 						$.get("${root}/map"
 // 								,{act:"apt", dong:$("#dong").val()}

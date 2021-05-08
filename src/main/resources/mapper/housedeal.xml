@@ -53,20 +53,38 @@
 		</if>		
 	</select>
 	
-	<select id="getCorona"  parameterType="string"  resultType="coronaDto" >
+	<!-- <select id="getCorona"  parameterType="string"  resultType="coronaDto" >
 		select * 
 		from corona
 		<if test="value != null and value !=''">
 			where gungu = #{value}
 		</if>
+	</select> -->
+	<select id="getCorona"  parameterType="string"  resultType="coronaDto" >
+		select * 
+		from corona c 
+		where c.gungu  in (
+			select  distinct gugun
+			from baseaddress
+			where dongcode = #{value}
+		);
 	</select>
 	
-	<select id="getHospital" parameterType="string"  resultType="hospitalDto" >
+	<!-- <select id="getHospital" parameterType="string"  resultType="hospitalDto" >
 		select * 
 		from hospital
 		<if test="value != null and value !=''">
 			where gungu = #{value}
 		</if>
+	</select> -->
+	<select id="getHospital" parameterType="string"  resultType="hospitalDto" >
+		select * 
+		from hospital h 
+		where h.gungu  in (
+			select  distinct gugun
+			from baseaddress
+			where dongcode = #{value}
+		)
 	</select>
 	
 </mapper>

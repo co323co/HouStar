@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8" import="java.util.ArrayList,com.ssafy.happyhouse.model.dto.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="dong" value="${dong}"/>
+<c:set var="gugun" value="${gugun}"/>
 <%
 	String root = request.getContextPath();
 	String ct = (String) session.getAttribute("ct");
@@ -367,6 +368,7 @@
 	<div class="container">
 		<div class="row mt-5 mb-5">
 			<div class="col-sm-4">
+		<%-- 	${gugun } --%>
 				<h2>거래 내역</h2>			
 				<hr>
 				  <c:if test="${tlist.size() == 0}">
@@ -412,44 +414,37 @@
 				</div>
 				<br><input type="button" value="코로나 선별 진료소" id="cor" onclick = "div_show()"/>
 				<input type="button" value="안심병원 검색" id="hos" onclick = "div_show2()"/>
+				
 				<div id="corona_s" style="display: none">
 					<h2>코로나 선별 진료소</h2>===================================
-					<%
-						if(co != null)
-									{
-								for(CoronaDto corona : co){
-					%>
-						<br>
-						<div><%=corona.getCname()%><br> <%=corona.getAddress()%><br>평일: <%=corona.getOtime()%><br>토요일: <%=corona.getOtime()%><br>일/공휴일: <%=corona.getOtime()%><br>번호: <%=corona.getPhone()%></div>
+					
+				  <c:if test="${clist.size() != 0}">
+				  	<c:forEach var="c" items="${clist}">
+				  	<br>
+						<div>${c.cname }<br> ${c.cname }<br>평일: ${c.otime }<br>토요일: ${c.stime }<br>일/공휴일: ${c.htime }<br>번호:  ${c.phone }</div>
 						===================================
-					<%
- 	} }
- 				else{
- %>
-						<br>근처 코로나 선별소가 없습니다.
-					<%
-							}
-						%>
+				  	</c:forEach>
+				  </c:if>
+					  <c:if test="${clist.size() == 0}">
+					  <br>근처 코로나 선별소가 없습니다.
+					  </c:if>
 					<br>
 					<input type="button" value="숨기기" id="cor_h" onclick = "div_hide()"/>
 				</div>
+				
+				
 				<div id="hospital_s" style="display: none">
 					<h2>동네 안심병원</h2>===================================
-					<%
-						if(hos != null)
-									{
-									for(HospitalDto h : hos){
-					%>
-						<br>
-						<div><%=h.getHname() %><br><%=h.getAddress() %><br><%=h.getType() %><br><%=h.getPhone() %><br> </div>
+					 <c:if test="${hlist.size() != 0}">
+				  	<c:forEach var="h" items="${hlist}">
+				  		<br>
+						<div>${h.hname }<br>${h.address }<br>${h.type }<br>${h.phone }<br> </div>
 						===================================
-					<%		}
-						}else{
-					%>
-						<br>근처 안심 병원이 없습니다!
-					<% 	
-						}
-					%>
+				  	</c:forEach>
+				  	</c:if>
+					 <c:if test="${hlist.size() == 0}">
+					 	<br>근처 안심 병원이 없습니다!
+					 </c:if>
 					<br>
 					<input type="button" value="숨기기" id="cor_h" onclick = "div_hide2()"/>
 				</div>
