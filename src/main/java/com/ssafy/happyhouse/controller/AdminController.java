@@ -25,7 +25,7 @@ import com.ssafy.happyhouse.model.service.MemberService;
 @RequestMapping("/admin")
 @CrossOrigin("*")
 public class AdminController {
-
+//
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
