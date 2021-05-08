@@ -86,8 +86,8 @@
 			where dongcode = #{value}
 		)
 	</select>
-	
-		<select id="getall" resultType="houseDealDto">
+	<!-- 전체 아파트 가져오기 -->
+	<select id="getall" resultType="houseDealDto">
 		select d.hno, i.dong, i.aptname, i.code, d.dealAmount,
 		d.dealYear,d.dealMonth, d.dealDay, d.area, i.lat, i.lng, i.jibun
 		from housedeal d

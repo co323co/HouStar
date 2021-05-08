@@ -12,4 +12,5 @@ public interface HouseDealService {
 	public List<HouseDealDto> getReal(String name);
 	public List<CoronaDto> getCorona(String gu);
 	public List<HospitalDto> getHospital(String gu);
+	public List<HouseDealDto> getall();
 }

@@ -50,4 +50,10 @@ public class HouseDealServiceImpl implements HouseDealService {
 		return sqlSession.getMapper(HouseDealMapper.class).getHospital(gu);
 	}
 
+	@Override
+	public List<HouseDealDto> getall() {
+		
+		return sqlSession.getMapper(HouseDealMapper.class).getall();
+	}
+
 }

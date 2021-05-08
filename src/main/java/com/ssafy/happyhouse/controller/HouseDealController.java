@@ -56,16 +56,28 @@ public class HouseDealController {
 	// header에서 주변탐방으로 이동할떄 리스트를 다갖고가서 뿌린다.
 	@GetMapping(value="list")
 	public ModelAndView mvHouseDeal() {
-		ModelAndView mv = new ModelAndView();
-		String dong  = "1";
-		List<HouseDealDto> tlist = houseDealService.treadInfo(dong);	
-		System.out.println(tlist.toString());
-		mv.addObject(tlist);
+		ModelAndView mv = new ModelAndView();	
+		List<HouseDealDto> tlist = houseDealService.getall();
+		mv.addObject("firstlist",tlist);
 		mv.setViewName("house/around_search");
 		return mv;
 		
 	}
-
+	// 아파트 이름으로 검색하기
+	@GetMapping("api/ {}")
+	@ResponseBody
+	public 	List<HouseDealDto> searchapt (@PathVariable String aptname) {
+		List<HouseDealDto> tlist = houseDealService.getall();
+		for (HouseDealDto now : tlist) {
+			if(now.getAptname().contains(aptname)) {
+				
+			}
+		}
+		return null;
+		
+		
+	}
+	
 	
 	
 }
