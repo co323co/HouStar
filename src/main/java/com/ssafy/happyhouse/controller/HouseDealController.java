@@ -45,7 +45,7 @@ public class HouseDealController {
 //		System.out.println(gugun);
 //		System.out.println(clist.toString());
 //		System.out.println(hlist.toString());
-		mv.setViewName("house/around_search2");
+		mv.setViewName("house/around_search");
 		return mv;
 
 	}
