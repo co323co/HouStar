@@ -41,6 +41,11 @@ public class InterestAreaDto {
 	public void setSi(String si) {
 		this.si = si;
 	}
+	@Override
+	public String toString() {
+		return "InterestAreaDto [userid=" + userid + ", code=" + code + ", dong=" + dong + ", gu=" + gu + ", si=" + si
+				+ "]";
+	}
 
 	
 

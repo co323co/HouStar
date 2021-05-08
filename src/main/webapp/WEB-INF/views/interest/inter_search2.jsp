@@ -2,8 +2,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
 	String root = request.getContextPath();
 	List<MartDto> tlist = (List) session.getAttribute("mart");
@@ -213,68 +211,23 @@
 		}, 1000);
 	};
 	
-	$(document).ready(function(){
-		//관심지역 뿌리기
-		$.ajax({
-				url:'${root}/api/interest/list',   
-				type:'GET',
-				dataType:'json',
-				success:function(area) {
-					console.log("관심지역 리스트가져오기성공");
-					makeList(area);
-				},
-				error:function(xhr,status,msg){
-					console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-				}
-			});	//and ajax
-		
-		// 관심지역 상가 다 뿌리기
-			$.ajax({
-				url:'${root}/api/interest/mart',   
-				type:'GET',
-				success:function(area) {
-					console.log("주변 상가 리스트가져오기성공");
-					makemartist(area);
-				},
-				error:function(xhr,status,msg){
-					console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-				}
-			});	//and ajax
-
-	});//ready
-	// 관심지역 정보 뿌리기
-	function makeList(area) {
-		$("#userlist").empty();
-		$(area).each(function(index, area) {	
+	
+	
+	$(function() {
+		///////////////////////////////시, 도 선택 이벤트 처리 
+		$('#city').change(function() {
+			var city = $(this).val();
+			console.log('city 선택', city)
 			
-			let str =` 
-				<tr id="view_${'${area.userid}'}" class="view" data-id="${'${area.userid}'}">
-				<td>${'${area.si}'}</td>
-				<td>${'${area.gu}'}</td>
-				<td>${'${area.dong}'}</td>
-			</tr>
-
-			`;
-			$("#userlist").append(str);
-		});//each
-	}// end function
-	// 관심지역 상가 뿌리기
-	function makemartist(area) {
-		$("#martlist").empty();
-		$(area).each(function(index, area) {	
-		
-			let str =` 
-				<tr id="view_${'${area.userid}'}" class="view" data-id="${'${area.userid}'}">
-				<td>${'${area.martname}'}</td>
-				<td>${'${area.bictitle}'}</td>
-				<td>${'${area.doro}'}</td>
-			</tr>
-
-			`;
-			$("#martlist").append(str);
-		});//each
-		
-	}// end function
+			location.href = '<%=root%>/ayj?act=citychange&city=' + city;
+			//$('#frm').submit();
+			
+			
+			
+			
+			
+		})
+	})
 </script>
         <style>
             .banner.dark-translucent-bg {
@@ -318,52 +271,66 @@
 		
        <div class="container">
         <div class="row mt-5 mb-5">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
 
 				<button type="button" class="btn btn-success mb-5" onClick="location.href='${root}/interest/envInfoPage'">환경 오염 정보 확인하러 가기</button>
-				<h2 class="mb-4">관심 지역 정보</h2>
-			<table class="table table-hover text-center" >
-			  		<colgroup>
-			            <col width="*">
-			            <col width="120">
-			            <col width="120">
-			          <%--   <col width="130"> --%>
-			        </colgroup>
-			    	<thead>
-				      	<tr>
-				        	<th class="text-center">시 이름</th>
-				        	<th class="text-center">구 이름</th>
-				        	<th class="text-center">동 이름</th>
-				        <!-- 	<th class="text-center">삭제</th> -->
-				      	</tr>
-			    	</thead>			 
-			    	<tbody id="userlist"></tbody>
-				</table>
+				
+				<%
+									if (mlist == null) {
+				%>
+				<h4>관심지역이 없습니다</h4>
+				<%
+					} else {
+								for (int i = 0; i < mlist.size(); i++) {
+				%>
+				<div class="media-body"></div>
+				<a class="mr-5"
+					href="<%=root%>/ayj?act=inter_search&dong=<%=mlist.get(i)%>">
+					관심지역 -> <%=mlist.get(i)%>
+				</a> <a
+					href="<%=root%>/ayj?act=inter_delete&dong=<%=mlist.get(i)%>">
+					삭제하기 </a>
+				<hr>
+				<%
+					}
+							}
+				%>
 
 
-				<h2 class="mt-5">주변 상가 정보</h2>
+
+				<h2>주변 상가 정보</h2>
             <br>
-           
-            <table class="table table-hover text-center" >
-			  		<colgroup>
-			            <col width="120">
-			            <col width="*">
-			            <col width="*">
-			        </colgroup>
-			    	<thead>
-				      	<tr>
-				        	<th class="text-center">상호 명</th>
-				        	<th class="text-center">상권업종대분류명</th>
-				        	<th class="text-center">주소</th>
-				      	</tr>
-			    	</thead>			 
-			    	<tbody id="martlist"></tbody>
-				</table>
+            <div>
+				<%
+					if(tlist==null || tlist.size() == 0){
+				%>
+					<h4>주변 상가가 없습니다</h4>
+				<%
+					}else{
+						for (MartDto h : tlist) {
+				%>
+				<%if(sel.equals(h.getBictitle())){%>
+				<div class="media-body">
+				</div>
+					<h6 class="media-heading" id='deal'>
+						가게 이름  : <%=h.getMartname()%>
+					</h6>
+					<h6 class="media-heading" id='deal'>
+						주소 : <%=h.getDoro()%></h6>
+					
+					<br>
+					<hr>
+					<br>
+					<%} %>
+				<%}
+				}
+				%>
+			</div>
             
             
           
           </div>
-          <div class="col-sm-6" style="margin:0 auto; " >
+          <div class="col-sm-8" style="margin:0 auto; " >
 
             <!-- Google Map start -->
           <div class="main col-lg-8 order-lg-2 ml-xl-auto">
