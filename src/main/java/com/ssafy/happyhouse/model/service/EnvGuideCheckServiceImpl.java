@@ -30,7 +30,8 @@ public class EnvGuideCheckServiceImpl implements EnvGuideCheckService{
 		 * 그래서 dongCode로 해당 동의 정보를 찾아  %OO시 OO구 OO동% 형태의 문자열을 만들고 그걸로 envinfo_view에서 검색하는 것
 		 */
 		SidoGugunDongDto sgd = (SidoGugunDongDto) sqlSession.getMapper(SidoGugunDongMapper.class).getByDongCode(dongCode);
-		String address = "%" + sgd.getSidoName() +" " + sgd.getDongName() + " " +sgd.getDongName() +"%";	// %OO시 OO구 OO동%		ex) %서울특별시 종로구 관수동%
+		String address = "%" + sgd.getSidoName() +" " + sgd.getGugunName() + " " +sgd.getDongName() +"%";	// %OO시 OO구 OO동%		ex) %서울특별시 종로구 관수동%
+		System.out.println("EnvGuideCheckServiceImpl : listByDong: " + address);
 		return sqlSession.getMapper(EnvGuideCheckMapper.class).listByAddress(address);
 	}
 

@@ -176,6 +176,7 @@
 	
     	<script type="text/javascript">
     		
+			//raedy됐을 때
     		$(document).ready(function () {
     			
 				//관심지역 불러오기
@@ -183,26 +184,30 @@
 				
 				//관심지역 골랐을 때 이벤트
 				$("#favSelectBox").change(function (e) { 
-					
-					var code = $("#favSelectBox option:selected").val();
-					console.log(code);
-
-					$.ajax({
-						type: "GET",
-						url: "${croot}/api/envguidecheck/list/"+code,
-						//dataType: "json",
-						success: function(list){
-							console.log(list);
-						},
-						error: function (xhr, status, msg) {
-							console.log("상태값 : " + status + " / Http 에러메시지 : " + msg);
-						}
-					}); //get
-
+					loadEnvInfo();
 				}); //change
 
 			}); //ready
 
+			//함수들
+			
+			function loadFavoriteDong(){
+				$.ajax({
+					type: "GET",
+					url: "${croot}/api/interest/list",	//해당 세션(로그인 ID)의 관심 지역 볼러오기
+					contentType: 'application/json',
+					success: function (list) {
+						console.log(list);
+						makeListFavoriteDong(list);
+					},  
+					error: function (xhr, status, msg) {
+						console.log("상태값 : " + status + " / Http 에러메시지 : " + msg);
+					}
+				});
+				
+			} //loadFavoriteDong
+
+			//관심지역 html 붙이는 함수
 			function makeListFavoriteDong(list){
 
 				$("#favSelectBox").empty();
@@ -214,22 +219,73 @@
 				});
 				$("#favSelectBox").append(content);
 			} //makeListFavoriteDong
+			
+			//환경정보 셋팅
+			function loadEnvInfo(){
+				var code = $("#favSelectBox option:selected").val();
+					console.log(code);
 
-			function loadFavoriteDong(){
 					$.ajax({
 						type: "GET",
-						url: "${croot}/api/interest/list",	//해당 세션(로그인 ID)의 관심 지역 볼러오기
-						contentType: 'application/json',
-						success: function (list) {
-							console.log(list);
-							makeListFavoriteDong(list);
-						},  
+						url: "${croot}/api/envguidecheck/list/"+code,
+						success: function(list){
+							let newList = [];	
+							//녹지 타입이 체크되어있으면
+							if($("#check_green").is(":checked")){
+								list.forEach(dto => {
+									if(dto.type.indexOf("녹지") != -1) newList.push(dto);
+								});
+							}
+							//폐수 타입이 체크되어있으면
+							if($("#check_wastewater").is(":checked")){
+								list.forEach(dto => {
+									if(dto.type.indexOf("폐수") != -1) newList.push(dto);
+								});
+							}
+							//대기 타입이 체크되어있으면
+							if($("#check_airemissions").is(":checked")){
+								list.forEach(dto => {
+									if(dto.type.indexOf("대기") != -1) newList.push(dto);
+								});
+							}
+							makeListEnvInfo(newList);
+						},
 						error: function (xhr, status, msg) {
 							console.log("상태값 : " + status + " / Http 에러메시지 : " + msg);
 						}
-					});
-				
-			} //loadFavoriteDong
+					}); //get
+			}//loadEnvInfo
+			
+			function makeListEnvInfo(list){
+				let content = "";
+				if(!list || list.length == 0){	//해당 동에 환경 정보가 없으면
+					$("#infos").html(`<div class="p-3 mb-2" style="border-radius: 5px">해당 동에 환경 정보가 없습니다!</div>`);
+				}
+				else{	//환경 정보가 있으면
+					list.forEach(dto => {
+						content +=  `
+							<div class="p-3 mb-2" style="border: 1px solid black; border-radius: 5px">
+									<div class="mt-1">
+										<span>업체명 : </span> 
+										<span>` + dto.name + `</span>
+									</div>
+	
+									<div class="mt-1">
+										<span>업종명 : </span>  
+										<span>` + dto.type + ` </span>
+									</div>
+	
+									<div class="mt-1">
+										<span>주소지 : </span>
+										<span>` + dto.address + `</span>
+									</div>
+							</div>													
+						`;
+					});//forEach
+					$("#infos").empty();
+					$("#infos").append(content);
+				}
+			}//makeListEnvInfo
 
     	</script>
     </head>
@@ -261,15 +317,15 @@
 					</div>
 
 					<div class="form-check-inline">
-						<input name="check_green" id="check_green" type="checkbox" class="form-check-input" value="">
+						<input checked name="check_green" id="check_green" type="checkbox" class="form-check-input" value="">
 						<label for="check_green" class="form-check-label">녹지</label>
 					</div>
 					<div class="form-check-inline">
-						<input name="check_wastewater" id="check_wastewater" type="checkbox" class="form-check-input" value="">
+						<input checked name="check_wastewater" id="check_wastewater" type="checkbox" class="form-check-input" value="">
 						<label for="check_wastewater" class="form-check-label">폐수 배출</label>
 					</div>
 					<div class="form-check-inline">
-						<input name="check_airemissions" id="check_airemissions" type="checkbox" class="form-check-input" value="">
+						<input checked name="check_airemissions" id="check_airemissions" type="checkbox" class="form-check-input" value="">
 						<label for="check_airemissions" class="form-check-label">대기 배출</label>
 					</div>
 				</form>
