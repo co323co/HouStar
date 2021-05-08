@@ -271,11 +271,11 @@
         <div class="row mt-5 mb-5">
           <div class="col-sm-4">
 
-				<button type="button" class="btn btn-success mb-5" onClick="location.href='inter_air.jsp'">대기 오염 정보 확인하러 가기</button>
+				<button type="button" class="btn btn-success mb-5" onClick="location.href='${root}/interest/envInfoPage'">환경 오염 정보 확인하러 가기</button>
 				
 				<%
 									if (mlist == null) {
-								%>
+				%>
 				<h4>관심지역이 없습니다</h4>
 				<%
 					} else {

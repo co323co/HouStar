@@ -34,6 +34,11 @@ public class InterestAreaController {
 	String mvSearchPage() {
 		return "/interest/inter_search";
 	}
+
+	@GetMapping("/interest/envInfoPage")
+	String mvEnvInfoPage() {
+		return "/interest/inter_envinfo";
+	}
 	
 	@PostMapping("/api/interest")
 	@ResponseBody
