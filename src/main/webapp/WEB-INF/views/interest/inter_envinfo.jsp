@@ -191,7 +191,7 @@
 					
 // 					console.log("누름");
 // 					var index = $("#dongSelectBox option").index($("#dongSelectBox option:selected"));
-// 					var codeList = <%= favDongCodeList %>; 
+<%-- // 					var codeList = <%= favDongCodeList %>;  --%>
 // 					var code = codeList[index-1]; //0번째 인덱스는 [선택해주세요]가 해당됨. 그래서 하나씩 앞으로 가야함
 // 					$("#code").val(code);
 // 					$.ajax({
