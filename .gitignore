@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### 로그 파일 ###
-./spring/spring-web.log
+./**/spring/spring-web.log
