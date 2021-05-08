@@ -87,4 +87,13 @@
 		)
 	</select>
 	
+		<select id="getall" resultType="houseDealDto">
+		select d.hno, i.dong, i.aptname, i.code, d.dealAmount,
+		d.dealYear,d.dealMonth, d.dealDay, d.area, i.lat, i.lng, i.jibun
+		from housedeal d
+		left join houseinfo i 
+		on d.hno = i.no
+		group by i.jibun;
+	</select>
+	
 </mapper>
