@@ -99,35 +99,21 @@
 	
 	                <!-- Navbar links -->
 	                <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-	                
-	  
-	                
+
 	                  <ul class="navbar-nav">
-	                  
-	                   <c:choose>
+							<li class="nav-item">
+								<a class="nav-link" href=${croot}"/notice/board">공지사항</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href=${croot}"/news">오늘의 뉴스</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href=${croot}"/housedeal/list">주변 탐방</a>
+							</li>
+							<c:choose>
 	                    	<c:when test="${empty userId }">
-	                    	  <li class="nav-item">
-		                      <a class="nav-link" href=${croot}"/notice/board">공지사항</a>
-		                    </li>
-		                    <li class="nav-item">
-		                      <a class="nav-link" href=${croot}"/news">오늘의 뉴스</a>
-		                    </li>
-		                    <li class="nav-item">
-					          <a class="nav-link" href=${croot}"/housedeal/list">주변 탐방</a>
-					        </li>
-				        
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    	<li class="nav-item">
-		                      <a class="nav-link" href=${croot}"/notice/board">공지사항</a>
-		                    </li>
-		                    <li class="nav-item">
-		                      <a class="nav-link" href=${croot}"/news">오늘의 뉴스</a>
-		                    </li>
-		                    <li class="nav-item">
-					          <a class="nav-link" href=${croot}"/housedeal/list">주변 탐방</a>
-					        </li>
-					        
 					        <li class="nav-item">
 					          <a id="inter_submit" class="nav-link" href=${croot}"/interest/registform">관심 지역 등록</a>
 					        </li>
@@ -141,7 +127,9 @@
 					        </c:if>
 	                    	</c:otherwise>
 	                    </c:choose> 
-				        
+				             <li class="nav-item">
+					          <a class="nav-link" href=${croot}"/sitemap">사이트맵</a>
+					        </li>
 	                  </ul>
 	                </div>
 	            </div>
