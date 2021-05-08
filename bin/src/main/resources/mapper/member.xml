@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.MemberMapper">
+
+	<select id="login" parameterType="map" resultType="boolean">
+		select  IF(COUNT(*) = 1, 1, 0)
+		from members
+		where userId = #{login_userId} and userPwd = #{login_userPwd}
+	</select>
+
+	<select id="findPassword" parameterType="map" resultType="map">
+		select userPwd as password from members where userId=#{id} and userName=#{name} and userPhone=#{phone};
+	</select>
+
+	<select id="userList" resultType="memberDto">
+		select *
+		from members
+		order by #{userId};
+	</select> 
+	
+	<select id="searchbyid" parameterType="String" resultType="memberDto">
+		select * 
+		from members
+		<if test="word != null and word !=''">
+			where userId like concat('%', #{word}, '%')
+		</if>
+	</select>
+	
+	<select id="lookupmember" parameterType="String" resultType="memberDto">
+		select *
+		from members
+		where userId = #{userId}
+	</select>
+	<!--  -->
+	<insert id="insertMember" parameterType="memberDto">
+		insert into members (userId, userPwd, userName, userAddress, userPhone)
+		values (#{userId}, #{userPwd}, #{userName}, #{userAddress}, #{userPhone})
+	</insert>
+	
+	<update id="update" parameterType="memberDto">
+		update members
+		set userPwd = #{userPwd}, userName = #{userName}, userAddress = #{userAddress}, userPhone = #{userPhone}
+		where userId = #{userId}
+	</update>
+	
+	 <delete id="deleteMember" parameterType="String">
+		delete from members
+		where userId = #{userId}
+	</delete>  
+	
+</mapper>

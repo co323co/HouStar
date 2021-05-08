@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.happyhouse.model.mapper.HouseDealMapper">
+
+	<!-- public List<HouseDealDto> treadInfo(String dong); 
+		public List<String> gungu(String city); 
+		public List<String> dong(String gu); 
+		public List<HouseDealDto> getReal(String name); 
+		public List<CoronaDto> getCorona(String gu); 
+		public List<HospitalDto> getHospital(String gu); -->
+		
+	<!-- 동이름으로만 가져오면 중복이 발생할수 있으니 나중에 동코드까지 비교하는 조건절을 추가한다. -->
+	<select id="treadInfo" parameterType="string"
+		resultType="houseDealDto">
+		select d.hno, i.dong, i.aptname, i.code, d.dealAmount,
+		d.dealYear,d.dealMonth, d.dealDay, d.area, i.lat, i.lng, i.jibun
+		from housedeal d
+		left join houseinfo i 
+		on d.hno = i.no
+		<if test="value != null and value !=''">
+			where i.dong = #{value}
+		</if>
+		group by i.jibun;
+	</select>
+
+	<select id="gungu" parameterType="string" resultType="string">
+		select gugun
+		from baseaddress
+		<if test="value != null and value !=''">
+			where city = #{value}
+		</if>
+		group by gugun
+	</select>
+	
+	<select id="dong" parameterType="string" resultType="string">
+		select dong
+		from baseaddress
+		<if test="value != null and value !=''">
+			where gugun = #{value}
+		</if>
+		group by dong
+	</select>
+	
+	<select id="getReal" parameterType="string" resultType="houseDealDto">
+		select i.AptName, d.dealAmount, d.area, d.type, d.dealYear, d.dealMonth, d.dealDay
+		from housedeal d left join houseinfo i 
+		on d.hno = i.no
+		<if test="value != null and value !=''">
+		where AptName = #{value}
+		</if>		
+	</select>
+	
+	<!-- <select id="getCorona"  parameterType="string"  resultType="coronaDto" >
+		select * 
+		from corona
+		<if test="value != null and value !=''">
+			where gungu = #{value}
+		</if>
+	</select> -->
+	<select id="getCorona"  parameterType="string"  resultType="coronaDto" >
+		select * 
+		from corona c 
+		where c.gungu  in (
+			select  distinct gugun
+			from baseaddress
+			where dongcode = #{value}
+		);
+	</select>
+	
+	<!-- <select id="getHospital" parameterType="string"  resultType="hospitalDto" >
+		select * 
+		from hospital
+		<if test="value != null and value !=''">
+			where gungu = #{value}
+		</if>
+	</select> -->
+	<select id="getHospital" parameterType="string"  resultType="hospitalDto" >
+		select * 
+		from hospital h 
+		where h.gungu  in (
+			select  distinct gugun
+			from baseaddress
+			where dongcode = #{value}
+		)
+	</select>
+	
+</mapper>
