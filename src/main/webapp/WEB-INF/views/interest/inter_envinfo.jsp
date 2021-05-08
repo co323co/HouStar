@@ -179,23 +179,58 @@
     		$(document).ready(function () {
     			
 				//관심지역 불러오기
+				loadFavoriteDong();
 				
-    			
-			
-				
+				//관심지역 골랐을 때 이벤트
+				$("#favSelectBox").change(function (e) { 
+					
+					var code = $("#favSelectBox option:selected").val();
+					console.log(code);
 
-			});
+					$.ajax({
+						type: "GET",
+						url: "${croot}/api/envguidecheck/list/"+code,
+						//dataType: "json",
+						success: function(list){
+							console.log(list);
+						},
+						error: function (xhr, status, msg) {
+							console.log("상태값 : " + status + " / Http 에러메시지 : " + msg);
+						}
+					}); //get
 
-			function makeListFavoriteDong(){
+				}); //change
 
-				
+			}); //ready
 
-			}
+			function makeListFavoriteDong(list){
+
+				$("#favSelectBox").empty();
+				let content = "<option selected>선택해주세요</option>";
+				list.forEach(interest => {
+					content += `
+					<option value = ${'${interest.code}'} > ${'${interest.dong}'} </option>
+					`
+				});
+				$("#favSelectBox").append(content);
+			} //makeListFavoriteDong
 
 			function loadFavoriteDong(){
+					$.ajax({
+						type: "GET",
+						url: "${croot}/api/interest/list",	//해당 세션(로그인 ID)의 관심 지역 볼러오기
+						contentType: 'application/json',
+						success: function (list) {
+							console.log(list);
+							makeListFavoriteDong(list);
+						},  
+						error: function (xhr, status, msg) {
+							console.log("상태값 : " + status + " / Http 에러메시지 : " + msg);
+						}
+					});
 				
+			} //loadFavoriteDong
 
-			}
     	</script>
     </head>
     <body>
@@ -217,18 +252,14 @@
 					<input type="hidden" name="act" value="selectFavDong">
 					<input type="hidden" name="code" id="code" value="">
 					<input type="hidden" name="boxidx" id="boxidx" value="">
+
 					<div class="form-group mt-2">
-						<label for="dongSelectBox">🎈나의 관심지역🎈</label> 
-						<select
-							class="form-control" id="dongSelectBox" name="dongSelectBox">
-							<option selected>선택해주세요</option>
-<%-- 							 <% --%>
-// 								for(String dong : bserv.findDongNames(favDongCodeList)) {
-// 									out.println("<option>"+dong+"</option>");
-// 								}
-<%-- 							%>  --%>
+						<label for="favSelectBox">🎈나의 관심지역🎈</label> 
+						<!--관심지역 선택 select box-->
+						<select class="form-control" id="favSelectBox" name="dongSelectBox">							
 						</select>
 					</div>
+
 					<div class="form-check-inline">
 						<input name="check_green" id="check_green" type="checkbox" class="form-check-input" value="">
 						<label for="check_green" class="form-check-label">녹지</label>

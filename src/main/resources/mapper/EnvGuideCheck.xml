@@ -8,8 +8,8 @@
 		select code, name, type, address from envinfo_view
 	</select>
 	
-	<select id="listByDong" parameterType="string" resultType="EnvInfoDto">
-		select code, name, type, address from envinfo_view where code=#{dongCode}
+	<select id="listByAddress" parameterType="string" resultType="EnvInfoDto">
+		select code, name, type, address from envinfo_view where address Like #{address};
 	</select>
 	
 </mapper>

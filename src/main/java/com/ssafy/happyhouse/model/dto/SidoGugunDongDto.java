@@ -1,13 +1,14 @@
 package com.ssafy.happyhouse.model.dto;
 
-public class SidoGugunCodeDto {
+public class SidoGugunDongDto {
 	
 	//시도 코드 (앞 두글자) ex) 서울 : 11
 	private String sidoCode;
 	private String sidoName;
 	private String gugunCode;
 	private String gugunName;
-	
+	private String dongCode;
+	private String dongName;
 	public String getSidoCode() {
 		return sidoCode;
 	}
@@ -32,4 +33,18 @@ public class SidoGugunCodeDto {
 	public void setGugunName(String gugunName) {
 		this.gugunName = gugunName;
 	}
+	public String getDongCode() {
+		return dongCode;
+	}
+	public void setDongCode(String dongCode) {
+		this.dongCode = dongCode;
+	}
+	public String getDongName() {
+		return dongName;
+	}
+	public void setDongName(String dongName) {
+		this.dongName = dongName;
+	}
+	
+	
 }

@@ -15,7 +15,7 @@ import com.ssafy.happyhouse.model.dto.HospitalDto;
 import com.ssafy.happyhouse.model.dto.HouseDealDto;
 import com.ssafy.happyhouse.model.dto.HouseInfoDto;
 import com.ssafy.happyhouse.model.service.HouseDealService;
-import com.ssafy.happyhouse.model.service.HouseMapService;
+import com.ssafy.happyhouse.model.service.SidoGugunDongService;
 
 @Controller
 @RequestMapping("housedeal")

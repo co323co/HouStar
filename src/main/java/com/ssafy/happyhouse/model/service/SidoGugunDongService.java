@@ -3,12 +3,12 @@ package com.ssafy.happyhouse.model.service;
 import java.util.List;
 
 import com.ssafy.happyhouse.model.dto.HouseInfoDto;
-import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
+import com.ssafy.happyhouse.model.dto.SidoGugunDongDto;
 
-public interface HouseMapService {
+public interface SidoGugunDongService {
 	
-	List<SidoGugunCodeDto> getSido() throws Exception;
-	List<SidoGugunCodeDto> getGugunInSido(String sido) throws Exception;
+	List<SidoGugunDongDto> getSido() throws Exception;
+	List<SidoGugunDongDto> getGugunInSido(String sido) throws Exception;
 	List<HouseInfoDto> getDongInGugun(String gugun) throws Exception;
 	List<HouseInfoDto> getAptInDong(String dong) throws Exception;
 	

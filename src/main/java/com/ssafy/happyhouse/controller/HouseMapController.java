@@ -9,32 +9,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.dto.HouseInfoDto;
-import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
-import com.ssafy.happyhouse.model.service.HouseMapService;
+import com.ssafy.happyhouse.model.dto.SidoGugunDongDto;
+import com.ssafy.happyhouse.model.service.SidoGugunDongService;
 
+//시군구 코드, 주소 변환 등 여기서 처리함
 @RestController
 @RequestMapping("housemap")
 public class HouseMapController {
 
 	@Autowired
-	HouseMapService hmSer;
+	SidoGugunDongService sgdSer;
 	
 	@GetMapping("sido")
-	List<SidoGugunCodeDto> getSido() throws Exception {
-		return hmSer.getSido();
+	List<SidoGugunDongDto> getSido() throws Exception {
+		return sgdSer.getSido();
 	}
 	
 	//시도 코드 (앞 두글자) ex) 서울 : 11
 	@GetMapping("gugun/{sido}")
-	List<SidoGugunCodeDto> getGugun(@PathVariable("sido") String sido) throws Exception {
+	List<SidoGugunDongDto> getGugun(@PathVariable("sido") String sido) throws Exception {
 		System.out.println(sido);
-		return hmSer.getGugunInSido(sido);
+		return sgdSer.getGugunInSido(sido);
 	}
 	
 	//Deal거래가 있는 동만 불러오기 위해 HouseDeal로 반환함
 	@GetMapping("dong/{gugun}")
 	List<HouseInfoDto> getDong(@PathVariable("gugun") String gugun) throws Exception {
-		return hmSer.getDongInGugun(gugun);
+		return sgdSer.getDongInGugun(gugun);
 	}
 	
 }

@@ -7,26 +7,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ssafy.happyhouse.model.dto.SidoGugunCodeDto;
+import com.ssafy.happyhouse.model.dto.SidoGugunDongDto;
 
-public class HouseMapDaoImpl implements HouseMapMapper {
+public class HouseMapDaoImpl implements SidoGugunDongMapper {
 	
-	private static HouseMapMapper houseMapDao;
+	private static SidoGugunDongMapper houseMapDao;
 	
 	private HouseMapDaoImpl() {}
 	
-	public static HouseMapMapper getHouseMapDao() {
+	public static SidoGugunDongMapper getHouseMapDao() {
 		if(houseMapDao == null)
 			houseMapDao = new HouseMapDaoImpl();
 		return houseMapDao;
 	}
 
 	@Override
-	public List<SidoGugunCodeDto> getSido() throws Exception {
+	public List<SidoGugunDongDto> getSido() throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<SidoGugunCodeDto> list = new ArrayList<SidoGugunCodeDto>();
+		List<SidoGugunDongDto> list = new ArrayList<SidoGugunDongDto>();
 		try {
 			conn = DBUtil.getConnection();
 			StringBuilder sql = new StringBuilder();
@@ -35,7 +35,7 @@ public class HouseMapDaoImpl implements HouseMapMapper {
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				SidoGugunCodeDto dto = new SidoGugunCodeDto();
+				SidoGugunDongDto dto = new SidoGugunDongDto();
 				dto.setSidoCode(rs.getString("sido_code"));
 				dto.setSidoName(rs.getString("sido_name"));
 				list.add(dto);
@@ -51,11 +51,11 @@ public class HouseMapDaoImpl implements HouseMapMapper {
 	}
 
 	@Override
-	public List<SidoGugunCodeDto> getGugunInSido(String sido) throws Exception {
+	public List<SidoGugunDongDto> getGugunInSido(String sido) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<SidoGugunCodeDto> list = new ArrayList<SidoGugunCodeDto>();
+		List<SidoGugunDongDto> list = new ArrayList<SidoGugunDongDto>();
 		try {
 			conn = DBUtil.getConnection();
 			StringBuilder sql = new StringBuilder();
@@ -66,7 +66,7 @@ public class HouseMapDaoImpl implements HouseMapMapper {
 			pstmt.setString(1, sido);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				SidoGugunCodeDto dto = new SidoGugunCodeDto();
+				SidoGugunDongDto dto = new SidoGugunDongDto();
 				dto.setGugunCode(rs.getString("gugun_code"));
 				dto.setGugunName(rs.getString("gugun_name"));
 				list.add(dto);
