@@ -187,14 +187,23 @@
 					loadEnvInfo();
 				}); //change
 
+				//체크박스 선택했을 때 이벤트
+				$("[name=typeCheckBox]").change(function (e) { 
+					//동 선택이 되어 있으면
+					if($("#favSelectBox option:selected").val()!="non"){
+						loadEnvInfo();
+					}
+				}); //chang
+			
 			}); //ready
 
 			//함수들
 			
+			//해당 세션(로그인 ID)의 관심 지역 볼러오기
 			function loadFavoriteDong(){
 				$.ajax({
 					type: "GET",
-					url: "${croot}/api/interest/list",	//해당 세션(로그인 ID)의 관심 지역 볼러오기
+					url: "${croot}/api/interest/list",	
 					contentType: 'application/json',
 					success: function (list) {
 						console.log(list);
@@ -211,7 +220,7 @@
 			function makeListFavoriteDong(list){
 
 				$("#favSelectBox").empty();
-				let content = "<option selected>선택해주세요</option>";
+				let content = "<option value='non' selected>선택해주세요</option>";
 				list.forEach(interest => {
 					content += `
 					<option value = ${'${interest.code}'} > ${'${interest.dong}'} </option>
@@ -224,31 +233,11 @@
 			function loadEnvInfo(){
 				var code = $("#favSelectBox option:selected").val();
 					console.log(code);
-
 					$.ajax({
 						type: "GET",
 						url: "${croot}/api/envguidecheck/list/"+code,
 						success: function(list){
-							let newList = [];	
-							//녹지 타입이 체크되어있으면
-							if($("#check_green").is(":checked")){
-								list.forEach(dto => {
-									if(dto.type.indexOf("녹지") != -1) newList.push(dto);
-								});
-							}
-							//폐수 타입이 체크되어있으면
-							if($("#check_wastewater").is(":checked")){
-								list.forEach(dto => {
-									if(dto.type.indexOf("폐수") != -1) newList.push(dto);
-								});
-							}
-							//대기 타입이 체크되어있으면
-							if($("#check_airemissions").is(":checked")){
-								list.forEach(dto => {
-									if(dto.type.indexOf("대기") != -1) newList.push(dto);
-								});
-							}
-							makeListEnvInfo(newList);
+							makeListEnvInfo(list);
 						},
 						error: function (xhr, status, msg) {
 							console.log("상태값 : " + status + " / Http 에러메시지 : " + msg);
@@ -256,25 +245,44 @@
 					}); //get
 			}//loadEnvInfo
 			
+			//업체정보 html을 붙인다. 단 해당 동의 list에서 checked 상태에 따라 적합한 애들만 붙인다. 
 			function makeListEnvInfo(list){
+				console.log(list);
+				let newList = [];	
+				//녹지 타입이 체크되어있으면
+				if($("#check_green").is(":checked")){
+					list.forEach(dto => {
+						if(dto.type.indexOf("녹지") != -1) newList.push(dto);
+					});
+				}
+				//폐수 타입이 체크되어있으면
+				if($("#check_wastewater").is(":checked")){
+					list.forEach(dto => {
+						if(dto.type.indexOf("폐수") != -1) newList.push(dto);
+					});
+				}
+				//대기 타입이 체크되어있으면
+				if($("#check_airemissions").is(":checked")){
+					list.forEach(dto => {
+						if(dto.type.indexOf("대기") != -1) newList.push(dto);
+					});
+				}
 				let content = "";
-				if(!list || list.length == 0){	//해당 동에 환경 정보가 없으면
+				if(!newList || newList.length == 0){	//해당 동에 환경 정보가 없으면
 					$("#infos").html(`<div class="p-3 mb-2" style="border-radius: 5px">해당 동에 환경 정보가 없습니다!</div>`);
 				}
 				else{	//환경 정보가 있으면
-					list.forEach(dto => {
+					newList.forEach(dto => {
 						content +=  `
 							<div class="p-3 mb-2" style="border: 1px solid black; border-radius: 5px">
 									<div class="mt-1">
 										<span>업체명 : </span> 
 										<span>` + dto.name + `</span>
 									</div>
-	
 									<div class="mt-1">
 										<span>업종명 : </span>  
 										<span>` + dto.type + ` </span>
 									</div>
-	
 									<div class="mt-1">
 										<span>주소지 : </span>
 										<span>` + dto.address + `</span>
@@ -317,15 +325,15 @@
 					</div>
 
 					<div class="form-check-inline">
-						<input checked name="check_green" id="check_green" type="checkbox" class="form-check-input" value="">
+						<input name="typeCheckBox"  checked name="check_green" id="check_green" type="checkbox" class="form-check-input" value="">
 						<label for="check_green" class="form-check-label">녹지</label>
 					</div>
 					<div class="form-check-inline">
-						<input checked name="check_wastewater" id="check_wastewater" type="checkbox" class="form-check-input" value="">
+						<input name="typeCheckBox" checked name="check_wastewater" id="check_wastewater" type="checkbox" class="form-check-input" value="">
 						<label for="check_wastewater" class="form-check-label">폐수 배출</label>
 					</div>
 					<div class="form-check-inline">
-						<input checked name="check_airemissions" id="check_airemissions" type="checkbox" class="form-check-input" value="">
+						<input name="typeCheckBox"  checked name="check_airemissions" id="check_airemissions" type="checkbox" class="form-check-input" value="">
 						<label for="check_airemissions" class="form-check-label">대기 배출</label>
 					</div>
 				</form>

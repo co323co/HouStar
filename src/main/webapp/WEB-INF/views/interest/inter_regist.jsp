@@ -80,6 +80,11 @@
 					//등록 버튼 눌렀을 때
 					$("#btn_regist").click(function (e) { 
 						
+						if($("#sido option:selected").val()=="non"){
+							alert("동을 선택해주세요! (거래정보가 있는 동만 등록할 수 있습니다)");
+							return;
+						}
+
 						let info = {
 							sido : $("#sido option:selected").text(),
 							gugun : $("#gugun option:selected").text(),
@@ -114,10 +119,12 @@
 							success: function (response) {
 								console.log(response);
 								console.log({ code : code });
+								alert("등록 성공!");
 							},
 							error:function(xhr,status,msg){
 								console.log("상태값 : " + status + " Http에러메시지 : "+msg);
 								console.log({ code : code });
+								alert("이미 등록된 지역입니다");
 							}
 						});
 					}
@@ -130,17 +137,17 @@
 					<div class="sorting-filters text-center mb-20 d-flex justify-content-center">
 						<div class="form-group mr-1">
 							<select class="form-control bgPink" name="sido" id="sido">
-								<option value="0">선택</option>
+								<option value="non">선택</option>
 							</select>
 						</div>
 						<div class="form-group md-5">
 							<select class="form-control" name="gugun" id="gugun">
-								<option value="0">선택</option>
+								<option value="non">선택</option>
 							</select>
 						</div>
 						<div class="form-group ml-1">
 							<select class="form-control" name="dong" id="dong">
-								<option value="0">선택</option>
+								<option value="non">선택</option>
 							</select>
 						</div>
 						<button id="btn_regist" class="form-group ml-4 btn btn-warning btn-animated">등록</button>
