@@ -132,7 +132,7 @@
 					          <a id="inter_submit" class="nav-link" href=${croot}"/interest/registform">관심 지역 등록</a>
 					        </li>
 					        <li class="nav-item ">
-					          <a id="inter_search" class="nav-link"  href=${croot}"/inter_search">관심 지역 탐방</a>
+					          <a id="inter_search" class="nav-link"  href=${croot}"/interest/searchPage">관심 지역 탐방</a>
 					        </li>
 					         <c:if test="${userId eq 'admin'}">
 					        <li class="nav-item">

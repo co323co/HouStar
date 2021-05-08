@@ -29,6 +29,11 @@ public class InterestAreaController {
 	String mvRegistForm() {
 		return "/interest/inter_regist";
 	}
+
+	@GetMapping("/interest/searchPage")
+	String mvSearchPage() {
+		return "/interest/inter_search";
+	}
 	
 	@PostMapping("/api/interest")
 	@ResponseBody
@@ -41,17 +46,18 @@ public class InterestAreaController {
 	
 	@DeleteMapping("/api/interest")
 	@ResponseBody
-	int delete(@RequestParam String code, @RequestParam String userId) {
+	int delete(@RequestBody String code, HttpSession session) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("code", code);
-		map.put("userId", userId);
+		map.put("userId", (String) session.getAttribute("userId"));
 		return iSer.delete(map);
 	}
-
+	
 	//해당 유저의 관심지역 리스트를 반환함
-	@GetMapping("/api/interest/list/{userId}")
+	@GetMapping("/api/interest/list")
 	@ResponseBody
-	List<InterestAreaDto> list(@PathVariable String userId) {
+	List<InterestAreaDto> list(HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
 		return iSer.list(userId);
 	}
 	
@@ -63,7 +69,5 @@ public class InterestAreaController {
 		rs.put("code", iSer.addressToCode(map));
 		return rs;
 	}
-	
-	
 	
 }
