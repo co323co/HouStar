@@ -5,8 +5,12 @@ public class InterestAreaDto {
 	private String userid;
 	private String code;
 	private String dong;
-	private String go;
+	private String gu;
 	private String si;
+	public InterestAreaDto(String userid, String dong) {
+		this.userid = userid;
+		this.dong = dong;
+	}
 	public String getUserid() {
 		return userid;
 	}
@@ -25,22 +29,17 @@ public class InterestAreaDto {
 	public void setDong(String dong) {
 		this.dong = dong;
 	}
-	public String getGo() {
-		return go;
+	public String getGu() {
+		return gu;
 	}
-	public void setGo(String go) {
-		this.go = go;
+	public void setGu(String gu) {
+		this.gu = gu;
 	}
 	public String getSi() {
 		return si;
 	}
 	public void setSi(String si) {
 		this.si = si;
-	}
-	public InterestAreaDto(String userid, String dong) {
-		super();
-		this.userid = userid;
-		this.dong = dong;
 	}
 
 	

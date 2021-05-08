@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.happyhouse.model.mapper.InterestAreaMapper">
+
+	<select id="insert" parameterType="InterestAreaDto">
+		insert into interestarea values ((select code from baseaddress where dong = #{dong}),#{userid} )
+	</select>
+	
+	<delete id="delete" parameterType="map">
+		delete from interestarea where userid = #{code} and code = #{userId}
+	</delete>
+	
+	<select id="list" parameterType="String" resultType="InterestAreaDto">
+			select #{userId} as userid, code as code, dong as dong, gugun as gu, city as si
+			from baseaddress
+			where code in (select code from interestarea where userid = #{userId})
+	</select>
+
+</mapper>

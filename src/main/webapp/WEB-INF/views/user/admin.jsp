@@ -177,7 +177,7 @@
     	function makeList(users) {
     		$("#userlist").empty();
     		$(users).each(function(index, user) {
-    			let str = ` 
+    			let str = `   
     			<tr id="view_${'${user.userId}'}" class="view" data-id="${'${user.userId}'}">
     				<td>${'${user.userId}'}</td>
     				<td>${'${user.userPwd}'}</td>
@@ -210,56 +210,44 @@
      	</script>
 </head>
 <body>
-  
-    <div  class="container" align="center">
-     <br>
-        <br>
-    <h2>회원 목록 관리</h2>
-    
-    <div align="right"><button type="button" class="modiBtn btn btn-outline-info" data-toggle="modal" data-target="#userRegModal">등록</button></div>
-    <br> <br>
-    <!-- 검색 폼 -->
-    
-    <!--  <form id="searchform" method="get" class="form-inline" action=""> -->
-	  <table class="table table-borderless">
-	  	<tr>
-	  		<td align="right">
-			  <input type="text" class="form-control" placeholder="아이디 검색 " name="word" id="sword" style="width: 300px;">
-			  <button type="button" id="searchBtn" class="btn btn-primary">검색</button>
-			</td>
-	  	</tr>
-	  </table>
-	<!--   </form> -->
-	  
-    <br> <br>
-    <div align="center">
-    <table class="table table-hover text-center">
-  		<colgroup>
-            <col width="120">
-            <col width="120">
-            <col width="120">
-            <col width="*">
-            <col width="180">
-            <col width="130">
-        </colgroup>
-    	<thead>
-	      	<tr>
-	        	<th class="text-center">아이디</th>
-	        	<th class="text-center">비밀번호</th>
-	        	<th class="text-center">이름</th>
-	        	<th class="text-center">주소</th>
-	        	<th class="text-center">전화번호</th>
-	        	<th class="text-center">수정/삭제</th>
-	      	</tr>
-    	</thead>
-    	<tbody id="userlist"></tbody>
-	</table>
+
+	<div class="container" align="center">
+		<h2 class="mt-5">회원 목록 관리</h2>
+		<div class="text-right mt-5">
+			<!-- 검색 폼 -->
+			<input type="text" class="form-control" placeholder="아이디 검색 " name="word" id="sword" style="width: 300px; display: inline-block;">
+			<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+			<button type="button" class="modiBtn btn btn-outline-info" data-toggle="modal" data-target="#userRegModal">등록</button>
+		</div>
+		<!--   </form> -->
+		<div align="center" class="mt-2">
+			<table class="table table-hover text-center">
+				<colgroup>
+					<col width="120">
+					<col width="120">
+					<col width="120">
+					<col width="*">
+					<col width="180">
+					<col width="130">
+				</colgroup>
+				<thead>
+					<tr>
+						<th class="text-center">아이디</th>
+						<th class="text-center">비밀번호</th>
+						<th class="text-center">이름</th>
+						<th class="text-center">주소</th>
+						<th class="text-center">전화번호</th>
+						<th class="text-center">수정/삭제</th>
+					</tr>
+				</thead>
+				<tbody id="userlist"></tbody>
+			</table>
+		</div>
 	</div>
-    </div>
-    
-    
-    
-<!-- 회원 등록 모달 -->
+
+
+
+	<!-- 회원 등록 모달 -->
 <div class="modal" id="userRegModal">
   <div class="modal-dialog">
     <div class="modal-content">

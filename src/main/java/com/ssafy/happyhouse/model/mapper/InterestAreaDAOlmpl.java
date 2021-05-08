@@ -7,13 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ssafy.happyhouse.model.dto.InterestAreaDto;
 import com.ssafy.model.InterestArea;
 import com.ssafy.util.DBUtil;
 
-public class InterestAreaDAOlmpl implements InterestAreaDAO {
+public class InterestAreaDAOlmpl implements InterestAreaMapper {
 
 	@Override
-	public void insertArea(InterestArea interestArea) {
+	public void insertArea(InterestAreaDto interestArea) {
 		System.out.println("관심지역 등록 DAO");
 		
 		Connection conn = null;

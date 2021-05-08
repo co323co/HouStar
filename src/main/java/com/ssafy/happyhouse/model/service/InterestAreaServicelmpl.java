@@ -1,35 +1,33 @@
-package com.ssafy.model.service;
+package com.ssafy.happyhouse.model.service;
 
 import java.util.List;
+import java.util.Map;
 
-import com.ssafy.model.InterestArea;
-import com.ssafy.model.dao.InterestAreaDAO;
-import com.ssafy.model.dao.InterestAreaDAOlmpl;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.model.dto.InterestAreaDto;
+import com.ssafy.happyhouse.model.mapper.InterestAreaMapper;
+
+@Service
 public class InterestAreaServicelmpl implements InterestAreaService {
-	InterestAreaDAO dao;
-	
-	public InterestAreaServicelmpl() {
-		dao =  new InterestAreaDAOlmpl();
-	}
-	
-	
-	@Override
-	public void insertArea(InterestArea interestArea) {
-		dao.insertArea(interestArea);
 
+	@Autowired
+	private SqlSession sqlSession;
+
+	@Override
+	public int insert(InterestAreaDto interestArea) {	
+		return sqlSession.getMapper(InterestAreaMapper.class).insert(interestArea);
 	}
 
 	@Override
-	public void deleteArea(String code, String userId) {
-		dao.deleteArea(code,userId);
-
+	public int delete(Map<String, String> map) {	//String code, String userId
+		return sqlSession.getMapper(InterestAreaMapper.class).delete(map);
 	}
 
 	@Override
-	public List<String> findArea(String userid) {
-		// TODO Auto-generated method stub
-		return dao.findArea(userid);
+	public List<InterestAreaDto> list(String userId) {
+		return sqlSession.getMapper(InterestAreaMapper.class).list(userId);
 	}
-
 }
