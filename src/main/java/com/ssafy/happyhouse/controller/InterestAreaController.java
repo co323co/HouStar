@@ -73,5 +73,6 @@ public class InterestAreaController {
 		rs.put("code", iSer.addressToCode(map));
 		return rs;
 	}
-	
+	// id로 관심지역의 법정동코드 반환
+	// 법정동코드로 mart list 를 받아서 화면에 
 }
