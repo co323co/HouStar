@@ -5,7 +5,6 @@ public class EnvInfoDto {
 	String code, name, type, address;
 
 	public EnvInfoDto(String code, String name, String type, String address) {
-		super();
 		this.code = code;
 		this.name = name;
 		this.type = type;

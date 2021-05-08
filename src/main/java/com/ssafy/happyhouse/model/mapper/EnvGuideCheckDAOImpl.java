@@ -7,10 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ssafy.model.EnvInfoDto;
-import com.ssafy.model.service.EnvGuideCheckService;
-import com.ssafy.model.service.EnvGuideCheckServiceImpl;
-import com.ssafy.util.DBUtil;
+import com.ssafy.happyhouse.model.dto.EnvInfoDto;
 
 public class EnvGuideCheckDAOImpl implements EnvGuideCheckDAO{
 

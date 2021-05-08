@@ -2,7 +2,7 @@ package com.ssafy.happyhouse.model.mapper;
 
 import java.util.List;
 
-import com.ssafy.model.EnvInfoDto;
+import com.ssafy.happyhouse.model.dto.EnvInfoDto;
 
 public interface EnvGuideCheckDAO {
 	
