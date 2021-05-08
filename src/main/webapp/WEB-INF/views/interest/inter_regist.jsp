@@ -53,7 +53,7 @@
 						$.get("${root}/housemap/gugun/"+$("#sido").val()
 								,function(data, status){
 									$("#gugun").empty();
-									$("#gugun").append('<option value="0">선택</option>');
+									$("#gugun").append('<option value="non">선택</option>');
 									$.each(data, function(index, vo) {
 										$("#gugun").append("<option value='"+vo.gugunCode+"'>"+vo.gugunName+"</option>");
 									});//each
@@ -67,7 +67,7 @@
 						$.get("${root}/housemap/dong/"+$("#gugun").val()
 								,function(data, status){
 									$("#dong").empty();
-									$("#dong").append('<option value="0">선택</option>');
+									$("#dong").append('<option value="non">선택</option>');
 									$.each(data, function(index, vo) {
 										$("#dong").append("<option value='"+vo.dong+"'>"+vo.dong+"</option>");
 									});//each
@@ -80,8 +80,8 @@
 					//등록 버튼 눌렀을 때
 					$("#btn_regist").click(function (e) { 
 						
-						if($("#sido option:selected").val()=="non"){
-							alert("동을 선택해주세요! (거래정보가 있는 동만 등록할 수 있습니다)");
+						if($("#dong option:selected").val()=="non"){
+							alert("동을 선택해주세요! (거래정보가 있는 동만 보여집니다)");
 							return;
 						}
 
