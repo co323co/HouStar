@@ -74,10 +74,7 @@ public class HouseDealController {
 			}
 		}
 		return null;
-		
-		
 	}
 	
-	
-	
 }
+

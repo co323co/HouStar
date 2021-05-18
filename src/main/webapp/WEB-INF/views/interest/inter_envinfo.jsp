@@ -167,13 +167,7 @@
 			};
 		</script> 	
     	
-	<%
-		//BcodeService bserv = new BcodeServicelmpl(); //동코드 -> 이름 바꿔줄 서비스
-		String userId = (String)(request.getSession().getAttribute("id")); //로그인중인 usrId 불러옴
-		//List<String> favDongCodeList = (new InterestAreaDAOlmpl()).findArea(userId); ///해당 유저의 관심지역코드list 불러옴
-		
-	%>
-	
+		<!-- 목록 구성 -->
     	<script type="text/javascript">
     		
 			//raedy됐을 때
@@ -296,7 +290,8 @@
 			}//makeListEnvInfo
 
     	</script>
-    </head>
+
+</head>
     <body>
 
 
