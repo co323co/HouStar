@@ -1,11 +1,17 @@
+-- 게시판, 댓글 관리
+-- board, board_name, comment
+
+create database IF NOT EXISTS happyhouse;
 use happyhouse;
 
+DROP TABLE IF EXISTS board_name;
 create table board_name (
 	gubun Integer auto_increment,
     name varchar(100),
     constraint primary key(gubun)
 );
 
+DROP TABLE IF EXISTS board;
 create table board	(
     id Integer auto_increment,
 	title varchar(100),
@@ -19,25 +25,14 @@ create table board	(
     constraint foreign key(gubun) references board_name(gubun)
 );
 
+DROP TABLE IF EXISTS comment;
 create table comment(
 	bid integer,
-	seq integer,
+	seq integer, -- 해당 게시글에서의 댓글 순서
     content varchar(1000),
+    userid varchar(100),
+    regtime date,
     constraint primary key(bid, seq),
+    constraint foreign key(userid) references members(userid),
     constraint foreign key(bid) references board(id)
 );
-
-insert into board_name(name) values ("공지사항");
-insert into board_name(name) values ("QnA");
-
-insert into board (title, content, userid, regtime, views, gubun)
-		values ("게시글1", "내용", "co323co", now(), 0, 1);
-        
-select id, title, content, userid, regtime, views, gubun
-		from board where gubun="1";
-        
-select id, title, content, userid, regtime, views, gubun
-from board
-where gubun = 1 and title like concat('%', "게시글", '%')
-order by id desc;
-        

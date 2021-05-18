@@ -14,10 +14,6 @@
 			order by id desc
 	</select>
 	
-	<insert id="insert" parameterType="BoardDto">
-		insert into board (title, content, userid, regtime, views, gubun)
-		values (#{title}, #{content}, #{userid}, now(), #{views}, #{gubun})
-	</insert>
 	
 	<select id="select" parameterType="int" resultType="BoardDto">
 		select id, title, content, userid, regtime, views, gubun
@@ -25,6 +21,10 @@
 		where id = #{id}
 	</select>
 	
+	<insert id="insert" parameterType="BoardDto">
+		insert into board (title, content, userid, regtime, views, gubun)
+		values (#{title}, #{content}, #{userid}, now(), #{views}, #{gubun})
+	</insert>
 	<update id="update" parameterType="BoardDto">
 		update board
 		set title = #{title}, content = #{content}, views = #{views}, gubun = #{gubun} 

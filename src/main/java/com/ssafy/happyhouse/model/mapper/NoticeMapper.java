@@ -10,7 +10,7 @@ public interface NoticeMapper {
 	public List<NoticeDto> list(Map<String, String> map);
 	public NoticeDto search(int id);
 	public int insert(NoticeDto notice);
-	public int delete(int id);
 	public int update(NoticeDto notice);
+	public int delete(int id);
 	
 }

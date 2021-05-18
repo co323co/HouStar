@@ -30,7 +30,7 @@ public class SwaggerConfiguration {
 //	http://localhost/swagger-ui.html
 
 	private String version = "V1";
-	private String title = "SSAFY GuestBook API " + version;
+	private String title = "Happy House API " + version;
 	
 	@Bean
 	public Docket api() {
