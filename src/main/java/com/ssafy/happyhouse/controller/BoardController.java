@@ -31,15 +31,17 @@ public class BoardController {
 	@Autowired
 	BoardService bSer;
 
-//	@ApiOperation("게시판 id로 해당 게시판의 모든 게시글을 반환")
-//	@GetMapping("/{id}")
-//	public List<BoardDto> listByBid(@PathVariable("word") String word) {
+//	@ApiOperation("게시판 gubun으로 해당 게시판의 모든 게시글을 반환, word가 있을 경우 제목에 word가 포함된 게시글만 반환한다")
+//	@GetMapping({"/{gubun}", "/{gubun}/{word}"})
+//	@ResponseBody
+//	public List<BoardDto> listById(@PathVariable String gubun, @PathVariable(required=false) String word) {
 //		Map<String, String> map = new HashMap<>();
+//		System.out.println(word);
+//		map.put("gubun", gubun);
 //		map.put("word", word);
-//		return bSer.list(map);
+//		return bSer.listByBid(map);
 //	}
-	
-	
+//	
 	@ApiOperation("gubun(pk)으로 해당 게시판의 이름을 반환한다.")
 	@GetMapping("name/{gubun}")
 	@ResponseBody
@@ -47,12 +49,20 @@ public class BoardController {
 		return bSer.findNameByGubun(gubun);
 	}
 	
+	@ApiOperation("게시판 gubun으로 해당 게시판의 모든 게시글을 반환")
+	@GetMapping("/{gubun}")
+	@ResponseBody
+	public List<BoardDto> listById(@PathVariable String gubun) {
+		Map<String, String> map = new HashMap<>();
+		map.put("gubun", gubun);
+		return bSer.listByBid(map);
+	}
+
 	@ApiOperation("게시판 gubun으로 해당 게시판의 모든 게시글을 반환, word가 있을 경우 제목에 word가 포함된 게시글만 반환한다")
-	@GetMapping({"/{gubun}", "/{gubun}/{word}"})
+	@GetMapping("/{gubun}/{word}")
 	@ResponseBody
 	public List<BoardDto> listById(@PathVariable String gubun, @PathVariable(required=false) String word) {
 		Map<String, String> map = new HashMap<>();
-		System.out.println(word);
 		map.put("gubun", gubun);
 		map.put("word", word);
 		return bSer.listByBid(map);

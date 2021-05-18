@@ -24,7 +24,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDto> listByBid(Map<String, String> map) {
 		Map<String, String> param = new HashMap<String, String>();
-		param.put("bid", map.get("gubun") == null ? "" : map.get("gubun"));
+		param.put("gubun", map.get("gubun") == null ? "" : map.get("gubun"));
 		param.put("word", map.get("word") == null ? "" : map.get("word"));
 		return sqlSession.getMapper(BoardMapper.class).listByBid(param);
 	}
