@@ -63,7 +63,7 @@ public class BoardController {
 	
 	@ApiOperation("게시판 gubun으로 새로운 게시글을 등록한다, title, content, gubun 필수 / views 선택")
 	@PostMapping("post/{gubun}")
-	public boolean write(BoardDto board) {
+	public boolean write(@RequestBody BoardDto board) {
 		return bSer.insert(board);
 	}
 	
