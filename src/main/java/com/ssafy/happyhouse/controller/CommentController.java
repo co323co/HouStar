@@ -62,6 +62,7 @@ public class CommentController {
 	@ApiOperation("comment의 bid와 seq가 일치하는 댓글의 내용(content)을 수정한다.(나머지는 수정되지 않음)")
 	@PutMapping("")
 	public boolean modify(@RequestBody CommentDto comment) {
+		System.out.println(comment.getBid()+","+comment.getSeq()+","+comment.getContent());
 		return cSer.update(comment);
 	}
 	
