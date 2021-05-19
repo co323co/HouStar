@@ -69,13 +69,10 @@ public class CommentController {
 	@ApiOperation("id가 bid인 게시글의 seq번째 댓글을 삭제한다")
 	@DeleteMapping("/{bid}/{seq}")
 	public boolean remove(@PathVariable int bid, @PathVariable int seq) {
-		System.out.println(bid+","+seq);
 		Map<String, Integer> map = new HashMap<>();
 		map.put("bid", bid);
 		map.put("seq", seq);
-		boolean re = cSer.delete(map);
-		System.out.println(re);
-		return re;
+		return cSer.delete(map);
 	}
 	
 }
