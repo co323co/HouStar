@@ -20,7 +20,7 @@
 	<insert id="insert" parameterType="CommentDto">
 		 insert into comment(bid, seq, content,userid,regtime) 
 		 values(#{bid}, 
-		 (select max(tmp.seq)+1 from comment as tmp where tmp.bid=#{bid}),
+		 ifnull((select max(tmp.seq)+1 from comment as tmp where tmp.bid=#{bid}),1),
 		 #{content}, #{userid}, now());
 	</insert>
 	

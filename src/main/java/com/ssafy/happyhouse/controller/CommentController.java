@@ -55,24 +55,27 @@ public class CommentController {
 	
 	@ApiOperation("bid, content, userid가 들어간 comment 정보로 새로운 댓글을 등록한다 (나머지 칼럼은 자동 등록)")
 	@PostMapping("")
-	public boolean write(CommentDto comment) {
+	public boolean write(@RequestBody CommentDto comment) {
+		System.out.println(comment);
 		return cSer.insert(comment);
 	}
 	
 	@ApiOperation("comment의 bid와 seq가 일치하는 댓글의 내용(content)을 수정한다.(나머지는 수정되지 않음)")
 	@PutMapping("")
 	public boolean modify(@RequestBody CommentDto comment) {
-		System.out.println(comment.getBid()+","+comment.getSeq()+","+comment.getContent());
 		return cSer.update(comment);
 	}
 	
 	@ApiOperation("id가 bid인 게시글의 seq번째 댓글을 삭제한다")
-	@DeleteMapping("post/{bid}/{seq}")
+	@DeleteMapping("/{bid}/{seq}")
 	public boolean remove(@PathVariable int bid, @PathVariable int seq) {
+		System.out.println(bid+","+seq);
 		Map<String, Integer> map = new HashMap<>();
 		map.put("bid", bid);
 		map.put("seq", seq);
-		return cSer.delete(map);
+		boolean re = cSer.delete(map);
+		System.out.println(re);
+		return re;
 	}
 	
 }
