@@ -1,23 +1,23 @@
-import ApiService from "@/core/services/api.service";
-import JwtService from "@/core/services/jwt.service";
+import ApiService from '@/core/services/api.service';
+import JwtService from '@/core/services/jwt.service';
 
 // action types
-export const VERIFY_AUTH = "verifyAuth";
-export const LOGIN = "login";
-export const LOGOUT = "logout";
-export const REGISTER = "register";
-export const UPDATE_PASSWORD = "updateUser";
+export const VERIFY_AUTH = 'verifyAuth';
+export const LOGIN = 'login';
+export const LOGOUT = 'logout';
+export const REGISTER = 'register';
+export const UPDATE_PASSWORD = 'updateUser';
 
 // mutation types
-export const PURGE_AUTH = "logOut";
-export const SET_AUTH = "setUser";
-export const SET_PASSWORD = "setPassword";
-export const SET_ERROR = "setError";
+export const PURGE_AUTH = 'logOut';
+export const SET_AUTH = 'setUser';
+export const SET_PASSWORD = 'setPassword';
+export const SET_ERROR = 'setError';
 
 const state = {
   errors: null,
   user: {},
-  isAuthenticated: !!JwtService.getToken()
+  isAuthenticated: !!JwtService.getToken(),
 };
 
 const getters = {
@@ -26,13 +26,13 @@ const getters = {
   },
   isAuthenticated(state) {
     return state.isAuthenticated;
-  }
+  },
 };
 
 const actions = {
   [LOGIN](context, credentials) {
-    return new Promise(resolve => {
-      ApiService.post("login", credentials)
+    return new Promise((resolve) => {
+      ApiService.post('/login', credentials)
         .then(({ data }) => {
           // console.log("Here what post returns", data);
           context.commit(SET_AUTH, data);
@@ -46,9 +46,9 @@ const actions = {
   [LOGOUT](context) {
     context.commit(PURGE_AUTH);
   },
-  [REGISTER](context, credentials) {
-    return new Promise(resolve => {
-      ApiService.post("login", credentials)
+  [REGISTER](context, user) {
+    return new Promise((resolve) => {
+      ApiService.post('login', user)
         .then(({ data }) => {
           context.commit(SET_AUTH, data);
           resolve(data);
@@ -61,7 +61,7 @@ const actions = {
   [VERIFY_AUTH](context) {
     if (JwtService.getToken()) {
       ApiService.setHeader();
-      ApiService.get("verify")
+      ApiService.get('verify')
         .then(({ data }) => {
           context.commit(SET_AUTH, data);
         })
@@ -75,11 +75,11 @@ const actions = {
   [UPDATE_PASSWORD](context, payload) {
     const password = payload;
 
-    return ApiService.put("password", password).then(({ data }) => {
+    return ApiService.put('password', password).then(({ data }) => {
       context.commit(SET_PASSWORD, data);
       return data;
     });
-  }
+  },
 };
 
 const mutations = {
@@ -100,12 +100,12 @@ const mutations = {
     state.user = {};
     state.errors = {};
     JwtService.destroyToken();
-  }
+  },
 };
 
 export default {
   state,
   actions,
   mutations,
-  getters
+  getters,
 };

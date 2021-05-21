@@ -1,7 +1,7 @@
-import Vue from "vue";
-import axios from "axios";
-import VueAxios from "vue-axios";
-import JwtService from "@/core/services/jwt.service";
+import Vue from 'vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import JwtService from '@/core/services/jwt.service';
 
 /**
  * Service to call HTTP request via Axios
@@ -9,20 +9,18 @@ import JwtService from "@/core/services/jwt.service";
 const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
-    Vue.axios.defaults.baseURL = "http://localhost";
+    Vue.axios.defaults.baseURL = 'http://localhost/api';
   },
 
   /**
    * Set the default HTTP request headers
    */
   setHeader() {
-    Vue.axios.defaults.headers.common[
-      "Authorization"
-    ] = `Token ${JwtService.getToken()}`;
+    Vue.axios.defaults.headers.common['Authorization'] = `Token ${JwtService.getToken()}`;
   },
 
   query(resource, params) {
-    return Vue.axios.get(resource, params).catch(error => {
+    return Vue.axios.get(resource, params).catch((error) => {
       // console.log(error);
       throw new Error(`[KT] ApiService ${error}`);
     });
@@ -34,8 +32,8 @@ const ApiService = {
    * @param slug
    * @returns {*}
    */
-  get(resource, slug = "") {
-    return Vue.axios.get(`${resource}/${slug}`).catch(error => {
+  get(resource, slug = '') {
+    return Vue.axios.get(`${resource}/${slug}`).catch((error) => {
       // console.log(error);
       throw new Error(`[KT] ApiService ${error}`);
     });
@@ -78,11 +76,11 @@ const ApiService = {
    * @returns {*}
    */
   delete(resource) {
-    return Vue.axios.delete(resource).catch(error => {
+    return Vue.axios.delete(resource).catch((error) => {
       // console.log(error);
       throw new Error(`[RWV] ApiService ${error}`);
     });
-  }
+  },
 };
 
 export default ApiService;
