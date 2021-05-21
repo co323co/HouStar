@@ -28,13 +28,13 @@
 		</if>
 	</select>
 	<!-- id로 유저찾아서 반환 -->
-	<select id="lookupmember" parameterType="String" resultType="memberDto">
-		select *
+	<select id="select" parameterType="String" resultType="memberDto">
+		select userid, pwd, name, address, phone, tag, age_range, family_type
 		from members
 		where userid = #{userid}
 	</select>
 	
-	<insert id="insertMember" parameterType="memberDto">
+	<insert id="insert" parameterType="memberDto">
 		insert into members (userid, pwd, name, address, phone, tag, age_range, family_type)
 		values (#{userid}, #{pwd}, #{name}, #{address}, #{phone}, #{tag}, #{age_range}, #{family_type})
 	</insert>

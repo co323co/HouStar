@@ -50,20 +50,21 @@ public class MemberController {
 			return "/user/login";
 		}	
 	}
-	
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
-	
+
 	@ApiOperation("회원가입")
 	@PostMapping("")
 	public boolean regist(@RequestBody MemberDto member) {
-//		mSer.insertMember(member);
 		System.out.println(member);
-		return true;
+		return mSer.insert(member);
 	}
+	
+	@ApiOperation("userid로 유저 정보를 찾아서 반환한다")
+	@GetMapping("/{userid}")
+	public MemberDto userInfo(@PathVariable String userid) {
+		System.out.println("진입");
+		return mSer.select(userid);
+	}
+	
 	
 	@GetMapping("/findpassword/{id}/{name}/{phone}")
 	@ResponseBody
@@ -75,24 +76,13 @@ public class MemberController {
 		return mSer.findPassword(map);
 	}
 	
-	//rest로 Userinfo 입장 시 로그인정보 뿌리기
-	@GetMapping(value="/api/user")
-	public @ResponseBody ResponseEntity<MemberDto> userInfo(HttpSession session) {
-		String userid = (String)session.getAttribute("userid");
-		
-		MemberDto memberDto = mSer.lookupmember(userid);
-		if(memberDto != null)
-			return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
-		else
-			return new ResponseEntity<MemberDto>(HttpStatus.NO_CONTENT);
-	}
 	
 	@PutMapping("/api/user")
 	public @ResponseBody ResponseEntity<MemberDto> userModify(@RequestBody MemberDto memberDto) {
 		System.out.println(memberDto.toString());
 		mSer.update(memberDto);		
 		String userid = memberDto.getUserid();		
-		memberDto = mSer.lookupmember(userid);
+		memberDto = mSer.select(userid);
 		return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 	}
 	//회원탈퇴

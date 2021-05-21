@@ -22,12 +22,12 @@ public class MemberDto {
 	@ApiModelProperty("가구 형태")
 	private String family_type;
 	@ApiModelProperty("연령대")
-	private int age_range;
+	private Integer age_range;
 
 	public MemberDto() {}
 
 	public MemberDto(String userid, String pwd, String name, String address, String phone, String tag,
-			String family_type, int age_range) {
+			String family_type, Integer age_range) {
 		super();
 		this.userid = userid;
 		this.pwd = pwd;
@@ -95,11 +95,11 @@ public class MemberDto {
 		this.family_type = family_type;
 	}
 
-	public int getAge_range() {
+	public Integer getAge_range() {
 		return age_range;
 	}
 
-	public void setAge_range(int age_range) {
+	public void setAge_range(Integer age_range) {
 		this.age_range = age_range;
 	}
 

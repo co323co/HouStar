@@ -46,7 +46,7 @@ public class AdminController {
 	//등록
 	@PostMapping(value = "/user")
 	public ResponseEntity<List<MemberDto>> userRegister(@RequestBody MemberDto memberDto) {	
-			mService.insertMember(memberDto);
+			mService.insert(memberDto);
 			List<MemberDto> list = mService.userList();
 			return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
 	}
@@ -55,7 +55,7 @@ public class AdminController {
 	public ResponseEntity<MemberDto> userInfo(@PathVariable("userId") String userId) {
 	
 		System.out.println(userId);
-		MemberDto memberDto = mService.lookupmember(userId);
+		MemberDto memberDto = mService.select(userId);
 		if(memberDto != null)
 			return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 		else
