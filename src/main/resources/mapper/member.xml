@@ -27,21 +27,22 @@
 			where userid like concat('%', #{word}, '%')
 		</if>
 	</select>
-	
+	<!-- id로 유저찾아서 반환 -->
 	<select id="lookupmember" parameterType="String" resultType="memberDto">
 		select *
 		from members
 		where userid = #{userid}
 	</select>
-	<!--  -->
+	
 	<insert id="insertMember" parameterType="memberDto">
-		insert into members (userid, pwd, name, address, phone)
-		values (#{userid}, #{pwd}, #{name}, #{address}, #{phone})
+		insert into members (userid, pwd, name, address, phone, tag, age_range, family_type)
+		values (#{userid}, #{pwd}, #{name}, #{address}, #{phone}, #{tag}, #{age_range}, #{family_type})
 	</insert>
 	
 	<update id="update" parameterType="memberDto">
 		update members
-		set pwd = #{pwd}, name = #{name}, address = #{address}, phone = #{phone}
+		set pwd = #{pwd}, name = #{name}, address = #{address}, phone = #{phone}, 
+		tag = #{tag}, age_range = #{age_range}, family_type = #{family_type}, 
 		where userid = #{userid}
 	</update>
 	

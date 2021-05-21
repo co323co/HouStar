@@ -95,7 +95,7 @@ public class MemberController {
 	public @ResponseBody ResponseEntity<MemberDto> userModify(@RequestBody MemberDto memberDto) {
 		System.out.println(memberDto.toString());
 		mSer.update(memberDto);		
-		String userid = memberDto.getUserId();		
+		String userid = memberDto.getUserid();		
 		memberDto = mSer.lookupmember(userid);
 		return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 	}
