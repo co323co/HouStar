@@ -50,6 +50,7 @@ export default {
       .get('/address/sidos')
       .then(({ data }) => {
         this.sidos = data;
+        console.log(data);
       })
       .catch(({ response }) => {
         console.log('실패 : : ');

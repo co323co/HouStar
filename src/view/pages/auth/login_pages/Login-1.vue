@@ -151,7 +151,7 @@
                         type="text"
                         placeholder="Id"
                         name="id"
-                        ref="id"
+                        v-model.lazy="signup_userid"
                         autocomplete="off"
                       />
                     </div>
@@ -369,6 +369,8 @@ export default {
   name: 'login-1',
   data() {
     return {
+      //아이디 중복 체크용
+      signup_userid: '',
       //팝업 용
       overlay_success: false,
       overlay_fail: false,
@@ -515,25 +517,25 @@ export default {
     });
 
     this.fv.on('core.form.valid', () => {
-      var email = this.form.email;
-      var password = this.form.password;
+      // var email = this.form.email;
+      // var password = this.form.password;
 
-      // clear existing errors
-      this.$store.dispatch(LOGOUT);
+      // // clear existing errors
+      // this.$store.dispatch(LOGOUT);
 
-      // set spinner to submit button
+      // // set spinner to submit button
       const submitButton = this.$refs['kt_login_signin_submit'];
       submitButton.classList.add('spinner', 'spinner-light', 'spinner-right');
 
-      // dummy delay
+      // // dummy delay
       setTimeout(() => {
-        // send login request
-        this.$store
-          .dispatch(LOGIN, { email, password })
-          // go to which page after successfully login
-          .then(() => this.$router.push({ name: 'dashboard' }))
-          .catch(() => {});
-
+        // // send login request
+        // this.$store
+        //   .dispatch(LOGIN, { email, password })
+        //   // go to which page after successfully login
+        //   .then(() => this.$router.push({ name: 'dashboard' }))
+        //   .catch(() => {});
+        this.$router.push({ name: 'home' });
         submitButton.classList.remove('spinner', 'spinner-light', 'spinner-right');
       }, 2000);
     });
@@ -552,7 +554,7 @@ export default {
     this.fv1.on('core.form.valid', () => {
       console.log('회원가입 시도');
       const user = {
-        userid: this.$refs.id.value,
+        userid: this.signup_userid,
         pwd: this.$refs.rpassword.value,
         name: this.$refs.name.value,
         address: this.$refs.address.value,
@@ -608,7 +610,7 @@ export default {
   methods: {
     registSuccess() {
       this.overlay_success = false;
-      this.$refs.id.value = '';
+      this.signup_userid = '';
       this.$refs.cpassword.value = '';
       this.$refs.rpassword.value = '';
       this.$refs.name.value = '';
@@ -626,6 +628,13 @@ export default {
       this.state = form;
       var form_name = 'kt_login_' + form + '_form';
       KTUtil.animateClass(KTUtil.getById(form_name), 'animate__animated animate__backInUp');
+    },
+  },
+  watch: {
+    signup_userid: function (userid) {
+      http.get('/user/' + userid).then((data) => {
+        console.log(data);
+      });
     },
   },
 };
