@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "DongReviewDto : 동 리뷰 저장", description = "dongcode, userid, (인프라, 대중교통, 안전, 건강, 학군, 환경) 에 대한 평점, 리뷰내용 을 담고 있습니다.")
-
 public class DongReviewDto {
 	
 	@ApiModelProperty("dongcode")
