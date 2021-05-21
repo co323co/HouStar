@@ -3,16 +3,16 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper
-	namespace="com.ssafy.happyhouse.model.mapper.MartMapper">
+	namespace="com.ssafy.happyhouse.model.mapper.StoreMapper">
 	<!-- 
 	동코드로(법정동코드 ex 1111012900) 
 	법정동명 경도 위도 상권업종대분류명 도로명주소 상호명을 
 	martDto에 담아서 반환 
 	-->
-	<select id="getinfo" parameterType="string" resultType="martDto">
-		select 법정동명 as dong, 경도 as lat, 위도 as lng, 상권업종대분류명 as bictitle, 도로명주소 as doro, 상호명 as martname 
-		from mart
-		where 법정동코드 = #{value}
+	<select id="getinfo" parameterType="string" resultType="storeDto">
+		select name, type, dongname, dongcode, address, lat, lng
+		from store_view
+		where dongcode = #{value}
 	</select>
 	
 </mapper>	

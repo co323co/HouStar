@@ -1,4 +1,4 @@
-<%@page import="com.ssafy.happyhouse.model.dto.MartDto"%>
+<%@page import="com.ssafy.happyhouse.model.dto.StoreDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,7 +6,7 @@
     <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
 	String root = request.getContextPath();
-	List<MartDto> tlist = (List) session.getAttribute("mart");
+	ListStoreDtoo> tlist = (List) session.getAttribute("mart");
 	List<String> mlist = (List) session.getAttribute("martlist");
 	String sel = null;
 	sel = (String) request.getAttribute("sel");
@@ -57,7 +57,7 @@
 	///////////////////////////////////////////////////맵 설정
 
 	function initMap() {
-		<%List<MartDto> tlist2 = (List) session.getAttribute("mart");
+		<%ListStoreDtoo> tlist2 = (List) session.getAttribute("mart");
 		double b=0;
 		double c=0;
 			if (tlist2 == null) {

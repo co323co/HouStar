@@ -6,20 +6,20 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.happyhouse.model.dto.MartDto;
-import com.ssafy.happyhouse.model.mapper.MartMapper;
+import com.ssafy.happyhouse.model.dto.StoreDto;
+import com.ssafy.happyhouse.model.mapper.StoreMapper;
 
 @Service
-public class MartServicelmpl implements MartService {
+public class StoreServicelmpl implements StoretService {
 	
 	@Autowired
 	private SqlSession sqlSession;
 	@Autowired
-	private static MartService martService;
+	private static StoretService martService;
 	
 	@Override
-	public List<MartDto> getinfo(String dong) {		
-		return sqlSession.getMapper(MartMapper.class).getinfo(dong);
+	public List<StoreDto> getinfo(String dong) {		
+		return sqlSession.getMapper(StoreMapper.class).getinfo(dong);
 	}
 	
 

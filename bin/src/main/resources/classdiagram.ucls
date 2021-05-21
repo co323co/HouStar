@@ -148,16 +148,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="com.ssafy.happyhouse.model.dto.MartDto" project="happy_spring" 
-    file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/dto/MartDto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="448" width="304" x="332" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="17" language="java" name="com.ssafy.happyhouse.model.dto.InterestAreaDto" project="happy_spring" 
+  <class id="16" language="java" name="com.ssafy.happyhouse.model.dto.InterestAreaDto" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/dto/InterestAreaDto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="376" width="196" x="4018" y="37"/>    
@@ -167,7 +158,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="com.ssafy.happyhouse.model.dto.SidoGugunDongDto" project="happy_spring" 
+  <class id="17" language="java" name="com.ssafy.happyhouse.model.dto.SidoGugunDongDto" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/dto/SidoGugunDongDto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="412" width="194" x="1170" y="37"/>    
@@ -177,7 +168,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="com.ssafy.happyhouse.model.dto.EnvInfoDto" project="happy_spring" 
+  <class id="18" language="java" name="com.ssafy.happyhouse.model.dto.EnvInfoDto" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/dto/EnvInfoDto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="322" width="243" x="3735" y="37"/>    
@@ -187,7 +178,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="com.ssafy.happyhouse.model.dto.HouseDealDto" project="happy_spring" 
+  <class id="19" language="java" name="com.ssafy.happyhouse.model.dto.HouseDealDto" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/dto/HouseDealDto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="754" width="194" x="1634" y="37"/>    
@@ -197,7 +188,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="com.ssafy.happyhouse.model.dto.HouseInfoDto" project="happy_spring" 
+  <class id="20" language="java" name="com.ssafy.happyhouse.model.dto.HouseInfoDto" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/dto/HouseInfoDto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="574" width="194" x="936" y="37"/>    
@@ -207,7 +198,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="com.ssafy.happyhouse.model.dto.NoticeDto" project="happy_spring" 
+  <class id="21" language="java" name="com.ssafy.happyhouse.model.dto.NoticeDto" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/dto/NoticeDto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="412" width="237" x="2451" y="37"/>    
@@ -217,7 +208,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="com.ssafy.happyhouse.model.dto.CoronaDto" project="happy_spring" 
+  <class id="22" language="java" name="com.ssafy.happyhouse.model.dto.CoronaDto" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/dto/CoronaDto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="484" width="194" x="2958" y="37"/>    
@@ -227,7 +218,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="com.ssafy.happyhouse.model.dto.HospitalDto" project="happy_spring" 
+  <class id="23" language="java" name="com.ssafy.happyhouse.model.dto.HospitalDto" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/dto/HospitalDto.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="430" width="194" x="3192" y="37"/>    
@@ -237,7 +228,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="25" language="java" name="com.ssafy.happyhouse.model.mapper.MemberMapper" project="happy_spring" 
+  <interface id="24" language="java" name="com.ssafy.happyhouse.model.mapper.MemberMapper" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/mapper/MemberMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="214" width="341" x="6039" y="37"/>    
@@ -247,7 +238,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="26" language="java" name="com.ssafy.happyhouse.model.mapper.NoticeMapper" project="happy_spring" 
+  <interface id="25" language="java" name="com.ssafy.happyhouse.model.mapper.NoticeMapper" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/mapper/NoticeMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="160" width="262" x="2149" y="37"/>    
@@ -257,7 +248,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="27" language="java" name="com.ssafy.happyhouse.model.mapper.InterestAreaMapper" project="happy_spring" 
+  <interface id="26" language="java" name="com.ssafy.happyhouse.model.mapper.InterestAreaMapper" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/mapper/InterestAreaMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="142" width="274" x="4940" y="37"/>    
@@ -267,7 +258,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="28" language="java" name="com.ssafy.happyhouse.model.mapper.EnvGuideCheckMapper" project="happy_spring" 
+  <interface id="27" language="java" name="com.ssafy.happyhouse.model.mapper.EnvGuideCheckMapper" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/mapper/EnvGuideCheckMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="106" width="251" x="41" y="37"/>    
@@ -277,7 +268,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="29" language="java" name="com.ssafy.happyhouse.model.mapper.HouseDealMapper" project="happy_spring" 
+  <interface id="28" language="java" name="com.ssafy.happyhouse.model.mapper.HouseDealMapper" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/mapper/HouseDealMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="196" width="241" x="1868" y="37"/>    
@@ -287,8 +278,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="30" language="java" name="com.ssafy.happyhouse.model.mapper.MartMapper" project="happy_spring" 
-    file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/mapper/MartMapper.java" binary="false" 
+  <interface id="29" language="java" name="com.ssafy.happyhouse.model.mapper.StoreMapper" project="happy_spring" 
+    file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/mapper/StoreMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="88" width="220" x="676" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -297,7 +288,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="31" language="java" name="com.ssafy.happyhouse.model.mapper.SidoGugunDongMapper" project="happy_spring" 
+  <interface id="30" language="java" name="com.ssafy.happyhouse.model.mapper.SidoGugunDongMapper" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/mapper/SidoGugunDongMapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="160" width="315" x="5454" y="37"/>    
@@ -307,7 +298,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="32" language="java" name="com.ssafy.happyhouse.model.service.EnvGuideCheckServiceImpl" 
+  <class id="31" language="java" name="com.ssafy.happyhouse.model.service.EnvGuideCheckServiceImpl" 
     project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/EnvGuideCheckServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -318,7 +309,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="com.ssafy.happyhouse.model.service.SidoGugunDongServiceImpl" 
+  <class id="32" language="java" name="com.ssafy.happyhouse.model.service.SidoGugunDongServiceImpl" 
     project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/SidoGugunDongServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -329,8 +320,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="34" language="java" name="com.ssafy.happyhouse.model.service.MartServicelmpl" project="happy_spring" 
-    file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/MartServicelmpl.java" binary="false" 
+  <class id="33" language="java" name="com.ssafy.happyhouse.model.service.StoreServicelmpl" project="happy_spring" 
+    file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/StoreServicelmpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="124" width="216" x="11219" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -339,7 +330,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="35" language="java" name="com.ssafy.happyhouse.model.service.EnvGuideCheckService" 
+  <interface id="34" language="java" name="com.ssafy.happyhouse.model.service.EnvGuideCheckService" 
     project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/EnvGuideCheckService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -350,7 +341,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="36" language="java" name="com.ssafy.happyhouse.model.service.SidoGugunDongService" 
+  <interface id="35" language="java" name="com.ssafy.happyhouse.model.service.SidoGugunDongService" 
     project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/SidoGugunDongService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -361,7 +352,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="37" language="java" name="com.ssafy.happyhouse.model.service.HouseDealServiceImpl" project="happy_spring" 
+  <class id="36" language="java" name="com.ssafy.happyhouse.model.service.HouseDealServiceImpl" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/HouseDealServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="250" width="241" x="4254" y="37"/>    
@@ -371,7 +362,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="38" language="java" name="com.ssafy.happyhouse.model.service.InterestAreaServicelmpl" 
+  <class id="37" language="java" name="com.ssafy.happyhouse.model.service.InterestAreaServicelmpl" 
     project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/InterestAreaServicelmpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -382,7 +373,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="39" language="java" name="com.ssafy.happyhouse.model.service.InterestAreaService" 
+  <interface id="38" language="java" name="com.ssafy.happyhouse.model.service.InterestAreaService" 
     project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/InterestAreaService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -393,7 +384,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="40" language="java" name="com.ssafy.happyhouse.model.service.MemberService" project="happy_spring" 
+  <interface id="39" language="java" name="com.ssafy.happyhouse.model.service.MemberService" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/MemberService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="214" width="341" x="8462" y="831"/>    
@@ -403,7 +394,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="41" language="java" name="com.ssafy.happyhouse.model.service.MemberServiceImpl" project="happy_spring" 
+  <class id="40" language="java" name="com.ssafy.happyhouse.model.service.MemberServiceImpl" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/MemberServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="250" width="341" x="8892" y="37"/>    
@@ -413,7 +404,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="42" language="java" name="com.ssafy.happyhouse.model.service.HouseDealService" project="happy_spring" 
+  <interface id="41" language="java" name="com.ssafy.happyhouse.model.service.HouseDealService" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/HouseDealService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="196" width="241" x="4254" y="831"/>    
@@ -423,8 +414,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="43" language="java" name="com.ssafy.happyhouse.model.service.MartService" project="happy_spring" 
-    file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/MartService.java" binary="false" 
+  <interface id="42" language="java" name="com.ssafy.happyhouse.model.service.StoretService" project="happy_spring" 
+    file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/StoretService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="88" width="216" x="11219" y="831"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -433,7 +424,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="44" language="java" name="com.ssafy.happyhouse.model.service.NoticeServiceImpl" project="happy_spring" 
+  <class id="43" language="java" name="com.ssafy.happyhouse.model.service.NoticeServiceImpl" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/NoticeServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="196" width="262" x="9536" y="37"/>    
@@ -443,7 +434,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="45" language="java" name="com.ssafy.happyhouse.model.service.NoticeService" project="happy_spring" 
+  <interface id="44" language="java" name="com.ssafy.happyhouse.model.service.NoticeService" project="happy_spring" 
     file="/happy_spring/src/main/java/com/ssafy/happyhouse/model/service/NoticeService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="160" width="262" x="9405" y="831"/>    
@@ -453,114 +444,154 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
+  <realization id="45">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="34"/>  
+  </realization>  
   <association id="46">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="47" name="sgdSer"/>      
-      <multiplicity id="48" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="47" name="houseDealService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
+    <end type="TARGET" refId="41" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="49">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="50" name="houseDealService"/>      
-      <multiplicity id="51" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="42" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="52">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="53" name="mSer"/>      
-      <multiplicity id="54" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="40" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="55">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="56" name="memberService"/>      
-      <multiplicity id="57" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="40" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="58">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="59" name="iSer"/>      
-      <multiplicity id="60" minimum="0" maximum="1"/>    
+      <attribute id="50" name="memberService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="39" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="61">    
+  <realization id="52">    
     <end type="SOURCE" refId="37"/>    
-    <end type="TARGET" refId="42"/>  
+    <end type="TARGET" refId="38"/>  
   </realization>  
-  <realization id="62">    
-    <end type="SOURCE" refId="33"/>    
-    <end type="TARGET" refId="36"/>  
-  </realization>  
-  <realization id="63">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="43"/>  
-  </realization>  
-  <realization id="64">    
-    <end type="SOURCE" refId="38"/>    
-    <end type="TARGET" refId="39"/>  
-  </realization>  
-  <realization id="65">    
-    <end type="SOURCE" refId="44"/>    
-    <end type="TARGET" refId="45"/>  
-  </realization>  
-  <realization id="66">    
-    <end type="SOURCE" refId="41"/>    
-    <end type="TARGET" refId="40"/>  
-  </realization>  
-  <association id="67">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="68" name="nSer"/>      
-      <multiplicity id="69" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="45" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="70">    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="71" name="martService"/>      
-      <multiplicity id="72" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="73">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="74" name="martService"/>      
-      <multiplicity id="75" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="76">    
-    <end type="SOURCE" refId="32"/>    
-    <end type="TARGET" refId="35"/>  
-  </realization>  
-  <association id="77">    
+  <association id="53">    
     <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="78" name="eSer"/>      
-      <multiplicity id="79" minimum="0" maximum="1"/>    
+      <attribute id="54" name="eSer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="55" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="35" navigable="true"/>    
+    <end type="TARGET" refId="34" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="80">    
-    <end type="SOURCE" refId="37" navigable="false">      
-      <attribute id="81" name="housedealservice"/>      
-      <multiplicity id="82" minimum="0" maximum="1"/>    
+  <association id="56">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="57" name="iSer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="59">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="44"/>  
+  </realization>  
+  <association id="60">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="61" name="sSer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="62" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="42" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="64" name="housedealservice">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="65" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="67" name="nSer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="68" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="69">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="35"/>  
+  </realization>  
+  <realization id="70">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="42"/>  
+  </realization>  
+  <realization id="71">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
+  <association id="72">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="73" name="martService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="74" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="75">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="76" name="sgdSer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="77" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="79" name="mSer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="80" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="81">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="41"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

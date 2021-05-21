@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssafy.happyhouse.model.dto.InterestAreaDto;
-import com.ssafy.happyhouse.model.dto.MartDto;
+import com.ssafy.happyhouse.model.dto.StoreDto;
 import com.ssafy.happyhouse.model.service.InterestAreaService;
-import com.ssafy.happyhouse.model.service.MartService;
+import com.ssafy.happyhouse.model.service.StoretService;
 
 @Controller
 public class InterestAreaController {
@@ -28,7 +28,7 @@ public class InterestAreaController {
 	@Autowired
 	InterestAreaService iSer;
 	@Autowired
-	MartService martService;
+	StoretService sSer;
 	
 	@GetMapping("/interest/registform")
 	String mvRegistForm() {
@@ -84,38 +84,38 @@ public class InterestAreaController {
 	
 	// id로 관심지역의 법정동코드 반환
 	// 법정동코드로 mart list 를 받아서 화면에 출력 
-	@GetMapping("/api/interest/mart")
+	@GetMapping("/api/interest/store")
 	@ResponseBody
-	public List<MartDto> mlist (HttpSession session){
+	public List<StoreDto> mlist (HttpSession session){
 		String userid = (String) session.getAttribute("userid");
 		List<InterestAreaDto> list =iSer.list(userid);
 		String code = list.get(0).getCode();
-		List<MartDto> martlist = martService.getinfo(code);
+		List<StoreDto> martlist = sSer.getinfo(code);
 		return martlist;
 	}
 	// 상호업종 대분류명 가꼬와서 리스트새로만들어서뿌려
-	@GetMapping("/api/interest/mart/{city}")
+	@GetMapping("/api/interest/mart/{type}")
 	@ResponseBody
-	public List<MartDto> newmartlist (@PathVariable("city") String city, HttpSession session){
-		if(city.contains("temp")) {
-			city = city.replaceAll("temp", "/");
+	public List<StoreDto> newmartlist (@PathVariable("type") String type, HttpSession session){
+		if(type.contains("temp")) {
+			type = type.replaceAll("temp", "/");
 		}
-		System.out.println(city);
+		System.out.println(type);
 		String userid = (String) session.getAttribute("userid");	
 		List<InterestAreaDto> list =iSer.list(userid);
 		String code = list.get(0).getCode();
-		List<MartDto> martlist = martService.getinfo(code);
-		if(city.equals("all")) {
+		List<StoreDto> martlist = sSer.getinfo(code);
+		if(type.equals("all")) {
 			return martlist;
 		}
-		List<MartDto> newmartlist = new ArrayList<>();
-		for (MartDto m : martlist) {
-			if(m.getBictitle().equals(city)) {
-				newmartlist.add(m);
-				System.out.println("담아써 새거에" + m.toString());
+		List<StoreDto> newStoretlist = new ArrayList<>();
+		for (StoreDto store : martlist) {
+			if(store.getType().equals(type)) {
+				newStoretlist.add(store);
+				System.out.println("담아써 새거에" + store.toString());
 			}
 		}
 		
-		return newmartlist;
+		return newStoretlist;
 	}
 }
