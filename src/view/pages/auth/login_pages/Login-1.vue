@@ -122,6 +122,18 @@
                     회원가입
                   </h3>
                 </div>
+                <b-badge
+                  v-if="signup_userid != `` && id_isUnique"
+                  class="mr-1 mb-2"
+                  variant="success"
+                  >사용 가능한 ID 입니다</b-badge
+                >
+                <b-badge
+                  v-if="signup_userid != `` && !id_isUnique"
+                  class="mr-1 mb-2"
+                  variant="danger"
+                  >중복 ID 입니다</b-badge
+                >
                 <v-row>
                   <v-overlay :absolute="true" :value="overlay_success" :opacity="0">
                     <div class="mb-16 pb-16">
@@ -371,6 +383,7 @@ export default {
     return {
       //아이디 중복 체크용
       signup_userid: '',
+      id_isUnique: true,
       //팝업 용
       overlay_success: false,
       overlay_fail: false,
@@ -609,6 +622,8 @@ export default {
   },
   methods: {
     registSuccess() {
+      if (!this.id_isUnique) return;
+
       this.overlay_success = false;
       this.signup_userid = '';
       this.$refs.cpassword.value = '';
@@ -632,8 +647,12 @@ export default {
   },
   watch: {
     signup_userid: function (userid) {
-      http.get('/user/' + userid).then((data) => {
-        console.log(data);
+      http.get('/user/' + userid).then((response) => {
+        if (response.data != '') {
+          this.id_isUnique = false;
+        } else {
+          this.id_isUnique = true;
+        }
       });
     },
   },

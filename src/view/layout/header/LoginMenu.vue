@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: 'HSMenu',
+  name: 'LoginMenu',
   methods: {
     hasActiveChildren(match) {
       return this.$route['path'].indexOf(match) !== -1;
