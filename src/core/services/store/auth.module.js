@@ -1,6 +1,3 @@
-import ApiService from '@/core/services/api.service';
-import JwtService from '@/core/services/jwt.service';
-
 // action types
 export const VERIFY_AUTH = 'verifyAuth';
 export const LOGIN = 'login';
@@ -17,7 +14,6 @@ export const SET_ERROR = 'setError';
 const state = {
   errors: null,
   user: {},
-  isAuthenticated: !!JwtService.getToken(),
 };
 
 const getters = {
@@ -65,11 +61,6 @@ const actions = {
   },
   [UPDATE_PASSWORD](context, payload) {
     const password = payload;
-
-    return ApiService.put('password', password).then(({ data }) => {
-      context.commit(SET_PASSWORD, data);
-      return data;
-    });
   },
 };
 
