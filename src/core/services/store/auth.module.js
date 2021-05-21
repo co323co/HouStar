@@ -1,5 +1,6 @@
 import ApiService from '@/core/services/api.service';
 import JwtService from '@/core/services/jwt.service';
+import http from '@/core/services/http-common';
 
 // action types
 export const VERIFY_AUTH = 'verifyAuth';
@@ -57,18 +58,29 @@ const actions = {
       tag = tag.substr(0, tag.length - 1);
       user.tag = tag;
       console.log(JSON.stringify(user));
-      ApiService.post('/user', user)
+      http
+        .post('/user', user)
         .then(({ data }) => {
-          console.log('성공');
+          console.log('성공 : :');
           console.log(data);
-          context.commit(SET_AUTH, data);
-          resolve(data);
         })
         .catch(({ response }) => {
-          console.log('실패');
+          console.log('실패 : : ');
           console.log(response);
-          // context.commit(SET_ERROR, response.data.errors);
         });
+
+      // ApiService.post('/user', user)
+      //   .then(({ data }) => {
+      //     console.log('성공');
+      //     console.log(data);
+      //     context.commit(SET_AUTH, data);
+      //     resolve(data);
+      //   })
+      //   .catch(({ response }) => {
+      //     console.log('실패');
+      //     console.log(response);
+      //     // context.commit(SET_ERROR, response.data.errors);
+      //   });
     });
   },
   [VERIFY_AUTH](context) {
