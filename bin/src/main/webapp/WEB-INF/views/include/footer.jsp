@@ -123,12 +123,12 @@
 		         <div class="col-md-8">
 		           <div class="footer-content">
 		               
-		             <h2 class="title">Find Us</h2>
+		             <h2 class="title">Happy House</h2>
 		             <div class="separator-2"></div>
 		            
-		             <p>(SSAFY) 서울시 강남구  테헤란로 멀티스퀘어</p>
-		             <p>1544-9001</p>
-		             <p><a href="#">admin@ssafy.com</a></p>
+		             <p>아파트 실거래가 정보, 관심지역 상가·환경오염정보를 제공합니다</p>
+		             <p>010-8277-8658</p>
+		             <p><a href="#">co323co@gmail.com</a></p>
 		           </div>
 		         </div>
 		       </div>

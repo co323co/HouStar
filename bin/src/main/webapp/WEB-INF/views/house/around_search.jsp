@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="dong" value="${dong}"/>
 <c:set var="gugun" value="${gugun}"/>
+<%-- <c:set var="firstlist" value="${firstlist}"/> --%>
 <%
 	String root = request.getContextPath();
 	String ct = (String) session.getAttribute("ct");
@@ -509,7 +510,6 @@
 	<div class="container">
 		<div class="row mt-5 mb-5">
 			<div class="col-sm-4">
-		<%-- 	${gugun } --%>
 				<h2>거래 내역</h2>			
 				<hr>
 				  <c:if test="${tlist.size() == 0}">
@@ -536,7 +536,30 @@
 						</div>
 						<hr>
 	  		</c:forEach>
+			
+	  		</c:if>
+	  		 <c:if test="${firstlist.size() != 0}">
+	  			<c:forEach var="t" items="${firstlist}">
+	  			<div class="media-body">
+					</div>
+						<h4>
+							<a href='#'>${t.aptname}</a>
+						</h4>
 
+						<h6 class="media-heading" id='deal'>
+							거래금액 :	${t.dealAmount}만원
+						</h6>
+						<h6 class="media-heading" id='deal'>
+							면적:	${t.area}</h6>
+						<div>
+							<p class="small margin-clear">
+							<div class="fa fa-calendar pr-10"></div>
+							${t.dealYear}.${t.dealMonth}.${t.dealDay}
+							</p>
+						</div>
+						<hr>
+	  		</c:forEach>
+			
 	  		</c:if>
 			</div>
 			
@@ -553,6 +576,11 @@
 							style="width: 600px; height: 400px"></div>
 					</div>
 				</div>
+				
+				
+				
+				
+				
 				<br><input type="button" value="코로나 선별 진료소" id="cor" onclick = "div_show()"/>
 				<input type="button" value="안심병원 검색" id="hos" onclick = "div_show2()"/>				
 				<div id="corona_s" style="display: none">
@@ -586,6 +614,8 @@
 					<input type="button" value="숨기기" id="cor_h" onclick = "div_hide2()"/>
 				</div>
 			</div>
+			
+			
 		</div>
 
 	</div>
