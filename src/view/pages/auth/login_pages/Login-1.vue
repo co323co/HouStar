@@ -441,7 +441,7 @@ export default {
               message: '비밀번호를 재확인 해주세요',
             },
             identical: {
-              compare: function () {
+              compare: function() {
                 return signup_form.querySelector('[name="password"]').value;
               },
               message: '비밀번호 재확인이 일치하지 않습니다.',
