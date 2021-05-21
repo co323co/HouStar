@@ -50,16 +50,9 @@ public class SidoGugunDongController {
 	}
 	//"dong": "상도동",
 	//"code": "11590",로 sidogugundong dto를 반환
-	/* 요청 json
-	 * {
-    "dongcode" : "11590",
-    "dongname" : "상도동"
-}
-	 */
-	@ApiOperation("dongcode와 dongname으로 시 이름, 군구 이름, 동 이름을 반환한다.")
+	@ApiOperation("dongcode와 dongname으로 시 이름, 군구 이름, 동 이름을 반환한다. ex dongcode ='11590' and dong ='상도동'")
 	@GetMapping("sidogugundong")
 	SidoGugunDongDto getAllPath(@RequestBody Map<String,Object> param)throws Exception{
-		//SidoGugunDongDto [sidoCode=11, sidoName=서울특별시, gugunCode=11590, gugunName=동작구, dongCode=1159010200, dongName=상도동]
 		System.out.println( param.get("dongcode") +" "+ param.get("dongname"));
 		return sgdSer.getAllPath(param);
 	}
