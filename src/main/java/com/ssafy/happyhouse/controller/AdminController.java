@@ -29,14 +29,14 @@ public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
-	private MemberService memberService;
+	private MemberService mService;
 
 	//관리자 페이지
 	//회원전체검색
 	@GetMapping(value = "/user")
 	public ResponseEntity<List<MemberDto>> userList() {
 		logger.debug("userList");
-		List<MemberDto> list = memberService.userList();
+		List<MemberDto> list = mService.userList();
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
 		} else {
@@ -46,8 +46,8 @@ public class AdminController {
 	//등록
 	@PostMapping(value = "/user")
 	public ResponseEntity<List<MemberDto>> userRegister(@RequestBody MemberDto memberDto) {	
-			memberService.insertMember(memberDto);
-			List<MemberDto> list = memberService.userList();
+			mService.insertMember(memberDto);
+			List<MemberDto> list = mService.userList();
 			return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
 	}
 	//상세검색
@@ -55,7 +55,7 @@ public class AdminController {
 	public ResponseEntity<MemberDto> userInfo(@PathVariable("userId") String userId) {
 	
 		System.out.println(userId);
-		MemberDto memberDto = memberService.lookupmember(userId);
+		MemberDto memberDto = mService.lookupmember(userId);
 		if(memberDto != null)
 			return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 		else
@@ -66,7 +66,7 @@ public class AdminController {
 	@GetMapping(value = "/user/{word}")
 	public ResponseEntity<List<MemberDto>> search(@PathVariable("word") String word) {	
 		System.out.println(word);
-		List<MemberDto> list = memberService.searchbyid(word);
+		List<MemberDto> list = mService.searchbyid(word);
 		if(list != null && !list.isEmpty()) {
 			return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
 		}
@@ -75,15 +75,15 @@ public class AdminController {
 	//수정
 	@PutMapping(value = "/user")
 	public ResponseEntity<List<MemberDto>> userModify(@RequestBody MemberDto memberDto) {
-		memberService.update(memberDto);
-		List<MemberDto> list = memberService.userList();
+		mService.update(memberDto);
+		List<MemberDto> list = mService.userList();
 		return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
 	}
 	//삭제
 	@DeleteMapping(value = "/user/{userId}")
 	public ResponseEntity<List<MemberDto>> userDelete(@PathVariable("userId") String userId) {
-		memberService.deleteMember(userId);
-		List<MemberDto> list = memberService.userList();
+		mService.deleteMember(userId);
+		List<MemberDto> list = mService.userList();
 		return new ResponseEntity<List<MemberDto>>(list, HttpStatus.OK);
 	}
 	 
