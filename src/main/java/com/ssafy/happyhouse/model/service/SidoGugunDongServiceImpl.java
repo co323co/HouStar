@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,18 @@ public class SidoGugunDongServiceImpl implements SidoGugunDongService {
 	}
 
 	@Override
-	public List<HouseInfoDto> getDongInGugun(String gugun) throws Exception {
-		return sqlSession.getMapper(SidoGugunDongMapper.class).getDongInGugun(gugun);
+	public List<HouseInfoDto> getDongInGugunhasDeal(String gugun) throws Exception {
+		return sqlSession.getMapper(SidoGugunDongMapper.class).getDongInGugunhasDeal(gugun);
 	}
 
 	@Override
 	public List<HouseInfoDto> getAptInDong(String dong) throws Exception {
 		return sqlSession.getMapper(SidoGugunDongMapper.class).getAptInDong(dong);
+	}
+
+	@Override
+	public SidoGugunDongDto getAllPath(Map<String,Object> param) throws Exception {	
+		return sqlSession.getMapper(SidoGugunDongMapper.class).getAllPath(param);
 	}
 
 }

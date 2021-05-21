@@ -23,7 +23,7 @@
 		ORDER BY gugun_code
 	</select>
 	
-	<select id="getDongInGugun" parameterType="string" resultType="HouseInfoDto">
+	<select id="getDongInGugunhasDeal" parameterType="string" resultType="HouseInfoDto">
 		SELECT distinct dong, code FROM houseinfo
 		where code = #{gugun}
 		ORDER BY dong
@@ -35,4 +35,11 @@
 		ORDER BY AptName
 	</select>
 	
+	<select id="getAllPath" parameterType="map" resultType="SidoGugunDongDto">
+	select left(code,2) as sidoCode, city as sidoName,
+				left(code,5) as gugunCode, gugun as gugunName,
+				code as dongCode, dong as dongName
+		FROM	baseaddress
+		WHERE dongcode =#{dongcode} and dong =#{dongname}
+	</select>
 </mapper>
