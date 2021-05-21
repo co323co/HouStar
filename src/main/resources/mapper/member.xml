@@ -7,47 +7,47 @@
 	<select id="login" parameterType="map" resultType="boolean">
 		select  IF(COUNT(*) = 1, 1, 0)
 		from members
-		where userId = #{login_userId} and userPwd = #{login_userPwd}
+		where userid = #{login_userid} and pwd = #{login_pwd}
 	</select>
 
 	<select id="findPassword" parameterType="map" resultType="map">
-		select userPwd as password from members where userId=#{id} and userName=#{name} and userPhone=#{phone};
+		select pwd as password from members where userid=#{id} and name=#{name} and phone=#{phone};
 	</select>
 
 	<select id="userList" resultType="memberDto">
 		select *
 		from members
-		order by #{userId};
+		order by #{userid};
 	</select> 
 	
 	<select id="searchbyid" parameterType="String" resultType="memberDto">
 		select * 
 		from members
 		<if test="word != null and word !=''">
-			where userId like concat('%', #{word}, '%')
+			where userid like concat('%', #{word}, '%')
 		</if>
 	</select>
 	
 	<select id="lookupmember" parameterType="String" resultType="memberDto">
 		select *
 		from members
-		where userId = #{userId}
+		where userid = #{userid}
 	</select>
 	<!--  -->
 	<insert id="insertMember" parameterType="memberDto">
-		insert into members (userId, userPwd, userName, userAddress, userPhone)
-		values (#{userId}, #{userPwd}, #{userName}, #{userAddress}, #{userPhone})
+		insert into members (userid, pwd, name, address, phone)
+		values (#{userid}, #{pwd}, #{name}, #{address}, #{phone})
 	</insert>
 	
 	<update id="update" parameterType="memberDto">
 		update members
-		set userPwd = #{userPwd}, userName = #{userName}, userAddress = #{userAddress}, userPhone = #{userPhone}
-		where userId = #{userId}
+		set pwd = #{pwd}, name = #{name}, address = #{address}, phone = #{phone}
+		where userid = #{userid}
 	</update>
 	
 	 <delete id="deleteMember" parameterType="String">
 		delete from members
-		where userId = #{userId}
+		where userid = #{userid}
 	</delete>  
 	
 </mapper>

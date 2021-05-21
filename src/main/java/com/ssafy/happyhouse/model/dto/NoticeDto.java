@@ -6,7 +6,7 @@ public class NoticeDto {
 	String title;
 	String content;
 	int views;
-	String userId;
+	String userid;
 	
 	public NoticeDto() {}
 	public NoticeDto(String title, String content) {
@@ -19,12 +19,12 @@ public class NoticeDto {
 //		this.title = title;
 //		this.content = content;
 //	}
-	public NoticeDto(int id, String title, String content, int views, String userId) {
+	public NoticeDto(int id, String title, String content, int views, String userid) {
 		this.id = id;
 		this.views = views;
 		this.title = title;
 		this.content = content;
-		this.userId = userId;
+		this.userid = userid;
 	}
 	public int getId() {
 		return id;
@@ -51,14 +51,14 @@ public class NoticeDto {
 		this.views = views;
 	}
 	public String getUserId() {
-		return userId;
+		return userid;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(String userid) {
+		this.userid = userid;
 	}
 	@Override
 	public String toString() {
-		return "[" + id + ", " + title + ", " + content + ", " + views + ", "+ userId + "]";
+		return "[" + id + ", " + title + ", " + content + ", " + views + ", "+ userid + "]";
 	}
 	
 }

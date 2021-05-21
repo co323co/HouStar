@@ -17,18 +17,18 @@ public class InterestAreaServicelmpl implements InterestAreaService {
 	private SqlSession sqlSession;
 
 	@Override
-	public int insert(Map<String, String> map) {	//String userId, String code
+	public int insert(Map<String, String> map) {	//String userid, String code
 		return sqlSession.getMapper(InterestAreaMapper.class).insert(map);
 	}
 
 	@Override
-	public int delete(Map<String, String> map) {	//String code, String userId
+	public int delete(Map<String, String> map) {	//String code, String userid
 		return sqlSession.getMapper(InterestAreaMapper.class).delete(map);
 	}
 
 	@Override
-	public List<InterestAreaDto> list(String userId) {
-		return sqlSession.getMapper(InterestAreaMapper.class).list(userId);
+	public List<InterestAreaDto> list(String userid) {
+		return sqlSession.getMapper(InterestAreaMapper.class).list(userid);
 	}
 
 	@Override

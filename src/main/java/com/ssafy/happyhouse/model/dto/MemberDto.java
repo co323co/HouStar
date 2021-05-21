@@ -1,64 +1,64 @@
 package com.ssafy.happyhouse.model.dto;
 
 public class MemberDto {
-	private String userId;
-	private String userPwd;
-	private String userName;
-	private String userAddress;
-	private String userPhone;
+	private String userid;
+	private String pwd;
+	private String name;
+	private String address;
+	private String phone;
 	
 	public MemberDto() {}
-	public MemberDto(String userPwd, String userName, String userAddress, String userPhone) {
-		this.userPwd = userPwd;
-		this.userName = userName;
-		this.userAddress = userAddress;
-		this.userPhone = userPhone;
+	public MemberDto(String pwd, String name, String address, String phone) {
+		this.pwd = pwd;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
 	}
 
 
-	public MemberDto(String userId, String userPwd, String userName, String userAddress, String userPhone) {
-		this.userId = userId;
-		this.userPwd = userPwd;
-		this.userName = userName;
-		this.userAddress = userAddress;
-		this.userPhone = userPhone;
+	public MemberDto(String userid, String pwd, String name, String address, String phone) {
+		this.userid = userid;
+		this.pwd = pwd;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
 	}
 	
 	
 	public String getUserId() {
-		return userId;
+		return userid;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(String userid) {
+		this.userid = userid;
 	}
 	public String getUserPwd() {
-		return userPwd;
+		return pwd;
 	}
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
+	public void setUserPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getUserName() {
-		return userName;
+		return name;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String name) {
+		this.name = name;
 	}
 	public String getUserAddress() {
-		return userAddress;
+		return address;
 	}
-	public void setUserAddress(String userAddress) {
-		this.userAddress = userAddress;
+	public void setUserAddress(String address) {
+		this.address = address;
 	}
 	public String getUserPhone() {
-		return userPhone;
+		return phone;
 	}
-	public void setUserPhone(String userPhone) {
-		this.userPhone = userPhone;
+	public void setUserPhone(String phone) {
+		this.phone = phone;
 	}
 	@Override
 	public String toString() {
-		return "MemberDto [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", userAddress="
-				+ userAddress + ", userPhone=" + userPhone + "]";
+		return "MemberDto [userid=" + userid + ", pwd=" + pwd + ", name=" + name + ", address="
+				+ address + ", phone=" + phone + "]";
 	}
 	
 	

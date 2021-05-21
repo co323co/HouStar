@@ -15,8 +15,8 @@ public class ConfirmInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		String userId= (String) session.getAttribute("userId");
-		if(userId == null) {
+		String userid= (String) session.getAttribute("userid");
+		if(userid == null) {
 			response.sendRedirect(request.getContextPath());
 			return false;
 		}

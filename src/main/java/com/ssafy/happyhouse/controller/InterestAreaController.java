@@ -50,7 +50,7 @@ public class InterestAreaController {
 	int insert(@RequestBody String code, HttpSession session) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("code", code);
-		map.put("userId", (String) session.getAttribute("userId"));
+		map.put("userid", (String) session.getAttribute("userid"));
 		return iSer.insert(map);
 	}
 	
@@ -59,7 +59,7 @@ public class InterestAreaController {
 	int delete(@RequestBody String code, HttpSession session) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("code", code);
-		map.put("userId", (String) session.getAttribute("userId"));
+		map.put("userid", (String) session.getAttribute("userid"));
 		return iSer.delete(map);
 	}
 	
@@ -67,8 +67,8 @@ public class InterestAreaController {
 	@GetMapping("/api/interest/list")
 	@ResponseBody
 	List<InterestAreaDto> list(HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
-		List<InterestAreaDto> list = iSer.list(userId);
+		String userid = (String) session.getAttribute("userid");
+		List<InterestAreaDto> list = iSer.list(userid);
 		System.out.println(list.toString());
 		return list;
 	}
@@ -87,8 +87,8 @@ public class InterestAreaController {
 	@GetMapping("/api/interest/mart")
 	@ResponseBody
 	public List<MartDto> mlist (HttpSession session){
-		String userId = (String) session.getAttribute("userId");
-		List<InterestAreaDto> list =iSer.list(userId);
+		String userid = (String) session.getAttribute("userid");
+		List<InterestAreaDto> list =iSer.list(userid);
 		String code = list.get(0).getCode();
 		List<MartDto> martlist = martService.getinfo(code);
 		return martlist;
@@ -101,8 +101,8 @@ public class InterestAreaController {
 			city = city.replaceAll("temp", "/");
 		}
 		System.out.println(city);
-		String userId = (String) session.getAttribute("userId");	
-		List<InterestAreaDto> list =iSer.list(userId);
+		String userid = (String) session.getAttribute("userid");	
+		List<InterestAreaDto> list =iSer.list(userid);
 		String code = list.get(0).getCode();
 		List<MartDto> martlist = martService.getinfo(code);
 		if(city.equals("all")) {

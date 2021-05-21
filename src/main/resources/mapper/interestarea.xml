@@ -6,17 +6,17 @@
 	namespace="com.ssafy.happyhouse.model.mapper.InterestAreaMapper">
 
 	<insert id="insert" parameterType="InterestAreaDto">
-		insert into interestarea values (#{code},#{userId})
+		insert into interestarea values (#{code},#{userid})
 	</insert>
 	
 	<delete id="delete" parameterType="map">
-		delete from interestarea where userid = #{code} and code = #{userId}
+		delete from interestarea where userid = #{code} and code = #{userid}
 	</delete>
 	
 	<select id="list" parameterType="String" resultType="InterestAreaDto">
-			select #{userId} as userid, code as code, dong as dong, gugun as gu, city as si
+			select #{userid} as userid, code as code, dong as dong, gugun as gu, city as si
 			from baseaddress
-			where code in (select code from interestarea where userid = #{userId})
+			where code in (select code from interestarea where userid = #{userid})
 	</select>
 
 	<select id="addressToCode" parameterType="map" resultType="String">

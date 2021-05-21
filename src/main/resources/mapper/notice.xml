@@ -5,12 +5,12 @@
 <mapper namespace="com.ssafy.happyhouse.model.mapper.NoticeMapper">
 
 	<insert id="insert" parameterType="NoticeDto">
-		insert into notices (id, title, content, views, userId)
-		values (#{id}, #{title}, #{content}, #{views}, #{userId})
+		insert into notices (id, title, content, views, userid)
+		values (#{id}, #{title}, #{content}, #{views}, #{userid})
 	</insert>
 	
 	<select id="list" parameterType="map" resultType="NoticeDto">
-		select id, title, content, views, userId
+		select id, title, content, views, userid
 		from notices
 		<if test="word != null and word != ''">
 				where title like concat('%', #{word}, '%')
@@ -33,14 +33,14 @@
 <!-- 	</select> -->
 	
 	<select id="search" parameterType="int" resultType="NoticeDto">
-		select id, title, content, views, userId
+		select id, title, content, views, userid
 		from notices
 		where id = #{id}
 	</select>
 	
 	<update id="update" parameterType="NoticeDto">
 		update notices
-		set title = #{title}, content = #{content}, views = #{views}, userId = #{userId} 
+		set title = #{title}, content = #{content}, views = #{views}, userid = #{userid} 
 		where id = #{id}
 	</update>
 	

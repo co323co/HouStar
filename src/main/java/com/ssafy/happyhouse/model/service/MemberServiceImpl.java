@@ -20,10 +20,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean login(Map<String, String> map) {
-		if(map.get("login_userId") == null || map.get("login_userPwd") == null)
+		if(map.get("login_userid") == null || map.get("login_pwd") == null)
 			return false;
 		else{
-//			System.out.println(map.get("login_userId") +" "+map.get("login_userPwd"));	
+//			System.out.println(map.get("login_userid") +" "+map.get("login_pwd"));	
 			return sqlSession.getMapper(MemberMapper.class).login(map);
 		}
 	}

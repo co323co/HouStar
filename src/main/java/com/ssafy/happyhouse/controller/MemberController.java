@@ -40,8 +40,8 @@ public class MemberController {
 		logger.debug("로그인 실행");
 		boolean login = mSer.login(map);
 		if(login) {			
-			String userId = map.get("login_userId");		
-			session.setAttribute("userId", userId);		
+			String userid = map.get("login_userid");		
+			session.setAttribute("userid", userid);		
 			return "index";
 		}else {
 			return "/user/login";
@@ -82,9 +82,9 @@ public class MemberController {
 	//rest로 Userinfo 입장 시 로그인정보 뿌리기
 	@GetMapping(value="/api/user")
 	public @ResponseBody ResponseEntity<MemberDto> userInfo(HttpSession session) {
-		String userId = (String)session.getAttribute("userId");
+		String userid = (String)session.getAttribute("userid");
 		
-		MemberDto memberDto = mSer.lookupmember(userId);
+		MemberDto memberDto = mSer.lookupmember(userid);
 		if(memberDto != null)
 			return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 		else
@@ -95,16 +95,16 @@ public class MemberController {
 	public @ResponseBody ResponseEntity<MemberDto> userModify(@RequestBody MemberDto memberDto) {
 		System.out.println(memberDto.toString());
 		mSer.update(memberDto);		
-		String userId = memberDto.getUserId();		
-		memberDto = mSer.lookupmember(userId);
+		String userid = memberDto.getUserId();		
+		memberDto = mSer.lookupmember(userid);
 		return new ResponseEntity<MemberDto>(memberDto, HttpStatus.OK);
 	}
 	//회원탈퇴
 	@GetMapping(value="/user/delete")
 	public String delete(HttpSession session) {
 		System.out.println("삭제진행");
-		String userId = (String)session.getAttribute("userId");
-		mSer.deleteMember(userId);
+		String userid = (String)session.getAttribute("userid");
+		mSer.deleteMember(userid);
 		session.invalidate();
 		return "index";
 	}
@@ -159,12 +159,12 @@ public class MemberController {
 //		//여기서 세션에다가 값 넣기 왜냐 관심지역은 로그인하고 다른곳갔다와도 유지되야함
 //		String root = request.getContextPath();
 //		String dong = request.getParameter("dong");
-//		String userId = (String) session.getAttribute("id"); 
-//		System.out.println(userId);
+//		String userid = (String) session.getAttribute("id"); 
+//		System.out.println(userid);
 //				
 //		System.out.println(dong);
 //		
-//		intSer.insertArea(new InterestArea(userId, dong));
+//		intSer.insertArea(new InterestArea(userid, dong));
 //		
 //		//List<Mart> mart =  marSer.getinfo(dong);
 ////		
