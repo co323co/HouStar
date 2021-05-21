@@ -123,6 +123,20 @@
                   </h3>
                 </div>
                 <v-row>
+                  <v-overlay :absolute="true" :value="overlay_success" :opacity="0">
+                    <div class="mb-16 pb-16">
+                      <v-alert class="pa-10" @click="registSuccess()" type="success"
+                        ><h2>회원가입 성공! 반가워요╰(*°▽°*)╯</h2></v-alert
+                      >
+                    </div>
+                  </v-overlay>
+                  <v-overlay :absolute="true" :value="overlay_fail" :opacity="0">
+                    <div class="mb-16 pb-16">
+                      <v-alert class="pa-10" @click="registFail()" border="left" type="warning"
+                        ><h2>회원가입 실패</h2></v-alert
+                      >
+                    </div>
+                  </v-overlay>
                   <v-col>
                     <div class="form-group">
                       <input
@@ -273,7 +287,7 @@
                     class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
                     @click="showForm('signin')"
                   >
-                    Cancel
+                    취소
                   </button>
                 </div>
               </form>
@@ -339,22 +353,25 @@
 </style>
 
 <script>
-import formValidation from '@/assets/plugins/formvalidation/dist/es6/core/Core';
+import http from '@/core/services/http-common';
 
+import formValidation from '@/assets/plugins/formvalidation/dist/es6/core/Core';
 // FormValidation plugins
 import Trigger from '@/assets/plugins/formvalidation/dist/es6/plugins/Trigger';
 import Bootstrap from '@/assets/plugins/formvalidation/dist/es6/plugins/Bootstrap';
 import SubmitButton from '@/assets/plugins/formvalidation/dist/es6/plugins/SubmitButton';
-
 import KTUtil from '@/assets/js/components/util';
 import { mapGetters, mapState } from 'vuex';
 import { LOGIN, LOGOUT, REGISTER } from '@/core/services/store/auth.module';
 import Swal from 'sweetalert2';
-
+import VuetifyVue from '../../vuetify/Vuetify.vue';
 export default {
   name: 'login-1',
   data() {
     return {
+      //팝업 용
+      overlay_success: false,
+      overlay_fail: false,
       state: 'signin',
       // Remove this dummy login info
       form: {
@@ -441,7 +458,7 @@ export default {
               message: '비밀번호를 재확인 해주세요',
             },
             identical: {
-              compare: function() {
+              compare: function () {
                 return signup_form.querySelector('[name="password"]').value;
               },
               message: '비밀번호 재확인이 일치하지 않습니다.',
@@ -554,7 +571,25 @@ export default {
       // dummy delay
       setTimeout(() => {
         // send register request
-        this.$store.dispatch(REGISTER, user).then(() => this.$router.push({ name: 'home' }));
+        //배열을 ,로 분리된 문자열로 변환
+        let tag = '';
+        user.tag.forEach((t) => {
+          tag += t + ',';
+        });
+        //마지막 쉼표는 제거
+        tag = tag.substr(0, tag.length - 1);
+        user.tag = tag;
+        console.log(JSON.stringify(user));
+        http
+          .post('/user', user)
+          .then(({ data }) => {
+            console.log(data);
+            if (data == true) this.overlay_success = true;
+          })
+          .catch(({ response }) => {
+            this.overlay_fail = true;
+            console.log(response);
+          });
 
         submitButton.classList.remove('spinner', 'spinner-light', 'spinner-right');
       }, 2000);
@@ -571,6 +606,22 @@ export default {
     });
   },
   methods: {
+    registSuccess() {
+      this.overlay_success = false;
+      this.$refs.id.value = '';
+      this.$refs.cpassword.value = '';
+      this.$refs.rpassword.value = '';
+      this.$refs.name.value = '';
+      this.$refs.address.value = '';
+      this.$refs.phone.value = '';
+      this.tag_val = [];
+      this.familyType_val = null;
+      this.ageRange_val = null;
+      this.showForm('signin');
+    },
+    registFail() {
+      this.overlay_fail = false;
+    },
     showForm(form) {
       this.state = form;
       var form_name = 'kt_login_' + form + '_form';

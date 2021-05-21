@@ -1,6 +1,5 @@
 import ApiService from '@/core/services/api.service';
 import JwtService from '@/core/services/jwt.service';
-import http from '@/core/services/http-common';
 
 // action types
 export const VERIFY_AUTH = 'verifyAuth';
@@ -48,40 +47,7 @@ const actions = {
     context.commit(PURGE_AUTH);
   },
   [REGISTER](context, user) {
-    return new Promise((resolve) => {
-      //배열을 ,로 분리된 문자열로 변환
-      let tag = '';
-      user.tag.forEach((t) => {
-        tag += t + ',';
-      });
-      //마지막 쉼표는 제거
-      tag = tag.substr(0, tag.length - 1);
-      user.tag = tag;
-      console.log(JSON.stringify(user));
-      http
-        .post('/user', user)
-        .then(({ data }) => {
-          console.log('성공 : :');
-          console.log(data);
-        })
-        .catch(({ response }) => {
-          console.log('실패 : : ');
-          console.log(response);
-        });
-
-      // ApiService.post('/user', user)
-      //   .then(({ data }) => {
-      //     console.log('성공');
-      //     console.log(data);
-      //     context.commit(SET_AUTH, data);
-      //     resolve(data);
-      //   })
-      //   .catch(({ response }) => {
-      //     console.log('실패');
-      //     console.log(response);
-      //     // context.commit(SET_ERROR, response.data.errors);
-      //   });
-    });
+    return new Promise((resolve) => {});
   },
   [VERIFY_AUTH](context) {
     if (JwtService.getToken()) {
