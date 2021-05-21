@@ -6,7 +6,7 @@
     <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
 	String root = request.getContextPath();
-	ListStoreDtoo> tlist = (List) session.getAttribute("mart");
+	List<StoreDto> tlist = (List) session.getAttribute("mart");
 	List<String> mlist = (List) session.getAttribute("martlist");
 	String sel = null;
 	sel = (String) request.getAttribute("sel");
