@@ -42,4 +42,9 @@ public class SidoGugunDongServiceImpl implements SidoGugunDongService {
 		return sqlSession.getMapper(SidoGugunDongMapper.class).getAllPath(param);
 	}
 
+	@Override
+	public List<SidoGugunDongDto> getDong(Map<String,Object> param) throws Exception {
+		return  sqlSession.getMapper(SidoGugunDongMapper.class).getDong(param);
+	}
+
 }

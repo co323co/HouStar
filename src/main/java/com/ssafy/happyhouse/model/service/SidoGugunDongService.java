@@ -14,4 +14,5 @@ public interface SidoGugunDongService {
 	List<HouseInfoDto> getAptInDong(String dong) throws Exception;
 	//dongcode, dongname로 sidogugundong 객체 반환
 	SidoGugunDongDto getAllPath(Map<String,Object> param)throws Exception;
+	List<SidoGugunDongDto> getDong(Map<String,Object> param)throws Exception;
 }

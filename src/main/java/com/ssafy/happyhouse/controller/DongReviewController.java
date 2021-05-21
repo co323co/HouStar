@@ -53,6 +53,7 @@ public class DongReviewController {
 		return dSer.delete(userid);		
 	}
 	// 그냥 여기서 다 가져와서 % 6 해서 리턴
+	@ApiOperation("dongcode에 해당하는 동의 총 평점을 반환한다.")
 	@GetMapping("totalavg/{dongcode}")
 	public Double getTotalAvg(@PathVariable String dongcode) {
 		double TotalAvg=(dSer.getInfraAvg(dongcode) + dSer.getTransAvg(dongcode)
@@ -62,26 +63,32 @@ public class DongReviewController {
 		TotalAvg = Math.round(TotalAvg * 100) / 100.0;
 		return TotalAvg;		
 	}
+	@ApiOperation("dongcode에 해당하는 동의 인프라 평균을 반환한다.")
 	@GetMapping("/infra/{dongcode}")
 	public Double getInfraAvg(@PathVariable String dongcode) {
 		return dSer.getInfraAvg(dongcode);
 	}
+	@ApiOperation("dongcode에 해당하는 동의 대중교통 평균을 반환한다.")
 	@GetMapping("/trans/{dongcode}")
 	public Double getTransAvg(@PathVariable String dongcode) {
 		return dSer.getTransAvg(dongcode);
 	}
+	@ApiOperation("dongcode에 해당하는 동의 안전 평균을 반환한다.")
 	@GetMapping("/safety/{dongcode}")
 	public Double getSaftyAvg(@PathVariable String dongcode) {
 		return dSer.getSaftyAvg(dongcode);
 	}
+	@ApiOperation("dongcode에 해당하는 동의 건강 평균을 반환한다.")
 	@GetMapping("/health/{dongcode}")
 	public Double getHealthAvg(@PathVariable String dongcode) {
 		return dSer.getHealthAvg(dongcode);
 	}
+	@ApiOperation("dongcode에 해당하는 동의 학군 평균을 반환한다.")
 	@GetMapping("/school/{dongcode}")
 	public Double getSchoolAvg(@PathVariable String dongcode) {
 		return dSer.getSchoolAvg(dongcode);
 	}
+	@ApiOperation("dongcode에 해당하는 동의 환경 평균을 반환한다.")
 	@GetMapping("/environment/{dongcode}")
 	public Double getEnvironmentAvg(@PathVariable String dongcode) {
 		return dSer.getEnvironmentAvg(dongcode);

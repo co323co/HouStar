@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,10 +45,19 @@ public class SidoGugunDongController {
 	}
 	
 	@ApiOperation("거래내역이 있는 dong들만 불러오기 위해 houseinfo table에서 select code(11110) 하여  dong(견지동 교남동..)을 반환한다.")
-	@GetMapping("dong/{gugun}")
+	@GetMapping("dealdong/{gugun}")
 	List<HouseInfoDto> getDonghasDeal(@PathVariable("gugun") String gugun) throws Exception {
 		return sgdSer.getDongInGugunhasDeal(gugun);
 	}
+	@ApiOperation("dong 리스트를 얻기위해 baseadress table에서 dongcode 와 gugun이름으로 dong리스트를 반환한다.")
+	@GetMapping("dongs/{dongcode}/{gugun}")
+	List<SidoGugunDongDto> getDong(@PathVariable("dongcode") String dongcode,@PathVariable("gugun") String gugun)throws Exception{		
+		Map<String, Object> param = new HashMap<>();
+		param.put("dongcode", dongcode);
+		param.put("gugun", gugun);
+		return sgdSer.getDong(param);
+	}
+	
 	//"dong": "상도동",
 	//"code": "11590",로 sidogugundong dto를 반환
 	@ApiOperation("dongcode와 dongname으로 시 이름, 군구 이름, 동 이름을 반환한다. ex dongcode ='11590' and dong ='상도동'")
