@@ -535,13 +535,14 @@ export default {
     this.fv1.on('core.form.valid', () => {
       console.log('회원가입 시도');
       const user = {
-        id: this.$refs.id.value,
-        password: this.$refs.rpassword.value,
+        userid: this.$refs.id.value,
+        pwd: this.$refs.rpassword.value,
         name: this.$refs.name.value,
+        address: this.$refs.address.value,
         phone: this.$refs.phone.value,
-        tags: this.tag_val,
-        familyType: this.familyType_val,
-        ageRange: this.ageRange_val,
+        tag: this.tag_val,
+        family_type: this.familyType_val,
+        age_range: this.ageRange_val,
       };
       // clear existing errors
       this.$store.dispatch(LOGOUT);

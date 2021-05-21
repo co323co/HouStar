@@ -32,7 +32,7 @@ const getters = {
 const actions = {
   [LOGIN](context, credentials) {
     return new Promise((resolve) => {
-      ApiService.post('/login', credentials)
+      ApiService.post('login', credentials)
         .then(({ data }) => {
           // console.log("Here what post returns", data);
           context.commit(SET_AUTH, data);
@@ -48,13 +48,26 @@ const actions = {
   },
   [REGISTER](context, user) {
     return new Promise((resolve) => {
-      ApiService.post('login', user)
+      //배열을 ,로 분리된 문자열로 변환
+      let tag = '';
+      user.tag.forEach((t) => {
+        tag += t + ',';
+      });
+      //마지막 쉼표는 제거
+      tag = tag.substr(0, tag.length - 1);
+      user.tag = tag;
+      console.log(JSON.stringify(user));
+      ApiService.post('/user', user)
         .then(({ data }) => {
+          console.log('성공');
+          console.log(data);
           context.commit(SET_AUTH, data);
           resolve(data);
         })
         .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
+          console.log('실패');
+          console.log(response);
+          // context.commit(SET_ERROR, response.data.errors);
         });
     });
   },
