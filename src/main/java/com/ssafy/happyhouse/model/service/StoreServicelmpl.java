@@ -14,8 +14,6 @@ public class StoreServicelmpl implements StoretService {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	@Autowired
-	private static StoretService martService;
 	
 	@Override
 	public List<StoreDto> getinfo(String dong) {		
