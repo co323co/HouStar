@@ -22,8 +22,9 @@
           </select>
         </div>
         <div class="form-group ml-2">
-          <select class="form-control" name="dong" id="dong">
-            <option value="0">선택</option>
+          <select class="form-control" name="dong" id="dong" v-model="dong">
+            <option value="" disabled selected hidden>선택</option>
+            <option v-for="(d, idx) in dongs" :key="idx" :value="d">{{ d.dongName }}</option>
           </select>
         </div>
       </div>
@@ -40,14 +41,14 @@ export default {
       sidos: [],
       gugun: '',
       guguns: [],
+      dong: '',
+      dongs: [],
     };
   },
   created() {
     http
       .get('/address/sidos')
       .then(({ data }) => {
-        //   console.log('성공 : :');
-        //    console.log(data);
         this.sidos = data;
       })
       .catch(({ response }) => {
@@ -61,7 +62,6 @@ export default {
       http
         .get('/address/guguns/' + this.sido.sidoCode)
         .then(({ data }) => {
-          //    console.log('성공 : :');
           console.log(data);
           this.guguns = data;
         })
@@ -71,19 +71,17 @@ export default {
         });
     },
     getDong() {
-      // const = {
-      // };
-      // http
-      //   .get('/address/guguns/' + )
-      //   .then(({ data }) => {
-      //     //    console.log('성공 : :');
-      //     //      console.log(data);
-      //     this.guguns = data;
-      //   })
-      //   .catch(({ response }) => {
-      //     console.log('실패 : : ');
-      //     console.log(response);
-      //   });
+      http
+        .get('/address/dongs/' + this.gugun.gugunCode + '/' + this.gugun.gugunName)
+        .then(({ data }) => {
+          console.log('성공 : :');
+          console.log(data);
+          this.dongs = data;
+        })
+        .catch(({ response }) => {
+          console.log('실패 : : ');
+          console.log(response);
+        });
     },
   },
 };
