@@ -22,7 +22,7 @@
           </select>
         </div>
         <div class="form-group ml-2">
-          <select class="form-control" name="dong" id="dong" v-model="dong">
+          <select class="form-control" name="dong" id="dong" v-model="dong" @change="moveInfo()">
             <option value="" disabled selected hidden>선택</option>
             <option v-for="(d, idx) in dongs" :key="idx" :value="d">{{ d.dongName }}</option>
           </select>
@@ -82,6 +82,11 @@ export default {
           console.log('실패 : : ');
           console.log(response);
         });
+    },
+    moveInfo() {
+      console.log(this.dong);
+      $store.commit('dongStore/setSidogugundong', this.dong);
+      console.log($store.state.Sidogugundong);
     },
   },
 };
