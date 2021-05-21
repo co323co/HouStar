@@ -2,37 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.happyhouse.model.mapper.SidoGugunDongMapper">
+<mapper
+	namespace="com.ssafy.happyhouse.model.mapper.SidoGugunDongMapper">
 
-	<select id="getByDongCode" parameterType="String" resultType="SidoGugunDongDto">
-		SELECT	left(code,2) as sidoCode, city as sidoName,
-				left(code,5) as gugunCode, gugun as gugunName,
-				code as dongCode, dong as dongName
-		FROM	baseaddress
-		WHERE	code = #{dongCode}
+	<select id="getByDongCode" parameterType="String"
+		resultType="SidoGugunDongDto">
+		SELECT left(code,2) as sidoCode, city as sidoName,
+		left(code,5) as gugunCode, gugun as gugunName,
+		code as dongCode, dong as dongName
+		FROM baseaddress
+		WHERE code = #{dongCode}
 	</select>
-	
+
 	<select id="getSido" resultType="SidoGugunDongDto">
-		SELECT left(sido_code,2) sidoCode, sido_name as sidoName FROM sidocode
+		SELECT left(sido_code,2)
+		sidoCode, sido_name as sidoName FROM sidocode
 		ORDER BY sido_code
 	</select>
-	
-	<select id="getGugunInSido" parameterType="string" resultType="SidoGugunDongDto">
-		SELECT left(gugun_code,5) gugunCode, gugun_name as gugunName FROM guguncode
-		WHERE left(gugun_code,2) = #{sido} <!-- 시도 코드 (앞 두글자) ex) 서울 : 11 -->
+
+	<select id="getGugunInSido" parameterType="string"
+		resultType="SidoGugunDongDto">
+		SELECT left(gugun_code,5) gugunCode, gugun_name as gugunName FROM
+		guguncode
+		WHERE left(gugun_code,2) = #{sido} <!-- 시도 코드 (앞 두글자) ex) 서울 : 
+			11 -->
 		ORDER BY gugun_code
 	</select>
-	
-	<select id="getDongInGugun" parameterType="string" resultType="HouseInfoDto">
+
+	<select id="getDongInGugunhasDeal" parameterType="string"
+		resultType="HouseInfoDto">
 		SELECT distinct dong, code FROM houseinfo
-		where code = #{gugun}
+		where code =
+		#{gugun}
 		ORDER BY dong
 	</select>
-	
-	<select id="getAptInDong" parameterType="string" resultType="HouseInfoDto">
+
+	<select id="getAptInDong" parameterType="string"
+		resultType="HouseInfoDto">
 		SELECT no,dong,AptName,code,jibun FROM houseinfo WHERE dong
 		= #{dong}
 		ORDER BY AptName
 	</select>
-	
+
+	<select id="getAllPath" parameterType="map"
+		resultType="SidoGugunDongDto">
+		select left(code,2) as sidoCode, city as sidoName,
+		left(code,5) as gugunCode, gugun as gugunName,
+		code as dongCode, dong as dongName
+		FROM baseaddress
+		WHERE dongcode
+		=#{dongcode} and dong =#{dongname}
+	</select>
+
+	<select id="getDong" parameterType="map"
+		resultType="SidoGugunDongDto">
+		select left(code,2) as sidoCode, city as sidoName,
+		left(code,5) as gugunCode, gugun as gugunName,
+		code as dongCode, dong as dongName
+		FROM baseaddress
+		where dongcode = #{dongcode} and gugun = #{gugun};
+	</select>
 </mapper>

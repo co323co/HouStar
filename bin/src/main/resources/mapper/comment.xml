@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.CommentMapper">
+	
+	<select id="listByBid" parameterType="int" resultType="CommentDto">
+			select bid, seq, content, userid, regtime
+			from comment 
+			where bid = #{bid}
+			order by seq desc
+	</select>
+	
+	<select id="select" parameterType="map" resultType="CommentDto">
+		select bid, seq, content, userid, regtime
+		from comment
+		where bid = #{bid} and seq = #{seq}
+	</select>
+	
+	<insert id="insert" parameterType="CommentDto">
+		 insert into comment(bid, seq, content,userid,regtime) 
+		 values(#{bid}, 
+		 ifnull((select max(tmp.seq)+1 from comment as tmp where tmp.bid=#{bid}),1),
+		 #{content}, #{userid}, now());
+	</insert>
+	
+	<update id="update" parameterType="CommentDto">
+		update comment
+		set content=#{content}
+		where bid = #{bid} and seq = #{seq}
+	</update>
+	
+	<delete id="delete" parameterType="map">
+		delete from comment
+		where bid = #{bid} and seq = #{seq}
+	</delete>
+	
+</mapper>
