@@ -1,24 +1,22 @@
 package com.ssafy.happyhouse.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ssafy.happyhouse.model.dto.DongReviewDto;
 
 public interface DongReviewMapper {
-	// 1. 동별 총 평균 계산 
-		public Double getTotalAvg(String dongcode);
-		// 2. 동의 항목별 평균 계산
-		public Double getInfraAvg(String dongcode);
-		public Double getTransAvg(String dongcode);
-		public Double getSaftyAvg(String dongcode);
-		public Double getHealthAvg(String dongcode);
-		public Double getSchoolAvg(String dongcode);
-		public Double getEnvironmentAvg(String dongcode);
-
-		public DongReviewDto getDongReview(String userid);
-		// 3. 리뷰 총 몇명이 썼는지=> get으로나중에 count하기
-		public List<DongReviewDto> getDongReviewList(String dongcode);
-		public boolean insert(DongReviewDto dongReviewDto);
-		public boolean delete(String userid);
-		public boolean update(DongReviewDto dongReviewDto);
+	//해당 동에 있는 모든 리뷰 반환
+	public List<DongReviewDto> getReviewByDong(String dongcode);
+	//해당 유저가 쓴 모든 리뷰 반환
+	public List<DongReviewDto> getReviewByUser(String userid);
+	//랭킹용
+	//모든 동에 있는 별점 정보를 반환
+	public List<Map<String,String>> getRatingAll();
+	//해당 동에 있는 별점 정보를 반환
+	public Map<String,String> getRatingByDong(String dongcode);
+	
+	public boolean insert(DongReviewDto dongReviewDto);
+	public boolean delete(String userid);
+	public boolean update(DongReviewDto dongReviewDto);
 }

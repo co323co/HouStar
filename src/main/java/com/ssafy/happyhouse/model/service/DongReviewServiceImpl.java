@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,50 +14,25 @@ import com.ssafy.happyhouse.model.mapper.DongReviewMapper;
 public class DongReviewServiceImpl implements DongReviewService {
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
-	public Double getTotalAvg(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getTotalAvg(dongcode);
+	public List<DongReviewDto> getReviewByUser(String userid) {
+		return sqlSession.getMapper(DongReviewMapper.class).getReviewByUser(userid);
 	}
 
 	@Override
-	public Double getInfraAvg(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getInfraAvg(dongcode);
+	public List<DongReviewDto> getReviewByDong(String dongcode) {
+		return sqlSession.getMapper(DongReviewMapper.class).getReviewByDong(dongcode);
 	}
 
 	@Override
-	public Double getTransAvg(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getTransAvg(dongcode);
+	public List<Map<String, String>> getRatingAll() {
+		return sqlSession.getMapper(DongReviewMapper.class).getRatingAll();
 	}
 
 	@Override
-	public Double getSaftyAvg(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getSaftyAvg(dongcode);
-	}
-
-	@Override
-	public Double getHealthAvg(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getHealthAvg(dongcode);
-	}
-
-	@Override
-	public Double getSchoolAvg(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getSchoolAvg(dongcode);
-	}
-
-	@Override
-	public Double getEnvironmentAvg(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getEnvironmentAvg(dongcode);
-	}
-
-	@Override
-	public DongReviewDto getDongReview(String userid) {
-		return sqlSession.getMapper(DongReviewMapper.class).getDongReview(userid);
-	}
-
-	@Override
-	public List<DongReviewDto> getDongReviewList(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getDongReviewList(dongcode);
+	public Map<String, String> getRatingByDong(String dongcode) {
+		return sqlSession.getMapper(DongReviewMapper.class).getRatingByDong(dongcode);
 	}
 
 	@Override
@@ -73,5 +49,4 @@ public class DongReviewServiceImpl implements DongReviewService {
 	public boolean update(DongReviewDto dongReviewDto) {
 		return sqlSession.getMapper(DongReviewMapper.class).update(dongReviewDto);
 	}
-
 }
