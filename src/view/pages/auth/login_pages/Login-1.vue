@@ -50,6 +50,25 @@
           "
         >
           <div class="d-flex flex-column-fluid flex-center">
+            <!--팝업 창 -->
+            <v-overlay :absolute="true" :value="overlay_success" :opacity="0">
+              <div class="mb-16 pb-16">
+                <v-alert class="pa-10" @click="overlaySuccess(overlay_event)" type="success"
+                  ><h2>{{ overlay_msg }}</h2></v-alert
+                >
+              </div>
+            </v-overlay>
+            <v-overlay :absolute="true" :value="overlay_fail" :opacity="0">
+              <div class="mb-16 pb-16">
+                <v-alert
+                  class="pa-10"
+                  @click="overlayFail(overlay_event)"
+                  border="left"
+                  type="warning"
+                  ><h2>{{ overlay_msg }}</h2></v-alert
+                >
+              </div>
+            </v-overlay>
             <!-- 로그인 화면 -->
             <!--begin::Signin-->
             <div class="login-form login-signin">
@@ -69,14 +88,14 @@
                   >
                 </div>
                 <div class="form-group">
-                  <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+                  <label for="login_id" class="font-size-h6 font-weight-bolder text-dark">ID</label>
                   <div id="example-input-group-1" label="" label-for="example-input-1">
                     <input
                       class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
                       type="text"
-                      name="email"
-                      ref="email"
-                      v-model="form.email"
+                      name="login_id"
+                      ref="login_id"
+                      v-model="login_form.id"
                     />
                   </div>
                 </div>
@@ -94,9 +113,9 @@
                     <input
                       class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
                       type="password"
-                      name="password"
-                      ref="password"
-                      v-model="form.password"
+                      name="login_password"
+                      ref="login_password"
+                      v-model="login_form.password"
                       autocomplete="off"
                     />
                   </div>
@@ -135,20 +154,6 @@
                   >중복 ID 입니다</b-badge
                 >
                 <v-row>
-                  <v-overlay :absolute="true" :value="overlay_success" :opacity="0">
-                    <div class="mb-16 pb-16">
-                      <v-alert class="pa-10" @click="registSuccess()" type="success"
-                        ><h2>회원가입 성공! 반가워요╰(*°▽°*)╯</h2></v-alert
-                      >
-                    </div>
-                  </v-overlay>
-                  <v-overlay :absolute="true" :value="overlay_fail" :opacity="0">
-                    <div class="mb-16 pb-16">
-                      <v-alert class="pa-10" @click="registFail()" border="left" type="warning"
-                        ><h2>회원가입 실패</h2></v-alert
-                      >
-                    </div>
-                  </v-overlay>
                   <v-col>
                     <div class="form-group">
                       <input
@@ -387,11 +392,16 @@ export default {
       //팝업 용
       overlay_success: false,
       overlay_fail: false,
+      //팝업창에 띄울 메시지
+      overlay_msg: '',
+      //팝업창 클릭시 발생할 이벤트 종류
+      overlay_event: '',
+
       state: 'signin',
       // Remove this dummy login info
-      form: {
-        email: 'admin@demo.com',
-        password: 'demo',
+      login_form: {
+        id: '',
+        password: '',
       },
       //선호태그 목록 (멀티선택)
       tag_val: [],
@@ -451,6 +461,7 @@ export default {
       },
     });
 
+    //회원가입 유효성 검사
     this.fv1 = formValidation(signup_form, {
       fields: {
         id: {
@@ -509,6 +520,7 @@ export default {
       },
     });
 
+    //비밀번호 찾기 유효성 검사
     this.fv2 = formValidation(forgot_form, {
       fields: {
         email: {
@@ -529,28 +541,34 @@ export default {
       },
     });
 
+    // 로그인 유효성 검사 통과 후 로그인 시도 부분
     this.fv.on('core.form.valid', () => {
-      // var email = this.form.email;
-      // var password = this.form.password;
+      var id = this.login_form.id;
+      var password = this.login_form.password;
 
-      // // clear existing errors
-      // this.$store.dispatch(LOGOUT);
+      // clear existing errors
+      this.$store.dispatch(LOGOUT);
 
-      // // set spinner to submit button
+      // set spinner to submit button
       const submitButton = this.$refs['kt_login_signin_submit'];
       submitButton.classList.add('spinner', 'spinner-light', 'spinner-right');
 
       // // dummy delay
       setTimeout(() => {
-        // // send login request
-        // this.$store
-        //   .dispatch(LOGIN, { email, password })
-        //   // go to which page after successfully login
-        //   .then(() => this.$router.push({ name: 'dashboard' }))
-        //   .catch(() => {});
-        this.$router.push({ name: 'home' });
+        // send login request
+        this.$store
+          .dispatch(LOGIN, { id, password })
+          // 로그인 성공
+          .then(() => this.$router.push({ name: 'home' }))
+          //로그인 실패
+          .catch(() => {
+            this.overlay_fail = true;
+            this.overlay_msg = 'ID, PASSWORD를 확인해주세요';
+            this.overlay_event = 'login';
+          });
+        // this.$router.push({ name: 'home' });
         submitButton.classList.remove('spinner', 'spinner-light', 'spinner-right');
-      }, 2000);
+      }, 500);
     });
 
     this.fv.on('core.form.invalid', () => {
@@ -599,15 +617,21 @@ export default {
           .post('/user', user)
           .then(({ data }) => {
             console.log(data);
-            if (data == true) this.overlay_success = true;
+            if (data == true) {
+              this.overlay_success = true;
+              this.overlay_event = 'regist';
+              this.overlay_msg = '회원가입 성공! 반가워요╰(*°▽°*)╯';
+            }
           })
           .catch(({ response }) => {
             this.overlay_fail = true;
+            this.overlay_event = 'regist';
+            this.overlay_msg = '회원가입 실패!';
             console.log(response);
           });
 
         submitButton.classList.remove('spinner', 'spinner-light', 'spinner-right');
-      }, 2000);
+      }, 500);
     });
 
     this.fv1.on('core.form.invalid', () => {
@@ -621,22 +645,26 @@ export default {
     });
   },
   methods: {
-    registSuccess() {
-      if (!this.id_isUnique) return;
-
+    //성공 팝업창을 클릭했을 때 실행할 함수
+    overlaySuccess(event) {
       this.overlay_success = false;
-      this.signup_userid = '';
-      this.$refs.cpassword.value = '';
-      this.$refs.rpassword.value = '';
-      this.$refs.name.value = '';
-      this.$refs.address.value = '';
-      this.$refs.phone.value = '';
-      this.tag_val = [];
-      this.familyType_val = null;
-      this.ageRange_val = null;
-      this.showForm('signin');
+      if (event == 'regist') {
+        if (!this.id_isUnique) return;
+        this.overlay_success = false;
+        this.signup_userid = '';
+        this.$refs.cpassword.value = '';
+        this.$refs.rpassword.value = '';
+        this.$refs.name.value = '';
+        this.$refs.address.value = '';
+        this.$refs.phone.value = '';
+        this.tag_val = [];
+        this.familyType_val = null;
+        this.ageRange_val = null;
+        this.showForm('signin');
+      }
     },
-    registFail() {
+    //실패 팝업창을 클릭했을 때 실행할 함수
+    overlayFail(event) {
       this.overlay_fail = false;
     },
     showForm(form) {

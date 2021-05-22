@@ -63,7 +63,7 @@
                 </span>
               </a>
             </div>
-            <button class="btn btn-light-primary btn-bold" @click="onLogout">Sign out</button>
+            <button class="btn btn-light-primary btn-bold" @click="onLogout">로그아웃</button>
           </div>
         </div>
         <!--end::Header-->
@@ -128,6 +128,7 @@ export default {
     KTLayoutQuickUser.init(this.$refs['kt_quick_user']);
   },
   methods: {
+    //로그아웃 버튼 클릭시 실행되는 함수
     onLogout() {
       this.$store.dispatch(LOGOUT).then(() => this.$router.push({ name: 'login' }));
     },

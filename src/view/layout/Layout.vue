@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column flex-root" v-if="isAuthenticated">
+  <div class="d-flex flex-column flex-root" v-if="isLogin">
     <!-- begin:: Header Mobile -->
     <KTHeaderMobile></KTHeaderMobile>
     <!-- end:: Header Mobile -->
@@ -89,8 +89,11 @@ export default {
     HtmlClass.init(this.layoutConfig());
   },
   mounted() {
-    // check if current user is authenticated
-    if (!this.isAuthenticated) {
+    // 로그인 되어있는지 체크
+    console.log('layout : isLogin ', this.isLogin);
+    let user = sessionStorage.getItem('currentUser');
+    console.log(user);
+    if (!this.isLogin) {
       this.$router.push({ name: 'login' });
     }
 
@@ -106,7 +109,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['isAuthenticated', 'breadcrumbs', 'pageTitle', 'layoutConfig']),
+    ...mapGetters(['isLogin', 'breadcrumbs', 'pageTitle', 'layoutConfig']),
 
     /**
      * Check if the page loader is enabled

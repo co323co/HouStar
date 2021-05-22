@@ -32,18 +32,6 @@
                 href="#"
                 role="tab"
                 aria-selected="true"
-                >로그인</a
-              >
-            </li>
-            <li class="nav-item mr-3">
-              <a
-                class="nav-link py-4 px-6"
-                @click="setActiveTab"
-                data-tab="2"
-                data-toggle="tab"
-                href="#"
-                role="tab"
-                aria-selected="true"
                 >관리자</a
               >
             </li>
@@ -96,20 +84,6 @@
                 <!--end::Menu-->
               </div>
             </b-tab>
-            <!-- 로그인 메뉴에 띄울 하단메뉴 -->
-            <b-tab>
-              <div class="tab-pane py-5 show active">
-                <!--begin::Menu-->
-                <div
-                  id="kt_header_menu"
-                  ref="kt_header_menu"
-                  class="header-menu header-menu-mobile header-menu-layout-default"
-                >
-                  <LoginMenu></LoginMenu>
-                </div>
-                <!--end::Menu-->
-              </div>
-            </b-tab>
             <!-- 관리자 메뉴에 띄울 하단메뉴 -->
             <b-tab class="tab-pane p-5 justify-content-between">
               <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
@@ -137,7 +111,6 @@ import KTTopbar from '@/view/layout/header/Topbar.vue';
 import KTLayoutHeader from '@/assets/js/layout/base/header.js';
 import KTLayoutHeaderMenu from '@/assets/js/layout/base/header-menu.js';
 import KTMenu from '@/view/layout/header/Menu.vue';
-import LoginMenu from '@/view/layout/header/LoginMenu.vue';
 import HSMenu from '@/view/layout/header/HouStarMenu.vue';
 
 export default {
@@ -150,7 +123,6 @@ export default {
   components: {
     KTTopbar,
     KTMenu,
-    LoginMenu,
     HSMenu,
   },
   mounted() {

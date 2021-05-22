@@ -172,7 +172,7 @@ export default {
           .then(() => this.$router.push({ name: 'dashboard' }));
 
         submitButton.classList.remove('spinner', 'spinner-light', 'spinner-right');
-      }, 2000);
+      }, 500);
     },
   },
   computed: {
