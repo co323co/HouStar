@@ -39,16 +39,12 @@ public class MemberController {
 	@Autowired
 	private MemberService mSer;
 
+	@ApiOperation("map에 ( 'id', 'password' ) 필요, 일치하는 유저가 있는지 검사해 boolean을 반환한다")
 	@PostMapping("/login")
-	public String login(@RequestParam Map<String, String> map, HttpSession session) {
-		boolean login = mSer.login(map);
-		if(login) {			
-			String userid = map.get("login_userid");		
-			session.setAttribute("userid", userid);		
-			return "index";
-		}else {
-			return "/user/login";
-		}	
+	public boolean login(@RequestBody Map<String, String> map) {
+		System.out.println(map);
+		System.out.println(map.get("id") +","+map.get("password"));
+		return mSer.login(map);
 	}
 
 	@ApiOperation("회원가입")
@@ -61,7 +57,8 @@ public class MemberController {
 	@ApiOperation("userid로 유저 정보를 찾아서 반환한다")
 	@GetMapping("/{userid}")
 	public MemberDto userInfo(@PathVariable String userid) {
-		System.out.println("진입");
+		System.out.println(userid);
+		System.out.println( mSer.select(userid));
 		return mSer.select(userid);
 	}
 	

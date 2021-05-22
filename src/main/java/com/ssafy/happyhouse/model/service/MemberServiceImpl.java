@@ -19,6 +19,12 @@ public class MemberServiceImpl implements MemberService {
 	private SqlSession sqlSession;
 
 	@Override
+	public boolean login(Map<String, String> map) {
+		if(map.get("id") == null || map.get("password") == null) return false;
+		System.out.println(map.get("id") +" "+map.get("password"));	
+		return sqlSession.getMapper(MemberMapper.class).login(map);
+	}
+	@Override
 	public MemberDto select(String id) {	
 		return sqlSession.getMapper(MemberMapper.class).select(id);
 	}
@@ -26,21 +32,14 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public boolean insert(MemberDto memberDto) {
-		int res = sqlSession.getMapper(MemberMapper.class).insert(memberDto);
-		if(res==1) return true;
-		return false;
-	}
-	
-	@Override
-	public boolean login(Map<String, String> map) {
-		if(map.get("login_userid") == null || map.get("login_pwd") == null)
+		try {
+			int res = sqlSession.getMapper(MemberMapper.class).insert(memberDto);
+			if(res==1) return true;
+			else return false;
+		} catch (Exception e) {
 			return false;
-		else{
-//			System.out.println(map.get("login_userid") +" "+map.get("login_pwd"));	
-			return sqlSession.getMapper(MemberMapper.class).login(map);
 		}
-	}
-
+	}	
 
 	@Override
 	public void update(MemberDto memberDto) {
