@@ -24,7 +24,7 @@
           v-if="isAble"
         ></star-rating>
         <v-toolbar-title v-else>
-          <h1 class="display-1 ml-4">해당 동에 대한 평점 정보가 없습니다.😥</h1>
+          <h1 class="display-1 ml-4">에 대한 평점 정보가 없습니다.😥</h1>
         </v-toolbar-title>
       </v-toolbar>
 
