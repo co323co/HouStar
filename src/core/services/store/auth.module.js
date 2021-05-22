@@ -7,7 +7,8 @@ export const UPDATE_PASSWORD = 'updateUser';
 
 // mutation types
 export const PURGE_AUTH = 'logOut';
-export const SET_AUTH = 'setUser';
+export const SET_AUTH = 'setAuth';
+export const SET_USER = 'setUser';
 export const SET_PASSWORD = 'setPassword';
 export const SET_ERROR = 'setError';
 
@@ -15,23 +16,21 @@ import http from '@/core/services/http-common';
 
 const state = {
   errors: null,
+  user: null,
+  isLogin: null,
 };
 
 const getters = {
   currentUser(state) {
-    let string_user = sessionStorage.getItem('currentUser');
-    return JSON.parse(string_user);
+    return state.user;
+  },
+  isLogin(state) {
+    return state.isLogin;
   },
 };
 
 const actions = {
-  isLogin() {
-    console.log('isLogin getter 실행');
-    console.dir(sessionStorage.getItem('currentUser'));
-    if (sessionStorage.getItem('currentUser')) return (state.isLogin = true);
-    else return (state.isLogin = false);
-  },
-
+  [VERIFY_AUTH]() {},
   [LOGIN](context, payload) {
     return new Promise((resolve, rejecet) => {
       http
@@ -40,7 +39,8 @@ const actions = {
           //로그인 성공
           if (data == true) {
             http.get('/user/' + payload.id).then(({ data }) => {
-              context.commit(SET_AUTH, data);
+              context.commit(SET_AUTH, true);
+              context.commit(SET_USER, data);
               resolve();
             });
           }
@@ -54,25 +54,14 @@ const actions = {
     });
   },
   [LOGOUT](context) {
-    context.commit(PURGE_AUTH);
+    sessionStorage.clear();
+    context.commit(SET_AUTH, false);
+    context.commit(SET_USER, null);
   },
   [REGISTER](context, user) {
     // return new Promise((resolve) => {});
   },
-  [VERIFY_AUTH](context) {
-    // if (JwtService.getToken()) {
-    //   ApiService.setHeader();
-    //   ApiService.get('verify')
-    //     .then(({ data }) => {
-    //       context.commit(SET_AUTH, data);
-    //     })
-    //     .catch(({ response }) => {
-    //       context.commit(SET_ERROR, response.data.errors);
-    //     });
-    // } else {
-    //   context.commit(PURGE_AUTH);
-    // }
-  },
+
   [UPDATE_PASSWORD](context, payload) {
     const password = payload;
   },
@@ -82,16 +71,19 @@ const mutations = {
   [SET_ERROR](state, error) {
     state.errors = error;
   },
-  [SET_AUTH](state, user) {
-    let string_user = JSON.stringify(user);
-    sessionStorage.setItem('currentUser', string_user);
+  [SET_USER](state, user) {
+    state.user = user;
+    sessionStorage.setItem('currentUser', JSON.stringify(user));
+  },
+  [SET_AUTH](state, isLogin) {
+    state.isLogin = isLogin;
   },
   [SET_PASSWORD](state, password) {
     state.user.password = password;
   },
-  [PURGE_AUTH](state) {
-    sessionStorage.clear();
-  },
+  // [PURGE_AUTH](state) {
+  //   state.isLogin = false;
+  // },
 };
 
 export default {

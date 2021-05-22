@@ -426,7 +426,7 @@ export default {
     ...mapState({
       errors: (state) => state.auth.errors,
     }),
-    ...mapGetters(['currentUser']),
+    ...mapGetters(['isLogin', 'currentUser']),
 
     backgroundImage() {
       return process.env.BASE_URL + 'media/svg/illustrations/login-visual-1.svg';

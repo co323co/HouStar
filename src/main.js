@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from '@/core/services/store';
-import { VERIFY_AUTH } from '@/core/services/store/auth.module';
+// import { VERIFY_AUTH } from '@/core/services/store/auth.module';
 import { RESET_LAYOUT_CONFIG } from '@/core/services/store/config.module';
 
 Vue.config.productionTip = false;
@@ -31,8 +31,8 @@ import '@/core/plugins/formvalidation';
 
 router.beforeEach((to, from, next) => {
   // Ensure we checked auth before each page load.
-  Promise.all([store.dispatch(VERIFY_AUTH)]).then(next);
-
+  // Promise.all([store.dispatch(VERIFY_AUTH)]).then();
+  next();
   // reset config to initial state
   store.dispatch(RESET_LAYOUT_CONFIG);
 

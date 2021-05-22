@@ -46,7 +46,7 @@
           </div>
           <div class="d-flex flex-column">
             <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
-              김민정
+              {{ isLogin }}
             </a>
             <div class="text-muted mt-1">Application Developer</div>
             <div class="navi mt-2">
@@ -86,6 +86,7 @@
 import { LOGOUT } from '@/core/services/store/auth.module';
 import KTLayoutQuickUser from '@/assets/js/layout/extended/quick-user.js';
 import KTOffcanvas from '@/assets/js/components/offcanvas.js';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'KTQuickUser',
@@ -127,7 +128,8 @@ export default {
     // Init Quick User Panel
     KTLayoutQuickUser.init(this.$refs['kt_quick_user']);
   },
-  methods: {
+  computed: {},
+  mrethods: {
     //로그아웃 버튼 클릭시 실행되는 함수
     onLogout() {
       this.$store.dispatch(LOGOUT).then(() => this.$router.push({ name: 'login' }));
@@ -137,6 +139,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['currentUser']),
     picture() {
       return process.env.BASE_URL + 'media/users/300_21.jpg';
     },
