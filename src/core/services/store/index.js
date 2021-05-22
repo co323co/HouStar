@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+import createPersistedState from 'vuex-persistedstate';
 import auth from './auth.module';
 import htmlClass from './htmlclass.module';
 import config from './config.module';
@@ -19,4 +19,5 @@ export default new Vuex.Store({
     profile,
     dongStore,
   },
+  plugins: [createPersistedState()],
 });
