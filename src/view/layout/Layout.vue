@@ -89,10 +89,8 @@ export default {
     HtmlClass.init(this.layoutConfig());
   },
   mounted() {
-    // 로그인 되어있는지 체크
-    console.log('layout : isLogin ', this.isLogin);
-    let user = sessionStorage.getItem('currentUser');
-    console.log(user);
+    // 로그인 안되어있으면 로그인 페이지로 넘어감
+    console.log('layout : 로그인 : ', this.isLogin);
     if (!this.isLogin) {
       this.$router.push({ name: 'login' });
     }

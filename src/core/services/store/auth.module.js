@@ -40,8 +40,8 @@ const actions = {
           if (data == true) {
             http.get('/user/' + payload.id).then(({ data }) => {
               context.commit(SET_AUTH, data);
+              resolve();
             });
-            resolve();
           }
           //로그인 실패
           else rejecet();
@@ -89,9 +89,7 @@ const mutations = {
     state.user.password = password;
   },
   [PURGE_AUTH](state) {
-    sessionStorage.clear;
-    console.log('클리어');
-    console.log(sessionStorage.length);
+    sessionStorage.clear();
   },
 };
 
