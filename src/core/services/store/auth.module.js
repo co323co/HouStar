@@ -22,15 +22,16 @@ const getters = {
     let string_user = sessionStorage.getItem('currentUser');
     return JSON.parse(string_user);
   },
-  isLogin() {
-    console.log('세션 값 : ');
-    console.dir(sessionStorage.getItem('currentUser'));
-    if (sessionStorage.getItem('currentUser')) return true;
-    else return false;
-  },
 };
 
 const actions = {
+  isLogin() {
+    console.log('isLogin getter 실행');
+    console.dir(sessionStorage.getItem('currentUser'));
+    if (sessionStorage.getItem('currentUser')) return (state.isLogin = true);
+    else return (state.isLogin = false);
+  },
+
   [LOGIN](context, payload) {
     return new Promise((resolve, rejecet) => {
       http

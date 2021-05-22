@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column flex-root" v-if="isLogin">
+  <div class="d-flex flex-column flex-root" v-if="isLogin()">
     <!-- begin:: Header Mobile -->
     <KTHeaderMobile></KTHeaderMobile>
     <!-- end:: Header Mobile -->
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import KTAside from '@/view/layout/aside/Aside.vue';
 import KTHeader from '@/view/layout/header/Header.vue';
 import KTHeaderMobile from '@/view/layout/header/HeaderMobile.vue';
@@ -90,8 +90,10 @@ export default {
   },
   mounted() {
     // 로그인 안되어있으면 로그인 페이지로 넘어감
-    console.log('layout : 로그인 : ', this.isLogin);
-    if (!this.isLogin) {
+    console.log('경로 : ' + this.$route.path);
+    console.log('layout : isLogin 실행 : ', this.isLogin());
+    //computed는 캐싱돼서 mapGetters로 하니까 호출이 안되버림, 직접 해주기!
+    if (!this.isLogin()) {
       this.$router.push({ name: 'login' });
     }
 
@@ -102,12 +104,13 @@ export default {
     }, 2000);
   },
   methods: {
+    ...mapActions(['isLogin']),
     footerLayout(type) {
       return this.layoutConfig('footer.layout') === type;
     },
   },
   computed: {
-    ...mapGetters(['isLogin', 'breadcrumbs', 'pageTitle', 'layoutConfig']),
+    ...mapGetters(['breadcrumbs', 'pageTitle', 'layoutConfig']),
 
     /**
      * Check if the page loader is enabled

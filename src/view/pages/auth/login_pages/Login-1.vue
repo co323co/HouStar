@@ -559,7 +559,11 @@ export default {
         this.$store
           .dispatch(LOGIN, { id, password })
           // 로그인 성공
-          .then(() => this.$router.push({ name: 'home' }))
+          .then(() => {
+            // console.log(sessionStorage.getItem('currentUser'));
+            // console.log('로그인 : ' + this.isLogin);
+            this.$router.push({ name: 'home' });
+          })
           //로그인 실패
           .catch(() => {
             this.overlay_fail = true;
