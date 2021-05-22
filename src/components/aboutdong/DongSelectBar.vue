@@ -117,6 +117,7 @@ export default {
   },
 };
 </script>
+x`
 <style>
 .v-list {
   background-color: white;

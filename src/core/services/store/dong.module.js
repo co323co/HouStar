@@ -9,7 +9,9 @@ const dongStore = {
       state.Sidogugundong = payload;
     },
   },
-  actions: {},
+  // actions: {
+  //   getTotalAvg()
+  // },
 };
 
 export default dongStore;

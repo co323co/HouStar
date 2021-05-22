@@ -6,7 +6,7 @@ import htmlClass from './htmlclass.module';
 import config from './config.module';
 import breadcrumbs from './breadcrumbs.module';
 import profile from './profile.module';
-import dongStore from './dongStore';
+import dongStore from './dong.module';
 
 Vue.use(Vuex);
 
