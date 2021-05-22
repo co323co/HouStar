@@ -72,8 +72,13 @@ const mutations = {
     state.errors = error;
   },
   [SET_USER](state, user) {
-    state.user = user;
-    sessionStorage.setItem('currentUser', JSON.stringify(user));
+    if (user) {
+      user.tag = user.tag.split(',');
+      state.user = user;
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
+    } else {
+      state.user = null;
+    }
   },
   [SET_AUTH](state, isLogin) {
     state.isLogin = isLogin;

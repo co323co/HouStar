@@ -89,8 +89,6 @@ export default {
     HtmlClass.init(this.layoutConfig());
   },
   mounted() {
-    console.log('layout이에요');
-    console.log(this.$store);
     // 로그인 안되어있으면 로그인 페이지로 넘어감
     if (!this.isLogin) {
       this.$router.push({ name: 'login' });

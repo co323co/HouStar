@@ -39,37 +39,33 @@
         style="max-height: 90vh; position: relative"
       >
         <!--begin::Header-->
-        <div class="d-flex align-items-center mt-5">
+        <h2>😉 {{ currentUser.userid }}</h2>
+        <div class="mt-3 d-flex align-items-center">
           <div class="symbol symbol-100 mr-5">
             <b-icon class="symbol-label" icon="person-fill"></b-icon>
             <i class="symbol-badge bg-success"></i>
           </div>
           <div class="d-flex flex-column">
             <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
-              {{ isLogin }}
+              {{ currentUser.name }}
             </a>
-            <div class="text-muted mt-1">Application Developer</div>
-            <div class="navi mt-2">
-              <a href="#" class="navi-item">
-                <span class="navi-link p-0 pb-2">
-                  <span class="navi-icon mr-1">
-                    <span class="svg-icon svg-icon-lg svg-icon-primary">
-                      <!--begin::Svg Icon-->
-                      <inline-svg src="media/svg/icons/Communication/Mail-notification.svg" />
-                      <!--end::Svg Icon-->
-                    </span>
-                  </span>
-                  <span class="navi-text text-muted text-hover-primary"> jm@softplus.com </span>
-                </span>
-              </a>
-            </div>
-            <button class="btn btn-light-primary btn-bold" @click="onLogout">로그아웃</button>
+            <div class="text-muted mt-2">💗 {{ currentUser.tag | list }}</div>
+            <div class="text-muted mt-2">💡 {{ currentUser.age_range | ageRange }}</div>
+            <div class="text-muted mt-2">👩‍👧 {{ currentUser.family_type | familyType }}</div>
+            <button class="mt-2 btn btn-light-primary btn-bold" @click="onLogout()">
+              로그아웃
+            </button>
           </div>
         </div>
         <!--end::Header-->
-        <div class="separator separator-dashed mt-8 mb-5"></div>
-
-        <div class="separator separator-dashed my-7"></div>
+        <div class="separator separator-dashed mt-5 mb-5 pt-5">
+          <div class="pt-5">
+            <h5>📞 {{ currentUser.phone }}</h5>
+          </div>
+          <div class="pt-5">
+            <h5>🏠 {{ currentUser.address }}</h5>
+          </div>
+        </div>
       </perfect-scrollbar>
       <!--end::Content-->
     </div>
@@ -128,8 +124,7 @@ export default {
     // Init Quick User Panel
     KTLayoutQuickUser.init(this.$refs['kt_quick_user']);
   },
-  computed: {},
-  mrethods: {
+  methods: {
     //로그아웃 버튼 클릭시 실행되는 함수
     onLogout() {
       this.$store.dispatch(LOGOUT).then(() => this.$router.push({ name: 'login' }));
@@ -142,6 +137,26 @@ export default {
     ...mapGetters(['currentUser']),
     picture() {
       return process.env.BASE_URL + 'media/users/300_21.jpg';
+    },
+  },
+  filters: {
+    ageRange: function (ageRange) {
+      if (!ageRange) return '연령대를 등록해주세요';
+      if (ageRange == 'over') return '60대 이상';
+      else return ageRange + '대';
+    },
+    familyType: function (type) {
+      if (!type) return '가구형태를 등록해주세요';
+      else return type;
+    },
+    list: function (list) {
+      if (!list) return '';
+      let str = '';
+      for (let i = 0; i < list.length - 1; i++) {
+        str += list[i] + '     |     ';
+      }
+      str += list[list.length - 1];
+      return str;
     },
   },
 };
