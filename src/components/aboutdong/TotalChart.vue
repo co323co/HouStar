@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import LineChart from '@/core/services/bar.js';
+import LineChart from '@/core/services/chart.js';
 
 export default {
   components: {

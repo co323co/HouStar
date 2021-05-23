@@ -38,6 +38,7 @@
       <v-card-text class="grey lighten-4">
         <v-sheet max-width="1200" min-height="300" class="mx-auto">
           <TotalChart />
+          <BarChart />
         </v-sheet>
       </v-card-text>
     </v-card>
@@ -48,11 +49,13 @@
 import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
 import TotalChart from '@/components/aboutdong/TotalChart.vue';
+import BarChart from '@/components/aboutdong/Barchart.vue';
 
 export default {
   components: {
     StarRating,
     TotalChart,
+    BarChart,
   },
   data: () => ({
     rating: '',
