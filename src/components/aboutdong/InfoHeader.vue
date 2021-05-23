@@ -37,8 +37,11 @@
 
       <v-card-text class="grey lighten-4">
         <v-sheet max-width="1200" min-height="300" class="mx-auto">
-          <TotalChart />
           <BarChart />
+          <AreaChart />
+          <LineChart />
+          <PieChart />
+          <RadarChart />
         </v-sheet>
       </v-card-text>
     </v-card>
@@ -48,14 +51,19 @@
 <script>
 import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
-import TotalChart from '@/components/aboutdong/TotalChart.vue';
-import BarChart from '@/components/aboutdong/Barchart.vue';
-
+import BarChart from '@/components/charts/Barchart.vue';
+import AreaChart from '@/components/charts/AreaChart.vue';
+import LineChart from '@/components/charts/LineChart.vue';
+import PieChart from '@/components/charts/PieChart.vue';
+import RadarChart from '@/components/charts/RadarChart.vue';
 export default {
   components: {
     StarRating,
-    TotalChart,
     BarChart,
+    AreaChart,
+    LineChart,
+    PieChart,
+    RadarChart,
   },
   data: () => ({
     rating: '',
