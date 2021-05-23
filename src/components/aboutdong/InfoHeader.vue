@@ -38,10 +38,6 @@
       <v-card-text class="grey lighten-4">
         <v-sheet max-width="1200" min-height="300" class="mx-auto">
           <BarChart />
-          <AreaChart />
-          <LineChart />
-          <PieChart />
-          <RadarChart />
         </v-sheet>
       </v-card-text>
     </v-card>
@@ -52,38 +48,38 @@
 import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
 import BarChart from '@/components/charts/Barchart.vue';
-import AreaChart from '@/components/charts/AreaChart.vue';
-import LineChart from '@/components/charts/LineChart.vue';
-import PieChart from '@/components/charts/PieChart.vue';
-import RadarChart from '@/components/charts/RadarChart.vue';
+
 export default {
   components: {
     StarRating,
     BarChart,
-    AreaChart,
-    LineChart,
-    PieChart,
-    RadarChart,
   },
   data: () => ({
     rating: '',
     isAble: false,
   }),
+  mounted() {
+    if (this.$store.state.rate.rating) {
+      this.isAble = true;
+      this.rating = this.$store.state.rate.rating.total;
+    } else this.isAble = false;
+  },
   created() {
-    console.log('dong info created 실행');
-    http
-      .get('/dongreview/avg-rating/' + this.$store.state.dongStore.Sidogugundong.dongCode)
-      .then(({ data }) => {
-        console.log(data);
-        this.rating = data.total;
-
-        if (data) this.isAble = true;
-        else this.isAble = false;
-      })
-      .catch(({ response }) => {
-        console.log('해당 동에 대한 평점 정보가 없습니다. ');
-        console.log(response);
-      });
+    // console.log('dong info created 실행');
+    // http
+    //   .get('/dongreview/avg-rating/' + this.$store.state.dongStore.Sidogugundong.dongCode)
+    //   .then(({ data }) => {
+    //     console.log(data);
+    //     this.$store.state.rate.rating = data;
+    //    // console.log(this.$store.state.rate.rating);
+    //     this.rating = data.total;
+    // if (this.$store.state.rate.rating) this.isAble = true;
+    // else this.isAble = false;
+    //   })
+    //   .catch(({ response }) => {
+    //     console.log('해당 동에 대한 평점 정보가 없습니다. ');
+    //     console.log(response);
+    //   });
   },
   methods: {
     mvinfo() {},

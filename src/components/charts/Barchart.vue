@@ -1,36 +1,53 @@
 <script>
-import { Bar } from 'vue-chartjs';
+import http from '@/core/services/http-common';
+import { HorizontalBar } from 'vue-chartjs';
 
 export default {
-  extends: Bar,
+  extends: HorizontalBar,
+
   mounted() {
+    // Bar가 mount될 때 dongcode로 rating 객체를 얻어옴.
+    http
+      .get('/dongreview/avg-rating/' + this.$store.state.dongStore.Sidogugundong.dongCode)
+      .then(({ data }) => {
+        console.log(data);
+        this.$store.state.rate.rating = data;
+      })
+      .catch(({ response }) => {
+        console.log(response);
+      });
+
+    // mount 될 때 차트에 데이터를 넣음.
+    console.log('this.store      ' + this.$store.state.rate.rating.total);
     this.renderChart(
       {
-        labels: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ],
+        labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '교통🚦'],
+
         datasets: [
           {
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
+            font: {
+              size: 14,
+            },
+            label: '전체 리뷰 통계',
+            backgroundColor: 'gray',
+            data: [
+              this.$store.state.rate.rating.environment,
+              this.$store.state.rate.rating.health,
+              this.$store.state.rate.rating.infra,
+              this.$store.state.rate.rating.safety,
+              this.$store.state.rate.rating.school,
+              this.$store.state.rate.rating.trans,
+            ],
           },
         ],
       },
-      // responsive
       { responsive: true, maintainAspectRatio: false }
     );
   },
 };
 </script>
+<style scoped>
+canvas {
+  font-size: 3cm;
+}
+</style>
