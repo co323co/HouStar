@@ -37,7 +37,7 @@ public class SidoGugunDongController {
 		return sgdSer.getSido();
 	}
 	
-	@ApiOperation("sido code (11) (서울 ) 로 gugunCode, gugunName(종로구)을 반환한다.")
+	@ApiOperation("sido code (11) (서울) 로 gugunCode, gugunName(종로구)을 반환한다.")
 	@GetMapping("guguns/{sido}")
 	List<SidoGugunDongDto> getGugun(@PathVariable("sido") String sido) throws Exception {
 		System.out.println(sido);
