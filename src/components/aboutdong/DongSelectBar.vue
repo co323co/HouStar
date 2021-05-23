@@ -94,7 +94,7 @@ export default {
       // console.log(this.)
       // console.log(this.gugun);
       http
-        .get('/address/dongs/' + this.gugun.gugunCode + '/' + this.gugun.gugunName)
+        .get('/address/dongs/' + this.gugun.gugunCode)
         .then(({ data }) => {
           console.log('성공 : :');
           console.log(data);

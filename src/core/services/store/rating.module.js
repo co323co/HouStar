@@ -4,14 +4,7 @@ const rate = {
     rating: Object,
   },
   getters: {},
-  mutations: {
-    // setSidogugundong(state, payload) {
-    //   state.Sidogugundong = payload;
-    // },
-  },
-  // actions: {
-  //   getTotalAvg()
-  // },
+  mutations: {},
 };
 
 export default rate;

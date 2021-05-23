@@ -20,6 +20,22 @@ export default new Router({
           path: '/dong-info',
           name: 'dong-info',
           component: () => import('@/view/pages/dong/Info.vue'),
+          // redirect 해줘야 상위 라우터에 액세스 할때 기본 하위 경로가 로드된다.
+          redirect: {
+            name: 'detail',
+          },
+          children: [
+            {
+              path: '',
+              name: 'detail',
+              component: () => import('@/view/pages/dong/Detail.vue'),
+            },
+            {
+              path: '/review',
+              name: 'review',
+              component: () => import('@/view/pages/dong/Review.vue'),
+            },
+          ],
         },
         {
           path: '/notice',
