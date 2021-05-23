@@ -18,5 +18,5 @@ public interface SidoGugunDongMapper {
 	SidoGugunDongDto getByDongCode(String dongCode);
 	//dongcode로 sidogugundong 객체 반환
 	SidoGugunDongDto getAllPath(Map<String,Object> param)throws Exception;
-	List<SidoGugunDongDto> getDong(Map<String,Object> param)throws Exception;
+	List<SidoGugunDongDto> getDongByGugun(String guguncode)throws Exception;
 }

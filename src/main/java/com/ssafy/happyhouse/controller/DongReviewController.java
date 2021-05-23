@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.dto.DongReviewDto;
@@ -28,6 +30,21 @@ public class DongReviewController {
 
 	@Autowired
 	DongReviewService dSer;
+	
+	@ApiOperation("모든 동의 리뷰를 반환한다. user랑 조인해서 user의 성향 정보까지 갖고있다.")
+	@GetMapping("")
+	public List<Map<String, String>> getReviewAll(){
+		return dSer.getReviewAll();
+	}
+	
+	@ApiOperation("일치하는 조건의 사용자가 쓴 리뷰로만 통계를 내서 각 동별 별점 정보를 반환한다. map에 있는 칼럼 조건으로 검사  ex) { age_range:20 }")
+	@GetMapping("/avg-rating/type")
+	public List<Map<String, String>> getRatingByType(@RequestParam Map<String, String> map){
+		System.out.println(map);
+		System.out.println(dSer.getRatingByType(map));
+		
+		return dSer.getRatingByType(map);
+	}
 	
 	@ApiOperation("해당 유저가 쓴 모든 리뷰 가져온다.")
 	@GetMapping("/user/{userid}")

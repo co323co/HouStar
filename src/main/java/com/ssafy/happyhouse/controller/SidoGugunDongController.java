@@ -49,23 +49,25 @@ public class SidoGugunDongController {
 	List<HouseInfoDto> getDonghasDeal(@PathVariable("gugun") String gugun) throws Exception {
 		return sgdSer.getDongInGugunhasDeal(gugun);
 	}
-	@ApiOperation("dong 리스트를 얻기위해 baseadress table에서 dongcode 와 gugun이름으로 dong리스트를 반환한다.")
-	@GetMapping("dongs/{dongcode}/{gugun}")
-	List<SidoGugunDongDto> getDong(@PathVariable("dongcode") String dongcode,@PathVariable("gugun") String gugun)throws Exception{		
+	@ApiOperation("gugncode로 dong리스트 반환용, SidoGugunDongDto list 반환")
+	@GetMapping("dongs/{guguncode}")
+	List<SidoGugunDongDto> getDongByGugun(@PathVariable("guguncode") String guguncode)throws Exception{		
 		Map<String, Object> param = new HashMap<>();
-		param.put("dongcode", dongcode);
-		param.put("gugun", gugun);
-		return sgdSer.getDong(param);
+		param.put("guguncode", guguncode);
+		return sgdSer.getDongByGugun(guguncode);
 	}
 	
 	//"dong": "상도동",
 	//"code": "11590",로 sidogugundong dto를 반환
-	@ApiOperation("dongcode와 dongname으로 시 이름, 군구 이름, 동 이름을 반환한다. ex dongcode ='11590' and dong ='상도동'")
-	@GetMapping("sidogugundong")
-	SidoGugunDongDto getAllPath(@RequestBody Map<String,Object> param)throws Exception{
-		System.out.println( param.get("dongcode") +" "+ param.get("dongname"));
-		return sgdSer.getAllPath(param);
-	}
-	
+//	@ApiOperation("dongcode와 dongname으로 시 이름, 군구 이름, 동 이름을 반환한다. ex dongcode ='11590' and dong ='상도동'")
+//	@GetMapping("sidogugundong")
+//	SidoGugunDongDto getAllPath(@RequestBody Map<String,Object> param)throws Exception{
+//		System.out.println( param.get("dongcode") +" "+ param.get("dongname"));
+//		return sgdSer.getAllPath(param);
+//	}
+//	@ApiOperation("dongcode로 SidoGugunDongDto 반환") 
+//	SidoGugunDongDto getDong(@PathVariable String dongcode) {
+//		return sgdSer.
+//	}
 	
 }

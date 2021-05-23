@@ -43,8 +43,8 @@ public class SidoGugunDongServiceImpl implements SidoGugunDongService {
 	}
 
 	@Override
-	public List<SidoGugunDongDto> getDong(Map<String,Object> param) throws Exception {
-		return  sqlSession.getMapper(SidoGugunDongMapper.class).getDong(param);
+	public List<SidoGugunDongDto> getDongByGugun(String guguncode) throws Exception {
+		return  sqlSession.getMapper(SidoGugunDongMapper.class).getDongByGugun(guguncode);
 	}
 
 }

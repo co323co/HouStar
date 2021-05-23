@@ -15,6 +15,7 @@ public class DongReviewServiceImpl implements DongReviewService {
 	@Autowired
 	private SqlSession sqlSession;
 
+	
 	@Override
 	public List<DongReviewDto> getReviewByUser(String userid) {
 		return sqlSession.getMapper(DongReviewMapper.class).getReviewByUser(userid);
@@ -48,5 +49,20 @@ public class DongReviewServiceImpl implements DongReviewService {
 	@Override
 	public boolean update(DongReviewDto dongReviewDto) {
 		return sqlSession.getMapper(DongReviewMapper.class).update(dongReviewDto);
+	}
+
+	@Override
+	public List<Map<String, String>> getReviewAll() {
+		//연령대가 0이면 선택 안한거니 null로 바꿔준다.
+		List<Map<String ,String>> res = sqlSession.getMapper(DongReviewMapper.class).getReviewAll();
+		for (Map<String, String> map : res) {
+			if(map.get("age_range").equals("0")) map.put("age_range", null);
+		}
+		return res;
+	}
+
+	@Override
+	public List<Map<String, String>> getRatingByType(Map<String, String> map) {
+		return  sqlSession.getMapper(DongReviewMapper.class).getRatingByType(map);
 	}
 }

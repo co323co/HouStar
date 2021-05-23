@@ -54,12 +54,12 @@
 		=#{dongcode} and dong =#{dongname}
 	</select>
 
-	<select id="getDong" parameterType="map"
+	<select id="getDongByGugun" parameterType="String"
 		resultType="SidoGugunDongDto">
 		select left(code,2) as sidoCode, city as sidoName,
 		left(code,5) as gugunCode, gugun as gugunName,
 		code as dongCode, dong as dongName
 		FROM baseaddress
-		where dongcode = #{dongcode} and gugun = #{gugun};
+		where dongcode = #{guguncode};
 	</select>
 </mapper>
