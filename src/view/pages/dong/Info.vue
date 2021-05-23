@@ -5,10 +5,13 @@
       <v-spacer></v-spacer>
       info.vue페이지
       <v-toolbar flat>
-        <div>
+        <span class="mr-2">
           {{ this.$store.state.dongStore.Sidogugundong.sidoName }}
+        </span>
+        |
+        <span class="ml-2">
           {{ this.$store.state.dongStore.Sidogugundong.gugunName }}
-        </div>
+        </span>
       </v-toolbar>
 
       <v-toolbar flat class="mb-5">
@@ -20,13 +23,9 @@
       <v-divider class="mx-4"></v-divider>
 
       <v-card-actions class="ml-2 mb-2">
-        <v-btn
-          ><router-link class="routerlink" :to="{ name: 'detail' }">상세정보</router-link></v-btn
-        >
+        <router-link class="routerlink mr-3 ml-2" :to="{ name: 'detail' }">상세정보</router-link>
 
-        <v-btn class="ml-4">
-          <router-link class="routerlink" :to="{ name: 'review' }">리뷰</router-link>
-        </v-btn>
+        | <router-link class="routerlink ml-3" :to="{ name: 'review' }">리뷰</router-link>
       </v-card-actions>
 
       <v-card-text class="grey lighten-4">
@@ -46,7 +45,9 @@ export default {
 };
 </script>
 <style>
-.v-application a {
+.v-application a,
+span {
   color: black;
+  font-size: 20px;
 }
 </style>

@@ -18,7 +18,9 @@
             show-rating
           ></star-rating>
         </v-flex>
-        <HorizontalBar :chart-data="datacollection" :class="size"></HorizontalBar>
+        <v-flex>
+          <HorizontalBar :chart-data="datacollection" :class="size"></HorizontalBar>
+        </v-flex>
         <!-- <div id="chart">
           <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
         </div> -->
@@ -94,10 +96,14 @@ export default {
   },
 };
 </script>
-<style>
+<style scope>
 .firstClass {
   padding-top: 30px;
   height: 300px;
   width: 300px;
+  margin-bottom: 50px;
+}
+.v-application--wrap {
+  min-height: 1vh;
 }
 </style>
