@@ -13,22 +13,22 @@
       <v-divider></v-divider>
       <!-- 동 랭킹 -->
       <v-row class="rank mt-1 mx-1">
-        <v-col v-if="suggest_dong.age_range">
-          <h6 class="mb-2">{{ currentUser.age_range | ageRange }} 취향저격 순위</h6>
+        <v-col v-if="suggest_dong.age_range && currentUser.age_range">
+          <h5 class="mb-3">{{ currentUser.age_range | ageRange }} 취향저격 순위</h5>
           <div v-for="(dong, idx) in suggest_dong.age_range" :key="idx" @click="moveInfo(dong)">
-            <MouseOver :msg="icon_rank[idx] + ' ' + dong.dongName" />
+            <mouse-over :msg="icon_rank[idx] + ' ' + dong.dongName" />
           </div>
         </v-col>
-        <v-col v-if="suggest_dong.family_type">
-          <h6 class="mb-2">{{ currentUser.family_type | familyType }} 취향저격 순위</h6>
+        <v-col v-if="suggest_dong.family_type && currentUser.fmaily_type">
+          <h5 class="mb-3">{{ currentUser.family_type | familyType }} 취향저격 순위</h5>
           <div v-for="(dong, idx) in suggest_dong.family_type" :key="idx" @click="moveInfo(dong)">
-            <MouseOver :msg="icon_rank[idx] + ' ' + dong.dongName" />
+            <mouse-over :msg="icon_rank[idx] + ' ' + dong.dongName" />
           </div>
         </v-col>
-        <v-col v-if="suggest_dong.tag">
-          <h6 class="mb-2">{{ currentUser.tag | list }} 취향저격 순위</h6>
+        <v-col v-if="suggest_dong.tag && currentUser.tag">
+          <h5 class="mb-3">{{ currentUser.tag | list }} 취향저격 순위</h5>
           <div v-for="(dong, idx) in suggest_dong.tag" :key="idx" @click="moveInfo(dong)">
-            <MouseOver :msg="icon_rank[idx] + ' ' + dong.dongName" />
+            <mouse-over :msg="icon_rank[idx] + ' ' + dong.dongName" />
           </div>
         </v-col>
       </v-row>
@@ -97,7 +97,7 @@ export default {
           //   console.log('age_range : ', rating_list);
           this.suggest_dong.age_range = [];
           //탑 3개까지 뽑음
-          for (let i = 0; i < 5; i++) {
+          for (let i = 0; i < 3; i++) {
             //동코드로 SigugundongDto 찾아서 suggest_dong.age_range에 넣음, (사용자의 연령대로 찾은 추천 동 목록)
             if (rating_list.length <= i) return;
             http.get('/address/' + rating_list[i].dongcode).then((dong_resonse) => {
@@ -120,7 +120,7 @@ export default {
           //   console.log('family_type : ', rating_list);
           this.suggest_dong.family_type = [];
           //탑 3개까지 뽑음
-          for (let i = 0; i < 5; i++) {
+          for (let i = 0; i < 3; i++) {
             //동코드로 SigugundongDto 찾아서 suggest_dong.family_type 넣음, (사용자의 가구타입으로 찾은 추천 동 목록)
             if (rating_list.length <= i) return;
             http.get('/address/' + rating_list[i].dongcode).then((dong_resonse) => {
@@ -166,7 +166,7 @@ export default {
         // console.log('tag : ', rating_list);
         this.suggest_dong.tag = [];
         //탑 3개까지 뽑음
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 3; i++) {
           //동코드로 SigugundongDto 찾아서 suggest_dong.tag 넣음, (사용자의 선호타입으로 찾은 추천 동 목록)
           if (rating_list.length <= i) return;
           http.get('/address/' + rating_list[i].dongcode).then((dong_resonse) => {
@@ -187,5 +187,8 @@ export default {
 <style scoped>
 .user_info h5 {
   display: inline-block;
+}
+.rank h5 {
+  color: grey;
 }
 </style>

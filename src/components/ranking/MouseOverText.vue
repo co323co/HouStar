@@ -5,7 +5,7 @@
     @mouseout="colorChange(false)"
     :class="{ 'mouse-over-bgcolor': isColor }"
   >
-    {{ msg }}
+    <h5>{{ msg }}</h5>
   </div>
 </template>
 <script>
