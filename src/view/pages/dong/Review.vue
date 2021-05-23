@@ -18,8 +18,10 @@
             show-rating
           ></star-rating>
         </v-flex>
-
-        <ChartName />
+        <HorizontalBar :chart-data="datacollection" :class="size"></HorizontalBar>
+        <!-- <div id="chart">
+          <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
+        </div> -->
       </v-card>
     </v-container>
   </v-app>
@@ -28,18 +30,38 @@
 import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
 //chart test
-import ChartName from '@/components/aboutdong/ChartName.vue';
-
+// import BarChart from '@/components/aboutdong/Barchart.vue';
+import HorizontalBar from '@/core/services/HorizontalBarChart.js';
+// import ApexCharts from 'apexcharts';
 export default {
   data() {
     return {
       Rating: 0,
       reviews: [],
+      size: 'firstClass',
+      datacollection: {
+        labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '교통🚦'],
+        datasets: [
+          {
+            label: '전체 리뷰 통계',
+            backgroundColor: 'gray',
+            data: [
+              this.$store.state.rate.rating.environment,
+              this.$store.state.rate.rating.health,
+              this.$store.state.rate.rating.infra,
+              this.$store.state.rate.rating.safety,
+              this.$store.state.rate.rating.school,
+              this.$store.state.rate.rating.trans,
+            ],
+          },
+        ],
+      },
     };
   },
   components: {
     StarRating,
-    ChartName,
+    // apexchart: ApexCharts,
+    HorizontalBar,
     // BarChart,
   },
   mounted() {
@@ -72,4 +94,10 @@ export default {
   },
 };
 </script>
-<style lang=""></style>
+<style>
+.firstClass {
+  padding-top: 30px;
+  height: 300px;
+  width: 300px;
+}
+</style>
