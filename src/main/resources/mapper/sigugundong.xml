@@ -62,4 +62,13 @@
 		FROM baseaddress
 		where dongcode = #{guguncode};
 	</select>
+	
+	<select id="getDong" parameterType="String"
+		resultType="SidoGugunDongDto">
+		select left(code,2) as sidoCode, city as sidoName,
+		left(code,5) as gugunCode, gugun as gugunName,
+		code as dongCode, dong as dongName
+		FROM baseaddress
+		where code = #{dongcode};
+	</select>
 </mapper>

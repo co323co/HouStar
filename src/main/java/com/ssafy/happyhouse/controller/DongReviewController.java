@@ -40,7 +40,8 @@ public class DongReviewController {
 	@ApiOperation("일치하는 조건의 사용자가 쓴 리뷰로만 통계를 내서 각 동별 별점 정보를 반환한다. map에 있는 칼럼 조건으로 검사  ex) { age_range:20 }")
 	@GetMapping("/avg-rating/type")
 	public List<Map<String, String>> getRatingByType(@RequestParam Map<String, String> map){
-		System.out.println(map);
+		System.out.println("getRatingByType");
+		System.out.println("map : " + map);
 		System.out.println(dSer.getRatingByType(map));
 		
 		return dSer.getRatingByType(map);

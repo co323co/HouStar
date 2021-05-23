@@ -63,5 +63,4 @@ public class SidoGugunDongDto {
 				+ ", gugunName=" + gugunName + ", dongCode=" + dongCode + ", dongName=" + dongName + "]";
 	}
 	
-	
 }

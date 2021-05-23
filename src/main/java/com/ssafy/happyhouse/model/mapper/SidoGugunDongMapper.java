@@ -3,6 +3,7 @@ package com.ssafy.happyhouse.model.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ssafy.happyhouse.model.dto.HouseInfoDto;
@@ -16,7 +17,6 @@ public interface SidoGugunDongMapper {
 	List<HouseInfoDto> getDongInGugunhasDeal(String gugun) throws Exception;
 	List<HouseInfoDto> getAptInDong(String dong) throws Exception;
 	SidoGugunDongDto getByDongCode(String dongCode);
-	//dongcode로 sidogugundong 객체 반환
-	SidoGugunDongDto getAllPath(Map<String,Object> param)throws Exception;
 	List<SidoGugunDongDto> getDongByGugun(String guguncode)throws Exception;
+	SidoGugunDongDto getDong(String dongcode);
 }

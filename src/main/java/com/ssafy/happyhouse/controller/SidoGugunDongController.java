@@ -57,17 +57,10 @@ public class SidoGugunDongController {
 		return sgdSer.getDongByGugun(guguncode);
 	}
 	
-	//"dong": "상도동",
-	//"code": "11590",로 sidogugundong dto를 반환
-//	@ApiOperation("dongcode와 dongname으로 시 이름, 군구 이름, 동 이름을 반환한다. ex dongcode ='11590' and dong ='상도동'")
-//	@GetMapping("sidogugundong")
-//	SidoGugunDongDto getAllPath(@RequestBody Map<String,Object> param)throws Exception{
-//		System.out.println( param.get("dongcode") +" "+ param.get("dongname"));
-//		return sgdSer.getAllPath(param);
-//	}
-//	@ApiOperation("dongcode로 SidoGugunDongDto 반환") 
-//	SidoGugunDongDto getDong(@PathVariable String dongcode) {
-//		return sgdSer.
-//	}
+	@ApiOperation("dongcode로 SidoGugunDongDto 반환") 
+	@GetMapping("/{dongcode}")
+	SidoGugunDongDto getDong(@PathVariable String dongcode) {
+		return sgdSer.getDong(dongcode);
+	}
 	
 }

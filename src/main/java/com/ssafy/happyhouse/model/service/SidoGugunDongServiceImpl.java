@@ -38,13 +38,12 @@ public class SidoGugunDongServiceImpl implements SidoGugunDongService {
 	}
 
 	@Override
-	public SidoGugunDongDto getAllPath(Map<String,Object> param) throws Exception {	
-		return sqlSession.getMapper(SidoGugunDongMapper.class).getAllPath(param);
-	}
-
-	@Override
 	public List<SidoGugunDongDto> getDongByGugun(String guguncode) throws Exception {
 		return  sqlSession.getMapper(SidoGugunDongMapper.class).getDongByGugun(guguncode);
 	}
 
+	@Override
+	public SidoGugunDongDto getDong(String dongcode) {
+		return  sqlSession.getMapper(SidoGugunDongMapper.class).getDong(dongcode);
+	}
 }
