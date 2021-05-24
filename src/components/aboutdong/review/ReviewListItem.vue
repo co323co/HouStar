@@ -60,7 +60,7 @@
 // import { mapActions } from 'vuex';
 export default {
   props: ['review'],
-  methods: {},
+  methods: { deleteTodo() {} },
   data() {
     return {};
   },

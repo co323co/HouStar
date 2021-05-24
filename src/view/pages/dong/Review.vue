@@ -22,9 +22,7 @@
         <v-flex>
           <HorizontalBar :chart-data="datacollection" :class="size"></HorizontalBar>
         </v-flex>
-
-        <!-- 리뷰 등록  -->
-
+        <!-- 리뷰 등록 -->
         <v-flex>
           <review-register />
         </v-flex>
