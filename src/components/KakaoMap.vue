@@ -1,12 +1,8 @@
+<!-- props로 시작좌표와 마커리스트를 넘기면 맵에 찍어준다. -->
+
 <template>
-  <div>
-    <!-- 지도를 담을 영역 -->
-    <div id="map" style="height: 400px"></div>
-    <!-- 지도의 띄울 커스텀 오버레이 DOM -->
-    <v-badge id="dot" content="⭐3.56" value="33" color="purple" overlap>
-      <v-icon large color="red"> mdi-map-marker </v-icon>
-    </v-badge>
-  </div>
+  <!-- 지도를 담을 영역 -->
+  <div id="map" style="height: 400px"></div>
 </template>
 
 <script
@@ -18,14 +14,13 @@
 import kakaoService from '@/core/services/kakao.service.js';
 export default {
   props: {
-    // 좌표 넘길 때
+    // 포지션 좌표 넘길 때
     // { lat : 위도, lng : 경도 }
     init_pos: Object,
-    //  { lat : 위도, lng : 경도 } 형태의 좌표 리스트
-    marker_poss: Object,
+    // {"position" : {lat:"",lng:""}, "text" : "텍스트 내용" }  형태 마커의 리스트
+    marker_list: Array,
   },
   mounted() {
-    console.log('map 시작 위치 : ', this.init_pos);
     //실제 지도를 그리는 Javascript API를 불러오기
     if (window.kakao && window.kakao.maps) {
       this.initMap();
@@ -47,22 +42,35 @@ export default {
         //지도의 레벨(확대, 축소 정도)
         level: 3,
       };
+      // console.log(this.marker_list);
       //지도 생성 및 객체 리턴
       const map = new kakao.maps.Map(container, options);
-      //커스텀 오버레이가 표시될 위치 객체, LatLng(위도, 경도)
-      const position = new kakao.maps.LatLng(37.58936620000001, 126.9697192);
-      // 커스텀 오버레이에 표시할 내용
-      // HTML 문자열 또는 Dom Element
-      let rating = '3.56';
-      let content = document.querySelector('#dot');
 
-      var customOverlay = new kakao.maps.CustomOverlay({
-        position: position,
-        content: content,
+      let imageSrc = 'media/svg/icons/Map/Marker.png';
+      this.marker_list.forEach((marker) => {
+        //커스텀 오버레이가 표시될 위치 객체, LatLng(위도, 경도)
+        let position = new kakao.maps.LatLng(marker.position.lat, marker.position.lng);
+        let text = marker.text;
+        // 커스텀 오버레이에 표시할 내용
+        // HTML 문자열 또는 Dom Element
+        let content = `
+                  <div
+                    style="background-color: #FFFFFF;
+                    border:solid 3px #ffc129;
+                    border-radius: 30px 30px;
+                    padding:2px 7px;
+                    margin : 5px" >
+                      ⭐3.55
+                  </div>
+                  <img style="width: 30px" src=${imageSrc}>
+        `;
+        let customOverlay = new kakao.maps.CustomOverlay({
+          position: position,
+          content: content,
+        });
+        // 커스텀 오버레이를 지도에 표시합니다
+        customOverlay.setMap(map);
       });
-
-      // 커스텀 오버레이를 지도에 표시합니다
-      customOverlay.setMap(map);
     },
   },
 };

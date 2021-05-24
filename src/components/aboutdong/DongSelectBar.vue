@@ -1,7 +1,7 @@
 <template lang="">
   <div>
     <!-- 시군구 select -->
-    <div class="amber lighten-4 section pt-2 pb-2">
+    <div class="indigo lighten-5 section pt-2 pb-2">
       <div class="sorting-filters text-center mt-10 d-flex justify-content-center">
         <div class="form-group mr-2">
           <v-container>

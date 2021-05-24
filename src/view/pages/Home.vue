@@ -36,8 +36,4 @@ export default {
 h2 {
   text-align: center;
 }
-.test {
-  background-size: cover;
-  background: black;
-}
 </style>
