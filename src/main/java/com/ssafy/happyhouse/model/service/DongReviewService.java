@@ -12,7 +12,7 @@ public interface DongReviewService {
 	public List<Map<String, String>> getRatingByType(Map<String, String> map);
 		
 	//해당 동에 있는 모든 리뷰 반환
-	public List<DongReviewDto> getReviewByDong(String dongcode);
+	public List<Map<String, String>> getReviewByDong(String dongcode);
 	//해당 유저가 쓴 모든 리뷰 반환
 	public List<DongReviewDto> getReviewByUser(String userid);
 	//랭킹용

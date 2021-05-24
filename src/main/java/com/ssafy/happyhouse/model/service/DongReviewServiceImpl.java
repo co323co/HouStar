@@ -22,8 +22,13 @@ public class DongReviewServiceImpl implements DongReviewService {
 	}
 
 	@Override
-	public List<DongReviewDto> getReviewByDong(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getReviewByDong(dongcode);
+	public List<Map<String, String>> getReviewByDong(String dongcode) {
+		//연령대가 0이면 선택 안한거니 null로 바꿔준다.
+		List<Map<String ,String>> res = sqlSession.getMapper(DongReviewMapper.class).getReviewByDong(dongcode);
+		for (Map<String, String> map : res) {
+			if(map.get("age_range").equals("0")) map.put("age_range", null);
+		}
+		return res;
 	}
 
 	@Override

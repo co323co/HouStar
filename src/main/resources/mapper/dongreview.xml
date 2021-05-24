@@ -5,13 +5,13 @@
 	namespace="com.ssafy.happyhouse.model.mapper.DongReviewMapper">
 
 	<select id="getReviewAll" resultType="Map">
-		SELECT dongcode, userid, tag, concat(age_range) age_range, family_type, concat(infra) infra, concat(trans) trans, concat(safety) safety, concat(health) health, concat(school) school, concat(environment) environment
+		SELECT dongcode, userid, tag, concat(age_range) age_range, family_type, concat(infra) infra, concat(trans) trans, concat(safety) safety, concat(health) health, concat(school) school, concat(environment) environment, content
 		FROM dong_review
 		JOIN members USING(userid);
 	</select>
 	
 	<select id="getReviewByDong" parameterType="String" resultType="Map">
-		SELECT dongcode, userid, tag, concat(age_range) age_range, family_type, concat(infra) infra, concat(trans) trans, concat(safety) safety, concat(health) health, concat(school) school, concat(environment) environment
+		SELECT dongcode, userid, tag, concat(age_range) age_range, family_type, concat(infra) infra, concat(trans) trans, concat(safety) safety, concat(health) health, concat(school) school, concat(environment) environment, content
 		FROM dong_review
 		JOIN members USING(userid)
 		WHERE dongcode = #{dongcode};

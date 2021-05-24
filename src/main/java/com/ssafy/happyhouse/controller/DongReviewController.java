@@ -56,7 +56,7 @@ public class DongReviewController {
 	
 	@ApiOperation("해당 동의 모든 리뷰 가져온다. user랑 조인해서 user의 성향 정보까지 갖고있다.")
 	@GetMapping("/dong/{dongcode}")
-	public List<DongReviewDto> getReviewByDong(@PathVariable String dongcode){
+	public List<Map<String, String>> getReviewByDong(@PathVariable String dongcode){
 		return dSer.getReviewByDong(dongcode);
 	}
 	
