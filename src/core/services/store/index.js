@@ -8,6 +8,7 @@ import breadcrumbs from './breadcrumbs.module';
 import profile from './profile.module';
 import dongStore from './dong.module';
 import rate from './rating.module';
+import review from './review.module';
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     profile,
     dongStore,
     rate,
+    review,
   },
   plugins: [createPersistedState()],
 });
