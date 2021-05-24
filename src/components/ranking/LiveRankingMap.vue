@@ -4,8 +4,10 @@
       <v-col class="rank">
         <div style="height: 30%"></div>
         <h4>🏆 실시간 랭킹</h4>
+
+        {{ rating_list }}
         <div class="pa-5">
-          <div v-for="(dong, idx) in dong_list" :key="idx" @click="moveInfo(dong)">
+          <div v-for="(dong, idx) in dong_list.slice(0, 3)" :key="idx" @click="moveInfo(dong)">
             <mouse-over :msg="idx + 1 + `.  ` + dong.dongName" />
           </div>
         </div>
@@ -13,14 +15,35 @@
       <v-col cols="8">
         <v-row class="no-gutters">
           <v-spacer></v-spacer>
-          <v-col class="mx-1">
-            <v-select no-data-text="항목이 없습니다" outlined dense></v-select>
+          <v-col class="mx-2">
+            <v-select
+              hint="선호 태그"
+              label="ALL"
+              v-model="tag_val"
+              :items="tags"
+              no-data-text="항목이 없습니다"
+              dense
+            ></v-select>
           </v-col>
-          <v-col class="mx-1">
-            <v-select no-data-text="항목이 없습니다" outlined dense></v-select>
+          <v-col class="mx-2">
+            <v-select
+              hint="가구 타입"
+              label="ALL"
+              v-model="familyType_val"
+              :items="familyTypes"
+              no-data-text="항목이 없습니다"
+              dense
+            ></v-select>
           </v-col>
-          <v-col class="mx-1">
-            <v-select no-data-text="항목이 없습니다" outlined dense></v-select>
+          <v-col class="mx-2">
+            <v-select
+              hint="연령대"
+              label="ALL"
+              v-model="ageRange_val"
+              :items="ageRanges"
+              no-data-text="항목이 없습니다"
+              dense
+            ></v-select>
           </v-col>
         </v-row>
         <v-divider></v-divider>
@@ -40,33 +63,54 @@ export default {
   },
   data() {
     return {
+      rating_list: [],
       dong_list: [],
+      //실시간 랭킹에 띄워줄 동들
+      rank_dong_list: [],
+      //선호태그 목록 (멀티선택)
+      tag_val: [],
+      tags: ['인프라', '대중교통', '안전', '건강', '학군', '환경'],
+      //가구 형태 목록 (1선택)
+      familyType_val: null,
+      familyTypes: ['자취생', '직장인', '신혼부부', '일반가족'],
+      //연령대 목록 (1선택)
+      // ageRange_val: null,
+      ageRange_val: null,
+      ageRanges: [
+        { text: '10대', value: 10 },
+        { text: '20대', value: 20 },
+        { text: '30대', value: 30 },
+        { text: '40대', value: 40 },
+        { text: '50대', value: 50 },
+        { text: '그 이상', value: 'over' },
+      ],
     };
   },
 
   mounted() {
-    http.get('/dongreview/avg-rating').then(({ data }) => {
-      //총 평점 높은 순으로 정렬
-      data.sort(function (a, b) {
-        return b.total - a.total;
-      });
-      //탑 5개까지 뽑음
-      for (let i = 0; i < 5; i++) {
-        //동코드로 SigugundongDto 찾기
-        if (data.length <= i) return;
-        http.get('/address/' + data[i].dongcode).then((dong_resonse) => {
-          this.dong_list.push(dong_resonse.data);
-        });
-      }
-    });
+    this.getList();
   },
   methods: {
-    moveInfo(dongDto) {
-      //   console.log(this.$store.state.dongStore.Sidogugundong);
-      this.$store.state.dongStore.Sidogugundong = dongDto;
-      //   console.log(this.$store.state.dongStore.Sidogugundong.dongName);
-      this.$router.push('dong-info');
+    async getList() {
+      let response = await http.get('/dongreview/avg-rating');
+      this.rating_list = response.data;
+      // 총 평점 높은 순으로 정렬
+      this.rating_list.sort(function (a, b) {
+        return b.total - a.total;
+      });
+      // 동코드로 SigugundongDto 찾기
+      for (let rating of this.rating_list) {
+        response = await http.get('/address/' + rating.dongcode);
+        let dong = response.data;
+        this.dong_list.push(dong);
+      }
     },
+  },
+  moveInfo(dongDto) {
+    //   console.log(this.$store.state.dongStore.Sidogugundong);
+    this.$store.state.dongStore.Sidogugundong = dongDto;
+    //   console.log(this.$store.state.dongStore.Sidogugundong.dongName);
+    this.$router.push('dong-info');
   },
 };
 </script>

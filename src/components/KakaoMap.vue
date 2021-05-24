@@ -1,6 +1,12 @@
 <template>
-  <!-- 지도를 담을 영역 -->
-  <div id="map" style="height: 300px"></div>
+  <div>
+    <!-- 지도를 담을 영역 -->
+    <div id="map" style="height: 400px"></div>
+    <!-- 지도의 띄울 커스텀 오버레이 DOM -->
+    <v-badge id="dot" content="3.56" value="33" color="purple" overlap bordered>
+      <v-icon large color="red"> mdi-map-marker </v-icon>
+    </v-badge>
+  </div>
 </template>
 
 <script
@@ -29,22 +35,34 @@ export default {
       ///지도를 생성할 때 필요한 기본 옵션
       const options = {
         //지도의 중심좌표.
-        center: new kakao.maps.LatLng(35.19656853772262, 129.0807270648317),
+        //청운동
+        center: new kakao.maps.LatLng(37.58936620000001, 126.9697192),
         //지도의 레벨(확대, 축소 정도)
         level: 3,
       };
       //지도 생성 및 객체 리턴
       const map = new kakao.maps.Map(container, options);
-      //마커 생성에 필요한 위치 객체, LatLng(위도, 경도)
-      const markerPosition = new kakao.maps.LatLng(35.19656853772262, 129.0807270648317);
-      //맵에 마커 등록
-      const marker = new kakao.maps.Marker({
-        position: markerPosition,
+      //커스텀 오버레이가 표시될 위치 객체, LatLng(위도, 경도)
+      const position = new kakao.maps.LatLng(37.58936620000001, 126.9697192);
+      // 커스텀 오버레이에 표시할 내용
+      // HTML 문자열 또는 Dom Element
+      let rating = '3.56';
+      let content = document.querySelector('#dot');
+
+      var customOverlay = new kakao.maps.CustomOverlay({
+        position: position,
+        content: content,
       });
-      marker.setMap(map);
+
+      // 커스텀 오버레이를 지도에 표시합니다
+      customOverlay.setMap(map);
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+v-badge {
+  color: black;
+}
+</style>
