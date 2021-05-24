@@ -5,32 +5,16 @@
         <div style="height: 30%"></div>
         <live-ranking :dong_list="dong_list.slice(0, 5)" />
       </v-col>
-      <v-col cols="8">
-        <v-row class="no-gutters">
-          <v-spacer></v-spacer>
-          <v-col class="mx-2">
-            <v-select
-              hint="가구 타입"
-              label="ALL"
-              v-model="familyType_val"
-              :items="familyTypes"
-              no-data-text="항목이 없습니다"
-              dense
-            ></v-select>
-          </v-col>
-          <v-col class="mx-2">
-            <v-select
-              hint="연령대"
-              label="ALL"
-              v-model="ageRange_val"
-              :items="ageRanges"
-              no-data-text="항목이 없습니다"
-              dense
-            ></v-select>
-          </v-col>
-        </v-row>
+      <v-col cols="8" class="first_dong_text">
+        <h2 class="mr-4">🥇 현재 1등</h2>
+        <h1 v-if="dong_list[0]">{{ dong_list[0].dongName }}</h1>
         <v-divider></v-divider>
-        <kakao-map :init_pos="map_init_pos" />
+        <!-- 부모가 데이터 서버에서 다 받고 나서야 넘겨줌 -->
+        <kakao-map
+          v-if="map_init_pos && map_marker_list"
+          :init_pos="map_init_pos"
+          :marker_list="map_marker_list"
+        />
       </v-col>
     </v-row>
   </v-layout>
@@ -47,52 +31,50 @@ export default {
   },
   data() {
     return {
-      map_init_pos: { lat: '0', lng: '0' },
+      map_init_pos: null,
+      map_marker_list: null,
       rating_list: [],
       dong_list: [],
-      //가구 형태 목록 (1선택)
-      familyType_val: null,
-      familyTypes: ['자취생', '직장인', '신혼부부', '일반가족'],
-      //연령대 목록 (1선택)
-      // ageRange_val: null,
-      ageRange_val: null,
-      ageRanges: [
-        { text: '10대', value: 10 },
-        { text: '20대', value: 20 },
-        { text: '30대', value: 30 },
-        { text: '40대', value: 40 },
-        { text: '50대', value: 50 },
-        { text: '그 이상', value: 'over' },
-      ],
     };
   },
-  mounted() {
-    this.getList();
-  },
   created() {
-    let first_dong = this.dong_list[0];
-    console.log(this.dong_list);
-    // let list = this.dong_list;
-
-    // console.log(list[0]);
-    // this.map_init_pos = {}
+    this.setPropsByHttp();
   },
   methods: {
-    async getList() {
+    async setPropsByHttp() {
+      //rating_list 설정
       let response = await http.get('/dongreview/avg-rating');
       this.rating_list = response.data;
       // 총 평점 높은 순으로 정렬
       this.rating_list.sort(function (a, b) {
         return b.total - a.total;
       });
+
+      //dong_list 설정
       // 동코드로 SigugundongDto 찾기
       for (let rating of this.rating_list) {
         response = await http.get('/address/' + rating.dongcode);
         let dong = response.data;
         this.dong_list.push(dong);
       }
+      let first_rating = this.rating_list[0];
+
+      // map props 설정
+      response = await http.get('/address/pos/dong/' + first_rating.dongcode);
+      let pos = response.data;
+      this.map_init_pos = { lat: pos.lat, lng: pos.lng };
+      this.map_marker_list = [{ position: this.map_init_pos, text: '⭐' + first_rating.total }];
     },
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.first_dong_text h1,
+h2 {
+  display: inline-block;
+}
+.first_dong_text h1 {
+  color: darkcyan;
+  font-weight: bold;
+}
+</style>
