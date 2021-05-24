@@ -135,7 +135,10 @@ export default {
     reviews(val) {
       // console.log('reviews 변경되었음');
       // console.log(val);
+
+      console.log('reviews whatch');
       this.show_list = val;
+      console.log(this.show_list);
       this.checkBar();
     },
     reviewsbyuserid(val) {

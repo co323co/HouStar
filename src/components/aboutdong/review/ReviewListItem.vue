@@ -60,7 +60,7 @@
       </v-row>
       <v-card-text align="rignt" v-if="currentUser.userid == review.userid">
         <button @click="activeModify">수정</button>
-        <button class="ml-3" @click="deleteTodo">제거</button>
+        <button class="ml-3" @click="deleteReview">제거</button>
       </v-card-text>
     </v-card>
     <!-- 수정부분 -->
@@ -80,37 +80,37 @@
           <div class="text-center">
             <label>환경</label>
             <v-rating
-              v-model="review.environment"
+              v-model="newReview.environment"
               background-color="purple lighten-3"
               color="purple"
             ></v-rating>
             <label>건강</label>
             <v-rating
-              v-model="review.health"
+              v-model="newReview.health"
               background-color="pink lighten-3"
               color="pink"
             ></v-rating>
             <label>인프라</label>
             <v-rating
-              v-model="review.infra"
+              v-model="newReview.infra"
               background-color="orange lighten-3"
               color="orange"
             ></v-rating>
             <label>안전</label>
             <v-rating
-              v-model="review.safety"
+              v-model="newReview.safety"
               background-color="green lighten-3"
               color="green"
             ></v-rating>
             <label>학군</label>
             <v-rating
-              v-model="review.school"
+              v-model="newReview.school"
               background-color="green lighten-3"
               color="green"
             ></v-rating>
             <label>대중교통</label>
             <v-rating
-              v-model="review.trans"
+              v-model="newReview.trans"
               background-color="indigo lighten-3"
               color="indigo"
             ></v-rating></div
@@ -120,13 +120,13 @@
             outlined
             name="input-7-4"
             label="Review"
-            v-model="review.content"
+            v-model="newReview.content"
           ></v-textarea>
         </v-col>
       </v-row>
-      <v-card-text align="rignt" v-if="currentUser.userid == review.userid">
+      <v-card-text align="rignt" v-if="currentUser.userid == newReview.userid">
         <button @click="modifyReview">수정</button>
-        <button class="ml-3" @click="deleteTodo">제거</button>
+        <button class="ml-3" @click="undoModify">취소</button>
       </v-card-text>
     </v-card>
   </v-flex>
@@ -170,23 +170,27 @@ export default {
   },
   props: ['review'],
   methods: {
+    undoModify() {
+      this.isReadOnly = true;
+    },
     activeModify() {
       console.log('수정으로바껴라');
       this.isReadOnly = false;
     },
     modifyReview() {
       //axios로 수정 + readonly로 바꾸기
-      console.log(this.review.userid);
+      // console.log('수정버튼누름');
+      // console.log(this.review.userid);
       http
         .put('/dongreview', {
-          content: this.review.content,
+          content: this.newReview.content,
           dongcode: this.$store.state.dongStore.Sidogugundong.dongCode,
-          environment: this.review.environment,
-          health: this.review.health,
-          infra: this.review.infra,
-          safety: this.review.safety,
-          school: this.review.school,
-          trans: this.review.trans,
+          environment: this.newReview.environment,
+          health: this.newReview.health,
+          infra: this.newReview.infra,
+          safety: this.newReview.safety,
+          school: this.newReview.school,
+          trans: this.newReview.trans,
           userid: this.currentUser.userid,
         })
         .then(({ data }) => {
@@ -204,10 +208,29 @@ export default {
           // user가 새글을 입력했는지 갱신해주기
           this.$store.dispatch('review/getReviewsByUserId', this.currentUser.userid);
           //다시 읽기전용으로 바꿔주기
-          this.isReadOnly = false;
+          this.isReadOnly = true;
         });
     },
-    deleteTodo() {},
+    deleteReview() {
+      console.log('삭제 버튼 누름스 ');
+      http.delete('/dongreview/' + this.currentUser.userid).then(({ data }) => {
+        let msg = '삭제 처리 시  문제가발생했습니다.';
+        if (data == true) {
+          msg = '삭제가 완료되었습니다.';
+        }
+        alert(msg);
+
+        // store에 있는거 갱신해주기
+        this.$store.dispatch(
+          'review/getReviews',
+          this.$store.state.dongStore.Sidogugundong.dongCode
+        );
+        // user가 새글을 입력했는지 갱신해주기
+        this.$store.dispatch('review/getReviewsByUserId', this.currentUser.userid);
+        //다시 읽기전용으로 바꿔주기
+        this.isReadOnly = true;
+      });
+    },
     convertTagToList() {
       //console.log('convertTagToList if문 밖에');
 
@@ -219,16 +242,16 @@ export default {
     },
   },
   filters: {
-    ageRange: function (ageRange) {
+    ageRange: function(ageRange) {
       if (!ageRange) return '';
       if (ageRange == 'over') return '60대 이상';
       else return ageRange + '대';
     },
-    familyType: function (type) {
+    familyType: function(type) {
       if (!type) return '';
       else return type;
     },
-    list: function (list) {
+    list: function(list) {
       if (!list) return '';
       let str = '';
       for (let i = 0; i < list.length - 1; i++) {
