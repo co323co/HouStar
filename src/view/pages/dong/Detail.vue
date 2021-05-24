@@ -1,31 +1,7 @@
 <!-- 상세정보 페이지 -->
 <template>
   <div class="pa-7">
-    <v-card class="mx-auto pa-3" elevation="5" shaped>
-      <v-card-title>
-        <h2 style="font-weight: bold">인프라</h2>
-      </v-card-title>
-      <v-card-subtitle class="ml-1" style="font-size: 1.2em">
-        {{ currentDongInfo.sidoName }}
-        {{ currentDongInfo.gugunName }}
-        {{ currentDongInfo.dongName }}
-        상가 정보
-      </v-card-subtitle>
-      <v-card-actions @click="show = !show">
-        <v-btn color="orange lighten-2" text> <h6>더 보기</h6> </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn icon>
-          <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-        </v-btn>
-      </v-card-actions>
-      <!-- 확장 부분 -->
-      <v-expand-transition>
-        <div v-show="show" class="pa-2">
-          <v-divider></v-divider>
-          <infra />
-        </div>
-      </v-expand-transition>
-    </v-card>
+    <infra />
     <trans />
     <saftey />
     <health />
@@ -51,9 +27,7 @@ export default {
     School,
     Environment,
   },
-  data: () => ({
-    show: false,
-  }),
+
   computed: {
     ...mapGetters(['currentDongInfo']),
   },

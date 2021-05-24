@@ -1,7 +1,32 @@
 <template lang="">
   <div>
-    <!-- <BarChart v-if="datasets" :labels="labels" :datasets="datasets" /> -->
-    <BarChart />
+    <v-card class="mx-auto pa-3" elevation="5" shaped>
+      <v-card-title>
+        <h2 style="font-weight: bold">인프라</h2>
+      </v-card-title>
+      <v-card-subtitle class="ml-1" style="font-size: 1.2em">
+        {{ currentDongInfo.sidoName }}
+        {{ currentDongInfo.gugunName }}
+        {{ currentDongInfo.dongName }}
+        상가 정보
+      </v-card-subtitle>
+      <v-card-actions @click="show = !show">
+        <v-btn color="orange lighten-2" text> <h6 style="font-weight: bold">더 보기</h6> </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn icon>
+          <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+        </v-btn>
+      </v-card-actions>
+      <!-- 확장 부분 -->
+      <v-expand-transition>
+        <div v-if="show">
+          <v-divider></v-divider>
+          <v-flex>
+            <BarChart v-if="datasets" :labels="labels" :datasets="datasets" />
+          </v-flex>
+        </div>
+      </v-expand-transition>
+    </v-card>
   </div>
 </template>
 <script>
@@ -26,6 +51,8 @@ export default {
         '학문/교육',
       ],
       datasets: null,
+      //카드뷰 확장 트리거
+      show: false,
     };
   },
   computed: {
