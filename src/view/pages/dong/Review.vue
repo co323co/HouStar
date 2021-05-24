@@ -4,10 +4,10 @@
       <v-card flat>
         <v-toolbar flat class="mb-1">
           <v-toolbar-title>
-            <h1 class="display-5 mt-4">전체 리뷰 ( {{ reviews.length }} 명 ), 총 별점, 차트</h1>
+            <h1 class="display-5 mt-4">전체 리뷰 ( {{ reviews.length }} 명 )</h1>
           </v-toolbar-title>
         </v-toolbar>
-
+        <!-- Total 별점 평균 뿌리기 -->
         <v-flex>
           <star-rating
             :increment="0.01"
@@ -18,12 +18,10 @@
             show-rating
           ></star-rating>
         </v-flex>
+        <!-- 개별 차트 평균 뿌리기 -->
         <v-flex>
           <HorizontalBar :chart-data="datacollection" :class="size"></HorizontalBar>
         </v-flex>
-        <!-- <div id="chart">
-          <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
-        </div> -->
       </v-card>
     </v-container>
   </v-app>
@@ -31,10 +29,8 @@
 <script>
 import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
-//chart test
-// import BarChart from '@/components/aboutdong/Barchart.vue';
 import HorizontalBar from '@/core/services/HorizontalBarChart.js';
-// import ApexCharts from 'apexcharts';
+
 export default {
   data() {
     return {
@@ -58,13 +54,12 @@ export default {
           },
         ],
       },
+      // options 바인딩하는거더찾아보기 ㅜ
     };
   },
   components: {
     StarRating,
-    // apexchart: ApexCharts,
     HorizontalBar,
-    // BarChart,
   },
   mounted() {
     console.log('mounted');
@@ -73,9 +68,9 @@ export default {
       .get('/dongreview/avg-rating/' + this.$store.state.dongStore.Sidogugundong.dongCode)
       .then(({ data }) => {
         console.log(data);
+        // Rating.module 에 있는 rating 객체에 얻어온 평균평점 객체 넣음
         this.$store.state.rate.rating = data;
         this.Rating = this.$store.state.rate.rating.total;
-        console.log('총! 평균! :      ' + this.$store.state.rate.rating.total);
       })
       .catch(({ response }) => {
         console.log(response);
@@ -86,9 +81,6 @@ export default {
       .then(({ data }) => {
         console.log(data);
         this.reviews = data;
-        //this.$store.state.rate.rating = data;
-        //this.Rating = this.$store.state.rate.rating.total;
-        //console.log('총! 평균! :      ' + this.$store.state.rate.rating.total);
       })
       .catch(({ response }) => {
         console.log(response);
