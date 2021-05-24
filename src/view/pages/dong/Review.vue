@@ -91,11 +91,12 @@ export default {
 <style scoped>
 .firstClass {
   padding-top: 30px;
+  display: block;
   height: 300px;
   width: 300px;
   margin-bottom: 50px;
 }
 .v-application--wrap {
-  min-height: 1vh;
+  min-height: 0;
 }
 </style>

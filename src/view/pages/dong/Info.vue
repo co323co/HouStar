@@ -45,7 +45,7 @@ export default {
 };
 </script>
 <style scoped>
-.v-application a,
+a,
 span {
   color: black;
   font-size: 20px;
