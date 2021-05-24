@@ -13,7 +13,7 @@
             :increment="0.01"
             :fixed-points="2"
             class="ml-5"
-            :rating="Rating"
+            :rating="totalRating"
             read-only
             show-rating
           ></star-rating>
@@ -23,6 +23,11 @@
           <HorizontalBar :chart-data="datacollection" :class="size"></HorizontalBar>
         </v-flex>
 
+        <!-- 리뷰 등록  -->
+
+        <v-flex>
+          <review-register />
+        </v-flex>
         <!-- 리뷰 리스트 뿌리기 -->
         <v-flex>
           <review-list />
@@ -37,6 +42,7 @@ import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
 import HorizontalBar from '@/core/services/HorizontalBarChart.js';
 import ReviewList from '@/components/aboutdong/review/ReviewList.vue';
+import ReviewRegister from '@/components/aboutdong/review/ReviewRegister.vue';
 
 export default {
   computed: {
@@ -47,9 +53,10 @@ export default {
   },
   data() {
     return {
-      Rating: 0,
+      totalRating: 0,
       reviews: [],
       size: 'firstClass',
+
       datacollection: {
         labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '교통🚦'],
         datasets: [
@@ -74,6 +81,7 @@ export default {
     StarRating,
     HorizontalBar,
     ReviewList,
+    ReviewRegister,
   },
   created() {
     // 해당 동에 대한 모든 리뷰 다 가져오기.
@@ -85,14 +93,18 @@ export default {
   },
   mounted() {
     console.log('mounted');
+    console.log(this.$store.state.dongStore.Sidogugundong.dongCode);
     // 해당 동의 평균 별점정보를가져옴/////
     http
       .get('/dongreview/avg-rating/' + this.$store.state.dongStore.Sidogugundong.dongCode)
       .then(({ data }) => {
+        console.log('평균뵬점정보 받아오기 실행 ');
         console.log(data);
         // Rating.module 에 있는 rating 객체에 얻어온 평균평점 객체 넣음
         this.$store.state.rate.rating = data;
-        this.Rating = this.$store.state.rate.rating.total;
+        this.totalRating = this.$store.state.rate.rating.total;
+        console.log('여기별점', this.totalRating);
+        console.log('스토어별점', this.$store.state.rate.rating.total);
       })
       .catch(({ response }) => {
         console.log(response);

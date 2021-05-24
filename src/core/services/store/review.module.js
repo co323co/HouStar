@@ -1,7 +1,7 @@
 import http from '@/core/services/http-common';
 
 const state = {
-  headerText: 'TODO it!',
+  // headerText: 'TODO it!',
   reviews: [],
   reviewsbyuserid: [],
 };

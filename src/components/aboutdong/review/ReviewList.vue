@@ -13,6 +13,7 @@ export default {
     ...mapState('review', ['reviews']),
   },
   created() {
+    console.log('ReviewList의 reviews');
     console.log(this.reviews);
   },
 };
