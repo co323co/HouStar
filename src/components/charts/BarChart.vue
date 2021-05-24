@@ -10,7 +10,6 @@ export default {
   mounted() {
     this.renderChart(
       {
-        //주석
         labels: this.labels,
         datasets: this.datasets,
         // datasets :  [

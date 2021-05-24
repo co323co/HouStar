@@ -1,12 +1,36 @@
 <!-- 상세정보 페이지 -->
 <template>
-  <div class="pa-7">
-    <infra />
-    <trans />
-    <saftey />
-    <health />
-    <school />
-    <environment />
+  <div class="pa-6">
+    <!-- 첫번째 행 -->
+    <v-row>
+      <!-- 1열 -->
+      <v-col>
+        <infra />
+      </v-col>
+      <!-- 2열 -->
+      <v-col>
+        <trans />
+      </v-col>
+      <!-- 3열 -->
+      <v-col>
+        <saftey />
+      </v-col>
+    </v-row>
+    <!-- 두번째 행 -->
+    <v-row>
+      <!-- 1열 -->
+      <v-col>
+        <health />
+      </v-col>
+      <!-- 2열 -->
+      <v-col>
+        <school />
+      </v-col>
+      <!-- 3열 -->
+      <v-col>
+        <environment />
+      </v-col>
+    </v-row>
   </div>
 </template>
 <script>
