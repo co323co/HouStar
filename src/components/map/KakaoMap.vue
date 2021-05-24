@@ -5,11 +5,6 @@
   <div id="map" style="height: 400px"></div>
 </template>
 
-<script
-  type="text/javascript"
-  src="//dapi.kakao.com/v2/maps/sdk.js?appkey="
-  +kakaoService.getKey()
-></script>
 <script>
 import kakaoService from '@/core/services/kakao.service.js';
 export default {
@@ -18,6 +13,7 @@ export default {
     // { lat : 위도, lng : 경도 }
     init_pos: Object,
     // {"position" : {lat:"",lng:""}, "text" : "텍스트 내용" }  형태 마커의 리스트
+    //  text는 선택. 없으면 안띄워줌
     marker_list: Array,
   },
   mounted() {
@@ -50,18 +46,22 @@ export default {
       this.marker_list.forEach((marker) => {
         //커스텀 오버레이가 표시될 위치 객체, LatLng(위도, 경도)
         let position = new kakao.maps.LatLng(marker.position.lat, marker.position.lng);
-        let text = marker.text;
         // 커스텀 오버레이에 표시할 내용
         // HTML 문자열 또는 Dom Element
-        let content = `
-                  <div
-                    style="background-color: #FFFFFF;
-                    border:solid 3px #ffc129;
-                    border-radius: 30px 30px;
-                    padding:2px 7px;
-                    margin : 5px" >
-                      ⭐3.55
-                  </div>
+        let content;
+        if (marker.text) {
+          content = `
+                   <div
+                     style="background-color: #FFFFFF;
+                     border:solid 3px #ffc129;
+                     border-radius: 30px 30px;
+                     padding:2px 7px;
+                     margin : 5px" >
+                       ${marker.text}
+                   </div>
+                  `;
+        }
+        content += `
                   <img style="width: 30px" src=${imageSrc}>
         `;
         let customOverlay = new kakao.maps.CustomOverlay({

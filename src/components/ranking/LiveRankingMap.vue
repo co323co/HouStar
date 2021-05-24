@@ -22,7 +22,7 @@
 <script>
 import http from '@/core/services/http-common';
 import LiveRanking from '@/components/ranking/LiveRanking.vue';
-import KakaoMap from '@/components/KakaoMap.vue';
+import KakaoMap from '@/components/map/KakaoMap.vue';
 
 export default {
   components: {
@@ -63,7 +63,8 @@ export default {
       response = await http.get('/address/pos/dong/' + first_rating.dongcode);
       let pos = response.data;
       this.map_init_pos = { lat: pos.lat, lng: pos.lng };
-      this.map_marker_list = [{ position: this.map_init_pos, text: '⭐' + first_rating.total }];
+      let text = '⭐' + (first_rating.total * 1.0).toFixed(2);
+      this.map_marker_list = [{ position: this.map_init_pos, text: text }];
     },
   },
 };
