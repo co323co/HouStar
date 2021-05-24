@@ -19,7 +19,7 @@
             <mouse-over :msg="icon_rank[idx] + ' ' + dong.dongName" />
           </div>
         </v-col>
-        <v-col v-if="suggest_dong.family_type && currentUser.fmaily_type">
+        <v-col v-if="suggest_dong.family_type && currentUser.family_type">
           <h5 class="mb-3">{{ currentUser.family_type | familyType }} 취향저격 순위</h5>
           <div v-for="(dong, idx) in suggest_dong.family_type" :key="idx" @click="moveInfo(dong)">
             <mouse-over :msg="icon_rank[idx] + ' ' + dong.dongName" />
