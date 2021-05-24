@@ -1,5 +1,5 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-12" max-width="1000">
+  <v-card class="mx-auto my-12" max-width="1000">
     <v-row align="center">
       <v-col>
         <div class="text-center">
@@ -26,7 +26,6 @@
       ></v-col>
       <v-col>
         <v-card-text align="rignt">
-          {{ msg }}
           <v-textarea solo name="input-7-4" label="Solo textarea" v-model="content"></v-textarea>
           <button @click="register">등록</button>
         </v-card-text>
@@ -61,12 +60,12 @@ export default {
         .post('/dongreview', {
           content: this.content,
           dongcode: this.$store.state.dongStore.Sidogugundong.dongCode,
-          environment: this.environment,
-          health: this.health,
-          infra: this.infra,
-          safety: this.safety,
-          school: this.school,
-          trans: this.trans,
+          environment: this.environment + '',
+          health: this.health + '',
+          infra: this.infra + '',
+          safety: this.safety + '',
+          school: this.school + '',
+          trans: this.trans + '',
           userid: this.currentUser.userid,
         })
         .then(({ data }) => {
@@ -100,13 +99,13 @@ export default {
   data() {
     return {
       content: '',
-      dongcode: '',
-      environment: '',
-      health: '',
-      infra: '',
-      safety: '',
-      school: '',
-      trans: '',
+      dongcode: this.$store.state.dongStore.Sidogugundong.dongCode,
+      environment: null,
+      health: null,
+      infra: null,
+      safety: null,
+      school: null,
+      trans: null,
       userid: '',
     };
   },

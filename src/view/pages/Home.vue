@@ -15,6 +15,7 @@
     <v-flex>
       <live-ranking-map />
     </v-flex>
+    <BarChart />
   </v-container>
 </template>
 <script>
@@ -22,13 +23,14 @@ import Banner from '@/view/layout/Banner.vue';
 import DongSelectBar from '@/components/aboutdong/DongSelectBar.vue';
 import SuggestDong from '@/components/ranking/SuggestDong.vue';
 import LiveRankingMap from '@/components/ranking/LiveRankingMap.vue';
-
+import BarChart from '@/components/charts/BarChart.vue';
 export default {
   components: {
     Banner,
     SuggestDong,
     DongSelectBar,
     LiveRankingMap,
+    BarChart,
   },
 };
 </script>

@@ -17,37 +17,37 @@
           <div class="text-center">
             <label>환경</label>
             <v-rating
-              v-model="review.environment"
+              v-model="newReview.environment"
               background-color="purple lighten-3"
               color="purple"
             ></v-rating>
             <label>건강</label>
             <v-rating
-              v-model="review.health"
+              v-model="newReview.health"
               background-color="pink lighten-3"
               color="pink"
             ></v-rating>
             <label>인프라</label>
             <v-rating
-              v-model="review.infra"
+              v-model="newReview.infra"
               background-color="orange lighten-3"
               color="orange"
             ></v-rating>
             <label>안전</label>
             <v-rating
-              v-model="review.safety"
+              v-model="newReview.safety"
               background-color="green lighten-3"
               color="green"
             ></v-rating>
             <label>학군</label>
             <v-rating
-              v-model="review.school"
+              v-model="newReview.school"
               background-color="green lighten-3"
               color="green"
             ></v-rating>
             <label>대중교통</label>
             <v-rating
-              v-model="review.trans"
+              v-model="newReview.trans"
               background-color="indigo lighten-3"
               color="indigo"
             ></v-rating></div
@@ -167,7 +167,6 @@ export default {
       userid: this.review.userid,
     };
     console.log(this.newReview);
-    this.review = thie.newReview;
   },
   props: ['review'],
   methods: {
@@ -220,16 +219,16 @@ export default {
     },
   },
   filters: {
-    ageRange: function(ageRange) {
+    ageRange: function (ageRange) {
       if (!ageRange) return '';
       if (ageRange == 'over') return '60대 이상';
       else return ageRange + '대';
     },
-    familyType: function(type) {
+    familyType: function (type) {
       if (!type) return '';
       else return type;
     },
-    list: function(list) {
+    list: function (list) {
       if (!list) return '';
       let str = '';
       for (let i = 0; i < list.length - 1; i++) {

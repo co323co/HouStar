@@ -3,7 +3,11 @@ const dongStore = {
   state: {
     Sidogugundong: Object,
   },
-  getters: {},
+  getters: {
+    currentDongInfo(state) {
+      return state.Sidogugundong;
+    },
+  },
   mutations: {
     setSidogugundong(state, payload) {
       state.Sidogugundong = payload;

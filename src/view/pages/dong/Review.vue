@@ -72,17 +72,14 @@
           </v-container>
         </v-flex>
         <v-flex v-else>
-          <v-container>
-            리뷰를 작성하지 않으면 글을 볼 수 없습니다.
-          </v-container>
+          <v-container> 리뷰를 작성하지 않으면 글을 볼 수 없습니다. </v-container>
         </v-flex>
       </v-card>
     </v-container>
   </v-app>
 </template>
 <script>
-import { mapState } from 'vuex';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
 import HorizontalBar from '@/core/services/HorizontalBarChart.js';
@@ -227,7 +224,7 @@ export default {
       .then(({ data }) => {
         // Rating.module 에 있는 rating 객체에 얻어온 평균평점 객체 넣음
         this.$store.state.rate.rating = data;
-        this.totalRating = this.$store.state.rate.rating.total;
+        this.totalRating = this.$store.state.rate.rating.total * 1.0;
       })
       .catch(({ response }) => {
         console.log(response);
