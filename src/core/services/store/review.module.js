@@ -1,53 +1,47 @@
+import http from '@/core/services/http-common';
+
 const state = {
-  todos: [],
+  headerText: 'TODO it!',
+  reviews: [],
+  reviewsbyuserid: [],
 };
 const getters = {
-  totalTodoCount(state) {
-    return state.todos.length;
+  totalReviewCount(state) {
+    return state.reviews.length;
   },
-  completedTodoCount(state) {
-    return state.todos.filter((todo) => {
-      return todo.completed === true;
-    }).length;
+  reviews(state) {
+    return state.reviews;
   },
-  uncompletedTodoCount(state) {
-    return state.todos.filter((todo) => {
-      return todo.completed === false;
-    }).length;
+  reviewsbyuserid(state) {
+    return state.reviewsbyuserid;
   },
 };
 const mutations = {
-  ADD_TODO(state, todoItem) {
-    state.todos.push(todoItem);
+  setReviews(state, payload) {
+    state.reviews = payload;
   },
-  DELETE_TODO(state, todo) {
-    state.todos.splice(state.todos.indexOf(todo), 1);
-  },
-  UPDATE_TODO_STATUS(state, todo) {
-    state.todos = state.todos.map((todoItem) => {
-      if (todoItem === todo) {
-        return {
-          title: todo.title,
-          completed: !todo.completed,
-        };
-      }
-      return todoItem;
-    });
+  setReviewsByUserId(state, payload) {
+    state.reviewsbyuserid = payload;
   },
 };
 const actions = {
-  addTodo({ commit }, todoItem) {
-    commit('ADD_TODO', todoItem);
+  getReviews({ commit }, payload) {
+    http.get('/dongreview/dong/' + payload).then(({ data }) => {
+      console.log('dongcode로 해당 동에 대한 리뷰 다 가져오기 성공');
+      commit('setReviews', data);
+    });
   },
-  deleteTodo({ commit }, todo) {
-    commit('DELETE_TODO', todo);
-  },
-  updateTodoStatus({ commit }, todo) {
-    commit('UPDATE_TODO_STATUS', todo);
+  getReviewsByUserId({ commit }, payload) {
+    http.get('/dongreview/user/' + payload).then(({ data }) => {
+      console.log('userid로 해당 유저가 쓴 모든 리뷰 가져오기 성공');
+      console.log(data);
+      commit('setReviewsByUserId', data);
+    });
   },
 };
 
 export default {
+  namespaced: true,
   state,
   actions,
   mutations,
