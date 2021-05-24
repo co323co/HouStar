@@ -1,5 +1,5 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-12" max-width="1000">
+  <v-card class="mx-auto my-12" max-width="1000">
     <v-card-title>
       {{ review.userid }} | {{ review.age_range }}대 | {{ review.family_type }}</v-card-title
     >

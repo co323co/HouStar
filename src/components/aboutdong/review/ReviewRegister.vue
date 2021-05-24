@@ -10,13 +10,9 @@
             color="purple"
           ></v-rating>
           <label>건강</label>
-          <v-rating
-            v-model="ienvironment"
-            background-color="pink lighten-3"
-            color="pink"
-          ></v-rating>
+          <v-rating v-model="ihealth" background-color="pink lighten-3" color="pink"></v-rating>
           <label>인프라</label>
-          <v-rating v-model="ihealth" background-color="orange lighten-3" color="orange"></v-rating>
+          <v-rating v-model="iinfra" background-color="orange lighten-3" color="orange"></v-rating>
           <label>안전</label>
           <v-rating v-model="isafety" background-color="green lighten-3" color="green"></v-rating>
           <label>학군</label>
@@ -45,7 +41,14 @@ export default {
     register() {},
   },
   data() {
-    return {};
+    return {
+      ienvironment: '',
+      ihealth: '',
+      iinfra: '',
+      isafety: '',
+      ischool: '',
+      itrans: '',
+    };
   },
 };
 </script>

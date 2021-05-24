@@ -92,7 +92,7 @@ export default {
   mounted() {
     console.log('mounted');
     console.log(this.$store.state.dongStore.Sidogugundong.dongCode);
-    // 해당 동의 평균 별점정보를가져옴/////
+    // 해당 동의 평균 별점정보를가져옴/////ㅁㅁㅁㅁㅁㅁ
     http
       .get('/dongreview/avg-rating/' + this.$store.state.dongStore.Sidogugundong.dongCode)
       .then(({ data }) => {
