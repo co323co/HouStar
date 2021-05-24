@@ -26,6 +26,42 @@
         <v-flex>
           <review-register />
         </v-flex>
+
+        <!-- 리뷰 셀렉트박스로 필터링하기 -->
+
+        <v-row class="no-gutters justify-sm-center">
+          <v-col class="mx-2">
+            <v-select
+              hint="선호 태그"
+              label="ALL"
+              v-model="tag_val"
+              :items="tags"
+              no-data-text="항목이 없습니다"
+              dense
+            ></v-select>
+          </v-col>
+          <v-col class="mx-2">
+            <v-select
+              hint="가구 타입"
+              label="ALL"
+              v-model="familyType_val"
+              :items="familyTypes"
+              no-data-text="항목이 없습니다"
+              dense
+            ></v-select>
+          </v-col>
+          <v-col class="mx-2">
+            <v-select
+              hint="연령대"
+              label="ALL"
+              v-model="ageRange_val"
+              :items="ageRanges"
+              no-data-text="항목이 없습니다"
+              dense
+            ></v-select>
+          </v-col>
+        </v-row>
+
         <!-- 리뷰 리스트 뿌리기 -->
         <v-flex>
           <review-list />
@@ -86,7 +122,7 @@ export default {
     // namespace true로 할경우 모듈명 / action 명
     this.$store.dispatch('review/getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
     // 해당 동에 대한 로그인한 유저의 모든 리뷰 가져오기
-    //console.log(this.currentUser.userid);
+    console.log('this.currentUser.userid', this.currentUser);
     this.$store.dispatch('review/getReviewsByUserId', this.currentUser.userid);
   },
   mounted() {

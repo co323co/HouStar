@@ -1,8 +1,9 @@
 <template>
   <v-card class="mx-auto my-12" max-width="1000">
     <v-card-title>
-      {{ review.userid }} | {{ review.age_range }}대 | {{ review.family_type }}</v-card-title
-    >
+      {{ review.userid }} | {{ review.age_range }}대 | {{ review.family_type }} |
+      {{ review.tag }}
+    </v-card-title>
     <v-row align="center">
       <v-col>
         <div class="text-center">
@@ -59,10 +60,46 @@
 <script>
 // import { mapActions } from 'vuex';
 export default {
-  props: ['review'],
-  methods: { deleteTodo() {} },
+  beforeMount() {
+    this.convertTagToList();
+    console.log('mounted rrrrrr');
+    console.log(this.review.tag);
+  },
   data() {
     return {};
+  },
+  props: ['review'],
+  methods: {
+    deleteTodo() {},
+    convertTagToList() {
+      console.log('convertTagToList if문 밖에');
+
+      if (this.review.tag) {
+        this.review.tag = this.review.tag.split(',');
+        console.log('convertTagToList');
+        console.log(this.review.tag);
+      }
+    },
+  },
+  filters: {
+    ageRange: function(ageRange) {
+      if (!ageRange) return '';
+      if (ageRange == 'over') return '60대 이상';
+      else return ageRange + '대';
+    },
+    familyType: function(type) {
+      if (!type) return '';
+      else return type;
+    },
+    list: function(list) {
+      if (!list) return '';
+      let str = '';
+      for (let i = 0; i < list.length - 1; i++) {
+        str += list[i] + '     ·     ';
+      }
+      str += list[list.length - 1];
+      return str;
+    },
   },
 };
 </script>
