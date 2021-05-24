@@ -3,7 +3,7 @@
     <!-- 지도를 담을 영역 -->
     <div id="map" style="height: 400px"></div>
     <!-- 지도의 띄울 커스텀 오버레이 DOM -->
-    <v-badge id="dot" content="3.56" value="33" color="purple" overlap bordered>
+    <v-badge id="dot" content="⭐3.56" value="33" color="purple" overlap>
       <v-icon large color="red"> mdi-map-marker </v-icon>
     </v-badge>
   </div>
@@ -17,7 +17,15 @@
 <script>
 import kakaoService from '@/core/services/kakao.service.js';
 export default {
+  props: {
+    // 좌표 넘길 때
+    // { lat : 위도, lng : 경도 }
+    init_pos: Object,
+    //  { lat : 위도, lng : 경도 } 형태의 좌표 리스트
+    marker_poss: Object,
+  },
   mounted() {
+    console.log('map 시작 위치 : ', this.init_pos);
     //실제 지도를 그리는 Javascript API를 불러오기
     if (window.kakao && window.kakao.maps) {
       this.initMap();
@@ -34,9 +42,8 @@ export default {
       const container = document.querySelector('#map');
       ///지도를 생성할 때 필요한 기본 옵션
       const options = {
-        //지도의 중심좌표.
-        //청운동
-        center: new kakao.maps.LatLng(37.58936620000001, 126.9697192),
+        //지도의 중심좌표. 위도, 경도
+        center: new kakao.maps.LatLng(this.init_pos.lat, this.init_pos.lng),
         //지도의 레벨(확대, 축소 정도)
         level: 3,
       };

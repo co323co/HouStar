@@ -3,28 +3,11 @@
     <v-row style="text-align: center">
       <v-col class="rank">
         <div style="height: 30%"></div>
-        <h4>🏆 실시간 랭킹</h4>
-
-        {{ rating_list }}
-        <div class="pa-5">
-          <div v-for="(dong, idx) in dong_list.slice(0, 3)" :key="idx" @click="moveInfo(dong)">
-            <mouse-over :msg="idx + 1 + `.  ` + dong.dongName" />
-          </div>
-        </div>
+        <live-ranking :dong_list="dong_list.slice(0, 5)" />
       </v-col>
       <v-col cols="8">
         <v-row class="no-gutters">
           <v-spacer></v-spacer>
-          <v-col class="mx-2">
-            <v-select
-              hint="선호 태그"
-              label="ALL"
-              v-model="tag_val"
-              :items="tags"
-              no-data-text="항목이 없습니다"
-              dense
-            ></v-select>
-          </v-col>
           <v-col class="mx-2">
             <v-select
               hint="가구 타입"
@@ -47,29 +30,26 @@
           </v-col>
         </v-row>
         <v-divider></v-divider>
-        <kakao-map />
+        <kakao-map :init_pos="map_init_pos" />
       </v-col>
     </v-row>
   </v-layout>
 </template>
 <script>
 import http from '@/core/services/http-common';
-import MouseOver from '@/components/ranking/MouseOverText.vue';
+import LiveRanking from '@/components/ranking/LiveRanking.vue';
 import KakaoMap from '@/components/KakaoMap.vue';
+
 export default {
   components: {
-    MouseOver,
+    LiveRanking,
     KakaoMap,
   },
   data() {
     return {
+      map_init_pos: { lat: '0', lng: '0' },
       rating_list: [],
       dong_list: [],
-      //실시간 랭킹에 띄워줄 동들
-      rank_dong_list: [],
-      //선호태그 목록 (멀티선택)
-      tag_val: [],
-      tags: ['인프라', '대중교통', '안전', '건강', '학군', '환경'],
       //가구 형태 목록 (1선택)
       familyType_val: null,
       familyTypes: ['자취생', '직장인', '신혼부부', '일반가족'],
@@ -86,9 +66,16 @@ export default {
       ],
     };
   },
-
   mounted() {
     this.getList();
+  },
+  created() {
+    let first_dong = this.dong_list[0];
+    console.log(this.dong_list);
+    // let list = this.dong_list;
+
+    // console.log(list[0]);
+    // this.map_init_pos = {}
   },
   methods: {
     async getList() {
@@ -106,17 +93,6 @@ export default {
       }
     },
   },
-  moveInfo(dongDto) {
-    //   console.log(this.$store.state.dongStore.Sidogugundong);
-    this.$store.state.dongStore.Sidogugundong = dongDto;
-    //   console.log(this.$store.state.dongStore.Sidogugundong.dongName);
-    this.$router.push('dong-info');
-  },
 };
 </script>
-<style scoped>
-.rank h4 {
-  color: coral;
-  font-weight: bold;
-}
-</style>
+<style scoped></style>
