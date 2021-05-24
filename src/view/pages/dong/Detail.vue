@@ -13,7 +13,7 @@
       </v-col>
       <!-- 3열 -->
       <v-col>
-        <saftey />
+        <safety />
       </v-col>
     </v-row>
     <!-- 두번째 행 -->
@@ -36,7 +36,7 @@
 <script>
 import Infra from './detail/Infra.vue';
 import Trans from './detail/Trans.vue';
-import Saftey from './detail/Health.vue';
+import Safety from './detail/Safety.vue';
 import Health from './detail/Health.vue';
 import School from './detail/School.vue';
 import Environment from './detail/Environment.vue';
@@ -46,7 +46,7 @@ export default {
   components: {
     Infra,
     Trans,
-    Saftey,
+    Safety,
     Health,
     School,
     Environment,

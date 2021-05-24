@@ -6,12 +6,15 @@ export default {
   props: {
     labels: Array,
     datasets: Array,
+    options: Object,
   },
   mounted() {
     this.renderChart(
       {
+        //주석
         labels: this.labels,
         datasets: this.datasets,
+        options: this.options,
         // datasets :  [
         //       {
         //         label: 'Data One',
