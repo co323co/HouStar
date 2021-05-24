@@ -1,7 +1,7 @@
 <template>
   <div id="kt_header" ref="kt_header" class="header flex-column header-fixed">
     <div class="header-top">
-      <div class="container">
+      <div class="container pa-0">
         <div class="d-none d-lg-flex align-items-center mr-3">
           <!--begin::Logo-->
           <div class="mr-20">
@@ -21,18 +21,6 @@
                 role="tab"
                 aria-selected="true"
                 >하우스타</a
-              >
-            </li>
-            <li class="nav-item mr-3">
-              <a
-                class="nav-link py-4 px-6"
-                @click="setActiveTab"
-                data-tab="1"
-                data-toggle="tab"
-                href="#"
-                role="tab"
-                aria-selected="true"
-                >관리자</a
               >
             </li>
           </ul>
@@ -56,23 +44,11 @@
                 >하우스타</a
               >
             </li>
-            <li class="nav-item mr-2">
-              <a
-                href="#"
-                class="nav-link btn btn-clean"
-                @click="setActiveTab"
-                data-tab="1"
-                data-toggle="tab"
-                data-target="#kt_header_tab_2"
-                role="tab"
-                >관리자</a
-              >
-            </li>
           </ul>
           <b-tabs class="hide-tabs" v-model="tabIndex">
             <!-- 하우스타 메뉴에 띄울 하단메뉴 -->
             <b-tab>
-              <div class="tab-pane py-5 show active">
+              <div class="tab-pane p-5 show active">
                 <!--begin::Menu-->
                 <div
                   id="kt_header_menu"
@@ -80,20 +56,6 @@
                   class="header-menu header-menu-mobile header-menu-layout-default"
                 >
                   <HSMenu></HSMenu>
-                </div>
-                <!--end::Menu-->
-              </div>
-            </b-tab>
-            <!-- 관리자 메뉴에 띄울 하단메뉴 -->
-            <b-tab class="tab-pane p-5 justify-content-between">
-              <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
-                <!--begin::Menu-->
-                <div
-                  id="kt_header_menu"
-                  ref="kt_header_menu"
-                  class="header-menu header-menu-mobile header-menu-layout-default"
-                >
-                  <KTMenu></KTMenu>
                 </div>
                 <!--end::Menu-->
               </div>
@@ -110,7 +72,6 @@ import { mapGetters } from 'vuex';
 import KTTopbar from '@/view/layout/header/Topbar.vue';
 import KTLayoutHeader from '@/assets/js/layout/base/header.js';
 import KTLayoutHeaderMenu from '@/assets/js/layout/base/header-menu.js';
-import KTMenu from '@/view/layout/header/Menu.vue';
 import HSMenu from '@/view/layout/header/HouStarMenu.vue';
 
 export default {
@@ -122,7 +83,6 @@ export default {
   },
   components: {
     KTTopbar,
-    KTMenu,
     HSMenu,
   },
   mounted() {
