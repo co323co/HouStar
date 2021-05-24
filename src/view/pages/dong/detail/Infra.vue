@@ -22,7 +22,12 @@
         <div v-if="show">
           <v-divider></v-divider>
           <v-flex>
-            <BarChart v-if="datasets" :labels="labels" :datasets="datasets" />
+            <BarChart
+              style="width: 300px; height: 300px"
+              v-if="datasets"
+              :labels="labels"
+              :datasets="datasets"
+            />
           </v-flex>
         </div>
       </v-expand-transition>
