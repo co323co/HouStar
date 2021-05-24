@@ -98,7 +98,7 @@ export default {
     setTimeout(() => {
       // Remove page loader after some time
       this.$store.dispatch(REMOVE_BODY_CLASSNAME, 'page-loading');
-    }, 2000);
+    }, 1000);
   },
   methods: {
     footerLayout(type) {

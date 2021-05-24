@@ -1,18 +1,30 @@
 <template lang="">
   <v-layout class="pa-5">
-    <v-row>
-      <v-col>
-        <div>
-          <h4>🏆 실시간 랭킹</h4>
-          <div class="pa-5">
-            <div v-for="(dong, idx) in dong_list" :key="idx" @click="moveInfo(dong)">
-              <mouse-over :msg="idx + 1 + `.  ` + dong.dongName" />
-            </div>
+    <v-row style="text-align: center">
+      <v-col class="rank">
+        <div style="height: 30%"></div>
+        <h4>🏆 실시간 랭킹</h4>
+        <div class="pa-5">
+          <div v-for="(dong, idx) in dong_list" :key="idx" @click="moveInfo(dong)">
+            <mouse-over :msg="idx + 1 + `.  ` + dong.dongName" />
           </div>
         </div>
       </v-col>
-      <v-col>
-        <div style="text-align: center">맵</div>
+      <v-col cols="8">
+        <v-row class="no-gutters">
+          <v-spacer></v-spacer>
+          <v-col class="mx-1">
+            <v-select no-data-text="항목이 없습니다" outlined dense></v-select>
+          </v-col>
+          <v-col class="mx-1">
+            <v-select no-data-text="항목이 없습니다" outlined dense></v-select>
+          </v-col>
+          <v-col class="mx-1">
+            <v-select no-data-text="항목이 없습니다" outlined dense></v-select>
+          </v-col>
+        </v-row>
+        <v-divider></v-divider>
+        <kakao-map />
       </v-col>
     </v-row>
   </v-layout>
@@ -20,9 +32,11 @@
 <script>
 import http from '@/core/services/http-common';
 import MouseOver from '@/components/ranking/MouseOverText.vue';
+import KakaoMap from '@/components/KakaoMap.vue';
 export default {
   components: {
     MouseOver,
+    KakaoMap,
   },
   data() {
     return {
@@ -57,7 +71,8 @@ export default {
 };
 </script>
 <style scoped>
-v-layout {
-  background-color: white;
+.rank h4 {
+  color: coral;
+  font-weight: bold;
 }
 </style>

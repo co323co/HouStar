@@ -1,13 +1,14 @@
 <template lang="">
   <div>
     <!-- 시군구 select -->
-    <div class="bg-secondary section pt-2 pb-2">
+    <div class="amber lighten-4 section pt-2 pb-2">
       <div class="sorting-filters text-center mt-10 d-flex justify-content-center">
         <div class="form-group mr-2">
           <v-container>
             <v-row dense>
               <v-col cols="4">
                 <v-autocomplete
+                  no-data-text="항목이 없습니다"
                   v-model="sido"
                   :items="sidos"
                   item-text="sidoName"
@@ -20,6 +21,7 @@
               </v-col>
               <v-col cols="4">
                 <v-autocomplete
+                  no-data-text="항목이 없습니다"
                   v-model="gugun"
                   :items="guguns"
                   item-text="gugunName"
@@ -33,6 +35,7 @@
               </v-col>
               <v-col cols="4">
                 <v-autocomplete
+                  no-data-text="항목이 없습니다"
                   v-model="dong"
                   :items="dongs"
                   item-text="dongName"

@@ -1,5 +1,6 @@
 <template lang="">
   <!-- 배너 사진 띄우는 레이아웃 -->
+  <!-- cycle="cycle" -->
   <v-layout>
     <v-carousel
       v-ripple
@@ -7,7 +8,6 @@
       delimiter-icon="mdi-minus"
       :show-arrows-on-hover="true"
       height="500"
-      cycle="cycle"
       interval="4000"
       tag="#tag"
     >

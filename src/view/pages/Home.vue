@@ -12,7 +12,9 @@
       </v-flex>
     </v-layout>
     <v-divider></v-divider>
-    <live-ranking-map />
+    <v-flex>
+      <live-ranking-map />
+    </v-flex>
   </v-container>
 </template>
 <script>
@@ -33,5 +35,9 @@ export default {
 <style scoped>
 h2 {
   text-align: center;
+}
+.test {
+  background-size: cover;
+  background: black;
 }
 </style>
