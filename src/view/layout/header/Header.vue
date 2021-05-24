@@ -1,7 +1,7 @@
 <template>
   <div id="kt_header" ref="kt_header" class="header flex-column header-fixed">
     <div class="header-top">
-      <div class="container">
+      <div class="container pa-0">
         <div class="d-none d-lg-flex align-items-center mr-3">
           <!--begin::Logo-->
           <div class="mr-20">
@@ -72,7 +72,7 @@
           <b-tabs class="hide-tabs" v-model="tabIndex">
             <!-- 하우스타 메뉴에 띄울 하단메뉴 -->
             <b-tab>
-              <div class="tab-pane py-5 show active">
+              <div class="tab-pane p-5 show active">
                 <!--begin::Menu-->
                 <div
                   id="kt_header_menu"
