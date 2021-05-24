@@ -1,8 +1,14 @@
 <template>
   <v-card class="mx-auto my-12" max-width="1000">
     <v-card-title>
-      {{ review.userid }} | {{ review.age_range }}대 | {{ review.family_type }} |
-      {{ taglist | list }}
+      <v-row v-if="review">
+        <p v-if="review.userid">{{ review.userid }} |</p>
+        <p v-if="review.age_range">{{ review.age_range }}대 |</p>
+        <p v-if="review.family_type">{{ review.family_type }} |</p>
+        <p v-if="review.tag">
+          {{ review.tag | list }}
+        </p>
+      </v-row>
     </v-card-title>
     <v-row align="center">
       <v-col>
@@ -37,7 +43,7 @@
             background-color="green lighten-3"
             color="green"
           ></v-rating>
-          <label>교통</label>
+          <label>대중교통</label>
           <v-rating
             v-model="review.trans"
             background-color="indigo lighten-3"
@@ -62,8 +68,8 @@
 export default {
   beforeMount() {
     this.convertTagToList();
-    console.log('mounted rrrrrr');
-    console.log(this.review.tag);
+    //  console.log('mounted rrrrrr');
+    //  console.log(this.review.tag);
   },
   data() {
     return {
@@ -74,12 +80,12 @@ export default {
   methods: {
     deleteTodo() {},
     convertTagToList() {
-      console.log('convertTagToList if문 밖에');
+      //console.log('convertTagToList if문 밖에');
 
       if (this.review.tag) {
         this.taglist = this.review.tag.split(',');
-        console.log('convertTagToList');
-        console.log(this.taglist);
+        // console.log('convertTagToList');
+        //  console.log(this.taglist);/
       }
     },
   },
@@ -97,7 +103,7 @@ export default {
       if (!list) return '';
       let str = '';
       for (let i = 0; i < list.length - 1; i++) {
-        str += list[i] + '     ·     ';
+        str += list[i];
       }
       str += list[list.length - 1];
       return str;

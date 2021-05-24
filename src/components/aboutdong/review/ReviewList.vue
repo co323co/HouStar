@@ -1,20 +1,20 @@
-<template>
-  <v-container>
-    <review-list-item v-for="(review, idx) in reviews" :key="idx" :review="review" />
-  </v-container>
-</template>
+<template> </template>
 <script>
-import ReviewListItem from './ReviewListItem.vue';
-import { mapState } from 'vuex';
 export default {
+  data() {
+    return {};
+  },
   components: { ReviewListItem },
+
   computed: {
     // namespace true로 할 경우 state는 그냥 접근 가능.
-    ...mapState('review', ['reviews']),
+    //해당 동에 대한 리뷰 : reviews
   },
   created() {
-    console.log('ReviewList의 reviews');
-    console.log(this.reviews);
+    //console.log('ReviewList의 reviews');
+    //console.log(this.reviews);
+    //created 될 때 보여줄 show_list 를 복사
+    //console.log(this.show_list);
   },
 };
 </script>
