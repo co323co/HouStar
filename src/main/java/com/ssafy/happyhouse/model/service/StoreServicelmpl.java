@@ -16,8 +16,8 @@ public class StoreServicelmpl implements StoretService {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<StoreDto> getinfo(String dong) {		
-		return sqlSession.getMapper(StoreMapper.class).getinfo(dong);
+	public List<StoreDto> getinfo(String dongcode) {		
+		return sqlSession.getMapper(StoreMapper.class).getinfo(dongcode);
 	}
 	
 

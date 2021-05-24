@@ -1,12 +1,23 @@
 package com.ssafy.happyhouse.model.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "StoreDto : 상가 정보", description = "상가의 정보를 담고 있습니다.")
 public class StoreDto {
+	@ApiModelProperty("상호명")
 	private String name;		//상호명 
+	@ApiModelProperty("상권업종대분류명")
 	private String type;		//상권업종대분류명 
+	@ApiModelProperty("법정동코드")
 	private String dongcode; 	//법정동코드
+	@ApiModelProperty("법정동명")
 	private String dongname;	//법정동명 
+	@ApiModelProperty("도로명주소")
 	private String address;		//도로명주소 
+	@ApiModelProperty("위도")
 	private String lat;			//위도 
+	@ApiModelProperty("경도")
 	private String lng;			//경도
 	
 	public StoreDto(String name, String type, String dongcode, String dongname, String address, String lat,

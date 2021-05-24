@@ -12,7 +12,7 @@
 	<select id="getinfo" parameterType="string" resultType="storeDto">
 		select name, type, dongname, dongcode, address, lat, lng
 		from store_view
-		where dongcode = #{value}
+		where dongcode = #{dongcode}
 	</select>
 	
 </mapper>	
