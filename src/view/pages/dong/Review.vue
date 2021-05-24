@@ -88,7 +88,7 @@ export default {
   },
 };
 </script>
-<style scope>
+<style scoped>
 .firstClass {
   padding-top: 30px;
   height: 300px;

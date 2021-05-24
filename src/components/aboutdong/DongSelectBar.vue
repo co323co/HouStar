@@ -120,8 +120,7 @@ export default {
   },
 };
 </script>
-x`
-<style>
+<style scoped>
 .v-list {
   background-color: white;
 }

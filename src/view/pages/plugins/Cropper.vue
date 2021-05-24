@@ -22,13 +22,7 @@
       </div>
     </b-alert>
 
-    <input
-      ref="input"
-      type="file"
-      name="image"
-      accept="image/*"
-      @change="setImage"
-    />
+    <input ref="input" type="file" name="image" accept="image/*" @change="setImage" />
     <div class="card card-custom content">
       <div class="card-body">
         <div class="row">
@@ -94,7 +88,7 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div style="min-height:209px">
+            <div style="min-height: 209px">
               <p>Preview</p>
               <div class="w-100 cropped-img mt-2 preview secondary" />
             </div>
@@ -113,24 +107,24 @@
 </template>
 
 <script>
-import VueCropper from "vue-cropperjs";
-import "cropperjs/dist/cropper.css";
-import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
+import VueCropper from 'vue-cropperjs';
+import 'cropperjs/dist/cropper.css';
+import { SET_BREADCRUMB } from '@/core/services/store/breadcrumbs.module';
 
 export default {
-  name: "Cooper-1",
+  name: 'Cooper-1',
   components: {
-    VueCropper
+    VueCropper,
   },
   data() {
     return {
-      imgSrc: "media/stock-600x400/img-9.jpg",
-      cropImg: "",
-      fileExtension: "png"
+      imgSrc: 'media/stock-600x400/img-9.jpg',
+      cropImg: '',
+      fileExtension: 'png',
     };
   },
   mounted() {
-    this.$store.dispatch(SET_BREADCRUMB, [{ title: "Cropper" }]);
+    this.$store.dispatch(SET_BREADCRUMB, [{ title: 'Cropper' }]);
   },
   methods: {
     cropImage() {
@@ -148,16 +142,16 @@ export default {
     },
     setImage(e) {
       const file = e.target.files[0];
-      this.fileExtension = file.name.split(".").pop();
-      if (file.type.indexOf("image/") === -1) {
-        alert("Please select an image file");
+      this.fileExtension = file.name.split('.').pop();
+      if (file.type.indexOf('image/') === -1) {
+        alert('Please select an image file');
         return;
       }
 
-      if (typeof FileReader === "function") {
+      if (typeof FileReader === 'function') {
         const reader = new FileReader();
 
-        reader.onload = event => {
+        reader.onload = (event) => {
           this.imgSrc = event.target.result;
           // rebuild cropperjs with the updated source
           this.$refs.cropper.replace(event.target.result);
@@ -165,7 +159,7 @@ export default {
 
         reader.readAsDataURL(file);
       } else {
-        alert("Sorry, FileReader API not supported");
+        alert('Sorry, FileReader API not supported');
       }
     },
     showFileChooser() {
@@ -175,31 +169,31 @@ export default {
       if (this.cropImg) {
         var extention = this.fileExtension;
         var href = this.cropImg;
-        var link = document.createElement("a");
+        var link = document.createElement('a');
         link.addEventListener(
-          "click",
-          function() {
+          'click',
+          function () {
             link.href = href;
-            link.download = "cropper-img." + extention;
+            link.download = 'cropper-img.' + extention;
             // console.log(link.download);
           },
           false
         );
         link.click();
       } else {
-        alert("Please, crop image before download it");
+        alert('Please, crop image before download it');
       }
     },
     zoom(percent) {
       this.$refs.cropper.relativeZoom(percent);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-input[type="file"] {
+<style scoped>
+input[type='file'] {
   display: none;
 }
 

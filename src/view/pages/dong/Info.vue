@@ -44,7 +44,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .v-application a,
 span {
   color: black;

@@ -19,7 +19,7 @@ export default {
     isAble: false,
   }),
   mounted() {
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       if (this.$store.state.rate.rating) {
         console.log('info header가 mounted');
         this.Rating = this.$store.state.rate.rating.total;
@@ -35,7 +35,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .vue-star-rating-rating-text {
   color: gray;
 }
