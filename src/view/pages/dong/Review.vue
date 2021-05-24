@@ -66,9 +66,14 @@
         </v-row>
 
         <!-- 리뷰 리스트 뿌리기 -->
-        <v-flex>
+        <v-flex v-if="isWrite">
           <v-container>
             <review-list-item v-for="(review, idx) in show_list" :key="idx" :review="review" />
+          </v-container>
+        </v-flex>
+        <v-flex v-else>
+          <v-container>
+            리뷰를 작성하지 않으면 글을 볼 수 없습니다.
           </v-container>
         </v-flex>
       </v-card>
@@ -87,16 +92,15 @@ import ReviewRegister from '@/components/aboutdong/review/ReviewRegister.vue';
 
 export default {
   methods: {
-    //1 선호태그 변경시
-    changeTag() {
+    checkBar() {
       // 선호태그 감지
       if (this.tag_val) {
         console.log(this.reviews);
         this.show_list = this.reviews.filter((reviews) => {
           return reviews.tag.includes(this.tag_val);
         });
-        console.log('filter 거친 this.show_list ');
-        console.log(this.show_list);
+        //    console.log('filter 거친 this.show_list ');
+        // console.log(this.show_list);
       }
       // 가구타입 감지
       if (this.familyType_val) {
@@ -104,8 +108,8 @@ export default {
         this.show_list = this.show_list.filter((reviews) => {
           if (this.familyType_val == reviews.family_type) return reviews;
         });
-        console.log('가구타입 filter 거친 this.show_list ');
-        console.log(this.show_list);
+        //  console.log('가구타입 filter 거친 this.show_list ');
+        //  console.log(this.show_list);
       }
       // 연령대 감지
       if (this.ageRange_val) {
@@ -113,80 +117,46 @@ export default {
         this.show_list = this.show_list.filter((reviews) => {
           if (this.ageRange_val == reviews.age_range) return reviews;
         });
-        console.log('연령대 filter 거친 this.show_list ');
-        console.log(this.show_list);
+        //  console.log('연령대 filter 거친 this.show_list ');
+        //  console.log(this.show_list);
       }
+    },
+    //1 선호태그 변경시
+    changeTag() {
+      this.checkBar();
     },
     //2 가구형태 변경시
     changeFamilyType() {
-      // 선호태그 감지
-      if (this.tag_val) {
-        console.log(this.reviews);
-        this.show_list = this.reviews.filter((reviews) => {
-          return reviews.tag.includes(this.tag_val);
-        });
-        console.log('filter 거친 this.show_list ');
-        console.log(this.show_list);
-      }
-      // 가구타입 감지
-      if (this.familyType_val) {
-        console.log(this.familyType_val);
-        this.show_list = this.show_list.filter((reviews) => {
-          if (this.familyType_val == reviews.family_type) return reviews;
-        });
-        console.log('가구타입 filter 거친 this.show_list ');
-        console.log(this.show_list);
-      }
-      // 연령대 감지
-      if (this.ageRange_val) {
-        console.log(this.ageRange_val);
-        this.show_list = this.show_list.filter((reviews) => {
-          if (this.ageRange_val == reviews.age_range) return reviews;
-        });
-        console.log('연령대 filter 거친 this.show_list ');
-        console.log(this.show_list);
-      }
+      this.checkBar();
     },
     //3 나이대 변경시
     changeAge() {
-      // 선호태그 감지
-      if (this.tag_val) {
-        console.log(this.reviews);
-        this.show_list = this.reviews.filter((reviews) => {
-          return reviews.tag.includes(this.tag_val);
-        });
-        console.log('filter 거친 this.show_list ');
-        console.log(this.show_list);
-      }
-      // 가구타입 감지
-      if (this.familyType_val) {
-        console.log(this.familyType_val);
-        this.show_list = this.show_list.filter((reviews) => {
-          if (this.familyType_val == reviews.family_type) return reviews;
-        });
-        console.log('가구타입 filter 거친 this.show_list ');
-        console.log(this.show_list);
-      }
-      // 연령대 감지
-      if (this.ageRange_val) {
-        console.log(this.ageRange_val);
-        this.show_list = this.show_list.filter((reviews) => {
-          if (this.ageRange_val == reviews.age_range) return reviews;
-        });
-        console.log('연령대 filter 거친 this.show_list ');
-        console.log(this.show_list);
-      }
+      this.checkBar();
+    },
+  },
+  watch: {
+    reviews(val) {
+      // console.log('reviews 변경되었음');
+      // console.log(val);
+      this.show_list = val;
+      this.checkBar();
+    },
+    reviewsbyuserid(val) {
+      console.log('whatch');
+      console.log(val);
+      if (val.length != 0) this.isWrite = true;
     },
   },
   computed: {
     // namespace true로 할 경우 module명 / getter 이름
     // 다른 모듈이니까 분리해서 써주기 review만 namespace true.
-    ...mapGetters('review', ['totalReviewCount']),
+    ...mapGetters('review', ['totalReviewCount', 'reviews', 'reviewsbyuserid']),
     ...mapGetters(['currentUser']),
-    ...mapState('review', ['reviews']),
+    // ...mapState('review', ['reviews']),
   },
   data() {
     return {
+      isWrite: false,
       //선호 태그 목록 (1선택)
       tag_val: null,
       tags: ['인프라', '대중교통', '안전', '건강', '학군', '환경'],
@@ -243,9 +213,12 @@ export default {
     // 해당 동에 대한 로그인한 유저의 모든 리뷰 가져오기
     // console.log('this.currentUser.userid', this.reviews);
     this.$store.dispatch('review/getReviewsByUserId', this.currentUser.userid);
+    if (this.$store.state.review.reviewsbyuserid.length != 0) this.isWrite = true;
+    // console.log(this.$store.state.review.reviewsbyuserid);
+    //console.log('this.$store.state.review.reviewsbyuserid');
     //created 될 때 보여줄 show_list 를 복사
     this.show_list = [...this.reviews];
-    console.log(this.show_list);
+    // console.log(this.show_list);
   },
   mounted() {
     // 해당 동의 평균 별점정보를가져옴/////ㅁㅁㅁㅁㅁㅁ
@@ -260,8 +233,8 @@ export default {
         console.log(response);
       });
     //새로얻어오기
-    this.$store.dispatch('review/getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
-    this.show_list = [...this.reviews];
+    // this.$store.dispatch('review/getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
+    //  this.show_list = [...this.reviews];
   },
 };
 </script>

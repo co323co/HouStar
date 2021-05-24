@@ -33,8 +33,8 @@ const actions = {
   },
   getReviewsByUserId({ commit }, payload) {
     http.get('/dongreview/user/' + payload).then(({ data }) => {
-      console.log('userid로 해당 유저가 쓴 모든 리뷰 가져오기 성공');
-      console.log(data);
+      //console.log('userid로 해당 유저가 쓴 모든 리뷰 가져오기 성공');
+      // console.log(data);
       commit('setReviewsByUserId', data);
     });
   },

@@ -26,6 +26,7 @@
       ></v-col>
       <v-col>
         <v-card-text align="rignt">
+          {{ msg }}
           <v-textarea solo name="input-7-4" label="Solo textarea" v-model="content"></v-textarea>
           <button @click="register">등록</button>
         </v-card-text>
@@ -36,18 +37,26 @@
 
 <script>
 import http from '@/core/services/http-common';
-import { mapState } from 'vuex';
+// import { mapState } from 'vuex';
 import { mapGetters } from 'vuex';
 export default {
+  // props: ['msg'],
+  // watch: {
+  //   msg: function() {
+  //     console.log('변경이 감지되었습니다');
+  //   },
+  // },
   computed: {
     ...mapGetters(['currentUser']),
   },
   methods: {
     register() {
-      // console.log(this.show_list);
+      // console.log(this.show_list);ㅋㅋ
+      // this.msg = '등록이 완료되었습니다';
       console.log('등록버튼누름');
-      console.log(this.currentUser.userid);
-      console.log(this.$store.state.dongStore.Sidogugundong.dongCode);
+      //console.log(this.currentUser.userid);
+      // console.log(this.$store.state.dongStore.Sidogugundong.dongCode);
+      //이미 해당 동에 글을 썼던 사람이면
       http
         .post('/dongreview', {
           content: this.content,
@@ -74,7 +83,17 @@ export default {
           this.safety = '';
           this.school = '';
           this.trans = '';
-          // this.$router.push({ name: 'review' });
+          // store에 있는거 갱신해주기
+          this.$store.dispatch(
+            'review/getReviews',
+            this.$store.state.dongStore.Sidogugundong.dongCode
+          );
+          // user가 새글을 입력했는지 갱신해주기
+          this.$store.dispatch('review/getReviewsByUserId', this.currentUser.userid);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          alert('리뷰는 한번만 등록가능합니다');
         });
     },
   },
