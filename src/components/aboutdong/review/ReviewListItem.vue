@@ -2,7 +2,7 @@
   <v-card class="mx-auto my-12" max-width="1000">
     <v-card-title>
       {{ review.userid }} | {{ review.age_range }}대 | {{ review.family_type }} |
-      {{ review.tag | list }}
+      {{ taglist | list }}
     </v-card-title>
     <v-row align="center">
       <v-col>
@@ -66,7 +66,9 @@ export default {
     console.log(this.review.tag);
   },
   data() {
-    return {};
+    return {
+      taglist: '',
+    };
   },
   props: ['review'],
   methods: {
@@ -75,23 +77,23 @@ export default {
       console.log('convertTagToList if문 밖에');
 
       if (this.review.tag) {
-        this.review.tag = this.review.tag.split(',');
+        this.taglist = this.review.tag.split(',');
         console.log('convertTagToList');
-        console.log(this.review.tag);
+        console.log(this.taglist);
       }
     },
   },
   filters: {
-    ageRange: function (ageRange) {
+    ageRange: function(ageRange) {
       if (!ageRange) return '';
       if (ageRange == 'over') return '60대 이상';
       else return ageRange + '대';
     },
-    familyType: function (type) {
+    familyType: function(type) {
       if (!type) return '';
       else return type;
     },
-    list: function (list) {
+    list: function(list) {
       if (!list) return '';
       let str = '';
       for (let i = 0; i < list.length - 1; i++) {
