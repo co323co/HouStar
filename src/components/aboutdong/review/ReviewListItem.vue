@@ -90,22 +90,23 @@ export default {
     },
   },
   filters: {
-    ageRange: function (ageRange) {
+    ageRange: function(ageRange) {
       if (!ageRange) return '';
       if (ageRange == 'over') return '60대 이상';
       else return ageRange + '대';
     },
-    familyType: function (type) {
+    familyType: function(type) {
       if (!type) return '';
       else return type;
     },
-    list: function (list) {
+    list: function(list) {
       if (!list) return '';
       let str = '';
       for (let i = 0; i < list.length - 1; i++) {
         str += list[i];
       }
       str += list[list.length - 1];
+      str = str.replace(',', '     ·     ');
       return str;
     },
   },

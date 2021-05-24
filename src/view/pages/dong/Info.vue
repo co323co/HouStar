@@ -31,7 +31,7 @@
       <v-card-text class="grey lighten-4">
         <v-sheet max-width="1200" min-height="300" class="mx-auto">
           <!--라우터 뷰!!!! -->
-          <router-view></router-view>
+          <router-view :key="$route.fullPath"></router-view>
         </v-sheet>
       </v-card-text>
     </v-card>

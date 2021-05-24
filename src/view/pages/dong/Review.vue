@@ -49,6 +49,7 @@
               :items="familyTypes"
               no-data-text="항목이 없습니다"
               dense
+              @change="changeFamilyType()"
             ></v-select>
           </v-col>
           <v-col class="mx-2">
@@ -59,6 +60,7 @@
               :items="ageRanges"
               no-data-text="항목이 없습니다"
               dense
+              @change="changeAge()"
             ></v-select>
           </v-col>
         </v-row>
@@ -87,22 +89,93 @@ export default {
   methods: {
     //1 선호태그 변경시
     changeTag() {
+      // 선호태그 감지
       if (this.tag_val) {
-        // console.log('tag_val에 값이 있다.');
-        // console.log(this.show_list);
         console.log(this.reviews);
         this.show_list = this.reviews.filter((reviews) => {
-          // console.log('들어옴');
-          // console.log(reviews);
-
           return reviews.tag.includes(this.tag_val);
         });
         console.log('filter 거친 this.show_list ');
-
         console.log(this.show_list);
       }
-      //2 가구형태 변경시
-      //3 나이대 변경시
+      // 가구타입 감지
+      if (this.familyType_val) {
+        console.log(this.familyType_val);
+        this.show_list = this.show_list.filter((reviews) => {
+          if (this.familyType_val == reviews.family_type) return reviews;
+        });
+        console.log('가구타입 filter 거친 this.show_list ');
+        console.log(this.show_list);
+      }
+      // 연령대 감지
+      if (this.ageRange_val) {
+        console.log(this.ageRange_val);
+        this.show_list = this.show_list.filter((reviews) => {
+          if (this.ageRange_val == reviews.age_range) return reviews;
+        });
+        console.log('연령대 filter 거친 this.show_list ');
+        console.log(this.show_list);
+      }
+    },
+    //2 가구형태 변경시
+    changeFamilyType() {
+      // 선호태그 감지
+      if (this.tag_val) {
+        console.log(this.reviews);
+        this.show_list = this.reviews.filter((reviews) => {
+          return reviews.tag.includes(this.tag_val);
+        });
+        console.log('filter 거친 this.show_list ');
+        console.log(this.show_list);
+      }
+      // 가구타입 감지
+      if (this.familyType_val) {
+        console.log(this.familyType_val);
+        this.show_list = this.show_list.filter((reviews) => {
+          if (this.familyType_val == reviews.family_type) return reviews;
+        });
+        console.log('가구타입 filter 거친 this.show_list ');
+        console.log(this.show_list);
+      }
+      // 연령대 감지
+      if (this.ageRange_val) {
+        console.log(this.ageRange_val);
+        this.show_list = this.show_list.filter((reviews) => {
+          if (this.ageRange_val == reviews.age_range) return reviews;
+        });
+        console.log('연령대 filter 거친 this.show_list ');
+        console.log(this.show_list);
+      }
+    },
+    //3 나이대 변경시
+    changeAge() {
+      // 선호태그 감지
+      if (this.tag_val) {
+        console.log(this.reviews);
+        this.show_list = this.reviews.filter((reviews) => {
+          return reviews.tag.includes(this.tag_val);
+        });
+        console.log('filter 거친 this.show_list ');
+        console.log(this.show_list);
+      }
+      // 가구타입 감지
+      if (this.familyType_val) {
+        console.log(this.familyType_val);
+        this.show_list = this.show_list.filter((reviews) => {
+          if (this.familyType_val == reviews.family_type) return reviews;
+        });
+        console.log('가구타입 filter 거친 this.show_list ');
+        console.log(this.show_list);
+      }
+      // 연령대 감지
+      if (this.ageRange_val) {
+        console.log(this.ageRange_val);
+        this.show_list = this.show_list.filter((reviews) => {
+          if (this.ageRange_val == reviews.age_range) return reviews;
+        });
+        console.log('연령대 filter 거친 this.show_list ');
+        console.log(this.show_list);
+      }
     },
   },
   computed: {
@@ -175,23 +248,20 @@ export default {
     console.log(this.show_list);
   },
   mounted() {
-    //console.log('mounted');
-    //console.log(this.$store.state.dongStore.Sidogugundong.dongCode);
     // 해당 동의 평균 별점정보를가져옴/////ㅁㅁㅁㅁㅁㅁ
     http
       .get('/dongreview/avg-rating/' + this.$store.state.dongStore.Sidogugundong.dongCode)
       .then(({ data }) => {
-        //console.log('평균뵬점정보 받아오기 실행 ');
-        //console.log(data);
         // Rating.module 에 있는 rating 객체에 얻어온 평균평점 객체 넣음
         this.$store.state.rate.rating = data;
         this.totalRating = this.$store.state.rate.rating.total;
-        //console.log('여기별점', this.totalRating);
-        //console.log('스토어별점', this.$store.state.rate.rating.total);
       })
       .catch(({ response }) => {
         console.log(response);
       });
+    //새로얻어오기
+    this.$store.dispatch('review/getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
+    this.show_list = [...this.reviews];
   },
 };
 </script>
