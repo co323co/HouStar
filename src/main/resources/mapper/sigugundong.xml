@@ -5,6 +5,9 @@
 <mapper
 	namespace="com.ssafy.happyhouse.model.mapper.SidoGugunDongMapper">
 
+	<select id="getDongPos" parameterType="String" resultType="map">
+		SELECT lat, lng FROM baseaddress WHERE code=#{dongcode};
+	</select>
 	<select id="getByDongCode" parameterType="String"
 		resultType="SidoGugunDongDto">
 		SELECT left(code,2) as sidoCode, city as sidoName,

@@ -11,6 +11,8 @@ import com.ssafy.happyhouse.model.dto.SidoGugunDongDto;
 
 public interface SidoGugunDongMapper {
 
+	//동코드로 lat, lng (위도, 경도) 정보 반환
+	Map<String, String> getDongPos(String dongcode);
 	List<SidoGugunDongDto> getSido() throws Exception;
 	List<SidoGugunDongDto> getGugunInSido(String sido) throws Exception;
 	//거래 정보가 있는 동만 반환

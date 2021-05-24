@@ -10,6 +10,7 @@ import com.ssafy.happyhouse.model.dto.SidoGugunDongDto;
 
 public interface SidoGugunDongService {
 	
+	Map<String, String> getDongPos(String dongcode);
 	List<SidoGugunDongDto> getSido() throws Exception;
 	List<SidoGugunDongDto> getGugunInSido(String sido) throws Exception;
 	List<HouseInfoDto> getDongInGugunhasDeal(String gugun) throws Exception;

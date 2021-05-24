@@ -31,6 +31,13 @@ public class SidoGugunDongController {
 
 	@Autowired
 	SidoGugunDongService sgdSer;
+	
+	@ApiOperation("동 코드로 해당 동의 위도, 경도 정보를 반환한다")
+	@GetMapping("/pos/dong/{dongcode}")
+	Map<String, String> getDongPos(@PathVariable String dongcode) {
+		return sgdSer.getDongPos(dongcode);
+	}
+	
 	@ApiOperation("모든 sido code와 시 이름을 받아온다.")
 	@GetMapping("sidos")
 	List<SidoGugunDongDto> getSido() throws Exception {

@@ -46,4 +46,9 @@ public class SidoGugunDongServiceImpl implements SidoGugunDongService {
 	public SidoGugunDongDto getDong(String dongcode) {
 		return  sqlSession.getMapper(SidoGugunDongMapper.class).getDong(dongcode);
 	}
+
+	@Override
+	public Map<String, String> getDongPos(String dongcode) {
+		return  sqlSession.getMapper(SidoGugunDongMapper.class).getDongPos(dongcode);
+	}
 }
