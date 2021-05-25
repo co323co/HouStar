@@ -22,7 +22,7 @@
         <div v-if="show">
           <v-divider></v-divider>
           <!-- 아이콘으로 병원, 코로나 선별진료소 갯수 뿌리기 -->
-          <div class="Data">
+          <div class="Data" align="center">
             <v-card class="d-flex flex-row" flat tile>
               <v-btn fab dark small color="green darken-2">
                 <v-icon dark>local_hospital</v-icon>
@@ -45,7 +45,7 @@
                 코로나 선별 진료소 {{ coronas.length }} 개
               </v-card-title>
               <v-card-title v-else class="zeroData">
-                😥 해당 동에 데이터가 없습니다!
+                😥 에 데이터가 없습니다!
               </v-card-title>
             </v-card>
           </div>
