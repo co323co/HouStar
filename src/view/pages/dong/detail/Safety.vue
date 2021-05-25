@@ -8,7 +8,7 @@
         {{ currentDongInfo.sidoName }}
         {{ currentDongInfo.gugunName }}
         {{ currentDongInfo.dongName }}
-        상가 정보
+        안전 등급 정보
       </v-card-subtitle>
       <v-card-actions @click="show = !show">
         <v-btn color="orange lighten-2" text> <h6 style="font-weight: bold">더 보기</h6> </v-btn>
