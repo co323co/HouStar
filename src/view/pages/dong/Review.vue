@@ -83,9 +83,9 @@ import { mapGetters } from 'vuex';
 import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
 import HorizontalBar from '@/core/services/HorizontalBarChart.js';
-// import ReviewList from '@/components/aboutdong/review/ReviewList.vue';
-import ReviewListItem from '@/components/aboutdong/review/ReviewListItem.vue';
-import ReviewRegister from '@/components/aboutdong/review/ReviewRegister.vue';
+// import ReviewList from '@/components/dong/review/ReviewList.vue';
+import ReviewListItem from '@/components/dong/review/ReviewListItem.vue';
+import ReviewRegister from '@/components/dong/review/ReviewRegister.vue';
 
 export default {
   methods: {

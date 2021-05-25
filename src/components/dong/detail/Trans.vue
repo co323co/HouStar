@@ -21,7 +21,7 @@
       <v-expand-transition>
         <div v-if="show">
           <v-divider></v-divider>
-          <v-flex>
+          <v-flex class="mb-3">
             <kakao-map v-if="map_init_pos" :init_pos="map_init_pos" />
           </v-flex>
         </div>
