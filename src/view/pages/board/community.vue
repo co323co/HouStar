@@ -4,9 +4,9 @@
       <v-col cols="6">
         <!-- table1, table2 -->
 
-        <v-card flat>
+        <v-card>
           <v-card-title height="50px">
-            인기 게시글 📃
+            🔥 인기 게시글 🔥
           </v-card-title>
           <v-data-table
             :headers="headers"
@@ -20,7 +20,7 @@
 
         <!-- end card -->
 
-        <v-card flat>
+        <v-card>
           <v-card-title height="50px">
             🔥 인기 게시판 🔥
           </v-card-title>
@@ -42,7 +42,7 @@
 
       <v-col cols="6" align="center">
         <!-- table3 -->
-        <v-card class="communitylist" flat>
+        <v-card class="communitylist">
           <v-card-title>
             게시판 목록 👩🧑
             <v-spacer></v-spacer>
