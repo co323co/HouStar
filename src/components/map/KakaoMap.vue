@@ -18,14 +18,19 @@ export default {
   },
   mounted() {
     //실제 지도를 그리는 Javascript API를 불러오기
-    if (window.kakao && window.kakao.maps) {
-      this.initMap();
-    } else {
-      const script = document.createElement('script');
-      script.onload = () => kakao.maps.load(this.initMap);
-      script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${kakaoService.getKey()}`;
-      document.head.appendChild(script);
-    }
+    // if (window.kakao && window.kakao.maps) {
+    //   this.initMap();
+    // } else {
+    //   const script = document.createElement('script');
+    //   script.onload = () => kakao.maps.load(this.initMap);
+    //   script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${kakaoService.getKey()}`;
+    //   document.head.appendChild(script);
+    // }
+    let initMap = this.initMap;
+    window.kakao.maps.load(function () {
+      // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
+      initMap();
+    });
   },
   methods: {
     initMap() {
