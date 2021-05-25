@@ -6,12 +6,8 @@ export default {
   props: {
     labels: Array,
     datasets: Array,
-    // options: Object,
   },
   mounted() {
-    console.log('this.options');
-
-    console.log(this.options);
     this.renderChart(
       {
         //주석
