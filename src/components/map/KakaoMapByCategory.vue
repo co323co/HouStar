@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     initMap() {
-      console.log('this.init_pos', this.init_pos);
+      // console.log('this.init_pos', this.init_pos);
       var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
           // center: new kakao.maps.LatLng(37.564343, 126.947613), // 지도의 중심좌표
@@ -47,7 +47,7 @@ export default {
 
       var map = new kakao.maps.Map(mapContainer, mapOption);
 
-      console.log('map', map);
+      // console.log('map', map);
       var places = new kakao.maps.services.Places(map);
       let subway_list = this.subway_list;
       let click = this.click;

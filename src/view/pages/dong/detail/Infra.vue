@@ -23,7 +23,7 @@
           <v-divider></v-divider>
           <v-flex>
             <BarChart
-              style="width: 300px; height: 300px"
+              style="width: 300px; height: 330px"
               v-if="datasets"
               :labels="labels"
               :datasets="datasets"

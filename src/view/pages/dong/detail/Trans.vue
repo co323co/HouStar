@@ -48,11 +48,11 @@ export default {
     ...mapGetters(['currentDongInfo']),
   },
   created() {
-    console.log(this.currentDongInfo);
+    // console.log(this.currentDongInfo);
     // map props 설정
     http.get('/address/pos/dong/' + this.currentDongInfo.dongCode).then((response) => {
       let pos = response.data;
-      console.log('pos', pos);
+      // console.log('pos', pos);
       this.map_init_pos = { lat: pos.lat, lng: pos.lng };
       // console.log('map_init_pos', this.map_init_pos);
     });
