@@ -14,7 +14,7 @@
           <v-text-field
             v-model="search"
             prepend-icon="mdi-magnify"
-            label="Search"
+            label="검색"
             single-line
             hide-details
           ></v-text-field>
@@ -30,6 +30,9 @@
         @click:row="mvDetail"
         no-data-text="게시글이 없습니다"
         no-results-text="검색 결과가 없습니다"
+        :footer-props="{
+          itemsPerPageText: '쪽수',
+        }"
       ></v-data-table>
     </v-card>
   </div>

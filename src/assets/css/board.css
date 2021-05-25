@@ -5,3 +5,10 @@
 .board table tbody td {
   font-size: 14px !important;
 }
+.board .v-data-footer {
+  font-size: 12px !important;
+}
+/* 페이지 쪽수 고르는 select box// */
+.v-select__selection--comma {
+  font-size: 13px !important;
+}
