@@ -4,14 +4,18 @@
 create database IF NOT EXISTS happyhouse;
 use happyhouse;
 
+DROP TABLE IF EXISTS comment;
+DROP TABLE IF EXISTS board;
 DROP TABLE IF EXISTS board_name;
+
 create table board_name (
 	gubun Integer auto_increment,
     name varchar(100),
     constraint primary key(gubun)
 );
 
-DROP TABLE IF EXISTS board;
+insert into board_name(name) values("공지사항"),("QnA");
+
 create table board	(
     id Integer auto_increment,
 	title varchar(100),
@@ -25,7 +29,6 @@ create table board	(
     constraint foreign key(gubun) references board_name(gubun)
 );
 
-DROP TABLE IF EXISTS comment;
 create table comment(
 	bid integer,
 	seq integer, -- 해당 게시글에서의 댓글 순서
@@ -36,3 +39,4 @@ create table comment(
     constraint foreign key(userid) references members(userid),
     constraint foreign key(bid) references board(id)
 );
+
