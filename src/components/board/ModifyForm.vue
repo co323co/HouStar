@@ -13,17 +13,8 @@
       <label for="price">작성일</label>
       <div class="view">{{ regtime }}</div>
       <label for="content">내용</label>
-      <textarea
-        id="content"
-        name="content"
-        v-model="content"
-        ref="content"
-        cols="35"
-        rows="5"
-      ></textarea
-      ><br />
-
-      <div v-if="board.userid == currentUser.userid">
+      <v-textarea v-model="content"></v-textarea><br />
+      <div v-if="userid == currentUser.userid">
         <!-- <a href="#" class="btn" @click="checkValue">수정</a> -->
         <button @click="checkValue">수정</button>
         <!-- <router-link to="/board/:gubun" class="btn">목록</router-link> -->
@@ -35,6 +26,7 @@
 
 <script>
 import http from '@/core/services/http-common';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -47,6 +39,9 @@ export default {
       regtime: '',
       gubun: '',
     };
+  },
+  computed: {
+    ...mapGetters(['currentUser']),
   },
   created() {
     //게시글 id로 해달게시글주는거

@@ -1,18 +1,13 @@
 <template>
   <div>
     <view-detail />
+    <!-- 댓글 작성하는 부분 -->
     <comment-write :bid="this.id" />
-    <comment-write
-      v-if="isModifyShow && modifyComment != null"
-      :modifyComment="modifyComment"
-      @modify-comment-cancel="onModifyCommentCancel"
-    />
-    <comment
-      v-for="(comment, index) in comments"
-      :key="index"
-      :comment="comment"
-      @modify-comment="onModifyComment"
-    />
+    <!-- 댓글 보여주는 부분 -->
+    <div v-for="(comment, index) in comments" :key="index">
+      <v-divider></v-divider>
+      <comment :comment="comment" />
+    </div>
   </div>
 </template>
 
@@ -25,9 +20,7 @@ import Comment from './comment/Comment.vue';
 export default {
   data() {
     return {
-      id: '',
-      isModifyShow: false,
-      modifyComment: null,
+      id: null,
     };
   },
   computed: {
@@ -43,14 +36,6 @@ export default {
     this.$store.dispatch('getBoard', this.id);
     this.$store.dispatch('getComments', this.id);
   },
-  methods: {
-    onModifyComment(comment) {
-      this.modifyComment = comment;
-      this.isModifyShow = true;
-    },
-    onModifyCommentCancel(isShow) {
-      this.isModifyShow = isShow;
-    },
-  },
+  methods: {},
 };
 </script>
