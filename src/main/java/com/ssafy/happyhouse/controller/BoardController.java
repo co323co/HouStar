@@ -78,5 +78,36 @@ public class BoardController {
 	public boolean remove(@PathVariable("id") int id) {
 		return bSer.delete(id);
 	}
+	@ApiOperation("인기 게시글 상위 5개를 조회수로 반환한다.")
+	@GetMapping("hotpost")
+	public List<BoardDto> getBoardsByView(){
+		return bSer.getBoardsByView();
+	}
+	@ApiOperation("인기 커뮤니티 상위 5개를 게시된 글 수의 총합으로 계산하여 반환한다.")
+	@GetMapping("hotcommunity")
+	public  List<Map<String, Object>> getCommunityRanking(){
+		return bSer.getCommunityRanking();
+	}
+	@ApiOperation("모든 커뮤니티를 반환한다.")
+	@GetMapping("community")
+	public  List<Map<String, Object>> selectAllCommunity(){
+		return bSer.selectAllCommunity();
+	}
+	@ApiOperation("커뮤니티를 추가한다.")
+	@PostMapping("community")
+	public boolean insertCommunity (@RequestBody Map<String, Object> map) {
+		String name = (String) map.get("name");
+		return bSer.insertCommunity(name);	
+	}
+	@ApiOperation("커뮤니티를 수정한다.")
+	@PutMapping("community")
+	public boolean updateCommunity (@RequestBody Map<String, Object> map) {
+		return bSer.updateCommunity(map);
+	}
+	@ApiOperation("커뮤니티를 삭제한다.")
+	@DeleteMapping("community/{gubun}")
+	public boolean deleteCommunity (@PathVariable int gubun) {
+		return bSer.deleteCommunity(gubun);
+	}
 	
 }

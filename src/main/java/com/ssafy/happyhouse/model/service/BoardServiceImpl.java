@@ -58,4 +58,34 @@ public class BoardServiceImpl implements BoardService {
 		return sqlSession.getMapper(BoardMapper.class).findNameByGubun(gubun);
 	}
 
+	@Override
+	public List<BoardDto> getBoardsByView() {
+		return sqlSession.getMapper(BoardMapper.class).getBoardsByView();
+	}
+
+	@Override
+	public List<Map<String, Object>> getCommunityRanking() {
+		return sqlSession.getMapper(BoardMapper.class).getCommunityRanking();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllCommunity() {
+		return sqlSession.getMapper(BoardMapper.class).selectAllCommunity();
+	}
+
+	@Override
+	public boolean insertCommunity(String name) {
+		return sqlSession.getMapper(BoardMapper.class).insertCommunity(name);
+	}
+
+	@Override
+	public boolean updateCommunity(Map<String, Object> map) {
+		return sqlSession.getMapper(BoardMapper.class).updateCommunity(map);
+	}
+
+	@Override
+	public boolean deleteCommunity(int gubun) {
+		return sqlSession.getMapper(BoardMapper.class).deleteCommunity(gubun);
+	}
+
 }

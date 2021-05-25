@@ -43,4 +43,41 @@
 		where gubun = #{gubun}
 	</select>
 	
+	<!-- 인기 게시글 -->
+	<select id="getBoardsByView" resultType="BoardDto">
+		select id, title, content, userid, regtime, views, gubun
+		from board
+		order by views desc limit 5;
+	</select>
+	
+	<!-- board_name table  -->
+	<select id="getCommunityRanking" resultType="Map">
+		select gubun, name, cast(count(*) as char(1)) as count 
+		from board 
+		join board_name using(gubun)
+		group by gubun 
+		order by count desc limit 5;	
+	</select>
+	
+	<select id="selectAllCommunity" resultType="Map">
+		select gubun, name
+		from board_name;
+	</select>
+	
+	<insert id="insertCommunity" parameterType="string">
+		insert into board_name (name) values (#{name});
+	</insert>
+	
+	<update id="updateCommunity" parameterType="map">
+		update board_name
+		set name = #{name}
+		where gubun = #{gubun}
+	</update>
+	
+	<delete id="deleteCommunity" parameterType="int">
+		delete from board_name 
+		where gubun = #{gubun}
+	</delete>
+	
+	
 </mapper>

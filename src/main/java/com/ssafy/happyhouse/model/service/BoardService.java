@@ -13,4 +13,12 @@ public interface BoardService {
 	public boolean delete(int id);
 	public boolean update(BoardDto board);
 	public String findNameByGubun(int id);
+	
+	// 커뮤니티 관련 
+	public List<BoardDto> getBoardsByView();
+	public List<Map<String, Object>> getCommunityRanking();
+	public List<Map<String, Object>> selectAllCommunity();
+	public boolean insertCommunity(String name);
+	public boolean updateCommunity(Map<String, Object> map);
+	public boolean deleteCommunity(int gubun);
 }

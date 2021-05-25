@@ -14,4 +14,10 @@ public interface BoardMapper {
 	public int delete(int id);
 	public String findNameByGubun(int gubun);
 	
+	public List<BoardDto> getBoardsByView();
+	public List<Map<String, Object>> getCommunityRanking();
+	public List<Map<String, Object>> selectAllCommunity();
+	public boolean insertCommunity(String name);
+	public boolean updateCommunity(Map<String, Object> map);
+	public boolean deleteCommunity(int gubun);
 }
