@@ -3,21 +3,11 @@
     <div>
       <KTHeader></KTHeader>
 
-      <!-- begin:: Content -->
-      <v-main>
-        <v-container class="content">
-          <div class="d-lg-flex flex-row-fluid">
-            <!-- begin:: Aside Left -->
-            <KTAside v-if="asideEnabled"></KTAside>
-            <!-- end:: Aside Left -->
-            <div class="container flex-row-fluid" background-color="white">
-              <transition name="fade-in-up">
-                <router-view :key="$route.fullPath" />
-              </transition>
-            </div>
-          </div>
-        </v-container>
-      </v-main>
+      <div class="flex-row-fluid" background-color="white">
+        <transition name="fade-in-up">
+          <router-view :key="$route.fullPath" />
+        </transition>
+      </div>
       <KTFooter></KTFooter>
     </div>
     <KTScrollTop></KTScrollTop>
@@ -26,7 +16,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import KTAside from '@/view/layout/aside/Aside.vue';
 import KTHeader from '@/view/layout/header/MyHeader.vue';
 import KTHeaderMobile from '@/view/layout/header/HeaderMobile.vue';
 import KTFooter from '@/view/layout/footer/Footer.vue';

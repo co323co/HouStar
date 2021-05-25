@@ -1,8 +1,8 @@
 <template lang="">
-  <div>
+  <v-container>
     <h1>{{ boardname }}</h1>
     <router-view />
-  </div>
+  </v-container>
 </template>
 <script>
 import { mapGetters } from 'vuex';

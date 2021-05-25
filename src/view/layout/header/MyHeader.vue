@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div absolute>
     <!-- 앱 바 -->
     <v-btn
@@ -16,7 +16,7 @@
     >
       <KTQuickUser></KTQuickUser>
     </v-btn>
-    <v-app-bar class="myHeader" color="deep-purple lighten-4">
+    <v-app-bar height="50px" class="myHeader" color="white">
       <v-container>
         <v-row align="center">
           <v-col>
@@ -50,14 +50,9 @@
         </v-row>
       </v-container>
     </v-app-bar>
-
-    <!-- 메인 -->
-    <v-container> </v-container>
   </div>
 </template>
 <script>
-// import KTQuickUser from '@/view/layout/extras/offcanvas/QuickUser.vue';
-import { LOGOUT } from '@/core/services/store/auth.module';
 import KTLayoutQuickUser from '@/assets/js/layout/extended/quick-user.js';
 import KTQuickUser from '@/view/layout/extras/offcanvas/QuickUser.vue';
 
@@ -75,7 +70,7 @@ export default {
 </script>
 <style scoped>
 .myHeader {
-  color: rgb(240, 212, 227);
+  color: rgb(255, 255, 255);
 }
 h2 {
   padding: 0;
