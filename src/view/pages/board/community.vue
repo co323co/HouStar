@@ -5,7 +5,7 @@
         <!-- table1, table2 -->
 
         <v-card flat>
-          <v-card-title height="50px">
+          <v-card-title style="height:80px">
             인기 게시글 📃
           </v-card-title>
           <v-data-table
@@ -21,7 +21,7 @@
         <!-- end card -->
 
         <v-card flat>
-          <v-card-title height="50px">
+          <v-card-title style="height:80px">
             🔥 인기 게시판 🔥
           </v-card-title>
 
@@ -42,8 +42,8 @@
 
       <v-col cols="6" align="center">
         <!-- table3 -->
-        <v-card class="communitylist" flat>
-          <v-card-title>
+        <v-card class="communitylist " flat>
+          <v-card-title style="height:80px" >
             게시판 목록 👩🧑
             <v-spacer></v-spacer>
             <v-text-field
