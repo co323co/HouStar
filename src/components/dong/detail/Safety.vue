@@ -21,14 +21,14 @@
       <v-expand-transition>
         <div v-if="show">
           <v-divider></v-divider>
-          <v-flex>
+          <div align="center">
             <BarChart
               style="width: 300px; height: 300px"
               v-if="datasets"
               :labels="labels"
               :datasets="datasets"
             />
-          </v-flex>
+          </div>
         </div>
       </v-expand-transition>
     </v-card>

@@ -1,53 +1,46 @@
 <template lang="">
-  <v-app>
-    <v-card>
-      <v-system-bar></v-system-bar>
-      <v-spacer></v-spacer>
-      info.vue페이지
-      <v-toolbar flat>
-        <span class="mr-2">
+  <div class="content pa-10">
+    <v-row class="info_header">
+      <h1 class="mt-3">{{ this.$store.state.dongStore.Sidogugundong.dongName }}</h1>
+      <div class="ml-3" style="display: inline-block">
+        <span>
           {{ this.$store.state.dongStore.Sidogugundong.sidoName }}
         </span>
-        |
         <span class="ml-2">
           {{ this.$store.state.dongStore.Sidogugundong.gugunName }}
         </span>
-      </v-toolbar>
-
-      <v-toolbar flat class="mb-5">
-        <v-toolbar-title>
-          <h1 class="display-3">{{ this.$store.state.dongStore.Sidogugundong.dongName }}</h1>
-        </v-toolbar-title>
-      </v-toolbar>
-
-      <v-divider class="mx-4"></v-divider>
-
-      <v-card-actions class="ml-2 mb-2">
-        <router-link class="routerlink mr-3 ml-2" :to="{ name: 'detail' }">상세정보</router-link>
-
-        | <router-link class="routerlink ml-3" :to="{ name: 'review' }">리뷰</router-link>
-      </v-card-actions>
-
-      <v-card-text class="grey lighten-4">
-        <v-sheet max-width="1200" min-height="300" class="mx-auto">
-          <!--라우터 뷰!!!! -->
-          <router-view :key="$route.fullPath"></router-view>
-        </v-sheet>
-      </v-card-text>
-    </v-card>
-  </v-app>
+      </div>
+    </v-row>
+    <v-divider></v-divider>
+    <v-row>
+      <router-link class="routerlink mr-3 ml-2" :to="{ name: 'detail' }">상세정보</router-link>
+      | <router-link class="routerlink ml-3" :to="{ name: 'review' }">리뷰</router-link>
+    </v-row>
+    <v-divider></v-divider>
+    <v-row class="mx-auto">
+      <!--라우터 뷰!!!! -->
+      <router-view :key="$route.fullPath"></router-view>
+    </v-row>
+  </div>
 </template>
 <script>
-export default {
-  components: {
-    // InfoHeader,
-  },
-};
+export default {};
 </script>
 <style scoped>
+.info_header {
+  display: block;
+}
+.info_header h1 {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 4em;
+}
 a,
 span {
   color: black;
   font-size: 20px;
+}
+.content {
+  background-color: #ffffff;
 }
 </style>

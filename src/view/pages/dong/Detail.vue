@@ -34,12 +34,12 @@
   </div>
 </template>
 <script>
-import Infra from './detail/Infra.vue';
-import Trans from './detail/Trans.vue';
-import Safety from './detail/Safety.vue';
-import Health from './detail/Health.vue';
-import School from './detail/School.vue';
-import Environment from './detail/Environment.vue';
+import Infra from '@/components/dong/detail/Infra.vue';
+import Trans from '@/components/dong/detail/Trans.vue';
+import Safety from '@/components/dong/detail/Safety.vue';
+import Health from '@/components/dong//detail/Health.vue';
+import School from '@/components/dong//detail/School.vue';
+import Environment from '@/components/dong/detail/Environment.vue';
 //현재페이지를 무슨 동을 클릭해서 들어왔는지 정보 담겨있음
 import { mapGetters } from 'vuex';
 export default {

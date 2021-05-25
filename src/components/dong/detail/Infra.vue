@@ -2,13 +2,15 @@
   <div>
     <v-card class="mx-auto pa-3" elevation="5" shaped>
       <v-card-title>
-        <h2 style="font-weight: bold">환경 오염</h2>
+        <h2 style="font-weight: bold">
+          <div class="head">인프라</div>
+        </h2>
       </v-card-title>
       <v-card-subtitle class="ml-1" style="font-size: 1.2em">
         {{ currentDongInfo.sidoName }}
         {{ currentDongInfo.gugunName }}
         {{ currentDongInfo.dongName }}
-        오염 시설 정보
+        상가 정보
       </v-card-subtitle>
       <v-card-actions @click="show = !show">
         <v-btn color="orange lighten-2" text> <h6 style="font-weight: bold">더 보기</h6> </v-btn>
@@ -21,15 +23,14 @@
       <v-expand-transition>
         <div v-if="show">
           <v-divider></v-divider>
-          <div v-if="isZero" class="zeroData">😥 해당 동에 데이터가 없습니다!</div>
-          <v-flex>
+          <div align="center">
             <BarChart
-              style="width: 300px; height: 300px"
-              v-if="!isZero && datasets"
+              style="width: 300px; height: 330px"
+              v-if="datasets"
               :labels="labels"
               :datasets="datasets"
             />
-          </v-flex>
+          </div>
         </div>
       </v-expand-transition>
     </v-card>
@@ -45,9 +46,17 @@ export default {
   },
   data() {
     return {
-      isZero: true,
-      data: [0, 0, 0, 0],
-      labels: ['대기배출', '폐수배출', '기타수질원', '유목물판매'],
+      data: [0, 0, 0, 0, 0, 0, 0, 0],
+      labels: [
+        '관광/여가/오락',
+        '부동산',
+        '소매',
+        '생활서비스',
+        '숙박',
+        '스포츠',
+        '음식',
+        '학문/교육',
+      ],
       datasets: null,
       //카드뷰 확장 트리거
       show: false,
@@ -57,28 +66,24 @@ export default {
     ...mapGetters(['currentDongInfo']),
   },
   created() {
+    console.log(this.currentDongInfo);
     //상가정보 리스트 얻어오기
-    http.get('/envguidecheck/list/' + this.currentDongInfo.dongCode).then((response) => {
-      let envInfoList = response.data;
-      console.log('envInfoList', envInfoList);
-      //모든 업소 타입을 조사해서 타입별 숫자를 샌다 (this.data)
-      for (let envInfo of envInfoList) {
-        //얻어온 업소 정보의 타입을 찾아서 cnt 숫자 증가
-        if (envInfo.type.indexOf('대기') != -1) {
-          this.data[0]++;
-        } else if (envInfo.type.indexOf('폐수') != -1) {
-          this.data[1]++;
-        } else if (envInfo.type.indexOf('수질') != -1) {
-          this.data[2]++;
-        } else if (envInfo.type.indexOf('유독물') != -1) {
-          this.data[3]++;
+    http.get('/store/' + this.currentDongInfo.dongCode).then((response) => {
+      let storeList = response.data;
+      //모든 상점의 타입을 조사해서 타입별 숫자를 샌다 (this.data)
+      for (let store of storeList) {
+        //얻어온 상점 정보의 타입을 찾아서 cnt 숫자 증가
+        for (let i in this.labels) {
+          if (store.type == this.labels[i]) {
+            this.data[i]++;
+            break;
+          }
         }
-        if (this.isZero) this.isZero = false;
       }
       this.datasets = [
         {
-          label: '업소 분류',
-          backgroundColor: '#974e90',
+          label: '상가 대분류',
+          backgroundColor: '#e481af',
           data: this.data,
         },
       ];
@@ -87,11 +92,8 @@ export default {
 };
 </script>
 <style scoped>
-.zeroData {
-  padding: 30px;
-  text-align: center;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #974e90;
+.head {
+  display: inline-block;
+  height: 100%;
 }
 </style>
