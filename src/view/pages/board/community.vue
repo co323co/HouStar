@@ -30,7 +30,7 @@
             :items="hotcommunitys"
             :items-per-page="5"
             class="elevation-1 com"
-            @click:row="mvList"
+            @click:row="[rowClicked, mvList]"
             :hide-default-footer="true"
           >
             <template v-slot:item.count="{ item }">
@@ -41,11 +41,42 @@
       </v-col>
 
       <v-col cols="6" align="center">
+        <!-- table3 -->
+        <v-card class="communitylist" flat>
+          <v-card-title>
+            게시판 목록 👩🧑
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-card-title>
+          <!-- select box 포함한 테이블 -->
+          <v-data-table
+            v-model="selected"
+            :headers="headers3"
+            :items="communitys"
+            item-key="name"
+            :items-per-page="10"
+            show-select
+            @item-selected="myMethod()"
+            :search="search"
+            class="elevation-1 com"
+            @click:row="mvList"
+          >
+            <template v-slot:item.count="{ item }">
+              <v-chip :color="getColor(item.count)" dark>{{ item.count }}</v-chip>
+            </template>
+          </v-data-table>
+        </v-card>
         <!-- 버튼모달창 시작 -->
 
         <v-dialog v-model="dialog" width="500">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on">
+            <v-btn color="amber darken-1 mt-4" dark v-bind="attrs" v-on="on">
               게시판 등록
             </v-btn>
           </template>
@@ -83,34 +114,6 @@
         </v-dialog>
 
         <!-- 버튼모달창 끝 -->
-
-        <!-- table3 -->
-        <v-card class="communitylist">
-          <v-card-title>
-            게시판 목록
-            <v-spacer></v-spacer>
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Search"
-              single-line
-              hide-details
-            ></v-text-field>
-          </v-card-title>
-
-          <v-data-table
-            :headers="headers3"
-            :items="communitys"
-            :items-per-page="10"
-            :search="search"
-            class="elevation-1"
-            @click:row="mvList"
-          >
-            <template v-slot:item.count="{ item }">
-              <v-chip :color="getColor(item.count)" dark>{{ item.count }}</v-chip>
-            </template>
-          </v-data-table>
-        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -120,6 +123,9 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
+      // 관리자일 때만 삭제
+      // singleSelect: false,
+      selected: [],
       // 커뮤니티 이름 등록
       dialog: false,
       communityName: '',
@@ -154,19 +160,17 @@ export default {
     this.$store.dispatch('getHotcommunitys');
     this.$store.dispatch('getCommunitys');
 
-    console.log('this.hotposts');
-    console.log(this.hotposts);
-    console.log('this.hotcommunitys');
-    console.log(this.hotcommunitys);
-    console.log('this.communitys');
+    console.log(this.currentUser);
     console.log(this.communitys);
     // console.log(this.communitys[0]);
   },
   computed: {
-    ...mapGetters(['hotposts', 'hotcommunitys', 'communitys']),
+    ...mapGetters(['hotposts', 'hotcommunitys', 'communitys', 'currentUser']),
   },
   methods: {
     mvList(row) {
+      console.log(this.communityName);
+
       this.$router.push(`/board/${row.gubun}`);
     },
     mvDetail(row) {
@@ -177,9 +181,13 @@ export default {
       else if (cnt > 3) return 'orange';
       else return 'green';
     },
+    myMethod() {
+      console('this.selected 지우려고 골랐음');
+
+      console(this.selected);
+    },
     // 커뮤니티 등록
     RegisterCommunity() {
-      console.log(this.communityName);
       let val = {
         name: this.communityName,
       };
@@ -193,6 +201,9 @@ export default {
     // 모달 닫기
     Close() {
       this.dialog = false;
+    },
+    rowClicked(val) {
+      console.log(val);
     },
   },
 };

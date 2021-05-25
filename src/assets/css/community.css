@@ -4,3 +4,11 @@
 .communitylist {
   margin-top: 20px;
 }
+
+.communitylist v-card-title {
+  font-size: 1.2em !important;
+}
+.com th {
+  font-size: 1.2em !important;
+  color: rgb(238, 160, 58) !important;
+}
