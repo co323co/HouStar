@@ -27,7 +27,6 @@
               v-if="datasets"
               :labels="labels"
               :datasets="datasets"
-              :options="options"
             />
           </v-flex>
         </div>
@@ -48,7 +47,6 @@ export default {
       data: [],
       labels: ['교통사고', '화재', '범죄', '생활안전', '자살', '감염병'],
       datasets: null,
-      options: null,
       //카드뷰 확장 트리거
       show: false,
     };
@@ -74,19 +72,18 @@ export default {
         this.data.push(response.data.epidemic);
         console.log('this.data 뽑을거임!!');
         console.log(this.data);
-        this.options = {
-          responsive: true,
-          lineTension: 1,
-          scales: { yAxes: [{ ticks: { beginAtZero: true, padding: 25 } }] },
-        };
         this.datasets = [
           {
             label: '안전 등급 분류',
             backgroundColor: '#e481af',
             data: this.data,
+            options: this.options,
           },
         ];
       });
+
+    // console.log('this.datasets');
+    //console.log(this.datasets);
   },
 };
 </script>
