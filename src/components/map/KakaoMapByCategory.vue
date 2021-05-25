@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="click.current_item" class="pa-1">
-      <h3 style="display: inline-block">🚉 {{ click.current_item.place_name }}</h3>
+      <h3 style="display: inline-block" class="mr-1">🚉 {{ click.current_item.place_name }}</h3>
       <h4 style="display: inline-block">{{ click.current_item.distance / 1000.0 }} KM</h4>
     </div>
     <div v-if="!click.current_item">
