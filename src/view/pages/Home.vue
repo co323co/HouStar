@@ -22,7 +22,7 @@ import Banner from '@/view/layout/Banner.vue';
 import DongSelectBar from '@/components/aboutdong/DongSelectBar.vue';
 import SuggestDong from '@/components/ranking/SuggestDong.vue';
 import LiveRankingMap from '@/components/ranking/LiveRankingMap.vue';
-
+//
 export default {
   components: {
     Banner,
