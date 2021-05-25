@@ -52,16 +52,18 @@
 	
 	<!-- board_name table  -->
 	<select id="getCommunityRanking" resultType="Map">
-		select gubun, name, cast(count(*) as char(1)) as count 
+		select gubun, name, count(*) count 
 		from board 
-		join board_name using(gubun)
+		right join board_name using(gubun)
 		group by gubun 
 		order by count desc limit 5;	
 	</select>
 	
 	<select id="selectAllCommunity" resultType="Map">
-		select gubun, name
-		from board_name;
+		select gubun, name, count(*) count 
+		from board 
+		right join board_name using(gubun)
+		group by gubun	
 	</select>
 	
 	<insert id="insertCommunity" parameterType="string">
