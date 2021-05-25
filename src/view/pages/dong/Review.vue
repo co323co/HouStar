@@ -13,7 +13,7 @@
             :increment="0.01"
             :fixed-points="2"
             class="ml-5"
-            :rating="totalRating"
+            :rating="AvgRating"
             read-only
             show-rating
           ></star-rating>
@@ -83,7 +83,6 @@ import { mapGetters } from 'vuex';
 import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
 import HorizontalBar from '@/core/services/HorizontalBarChart.js';
-// import ReviewList from '@/components/dong/review/ReviewList.vue';
 import ReviewListItem from '@/components/dong/review/ReviewListItem.vue';
 import ReviewRegister from '@/components/dong/review/ReviewRegister.vue';
 
@@ -96,8 +95,6 @@ export default {
         this.show_list = this.reviews.filter((reviews) => {
           return reviews.tag.includes(this.tag_val);
         });
-        //    console.log('filter 거친 this.show_list ');
-        // console.log(this.show_list);
       }
       // 가구타입 감지
       if (this.familyType_val) {
@@ -105,8 +102,6 @@ export default {
         this.show_list = this.show_list.filter((reviews) => {
           if (this.familyType_val == reviews.family_type) return reviews;
         });
-        //  console.log('가구타입 filter 거친 this.show_list ');
-        //  console.log(this.show_list);
       }
       // 연령대 감지
       if (this.ageRange_val) {
@@ -114,8 +109,6 @@ export default {
         this.show_list = this.show_list.filter((reviews) => {
           if (this.ageRange_val == reviews.age_range) return reviews;
         });
-        //  console.log('연령대 filter 거친 this.show_list ');
-        //  console.log(this.show_list);
       }
     },
     //1 선호태그 변경시
@@ -133,26 +126,16 @@ export default {
   },
   watch: {
     reviews(val) {
-      // console.log('reviews 변경되었음');
-      // console.log(val);
-
-      console.log('reviews whatch');
       this.show_list = val;
-      console.log(this.show_list);
       this.checkBar();
     },
     reviewsbyuserid(val) {
-      console.log('whatch');
-      console.log(val);
       if (val.length != 0) this.isWrite = true;
     },
   },
   computed: {
-    // namespace true로 할 경우 module명 / getter 이름
-    // 다른 모듈이니까 분리해서 써주기 review만 namespace true.
-    ...mapGetters('review', ['totalReviewCount', 'reviews', 'reviewsbyuserid']),
+    ...mapGetters(['totalReviewCount', 'reviews', 'reviewsbyuserid', 'AvgRating', 'rating']),
     ...mapGetters(['currentUser']),
-    // ...mapState('review', ['reviews']),
   },
   data() {
     return {
@@ -196,45 +179,23 @@ export default {
           },
         ],
       },
-      // options 바인딩하는거더찾아보기 ㅜ
     };
   },
   components: {
     StarRating,
     HorizontalBar,
-    // ReviewList,
     ReviewRegister,
     ReviewListItem,
   },
   created() {
+    // 해당 동에 대한 평균별점정보 가져오기
+    this.$store.dispatch('getRating', this.$store.state.dongStore.Sidogugundong.dongCode);
     // 해당 동에 대한 모든 리뷰 다 가져오기.
-    // namespace true로 할경우 모듈명 / action 명
-    this.$store.dispatch('review/getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
+    this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
     // 해당 동에 대한 로그인한 유저의 모든 리뷰 가져오기
-    // console.log('this.currentUser.userid', this.reviews);
-    this.$store.dispatch('review/getReviewsByUserId', this.currentUser.userid);
-    if (this.$store.state.review.reviewsbyuserid.length != 0) this.isWrite = true;
-    // console.log(this.$store.state.review.reviewsbyuserid);
-    //console.log('this.$store.state.review.reviewsbyuserid');
-    //created 될 때 보여줄 show_list 를 복사
+    this.$store.dispatch('getReviewsByUserId', this.currentUser.userid);
+    if (this.reviewsbyuserid.length != 0) this.isWrite = true;
     this.show_list = [...this.reviews];
-    // console.log(this.show_list);
-  },
-  mounted() {
-    // 해당 동의 평균 별점정보를가져옴/////ㅁㅁㅁㅁㅁㅁ
-    http
-      .get('/dongreview/avg-rating/' + this.$store.state.dongStore.Sidogugundong.dongCode)
-      .then(({ data }) => {
-        // Rating.module 에 있는 rating 객체에 얻어온 평균평점 객체 넣음
-        this.$store.state.rate.rating = data;
-        this.totalRating = this.$store.state.rate.rating.total * 1.0;
-      })
-      .catch(({ response }) => {
-        console.log(response);
-      });
-    //새로얻어오기
-    // this.$store.dispatch('review/getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
-    //  this.show_list = [...this.reviews];
   },
 };
 </script>

@@ -25,6 +25,7 @@ const mutations = {
   },
 };
 const actions = {
+  //
   getReviews({ commit }, payload) {
     http.get('/dongreview/dong/' + payload).then(({ data }) => {
       console.log('dongcode로 해당 동에 대한 리뷰 다 가져오기 성공');
@@ -41,7 +42,6 @@ const actions = {
 };
 
 export default {
-  namespaced: true,
   state,
   actions,
   mutations,

@@ -39,23 +39,12 @@ import http from '@/core/services/http-common';
 // import { mapState } from 'vuex';
 import { mapGetters } from 'vuex';
 export default {
-  // props: ['msg'],
-  // watch: {
-  //   msg: function() {
-  //     console.log('변경이 감지되었습니다');
-  //   },
-  // },
   computed: {
     ...mapGetters(['currentUser']),
   },
   methods: {
     register() {
-      // console.log(this.show_list);ㅋㅋ
-      // this.msg = '등록이 완료되었습니다';
       console.log('등록버튼누름');
-      //console.log(this.currentUser.userid);
-      // console.log(this.$store.state.dongStore.Sidogugundong.dongCode);
-      //이미 해당 동에 글을 썼던 사람이면
       http
         .post('/dongreview', {
           content: this.content,
@@ -83,12 +72,9 @@ export default {
           this.school = '';
           this.trans = '';
           // store에 있는거 갱신해주기
-          this.$store.dispatch(
-            'review/getReviews',
-            this.$store.state.dongStore.Sidogugundong.dongCode
-          );
+          this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
           // user가 새글을 입력했는지 갱신해주기
-          this.$store.dispatch('review/getReviewsByUserId', this.currentUser.userid);
+          this.$store.dispatch('getReviewsByUserId', this.currentUser.userid);
         })
         .catch((error) => {
           console.log(error.response);

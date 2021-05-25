@@ -4,118 +4,116 @@
       <v-col cols="6">
         <!-- table1, table2 -->
 
-        <v-card>
-          <v-card-title style="height:80px">
-            인기 게시글 📃 aaaaaaa
-          </v-card-title>
-          <v-data-table
-            :headers="headers"
-            :items="hotposts"
-            :items-per-page="5"
-            @click:row="mvDetail"
-            class="elevation-1 com"
-            :hide-default-footer="true"
-          ></v-data-table>
-        </v-card>
+        <!-- <v-card> -->
+        <v-card-title style="height:80px">
+          인기 게시글 📃
+        </v-card-title>
+        <v-data-table
+          :headers="headers"
+          :items="hotposts"
+          :items-per-page="5"
+          @click:row="mvDetail"
+          class="elevation-1 com"
+          :hide-default-footer="true"
+        ></v-data-table>
+        <!-- </v-card> -->
 
         <!-- end card -->
 
-        <v-card>
-          <v-card-title style="height:80px">
-            🔥 인기 게시판 🔥
-          </v-card-title>
+        <!-- <v-card> -->
+        <v-card-title style="height:80px">
+          🔥 인기 게시판 🔥
+        </v-card-title>
 
-          <v-data-table
-            :headers="headers3"
-            :items="hotcommunitys"
-            :items-per-page="5"
-            class="elevation-1 com"
-            @click:row="[rowClicked, mvList]"
-            :hide-default-footer="true"
-          >
-            <template v-slot:item.count="{ item }">
-              <v-chip :color="getColor(item.count)" dark>{{ item.count }}</v-chip>
-            </template></v-data-table
-          >
-        </v-card>
+        <v-data-table
+          :headers="headers3"
+          :items="hotcommunitys"
+          :items-per-page="5"
+          class="elevation-1 com"
+          @click:row="[rowClicked, mvList]"
+          :hide-default-footer="true"
+        >
+          <template v-slot:item.count="{ item }">
+            <v-chip :color="getColor(item.count)" dark>{{ item.count }}</v-chip>
+          </template></v-data-table
+        >
+        <!-- </v-card> -->
       </v-col>
 
       <v-col cols="6" align="center">
         <!-- table3 -->
-        <v-card class="communitylist " flat>
-          <v-card-title style="height:80px">
-            게시판 목록 👩🧑
-            <v-spacer></v-spacer>
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Search"
-              single-line
-              hide-details
-            ></v-text-field>
-          </v-card-title>
-          <!-- select box 포함한 테이블 -->
-          <v-data-table
-            v-model="selected"
-            :headers="headers3"
-            :items="communitys"
-            item-key="name"
-            :items-per-page="10"
-            show-select
-            @item-selected="myMethod()"
-            :search="search"
-            class="elevation-1 com"
-            @click:row="mvList"
-            no-data-text="게시글이 없습니다"
-            no-results-text="검색 결과가 없습니다"
-          >
-            <template v-slot:item.count="{ item }">
-              <v-chip :color="getColor(item.count)" dark>{{ item.count }}</v-chip>
-            </template>
-          </v-data-table>
-        </v-card>
-        <!-- 버튼모달창 시작 -->
 
-        <v-dialog v-model="dialog" width="500">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="amber darken-1 mt-4" dark v-bind="attrs" v-on="on">
-              게시판 등록
-            </v-btn>
+        <v-card-title style="height:80px">
+          게시판 목록 👩🧑
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-card-title>
+        <!-- select box 포함한 테이블 -->
+        <v-data-table
+          :headers="headers3"
+          :items="communitys"
+          :items-per-page="10"
+          :search="search"
+          class="elevation-1 com"
+          @click:row="mvList"
+          no-data-text="게시글이 없습니다"
+          no-results-text="검색 결과가 없습니다"
+        >
+          <template v-slot:item.count="{ item }">
+            <v-chip :color="getColor(item.count)" dark>{{ item.count }}</v-chip>
           </template>
+        </v-data-table>
 
-          <v-card>
-            <v-card-title>
-              <span class="headline">새 커뮤니티를 만들어 보세요! ✍</span>
-            </v-card-title>
+        <div>
+          <!-- 버튼모달창 시작 -->
 
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col>
-                    <v-text-field
-                      label="게시판 등록"
-                      required
-                      v-model="communityName"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <small> * 부적절한 게시판은 차후 삭제될 수 있습니다. </small>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = false">
-                Close
+          <v-dialog v-model="dialog" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="amber darken-1 mt-4" dark v-bind="attrs" v-on="on">
+                게시판 등록
               </v-btn>
-              <v-btn color="blue darken-1" text @click="[Close(), RegisterCommunity()]">
-                Register
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+            </template>
 
-        <!-- 버튼모달창 끝 -->
+            <v-card>
+              <v-card-title>
+                <span class="headline">새 커뮤니티를 만들어 보세요! ✍</span>
+              </v-card-title>
+
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col>
+                      <v-text-field
+                        label="게시판 등록"
+                        required
+                        v-model="communityName"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+                <small> * 부적절한 게시판은 차후 삭제될 수 있습니다. </small>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="dialog = false">
+                  Close
+                </v-btn>
+                <v-btn color="blue darken-1" text @click="[Close(), RegisterCommunity()]">
+                  Register
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
+          <!-- 버튼모달창 끝 -->
+        </div>
       </v-col>
     </v-row>
   </v-container>
