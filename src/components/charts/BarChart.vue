@@ -6,15 +6,18 @@ export default {
   props: {
     labels: Array,
     datasets: Array,
-    options: Object,
+    // options: Object,
   },
   mounted() {
+    console.log('this.options');
+
+    console.log(this.options);
     this.renderChart(
       {
         //주석
         labels: this.labels,
         datasets: this.datasets,
-        // options: this.options,
+
         // datasets :  [
         //       {
         //         label: 'Data One',
@@ -23,7 +26,19 @@ export default {
         //       },
         // ]
       },
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      }
     );
   },
 };
