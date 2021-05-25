@@ -2,7 +2,10 @@
   <div>
     <v-card class="mx-auto pa-3" elevation="5" shaped>
       <v-card-title>
-        <h2 style="font-weight: bold">인프라</h2>
+        <h2 style="font-weight: bold">
+          <v-icon class="ma-auto pa-auto">mdi-store</v-icon>
+          인프라
+        </h2>
       </v-card-title>
       <v-card-subtitle class="ml-1" style="font-size: 1.2em">
         {{ currentDongInfo.sidoName }}

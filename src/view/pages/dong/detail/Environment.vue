@@ -73,7 +73,7 @@ export default {
         } else if (envInfo.type.indexOf('유독물') != -1) {
           this.data[3]++;
         }
-        if (!this.isZero) this.isZero = true;
+        if (this.isZero) this.isZero = false;
       }
       this.datasets = [
         {
