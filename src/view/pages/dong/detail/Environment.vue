@@ -90,7 +90,7 @@ export default {
 .zeroData {
   padding: 30px;
   text-align: center;
-  font-size: 1.3em;
+  font-size: 1.5em;
   font-weight: bold;
   color: #974e90;
 }
