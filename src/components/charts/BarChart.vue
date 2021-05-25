@@ -14,7 +14,7 @@ export default {
         //주석
         labels: this.labels,
         datasets: this.datasets,
-        options: this.options,
+        // options: this.options,
         // datasets :  [
         //       {
         //         label: 'Data One',
