@@ -22,27 +22,33 @@
         <div v-if="show">
           <v-divider></v-divider>
           <!-- 아이콘으로 병원, 코로나 선별진료소 갯수 뿌리기 -->
-          <v-card class="d-flex flex-row" flat tile>
-            <v-btn fab dark small color="pink">
-              <v-icon dark>favorite</v-icon>
-            </v-btn>
+          <div class="Data">
+            <v-card class="d-flex flex-row" flat tile>
+              <v-btn fab dark small color="green darken-2">
+                <v-icon dark>local_hospital</v-icon>
+              </v-btn>
 
-            <!-- <h1 v-if="this.hospitals.length != 0">안심 병원 {{ hospitals.length }}</h1> -->
-            <v-card-title v-if="this.hospitals.length != 0">
-              안심 병원 {{ hospitals.length }} 개
-            </v-card-title>
-          </v-card>
+              <!-- <h1 v-if="this.hospitals.length != 0">안심 병원 {{ hospitals.length }}</h1> -->
+              <v-card-title v-if="isZero1"> 안심 병원 {{ hospitals.length }} 개 </v-card-title>
+              <v-card-title v-else class="zeroData">
+                😥 해당 동에 데이터가 없습니다!
+              </v-card-title>
+            </v-card>
 
-          <v-card class="d-flex flex-row" flat tile>
-            <v-btn fab dark small color="pink">
-              <v-icon dark>favorite</v-icon>
-            </v-btn>
+            <v-card class="d-flex flex-row" flat tile>
+              <v-btn fab dark small color="green darken-2">
+                <v-icon dark>coronavirus</v-icon>
+              </v-btn>
 
-            <!-- <h1 v-if="this.hospitals.length != 0">안심 병원 {{ hospitals.length }}</h1> -->
-            <v-card-title v-if="this.hospitals.coronas != 0">
-              코로나 선별 진료소 {{ coronas.length }} 개
-            </v-card-title>
-          </v-card>
+              <!-- <h1 v-if="this.hospitals.length != 0">안심 병원 {{ hospitals.length }}</h1> -->
+              <v-card-title v-if="isZero2">
+                코로나 선별 진료소 {{ coronas.length }} 개
+              </v-card-title>
+              <v-card-title v-else class="zeroData">
+                😥 해당 동에 데이터가 없습니다!
+              </v-card-title>
+            </v-card>
+          </div>
         </div>
       </v-expand-transition>
     </v-card>
@@ -58,6 +64,8 @@ export default {
   },
   data() {
     return {
+      isZero1: false,
+      isZero2: false,
       coronas: [],
       hospitals: [],
       data: [],
@@ -75,13 +83,13 @@ export default {
 
     http.get('/health/hospitals/' + this.currentDongInfo.gugunCode).then((response) => {
       this.hospitals = response.data;
-
+      if (this.hospitals.length != 0) this.isZero1 = true;
       http.get('/health/coronas/' + this.currentDongInfo.gugunCode).then((response) => {
         console.log('response.data coronas');
         console.log(response.data);
 
         this.coronas = response.data;
-
+        if (this.coronas.length != 0) this.isZero2 = true;
         this.data.push(this.hospitals.length);
         this.data.push(this.coronas.length);
         console.log('this.hospitals.length');
@@ -100,7 +108,15 @@ export default {
 };
 </script>
 <style scoped>
-h1 {
-  /* margin-bottom: 0; */
+.Data {
+  padding: 30px;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.zeroData {
+  text-align: center;
+  font-size: 0.8em;
+  color: #974e90;
 }
 </style>
