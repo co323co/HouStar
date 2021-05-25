@@ -79,21 +79,21 @@ export default {
     ...mapGetters(['currentDongInfo']),
   },
   created() {
-    console.log(this.currentDongInfo.gugunCode);
+    //.log(this.currentDongInfo.gugunCode);
 
     http.get('/health/hospitals/' + this.currentDongInfo.gugunCode).then((response) => {
       this.hospitals = response.data;
       if (this.hospitals.length != 0) this.isZero1 = true;
       http.get('/health/coronas/' + this.currentDongInfo.gugunCode).then((response) => {
-        console.log('response.data coronas');
-        console.log(response.data);
+        //console.log('response.data coronas');
+        //console.log(response.data);
 
         this.coronas = response.data;
         if (this.coronas.length != 0) this.isZero2 = true;
         this.data.push(this.hospitals.length);
         this.data.push(this.coronas.length);
-        console.log('this.hospitals.length');
-        console.log(this.hospitals.length);
+        //console.log('this.hospitals.length');
+        //console.log(this.hospitals.length);
         // this.datasets = [
         //   {
         //     label: '안전 등급 분류',
