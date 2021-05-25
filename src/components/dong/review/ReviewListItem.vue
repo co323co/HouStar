@@ -20,36 +20,43 @@
               v-model="newReview.environment"
               background-color="purple lighten-3"
               color="purple"
+              readonly
             ></v-rating>
             <label>건강</label>
             <v-rating
               v-model="newReview.health"
               background-color="pink lighten-3"
               color="pink"
+              readonly
             ></v-rating>
             <label>인프라</label>
             <v-rating
               v-model="newReview.infra"
               background-color="orange lighten-3"
               color="orange"
+              readonly
             ></v-rating>
             <label>안전</label>
             <v-rating
               v-model="newReview.safety"
               background-color="green lighten-3"
               color="green"
+              rea
+              readonly
             ></v-rating>
             <label>학군</label>
             <v-rating
               v-model="newReview.school"
               background-color="green lighten-3"
               color="green"
+              readonly
             ></v-rating>
             <label>대중교통</label>
             <v-rating
               v-model="newReview.trans"
               background-color="indigo lighten-3"
               color="indigo"
+              readonly
             ></v-rating></div
         ></v-col>
         <v-col>
