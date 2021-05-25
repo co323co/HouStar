@@ -20,13 +20,13 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("api/store")
 public class StoreController {
 
-	@Autowired
-	StoretService sSer;
+   @Autowired
+   StoretService sSer;
 
-	@ApiOperation("해당 동의 상가 정보 리스트를 반환한다")
-	@GetMapping({"/{dongcode}"})
-	public List<StoreDto> getinfo(@PathVariable String dongcode) {
-		return sSer.getinfo(dongcode);
-	}
-	
+   @ApiOperation("해당 동의 상가 정보 리스트를 반환한다")
+   @GetMapping({"/{dongcode}"})
+   public List<StoreDto> getinfo(@PathVariable String dongcode) {
+      return sSer.getinfo(dongcode);
+   }
+   
 }
