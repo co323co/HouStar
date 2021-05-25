@@ -1,21 +1,14 @@
 <template lang="">
-  <v-container class="justify-center">
+  <div class="justify-center">
     <!-- 배너 사진 띄우는 레이아웃 -->
     <banner />
+    <!-- 동 셀렉스 박스 레이아웃 -->
+    <dong-selectBar />
     <!-- 추천 동네 레이아웃 -->
     <suggest-dong />
-    <!-- 동 셀렉스 박스 레이아웃 -->
-    <v-layout class="mb-5">
-      <v-flex>
-        <h2 class="my-5">동네 구경하기</h2>
-        <dong-selectBar />
-      </v-flex>
-    </v-layout>
     <v-divider></v-divider>
-    <v-flex>
-      <live-ranking-map />
-    </v-flex>
-  </v-container>
+    <live-ranking-map />
+  </div>
 </template>
 <script>
 import Banner from '@/view/layout/Banner.vue';
