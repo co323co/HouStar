@@ -1,0 +1,7 @@
+.board table thead th {
+  font-size: 1.2em !important;
+  color: rgb(238, 160, 58) !important;
+}
+.board table tbody td {
+  font-size: 14px !important;
+}

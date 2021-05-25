@@ -18,12 +18,12 @@
 
 // Main demo style scss
 @import 'assets/sass/style.vue';
+@import 'assets/css/board.css';
 
 // Check documentation for RTL css
 // Update HTML with RTL attribute at public/index.html
 /*@import "assets/css/style.vue.rtl";*/
 </style>
-
 <script>
 import { OVERRIDE_LAYOUT_CONFIG } from '@/core/services/store/config.module';
 

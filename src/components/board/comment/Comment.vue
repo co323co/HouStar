@@ -22,7 +22,7 @@
         <v-col class="text-muted">{{ c_cmt.regtime }}</v-col>
         <v-col cols="1" class="cbtn text-right">
           <button @click="modify">확인</button> |
-          <button @click="isModifyShow = false">취소</button>
+          <button @click="cancle">취소</button>
         </v-col>
       </v-row>
     </div>
@@ -79,6 +79,10 @@ export default {
           this.$store.dispatch('getComments', this.comment.bid);
         });
       }
+    },
+    cancle() {
+      this.isModifyShow = false;
+      this.c_cmt.content = this.comment.content;
     },
     enterToBr(str) {
       if (str) return str.replace(/(?:\r\n|\r|\n)/g, '<br />');

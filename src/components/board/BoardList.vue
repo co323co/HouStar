@@ -1,57 +1,61 @@
-<template lang="">
+<template>
   <div>
-    <b-input-group class="mt-3">
-      <b-form-input v-model="word" placeholder="게시글 제목 검색"></b-form-input>
-      <b-input-group-append>
-        <b-button variant="outline-success" @click="search">검색</b-button>
-      </b-input-group-append>
-    </b-input-group>
-    <div v-if="boards.length" align="center">
-      <table class="table table-bordered table-condensed">
-        <colgroup>
-          <col :style="{ width: '5%' }" />
-          <col :style="{ width: '50%' }" />
-          <col :style="{ width: '10%' }" />
-          <col :style="{ width: '25%' }" />
-        </colgroup>
-        <tr>
-          <th>글번호</th>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>날짜</th>
-          <th>조회수</th>
-        </tr>
-        <list-row
-          v-for="(board, index) in boards"
-          :key="`${index}_items`"
-          :id="board.id"
-          :title="board.title"
-          :userid="board.userid"
-          :regtime="board.regtime"
-          :views="board.views"
-        />
-      </table>
-    </div>
-    <div v-else>글이 없습니다.</div>
+    <!-- 관리자가 아니면 공지사항게시판은 등록 못함 -->
     <div v-if="gubun != 1 || currentUser.userid == `admin`" class="text-right">
-      <button class="btn btn-primary" @click="movePage">등록</button>
+      <v-btn color="red lighten-3" class="ma-2" fab dark small @click="mvRegist">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </div>
+    <v-card class="pa-5">
+      <!-- 검색 bar -->
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-col cols="4">
+          <v-text-field
+            v-model="search"
+            prepend-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-card-title> </v-card-title>
+      <!-- 게시글 리스트 -->
+      <v-data-table
+        class="board"
+        :headers="headers"
+        :items="boards"
+        :search="search"
+        @click:row="mvDetail"
+        no-data-text="게시글이 없습니다"
+        no-results-text="검색 결과가 없습니다"
+      ></v-data-table>
+    </v-card>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import ListRow from './ListRow.vue';
 
 export default {
   data() {
     return {
       word: '',
-      //게시판 구분
-      gubun: null,
+      gubun: null, //게시판 구분
+      search: '',
+      headers: [
+        {
+          text: '글번호',
+          align: 'start',
+          value: 'id',
+          sortable: false,
+        },
+        { text: '제목', value: 'title' },
+        { text: '작성자', value: 'userid' },
+        { text: '날짜', value: 'regtime' },
+        { text: '조회수', value: 'views' },
+      ],
     };
-  },
-  components: {
-    ListRow,
   },
   computed: {
     ...mapGetters(['boards', 'boardname', 'currentUser']),
@@ -61,19 +65,14 @@ export default {
     this.gubun = this.$route.params.gubun;
   },
   methods: {
-    movePage() {
+    mvRegist() {
       console.log(this.$route.params.gubun);
       this.$router.push(`/board/${this.gubun}/create`);
     },
-    search() {
-      this.$store.dispatch('getBoards', `${this.gubun}/${this.word}`);
+    mvDetail(row) {
+      this.$router.push(`/board/${row.gubun}/view/${row.id}`);
     },
   },
 };
 </script>
-<style>
-th {
-  text-align: center;
-  height: 50px;
-}
-</style>
+<style></style>
