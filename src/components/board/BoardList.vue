@@ -33,38 +33,40 @@
       </table>
     </div>
     <div v-else>글이 없습니다.</div>
-    <div class="text-right">
+    <div v-if="gubun != 1 || currentUser.userid == `admin`" class="text-right">
       <button class="btn btn-primary" @click="movePage">등록</button>
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import ListRow from "@/components/board/ListRow.vue";
+import { mapGetters } from 'vuex';
+import ListRow from './ListRow.vue';
 
 export default {
   data() {
     return {
-      word: "",
+      word: '',
+      //게시판 구분
+      gubun: null,
     };
   },
   components: {
     ListRow,
   },
   computed: {
-    ...mapGetters(["boards", "boardname"]),
+    ...mapGetters(['boards', 'boardname', 'currentUser']),
   },
   created() {
     console.log(this.boardname);
-    console.log("보드이름 : " + this.$store.state.boardname);
+    this.gubun = this.$route.params.gubun;
   },
   methods: {
     movePage() {
       console.log(this.$route.params.gubun);
-      this.$router.push(`/boardpost/${this.$route.params.gubun}/create`);
+      this.$router.push(`/board/${this.gubun}/create`);
     },
     search() {
-      this.$store.dispatch("getBoards", `${this.$route.params.gubun}/${this.word}`);
+      this.$store.dispatch('getBoards', `${this.gubun}/${this.word}`);
     },
   },
 };

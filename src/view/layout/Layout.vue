@@ -34,10 +34,13 @@
                 <!-- begin:: Aside Left -->
                 <KTAside v-if="asideEnabled"></KTAside>
                 <!-- end:: Aside Left -->
-                <div class="content-wrapper flex-row-fluid">
+                <div class="flex-row-fluid" background-color="white">
+                  <!-- <div class="content-wrapper flex-row-fluid"> -->
+                  <!-- <v-container> -->
                   <transition name="fade-in-up">
-                    <router-view />
+                    <router-view :key="$route.fullPath" />
                   </transition>
+                  <!-- </v-container> -->
                 </div>
               </div>
             </div>
@@ -48,7 +51,8 @@
       </div>
     </div>
 
-    <KTStickyToolbar v-if="toolbarDisplay"></KTStickyToolbar>
+    <!-- 옆에 꼬랑지처럼 따라다니는 애-->
+    <!-- <KTStickyToolbar v-if="toolbarDisplay"></KTStickyToolbar> -->
     <KTScrollTop></KTScrollTop>
   </div>
 </template>
@@ -77,7 +81,7 @@ export default {
     KTHeaderMobile,
     // KTSubheader,
     KTFooter,
-    KTStickyToolbar,
+    // KTStickyToolbar,
     KTScrollTop,
     Loader,
   },

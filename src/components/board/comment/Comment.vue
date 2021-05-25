@@ -2,15 +2,20 @@
   <div class="comment">
     <div class="head">{{ comment.userid }} : {{ comment.regtime }}</div>
     <div class="content" v-html="enterToBr(comment.content)"></div>
-    <div class="cbtn">
+    <div v-if="comment.userid == currentUser.userid" class="cbtn">
       <label @click="modifyCommentView">수정</label> | <label @click="deleteComment">삭제</label>
     </div>
   </div>
 </template>
 <script>
-import http from '@/util/http-common';
+import http from '@/core/services/http-common';
+import { mapGetters } from 'vuex';
+
 export default {
   props: ['comment'],
+  computed: {
+    ...mapGetters(['currentUser']),
+  },
   methods: {
     modifyCommentView() {
       //부모한테 현재 댓글 수정작업 해달라고 알림
@@ -25,11 +30,10 @@ export default {
     deleteComment() {
       if (confirm('정말로 삭제할까요?')) {
         http.delete(`/comment/${this.comment.bid}/${this.comment.seq}`).then(({ data }) => {
-          let msg = '삭제 처리시 문제가 발생했습니다.';
-          if (data == true) {
-            msg = '삭제가 완료되었습니다.';
+          if (!data) {
+            let msg = '삭제 처리시 문제가 발생했습니다.';
+            alert(msg);
           }
-          alert(msg);
           // 삭제했으니 보여줄 댓글들 다시 얻기.
           this.$store.dispatch('getComments', this.comment.bid);
         });

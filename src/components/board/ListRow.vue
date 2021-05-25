@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "listrow",
+  name: 'listrow',
   props: {
     id: Number,
     title: String,

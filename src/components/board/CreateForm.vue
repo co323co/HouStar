@@ -20,48 +20,55 @@
   </div>
 </template>
 <script>
-import http from "@/util/http-common";
+import http from '@/core/services/http-common';
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      id: "",
-      title: "",
-      content: "",
-      userid: "",
-      views: "",
-      regtime: "",
+      id: '',
+      title: '',
+      content: '',
+      userid: null,
+      views: '',
+      regtime: '',
       gubun: this.$route.params.gubun,
     };
+  },
+  computed: {
+    ...mapGetters(['currentUser']),
+  },
+  created() {
+    this.userid = this.currentUser.userid;
   },
   methods: {
     checkValue() {
       let err = true;
-      let msg = "";
-      !this.title && ((msg = "title 입력해주세요"), (err = false), this.$refs.title.focus());
+      let msg = '';
+      !this.title && ((msg = 'title 입력해주세요'), (err = false), this.$refs.title.focus());
       err &&
         !this.content &&
-        ((msg = "내용 입력해주세요"), (err = false), this.$refs.content.focus());
+        ((msg = '내용 입력해주세요'), (err = false), this.$refs.content.focus());
       if (!err) alert(msg);
       else this.registBoard();
     },
     registBoard() {
-      console.log("this.title" + this.title);
-      console.log("this.content" + this.content);
-      console.log("this.userid" + this.userid);
+      console.log('this.title' + this.title);
+      console.log('this.content' + this.content);
+      console.log('this.userid' + this.userid);
       http
         .post(`/board/post/${this.gubun}`, {
           id: this.id,
           title: this.title,
           content: this.content,
-          // userid: this.userid,
+          userid: this.userid,
           // views: this.views,
           // regtime: this.regtime,
           gubun: this.gubun,
         })
         .then(({ data }) => {
-          let msg = "등록 처리시 문제가 발생했습니다.";
+          let msg = '등록 처리시 문제가 발생했습니다.';
           if (data) {
-            msg = "등록이 완료되었습니다.";
+            msg = '등록이 완료되었습니다.';
           }
           alert(msg);
           this.moveList();
@@ -69,7 +76,7 @@ export default {
     },
     moveList() {
       console.log(this.$route.params.gubun);
-      this.$router.push(`/boardpost/${this.gubun}`);
+      this.$router.push(`/board/${this.gubun}`);
     },
   },
 };

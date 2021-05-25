@@ -19,8 +19,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import ViewDetail from '@/components/board/ViewDetail.vue';
-import CommentWrite from '@/components/board/include/comment/CommentWrite.vue';
-import Comment from '@/components/board/include/comment/Comment.vue';
+import CommentWrite from './comment/CommentWrite.vue';
+import Comment from './comment/Comment.vue';
 
 export default {
   data() {

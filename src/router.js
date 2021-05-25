@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
 Vue.use(Router);
 
 export default new Router({
@@ -40,17 +39,49 @@ export default new Router({
         {
           path: '/notice',
           name: 'notice',
+          redirect: '/board/1',
           component: () => import('@/view/pages/board/board.vue'),
         },
         {
           path: '/qna',
           name: 'qna',
+          redirect: '/board/2',
           component: () => import('@/view/pages/board/board.vue'),
         },
         {
           path: '/community',
           name: 'community',
           component: () => import('@/view/pages/board/community.vue'),
+        },
+        {
+          path: '/board/:gubun',
+          name: 'board',
+          component: () => import('@/view/pages/board/board.vue'),
+          children: [
+            {
+              path: '',
+              name: 'board-post-list',
+              component: () => import('@/components/board/BoardList.vue'),
+            },
+            {
+              path: 'create',
+              name: 'board-post-create',
+              component: () => import('@/components/board/BoardCreate.vue'),
+            },
+            {
+              path: 'view/:id',
+              name: 'board-post-view',
+              component: () => import('@/components/board/BoardView.vue'),
+            },
+            {
+              path: 'modify/:id',
+              name: 'board-post-modify',
+              component: () => import('@/components/board/BoardModify.vue'),
+            },
+          ],
+          redirect: () => {
+            return '/board';
+          },
         },
         //관리자 부분
         {

@@ -22,27 +22,30 @@
         rows="5"
       ></textarea
       ><br />
-      <!-- <a href="#" class="btn" @click="checkValue">수정</a> -->
-      <button @click="checkValue">수정</button>
-      <!-- <router-link to="/boardpost/:gubun" class="btn">목록</router-link> -->
-      <button @click="moveList">목록</button>
+
+      <div v-if="board.userid == currentUser.userid">
+        <!-- <a href="#" class="btn" @click="checkValue">수정</a> -->
+        <button @click="checkValue">수정</button>
+        <!-- <router-link to="/board/:gubun" class="btn">목록</router-link> -->
+        <button @click="moveList">목록</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import http from "@/util/http-common";
+import http from '@/core/services/http-common';
 
 export default {
   data() {
     return {
-      id: "",
-      title: "",
-      content: "",
-      userid: "",
-      views: "",
-      regtime: "",
-      gubun: "",
+      id: '',
+      title: '',
+      content: '',
+      userid: '',
+      views: '',
+      regtime: '',
+      gubun: '',
     };
   },
   created() {
@@ -60,11 +63,11 @@ export default {
   methods: {
     checkValue() {
       let err = true;
-      let msg = "";
-      !this.title && ((msg = "title 입력해주세요"), (err = false), this.$refs.title.focus());
+      let msg = '';
+      !this.title && ((msg = 'title 입력해주세요'), (err = false), this.$refs.title.focus());
       err &&
         !this.content &&
-        ((msg = "내용 입력해주세요"), (err = false), this.$refs.content.focus());
+        ((msg = '내용 입력해주세요'), (err = false), this.$refs.content.focus());
       if (!err) alert(msg);
       else this.modifyBook();
     },
@@ -81,18 +84,18 @@ export default {
           gubun: this.gubun,
         })
         .then(({ data }) => {
-          console.log("수정완료");
-          let msg = "수정 처리시 문제가 발생했습니다.";
+          console.log('수정완료');
+          let msg = '수정 처리시 문제가 발생했습니다.';
           if (data) {
-            msg = "수정이 완료되었습니다.";
+            msg = '수정이 완료되었습니다.';
           }
           alert(msg);
-          // this.$router.push(`/boardpost/${this.gubun}`);
-          this.$router.push(`/boardpost/${this.gubun}/view/${this.id}`);
+          // this.$router.push(`/board/${this.gubun}`);
+          this.$router.push(`/board/${this.gubun}/view/${this.id}`);
         });
     },
     moveList() {
-      this.$router.push(`/boardpost/${this.gubun}`);
+      this.$router.push(`/board/${this.gubun}`);
     },
   },
 };

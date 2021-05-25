@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import CreateForm from '@/components/board/CreateForm.vue';
+import CreateForm from './CreateForm.vue';
 export default {
   components: {
     CreateForm,

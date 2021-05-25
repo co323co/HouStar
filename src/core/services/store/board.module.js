@@ -1,15 +1,11 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import http from "@/util/http-common";
+import http from '@/core/services/http-common';
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+export default {
   state: {
     boards: [],
     board: {},
     comments: [],
-    boardname: "",
+    boardname: '',
   },
   getters: {
     boards(state) {
@@ -44,32 +40,32 @@ export default new Vuex.Store({
     //게시판 구분(gubun)으로 해당 게시판 게시글 전부 찾기
     getBoards(context, payload) {
       http
-        .get("/board/" + payload)
+        .get('/board/' + payload)
         .then(({ data }) => {
-          context.commit("setBoards", data);
+          context.commit('setBoards', data);
         })
         .catch(() => {
-          alert("에러발생!");
+          alert('에러발생!');
         });
     },
     //게시글 id로 해당 게시글 찾기
     getBoard(context, payload) {
-      http.get("/board/post/" + payload).then(({ data }) => {
-        context.commit("setBoard", data);
+      http.get('/board/post/' + payload).then(({ data }) => {
+        context.commit('setBoard', data);
       });
     },
     //게시판 gubun로 게시판이름 찾기
     getBoardName(context, payload) {
-      http.get("/board/name/" + payload).then(({ data }) => {
+      http.get('/board/name/' + payload).then(({ data }) => {
         //  console.log(payload);
-        context.commit("setBoardName", data);
+        context.commit('setBoardName', data);
       });
     },
     //게시글 id로 댓글들 찾기
     getComments(context, payload) {
-      http.get("/comment/" + payload).then(({ data }) => {
-        context.commit("setComments", data);
+      http.get('/comment/' + payload).then(({ data }) => {
+        context.commit('setComments', data);
       });
     },
   },
-});
+};

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import ModifyForm from '@/components/board/ModifyForm.vue';
+import ModifyForm from './ModifyForm.vue';
 console.log('modify들어옴');
 export default {
   components: {

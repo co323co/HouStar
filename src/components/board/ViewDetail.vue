@@ -14,42 +14,45 @@
       <div class="view">{{ board.regtime }}</div>
       <label for="content">내용</label>
       <div class="view" v-html="enterToBr(board.content)"></div>
-      <div style="padding-top: 15px">
+      <div
+        v-if="currentUser.userid == 'admin' || board.userid == currentUser.userid"
+        style="padding-top: 15px"
+      >
         <button @click="mvmodify">수정</button>
-        <button @click="deleteBook">삭제</button>
+        <button @click="deleteBook" class="ml-2">삭제</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import http from "@/util/http-common";
+import { mapGetters } from 'vuex';
+import http from '@/core/services/http-common';
 
 export default {
   computed: {
-    ...mapGetters(["board"]),
+    ...mapGetters(['board', 'currentUser']),
   },
   methods: {
     mvmodify() {
-      this.$router.push(`/boardpost/${this.board.gubun}/modify/${this.board.id}`);
+      this.$router.push(`/board/${this.board.gubun}/modify/${this.board.id}`);
     },
     deleteBook() {
       console.log(this.board.id);
-      if (confirm("정말로 삭제?")) {
+      if (confirm('정말로 삭제하실 건가요?')) {
         http.delete(`/board/post/${this.board.id}`).then(({ data }) => {
-          let msg = "삭제 처리시 문제가 발생했습니다.";
+          let msg = '삭제 처리시 문제가 발생했습니다.';
           if (data) {
-            msg = "삭제가 완료되었습니다.";
+            msg = '삭제가 완료되었습니다.';
           }
           alert(msg);
-          this.$router.push(`/boardpost/${this.board.gubun}`);
-          // this.$router.push('/boardpost');
+          this.$router.push(`/board/${this.board.gubun}`);
+          // this.$router.push('/board');
         });
       }
     },
     enterToBr(str) {
-      if (str) return str.replace(/(?:\r\n|\r|\n)/g, "<br />");
+      if (str) return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
     },
   },
 };

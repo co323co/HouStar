@@ -3,6 +3,7 @@
   <div class="topbar">
     <!--begin: Search -->
     <b-dropdown
+      v-if="false"
       size="sm"
       id="kt_quick_search_toggle"
       variant="link"
@@ -26,6 +27,7 @@
 
     <!--begin: Notifications -->
     <b-dropdown
+      v-show="false"
       size="sm"
       variant="link"
       toggle-class="topbar-item text-decoration-none"

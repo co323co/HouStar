@@ -9,6 +9,7 @@ import profile from './profile.module';
 import dongStore from './dong.module';
 import rate from './rating.module';
 import review from './review.module';
+import board from './board.module';
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     dongStore,
     rate,
     review,
+    board,
   },
   plugins: [createPersistedState()],
 });
