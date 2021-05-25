@@ -1,58 +1,25 @@
 <template>
-  <div class="d-flex flex-column flex-root" v-if="isLogin">
-    <!-- begin:: Header Mobile -->
-    <KTHeaderMobile></KTHeaderMobile>
-    <!-- end:: Header Mobile -->
+  <div v-if="isLogin">
+    <div>
+      <KTHeader></KTHeader>
 
-    <Loader v-if="loaderEnabled" v-bind:logo="loaderLogo"></Loader>
-
-    <div class="d-flex flex-row flex-column-fluid page">
-      <div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">
-        <!-- begin:: Header -->
-        <KTHeader></KTHeader>
-        <!-- end:: Header -->
-
-        <!-- begin:: Content -->
-        <div id="kt_content" class="content d-flex flex-column flex-column-fluid">
-          <!-- begin:: Content Head -->
-          <!-- <KTSubheader
-            v-if="subheaderDisplay && displaySubheaderOnDashboard"
-            v-bind:breadcrumbs="breadcrumbs"
-            v-bind:title="pageTitle"
-          /> -->
-          <!-- end:: Content Head -->
-
-          <!-- begin:: Content Body -->
-          <div class="d-flex flex-column-fluid">
-            <div
-              :class="{
-                'container-fluid': contentFluid,
-                container: !contentFluid,
-              }"
-            >
-              <div class="d-lg-flex flex-row-fluid">
-                <!-- begin:: Aside Left -->
-                <KTAside v-if="asideEnabled"></KTAside>
-                <!-- end:: Aside Left -->
-                <div class="flex-row-fluid" background-color="white">
-                  <!-- <div class="content-wrapper flex-row-fluid"> -->
-                  <!-- <v-container> -->
-                  <transition name="fade-in-up">
-                    <router-view :key="$route.fullPath" />
-                  </transition>
-                  <!-- </v-container> -->
-                </div>
-              </div>
+      <!-- begin:: Content -->
+      <v-main>
+        <v-container class="content">
+          <div class="d-lg-flex flex-row-fluid">
+            <!-- begin:: Aside Left -->
+            <KTAside v-if="asideEnabled"></KTAside>
+            <!-- end:: Aside Left -->
+            <div class="container flex-row-fluid" background-color="white">
+              <transition name="fade-in-up">
+                <router-view :key="$route.fullPath" />
+              </transition>
             </div>
           </div>
-        </div>
-
-        <KTFooter></KTFooter>
-      </div>
+        </v-container>
+      </v-main>
+      <KTFooter></KTFooter>
     </div>
-
-    <!-- 옆에 꼬랑지처럼 따라다니는 애-->
-    <!-- <KTStickyToolbar v-if="toolbarDisplay"></KTStickyToolbar> -->
     <KTScrollTop></KTScrollTop>
   </div>
 </template>
@@ -60,14 +27,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import KTAside from '@/view/layout/aside/Aside.vue';
-import KTHeader from '@/view/layout/header/Header.vue';
+import KTHeader from '@/view/layout/header/MyHeader.vue';
 import KTHeaderMobile from '@/view/layout/header/HeaderMobile.vue';
-// import KTSubheader from '@/view/layout/subheader/Subheader.vue';
 import KTFooter from '@/view/layout/footer/Footer.vue';
 import HtmlClass from '@/core/services/htmlclass.service';
-import KTStickyToolbar from '@/view/layout/extras/StickyToolbar.vue';
 import KTScrollTop from '@/view/layout/extras/ScrollTop';
-import Loader from '@/view/content/Loader.vue';
+import KTQuickUser from '@/view/layout/extras/offcanvas/QuickUser.vue';
+
 import {
   ADD_BODY_CLASSNAME,
   REMOVE_BODY_CLASSNAME,
@@ -76,14 +42,12 @@ import {
 export default {
   name: 'Layout',
   components: {
-    KTAside,
     KTHeader,
-    KTHeaderMobile,
     // KTSubheader,
     KTFooter,
     // KTStickyToolbar,
     KTScrollTop,
-    Loader,
+    // KTQuickUser,
   },
   beforeMount() {
     // show page loading

@@ -1,21 +1,14 @@
 <template>
-  <div class="topbar-item">
+  <div class="topbar-item text-start">
     <div
       id="kt_quick_user_toggle"
-      class="
-        btn btn-icon btn-hover-transparent-white
-        d-flex
-        align-items-center
-        btn-lg
-        px-md-2
-        w-md-auto
-      "
+      class="btn btn-icon btn-hover-transparent-white align-items-center btn-lg px-md-2 w-md-auto"
     >
       <!-- 헤더에 달리는 버튼 UI -->
       <span class="symbol symbol-35">
-        <span class="symbol-label font-size-h5 font-weight-bold text-white bg-white-o-30">
-          <b-icon icon="person-fill"></b-icon
-        ></span>
+        <div class="symbol-label">
+          <v-icon color="white">mdi-account-circle</v-icon>
+        </div>
       </span>
     </div>
 
@@ -39,7 +32,7 @@
         style="max-height: 90vh; position: relative"
       >
         <!--begin::Header-->
-        <h2>😉 {{ currentUser.userid }}</h2>
+        <h2 style="color: black">😉 {{ currentUser.userid }}</h2>
         <div class="mt-3 d-flex align-items-center">
           <div class="symbol symbol-100 mr-5">
             <b-icon class="symbol-label" icon="person-fill"></b-icon>
@@ -60,10 +53,10 @@
         <!--end::Header-->
         <div class="separator separator-dashed mt-5 mb-5 pt-5">
           <div class="pt-5">
-            <h5>📞 {{ currentUser.phone }}</h5>
+            <h5 style="color: black">📞 {{ currentUser.phone }}</h5>
           </div>
           <div class="pt-5">
-            <h5>🏠 {{ currentUser.address }}</h5>
+            <h5 style="color: black">🏠 {{ currentUser.address }}</h5>
           </div>
         </div>
       </perfect-scrollbar>
@@ -76,6 +69,13 @@
 #kt_quick_user {
   overflow: hidden;
 }
+.text-muted {
+  font-size: 1.1em;
+}
+.symbol-label {
+  // color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+}
 </style>
 
 <script>
@@ -87,38 +87,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'KTQuickUser',
   data() {
-    return {
-      list: [
-        {
-          title: 'Another purpose persuade',
-          desc: 'Due in 2 Days',
-          alt: '+28%',
-          svg: 'media/svg/icons/Home/Library.svg',
-          type: 'warning',
-        },
-        {
-          title: 'Would be to people',
-          desc: 'Due in 2 Days',
-          alt: '+50%',
-          svg: 'media/svg/icons/Communication/Write.svg',
-          type: 'success',
-        },
-        {
-          title: 'Purpose would be to persuade',
-          desc: 'Due in 2 Days',
-          alt: '-27%',
-          svg: 'media/svg/icons/Communication/Group-chat.svg',
-          type: 'danger',
-        },
-        {
-          title: 'The best product',
-          desc: 'Due in 2 Days',
-          alt: '+8%',
-          svg: 'media/svg/icons/General/Attachment2.svg',
-          type: 'info',
-        },
-      ],
-    };
+    return {};
   },
   mounted() {
     // Init Quick User Panel
