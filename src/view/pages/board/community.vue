@@ -5,7 +5,7 @@
         <!-- table1, table2 -->
 
         <v-card flat>
-          <v-card-title>
+          <v-card-title height="50px">
             인기 게시글 📃
           </v-card-title>
           <v-data-table
@@ -20,8 +20,8 @@
 
         <!-- end card -->
 
-        <v-card flat class="mt-1">
-          <v-card-title>
+        <v-card flat>
+          <v-card-title height="50px">
             🔥 인기 게시판 🔥
           </v-card-title>
 
@@ -66,6 +66,8 @@
             :search="search"
             class="elevation-1 com"
             @click:row="mvList"
+            no-data-text="게시글이 없습니다"
+            no-results-text="검색 결과가 없습니다"
           >
             <template v-slot:item.count="{ item }">
               <v-chip :color="getColor(item.count)" dark>{{ item.count }}</v-chip>
