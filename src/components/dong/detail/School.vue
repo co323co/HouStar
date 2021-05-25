@@ -53,6 +53,7 @@ export default {
       show: false,
     };
   },
+  //테스트
   computed: {
     ...mapGetters(['currentDongInfo']),
   },
