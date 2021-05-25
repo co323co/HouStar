@@ -50,7 +50,7 @@
             </div>
             <div class="pa-3 zeroData" align="center">
               <div v-if="showschoollist.length == 0">
-                😥 해당 동에 데이터가 없습니다!
+                😥 해당 동에 학교가 없습니다!
               </div>
             </div>
           </div>
