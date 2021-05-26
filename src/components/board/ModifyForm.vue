@@ -1,29 +1,55 @@
 <template>
-  <!-- 기존거 시작 -->
   <div class="regist">
-    <h1 class="underline">수정</h1>
-    <div class="regist_form">
-      <label for="isbn">글번호</label>
-      <div class="view">{{ id }}</div>
-      <label for="isbn">조회수</label>
-      <div class="view">{{ views }}</div>
-      <label for="title">제목</label>
-      <input type="text" id="title" name="title" v-model="title" ref="title" /><br />
-      <label for="author">작성자</label>
-      <div class="view">{{ userid }}</div>
-      <label for="price">작성일</label>
-      <div class="view">{{ regtime }}</div>
-      <label for="content">내용</label>
-      <v-textarea v-model="content"></v-textarea><br />
-      <div v-if="userid == currentUser.userid">
-        <!-- <a href="#" class="btn" @click="checkValue">수정</a> -->
-        <button @click="checkValue">수정</button>
-        <!-- <router-link to="/board/:gubun" class="btn">목록</router-link> -->
-        <button @click="moveList">목록</button>
-      </div>
+    <h3 class="mt-1 mb-3 ml-2">글 수정</h3>
+    <div class="inputform">
+      <v-row class="btitle px-5 py-5">글 제목</v-row>
+      <v-divider></v-divider>
+      <v-text-field
+        type="text"
+        id="title"
+        name="title"
+        v-model="title"
+        ref="title"
+        placeholder="제목"
+        color="cyan lighten-3"
+        background-color="white"
+        class="pa-1 inputs"
+        hide-details
+      />
+      <v-row class="pl-2">
+        <v-col cols="12">
+          <v-row no-gutters align="center">
+            <p>{{ id }}</p>
+            <p class="ml-4">|</p>
+            <p class="ml-4">{{ regtime }}</p>
+            <p class="ml-4">|</p>
+            <p class="ml-4">조회 {{ views }} views</p>
+          </v-row>
+        </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
+      <v-divider></v-divider>
+      <v-row class="btitle px-5 py-5">내용</v-row> <v-divider></v-divider>
+      <v-textarea
+        placeholder="내용을 써주세요!"
+        id="content"
+        name="content"
+        v-model="content"
+        ref="content"
+        color="cyan lighten-3"
+        background-color="white"
+        class="pa-1 inputs"
+        hide-details
+      />
     </div>
+
+    <v-flex class="pt-4 mb-2 text-right">
+      <div v-if="userid == currentUser.userid">
+        <v-btn @click="checkValue">수정</v-btn>
+        <v-btn @click="moveList" class="ml-2">목록</v-btn>
+      </div>
+    </v-flex>
   </div>
-  <!-- 기존거끝 -->
 </template>
 
 <script>
@@ -99,26 +125,30 @@ export default {
 </script>
 
 <style scoped>
+.btitle {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+h3 {
+  font-family: BMHANNAPro;
+}
 .regist {
   padding: 10px;
+  background-color: rgb(250, 242, 215);
+  border-radius: 10px;
 }
-.regist_form {
-  text-align: left;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
+.inputform {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 10px;
 }
-input,
-textarea,
-.view {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  color: #787878;
-  font-size: medium;
+.v-btn {
+  font-size: 1.1em;
 }
+p {
+  margin-bottom: 0;
+}
+/* .inputs {
+  background-color: palegreen;
+} */
 </style>
