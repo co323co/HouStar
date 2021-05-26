@@ -9,7 +9,7 @@
         <v-card-subtitle>
           <v-row align="center" class="ml-1">
             <!-- <div v-if="this.totalReviewCount != 0"> -->
-            <span class="display-1 pa-0 mr-1"
+            <span v-if="rating" class="display-1 pa-0 mr-1"
               ><b> {{ (this.rating.total * 1.0).toFixed(1) }}</b>
             </span>
 
@@ -126,6 +126,56 @@ import ReviewListItem from '@/components/dong/review/ReviewListItem.vue';
 import ReviewRegister from '@/components/dong/review/ReviewRegister.vue';
 
 export default {
+  data() {
+    return {
+      rating: null,
+      isWrite: false,
+      //선호 태그 목록 (1선택)
+      tag_val: null,
+      tags: ['인프라', '대중교통', '안전', '건강', '학군', '환경'],
+      //가구 형태 목록 (1선택)
+      familyType_val: null,
+      familyTypes: ['자취생', '직장인', '신혼부부', '일반가족'],
+      //연령대 목록 (1선택)
+      // ageRange_val: null,
+      ageRange_val: null,
+      ageRanges: [
+        { text: '10대', value: 10 },
+        { text: '20대', value: 20 },
+        { text: '30대', value: 30 },
+        { text: '40대', value: 40 },
+        { text: '50대', value: 50 },
+        { text: '그 이상', value: 'over' },
+      ],
+
+      show_list: [],
+      size: 'firstClass',
+      chartDataForBarChart: Object,
+      chartDataForRadarChart: Object,
+
+      optionsForBarChart: {
+        legend: {
+          display: false,
+        },
+        elements: {
+          bar: {
+            borderWidth: 1,
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
+    };
+  },
   methods: {
     reset() {
       this.show_list = this.reviews;
@@ -179,57 +229,8 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['totalReviewCount', 'reviews', 'reviewsbyuserid', 'rating']),
+    ...mapGetters(['totalReviewCount', 'reviews', 'reviewsbyuserid']),
     ...mapGetters(['currentUser']),
-  },
-  data() {
-    return {
-      isWrite: false,
-      //선호 태그 목록 (1선택)
-      tag_val: null,
-      tags: ['인프라', '대중교통', '안전', '건강', '학군', '환경'],
-      //가구 형태 목록 (1선택)
-      familyType_val: null,
-      familyTypes: ['자취생', '직장인', '신혼부부', '일반가족'],
-      //연령대 목록 (1선택)
-      // ageRange_val: null,
-      ageRange_val: null,
-      ageRanges: [
-        { text: '10대', value: 10 },
-        { text: '20대', value: 20 },
-        { text: '30대', value: 30 },
-        { text: '40대', value: 40 },
-        { text: '50대', value: 50 },
-        { text: '그 이상', value: 'over' },
-      ],
-
-      show_list: [],
-      size: 'firstClass',
-      chartDataForBarChart: Object,
-      chartDataForRadarChart: Object,
-
-      optionsForBarChart: {
-        legend: {
-          display: false,
-        },
-        elements: {
-          bar: {
-            borderWidth: 1,
-          },
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          xAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-              },
-            },
-          ],
-        },
-      },
-    };
   },
   components: {
     StarRating,
@@ -239,10 +240,68 @@ export default {
     RadarChart,
   },
   created() {
+    let dongcode = this.$store.state.dongStore.Sidogugundong.dongCode;
+    http.get('/dongreview/avg-rating/' + dongcode).then(({ data }) => {
+      console.log('서버 받은 data', data);
+      this.rating = {
+        environment: data.environment,
+        health: data.health,
+        infra: data.infra,
+        safety: data.safety,
+        school: data.school,
+        trans: data.trans,
+        total: data.total,
+      };
+
+      this.chartDataForBarChart = {
+        labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '대중교통🚦'],
+        datasets: [
+          {
+            label: '카테고리별 통계',
+            backgroundColor: '#66BB6A',
+            barThickness: 7,
+            data: [
+              this.rating.environment,
+              this.rating.health,
+              this.rating.infra,
+              this.rating.safety,
+              this.rating.school,
+              this.rating.trans,
+            ],
+          },
+        ],
+      };
+      console.log('chartDataForBarChart', this.chartDataForBarChart);
+      // radar chart에 넣을 데이터
+      this.chartDataForRadarChart = {
+        labels: ['환경', '건강', '인프라', '안전', '학군', '대중교통'],
+        datasets: [
+          {
+            label: '카테고리별 통계',
+            backgroundColor: 'rgba(27, 197, 189, 0.2)',
+            borderColor: '#1bc5bd',
+            // pointBackgroundColor: 'rgba(179,181,198,1)',
+            pointBorderColor: '#fff',
+            // pointHoverBackgroundColor: '#fff',
+            // pointHoverBorderColor: 'rgba(179,181,198,1)',
+
+            data: [
+              this.rating.environment,
+              this.rating.health,
+              this.rating.infra,
+              this.rating.safety,
+              this.rating.school,
+              this.rating.trans,
+            ],
+          },
+        ],
+      };
+      //context.commit('setAvgRating', data.total * 1.0);
+      //this.rating = data;
+      //this.totalRating = this.rating.total * 1.0;
+    });
     // 해당 동에 대한 평균별점정보 가져오기
-    this.$store.dispatch('getRating', this.$store.state.dongStore.Sidogugundong.dongCode);
-    // console.log(this.$store.state.rate.rating);
-    // console.log(this.rating);
+    // console.log('현재 rating', this.rating);
     // console.log('this.rating');
     // 해당 동에 대한 모든 리뷰 다 가져오기.
     this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
@@ -252,49 +311,6 @@ export default {
     // console.log(this.reviewsbyuserid.length);
     if (this.reviewsbyuserid.length != 0) this.isWrite = true;
     this.show_list = [...this.reviews];
-
-    this.chartDataForBarChart = {
-      labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '대중교통🚦'],
-      datasets: [
-        {
-          label: '카테고리별 통계',
-          backgroundColor: '#66BB6A',
-          barThickness: 7,
-          data: [
-            this.$store.state.rate.rating.environment,
-            this.$store.state.rate.rating.health,
-            this.$store.state.rate.rating.infra,
-            this.$store.state.rate.rating.safety,
-            this.$store.state.rate.rating.school,
-            this.$store.state.rate.rating.trans,
-          ],
-        },
-      ],
-    };
-    // radar chart에 넣을 데이터
-    this.chartDataForRadarChart = {
-      labels: ['환경', '건강', '인프라', '안전', '학군', '대중교통'],
-      datasets: [
-        {
-          label: '카테고리별 통계',
-          backgroundColor: 'rgba(27, 197, 189, 0.2)',
-          borderColor: '#1bc5bd',
-          // pointBackgroundColor: 'rgba(179,181,198,1)',
-          pointBorderColor: '#fff',
-          // pointHoverBackgroundColor: '#fff',
-          // pointHoverBorderColor: 'rgba(179,181,198,1)',
-
-          data: [
-            this.$store.state.rate.rating.environment,
-            this.$store.state.rate.rating.health,
-            this.$store.state.rate.rating.infra,
-            this.$store.state.rate.rating.safety,
-            this.$store.state.rate.rating.school,
-            this.$store.state.rate.rating.trans,
-          ],
-        },
-      ],
-    };
   },
   mounted() {
     // 해당 동에 대한 평균별점정보 가져오기
