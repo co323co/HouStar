@@ -1,4 +1,5 @@
 <template>
+  <!-- 기존거 시작 -->
   <div class="regist">
     <h1 class="underline">수정</h1>
     <div class="regist_form">
@@ -22,6 +23,7 @@
       </div>
     </div>
   </div>
+  <!-- 기존거끝 -->
 </template>
 
 <script>

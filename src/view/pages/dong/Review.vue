@@ -102,8 +102,8 @@
       </v-container>
     </v-row>
     <v-flex v-else>
-      <v-container class="reviewback rounded-card">
-        리뷰를 작성하지 않으면 글을 볼 수 없습니다.
+      <v-container class="reviewback rounded-card text-center mt-5">
+        리뷰를 작성하지 않으면 볼 수 없습니다. 작성하시겠습니까?
       </v-container>
     </v-flex>
   </v-container>
@@ -275,6 +275,8 @@ export default {
     this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
     // 해당 동에 대한 로그인한 유저의 모든 리뷰 가져오기
     this.$store.dispatch('getReviewsByUserId', this.currentUser.userid);
+    // console.log('this.reviewsbyuserid.length');
+    // console.log(this.reviewsbyuserid.length);
     if (this.reviewsbyuserid.length != 0) this.isWrite = true;
     this.show_list = [...this.reviews];
   },
