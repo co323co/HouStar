@@ -69,7 +69,7 @@
           <v-btn
             :loading="loading3"
             :disabled="loading3"
-            color="pink"
+            color="amber darken-1"
             class="white--text"
             @click="register"
           >

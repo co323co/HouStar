@@ -74,14 +74,16 @@
       <!-- 리뷰 리스트 뿌리기 -->
     </v-card>
     <v-row v-if="isWrite">
-      <v-container>
-        <h1 align="center" class="mt-5">리뷰 목록 ✍ 총 {{ show_list.length }} 명</h1>
+      <v-container class="reviewback">
+        <h1 align="center" class="mt-10">리뷰 목록 ✍ 총 {{ show_list.length }} 명</h1>
 
         <review-list-item v-for="(review, idx) in show_list" :key="idx" :review="review" />
       </v-container>
     </v-row>
     <v-flex v-else>
-      <v-container> 리뷰를 작성하지 않으면 글을 볼 수 없습니다. </v-container>
+      <v-container class="reviewback">
+        리뷰를 작성하지 않으면 글을 볼 수 없습니다.
+      </v-container>
     </v-flex>
   </v-container>
 </template>

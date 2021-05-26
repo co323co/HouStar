@@ -1,9 +1,9 @@
 <template>
   <!-- 보여주는부분 -->
   <div align="center" class="mt-5">
-    <v-card v-if="isReadOnly" style="background-color : pink" max-width="1000">
+    <v-card v-if="isReadOnly" max-width="1000">
       <v-card-title>
-        <v-row v-if="review">
+        <v-row v-if="review" class="mt-1">
           <h2 v-if="review.userid" class="ml-3">{{ review.userid }} |</h2>
           <h2 v-if="review.age_range">{{ review.age_range }}대 |</h2>
           <h2 v-if="review.family_type">{{ review.family_type }} |</h2>
@@ -12,6 +12,8 @@
           </h2>
         </v-row>
       </v-card-title>
+
+      <v-divider></v-divider>
       <v-row align="center">
         <v-col cols="3">
           <div class="">
@@ -111,17 +113,18 @@
       </v-card-text>
     </v-card>
     <!-- 수정부분 -->
-    <v-card class="mx-auto my-12" max-width="1000" v-else style="background-color : pink">
+    <v-card class="mx-auto my-12" max-width="1000" v-else>
       <v-card-title>
-        <v-row v-if="review">
-          <p v-if="review.userid">{{ review.userid }} |</p>
-          <p v-if="review.age_range">{{ review.age_range }}대 |</p>
-          <p v-if="review.family_type">{{ review.family_type }} |</p>
-          <p v-if="review.tag">
+        <v-row v-if="review" class="mt-1">
+          <h2 v-if="review.userid" class="ml-3">{{ review.userid }} |</h2>
+          <h2 v-if="review.age_range">{{ review.age_range }}대 |</h2>
+          <h2 v-if="review.family_type">{{ review.family_type }} |</h2>
+          <h2 v-if="review.tag">
             {{ review.tag | list }}
-          </p>
+          </h2>
         </v-row>
       </v-card-title>
+      <v-divider></v-divider>
       <v-row align="center">
         <v-col cols="3">
           <div class="text-center">
@@ -134,40 +137,50 @@
               background-color="purple lighten-3"
               color="purple"
             ></v-rating>
+            <br />
             <label>건강</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.health"
               background-color="pink lighten-3"
               color="pink"
             ></v-rating>
+            <br />
             <label>인프라</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.infra"
               background-color="orange lighten-3"
               color="orange"
             ></v-rating>
+            <br />
             <label>안전</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.safety"
               background-color="green lighten-3"
               color="green"
             ></v-rating>
+            <br />
             <label>학군</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.school"
               background-color="green lighten-3"
               color="green"
             ></v-rating>
+            <br />
             <label>대중교통</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.trans"
