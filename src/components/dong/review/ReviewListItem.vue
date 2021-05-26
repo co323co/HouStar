@@ -14,7 +14,7 @@
           <span v-if="review.family_type" class="subtitle-1"
             ><b> {{ review.family_type }} </b> |
           </span>
-          <span v-if="review.tag" class="subtitle-1 "
+          <span v-if="review.tag" class="subtitle-1"
             ><b> {{ review.tag | list }} </b>
           </span>
         </v-row>
@@ -100,29 +100,25 @@
             value="review.content"
           ></v-textarea> -->
           <v-card-text>
-            <span class="comment"
-              ><b> {{ review.content }}</b>
-            </span>
+            <span class="comment">{{ review.content }} </span>
           </v-card-text>
         </v-col>
       </v-row>
-      <v-card-text align="rignt" v-if="currentUser.userid == review.userid">
-        <v-btn tile color="success" @click="activeModify">
-          <v-icon left>
-            mdi-pencil
-          </v-icon>
-          수정
+      <v-card-text
+        align="rignt"
+        style="text-align-last: right"
+        v-if="currentUser.userid == review.userid"
+      >
+        <v-btn fab color="success" @click="activeModify">
+          <v-icon> mdi-pencil </v-icon>
         </v-btn>
-        <v-btn tile color="error" class="ml-3" @click="deleteReview">
-          <v-icon left>
-            mdi-pencil
-          </v-icon>
-          제거
+        <v-btn fab color="error" class="ml-3" @click="deleteReview">
+          <v-icon> mdi-delete </v-icon>
         </v-btn>
       </v-card-text>
     </v-card>
     <!-- 수정부분 -->
-    <v-card class="mx-auto my-12" max-width="1000" v-else>
+    <v-card class="mx-auto my-5" max-width="1000" v-else>
       <v-card-title>
         <v-row v-if="review" class="mt-1" align="center">
           <span v-if="review.userid" class="display-1 pa-0 mr-1 ml-20">
@@ -135,7 +131,7 @@
           <span v-if="review.family_type" class="subtitle-1"
             ><b> {{ review.family_type }} </b> |
           </span>
-          <span v-if="review.tag" class="subtitle-1 "
+          <span v-if="review.tag" class="subtitle-1"
             ><b> {{ review.tag | list }} </b>
           </span>
         </v-row>
@@ -204,7 +200,7 @@
               color="indigo"
             ></v-rating></div
         ></v-col>
-        <v-col cols="9">
+        <v-col cols="8">
           <v-textarea
             outlined
             name="input-7-4"
@@ -213,22 +209,17 @@
           ></v-textarea>
         </v-col>
       </v-row>
-      <v-card-text align="rignt" v-if="currentUser.userid == newReview.userid">
-        <v-btn tile color="success" @click="modifyReview">
-          <v-icon left>
-            mdi-pencil
-          </v-icon>
-          수정
+      <v-card-text
+        align="rignt"
+        v-if="currentUser.userid == newReview.userid"
+        style="text-align-last: right"
+      >
+        <v-btn fab color="success" @click="modifyReview">
+          <v-icon> mdi-check </v-icon>
         </v-btn>
-        <v-btn tile color="error" class="ml-3" @click="undoModify">
-          <v-icon left>
-            mdi-pencil
-          </v-icon>
-          취소
+        <v-btn fab color="error" class="ml-3" @click="undoModify">
+          <v-icon> mdi-close </v-icon>
         </v-btn>
-        <!-- 
-        <button @click="modifyReview">수정</button>
-        <button class="ml-3" @click="undoModify">취소</button> -->
       </v-card-text>
     </v-card>
   </div>
@@ -334,16 +325,16 @@ export default {
     },
   },
   filters: {
-    ageRange: function(ageRange) {
+    ageRange: function (ageRange) {
       if (!ageRange) return '';
       if (ageRange == 'over') return '60대 이상';
       else return ageRange + '대';
     },
-    familyType: function(type) {
+    familyType: function (type) {
       if (!type) return '';
       else return type;
     },
-    list: function(list) {
+    list: function (list) {
       if (!list) return '';
       let str = '';
       for (let i = 0; i < list.length - 1; i++) {

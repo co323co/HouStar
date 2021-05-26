@@ -75,7 +75,7 @@
 
     <!-- 별점끝 -->
     <v-col cols="10">
-      <v-card-text>
+      <v-card-text class="pr-12">
         <h3>후기를 남겨주세요 ✍</h3>
 
         <!-- 여기시작 -->
@@ -97,9 +97,7 @@
             @click="register"
           >
             등록
-            <v-icon right dark>
-              mdi-cloud-upload
-            </v-icon>
+            <v-icon right dark> mdi-cloud-upload </v-icon>
           </v-btn>
         </div>
       </v-card-text>
