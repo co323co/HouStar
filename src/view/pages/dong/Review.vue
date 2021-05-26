@@ -1,78 +1,95 @@
 <template lang="">
   <v-container>
     <v-card>
-      <v-toolbar class="mb-1" flat>
-        <h1 class="display-5 mt-4">전체 리뷰 ( {{ totalReviewCount }} 명 )</h1>
-      </v-toolbar>
-      <v-divider></v-divider>
+      <!-- <v-toolbar class="" flat> -->
+      <v-card-title>
+        <h3>전체 리뷰 통계( {{ totalReviewCount }}명 )</h3>
+      </v-card-title>
+      <!-- </v-toolbar> -->
+
+      <!-- <v-divider></v-divider> -->
       <!-- Total 별점 평균 뿌리기 -->
-      <v-flex>
-        <star-rating
-          v-if="AvgRating"
-          :increment="0.01"
-          :fixed-points="2"
-          class="ml-5"
-          :rating="AvgRating"
-          read-only
-          show-rating
-        ></star-rating>
-      </v-flex>
+
+      <v-card-subtitle>
+        <v-row align="center" class="ml-1"
+          ><span class="display-1 pa-0">
+            {{ this.AvgRating.toFixed(1) }}
+          </span>
+          <star-rating
+            :inline="true"
+            v-if="AvgRating"
+            :increment="0.01"
+            :fixed-points="2"
+            :rating="AvgRating"
+            read-only
+            :show-rating="false"
+          ></star-rating
+        ></v-row>
+      </v-card-subtitle>
       <v-divider></v-divider>
       <!-- 개별 차트 평균 뿌리기 -->
       <div align="center">
-        <HorizontalBar
-          v-if="rating"
-          :chart-data="datacollection"
-          :class="size"
-          :options="options"
-        ></HorizontalBar>
+        <v-row>
+          <v-col cols="6">
+            <HorizontalBar
+              v-if="rating"
+              :chart-data="datacollection1"
+              :class="size"
+              :options="options1"
+            ></HorizontalBar>
+          </v-col>
+          <v-col cols="6">
+            <RadarChart v-if="rating" :chart-data="datacollection2" :class="size">
+            </RadarChart> </v-col
+        ></v-row>
       </div>
-      <v-divider></v-divider>
-      <!-- 리뷰 등록 -->
-
-      <review-register />
-      <v-divider></v-divider>
-
-      <!-- 리뷰 셀렉트박스로 필터링하기 -->
-
-      <v-row class=" justify-sm-center mt-5">
-        <v-col class="mx-2">
-          <v-select
-            hint="선호 태그"
-            label="ALL"
-            v-model="tag_val"
-            :items="tags"
-            no-data-text="항목이 없습니다"
-            solo
-            @change="changeTag()"
-          ></v-select>
-        </v-col>
-        <v-col class="mx-2">
-          <v-select
-            hint="가구 타입"
-            label="ALL"
-            v-model="familyType_val"
-            :items="familyTypes"
-            no-data-text="항목이 없습니다"
-            solo
-            @change="changeFamilyType()"
-          ></v-select>
-        </v-col>
-        <v-col class="mx-2">
-          <v-select
-            hint="연령대"
-            label="ALL"
-            v-model="ageRange_val"
-            :items="ageRanges"
-            no-data-text="항목이 없습니다"
-            solo
-            @change="changeAge()"
-          ></v-select>
-        </v-col>
-      </v-row>
-
-      <!-- 리뷰 리스트 뿌리기 !!!!!!-->
     </v-card>
+    <!-- <v-divider></v-divider> -->
+    <!-- 리뷰 등록 -->
+
+    <review-register />
+    <v-divider></v-divider>
+
+    <!-- 리뷰 셀렉트박스로 필터링하기 -->
+
+    <v-row class=" justify-sm-center mt-5">
+      <v-col class="mx-2">
+        <v-select
+          hint="선호 태그"
+          label="ALL"
+          v-model="tag_val"
+          :items="tags"
+          no-data-text="항목이 없습니다"
+          solo
+          @change="changeTag()"
+        ></v-select>
+      </v-col>
+      <v-col class="mx-2">
+        <v-select
+          hint="가구 타입"
+          label="ALL"
+          v-model="familyType_val"
+          :items="familyTypes"
+          no-data-text="항목이 없습니다"
+          solo
+          @change="changeFamilyType()"
+        ></v-select>
+      </v-col>
+      <v-col class="mx-2">
+        <v-select
+          hint="연령대"
+          label="ALL"
+          v-model="ageRange_val"
+          :items="ageRanges"
+          no-data-text="항목이 없습니다"
+          solo
+          @change="changeAge()"
+        ></v-select>
+      </v-col>
+    </v-row>
+
+    <!-- 리뷰 리스트 뿌리기 !!!!!!-->
+
     <v-row v-if="isWrite">
       <v-container class="reviewback">
         <h1 align="center" class="mt-10">리뷰 목록 ✍ 총 {{ show_list.length }} 명</h1>
@@ -92,6 +109,7 @@ import { mapGetters } from 'vuex';
 import http from '@/core/services/http-common';
 import StarRating from 'vue-star-rating';
 import HorizontalBar from '@/core/services/HorizontalBarChart.js';
+import RadarChart from '@/components/charts/RadarChart.vue';
 import ReviewListItem from '@/components/dong/review/ReviewListItem.vue';
 import ReviewRegister from '@/components/dong/review/ReviewRegister.vue';
 
@@ -171,12 +189,12 @@ export default {
       totalRating: 0,
       size: 'firstClass',
 
-      datacollection: {
+      datacollection1: {
         labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '대중교통🚦'],
         datasets: [
           {
-            label: '전체 리뷰 통계',
-            backgroundColor: 'pink',
+            label: '카테고리별 통계',
+            backgroundColor: '#B2EBF2',
             data: [
               this.$store.state.rate.rating.environment,
               this.$store.state.rate.rating.health,
@@ -188,7 +206,31 @@ export default {
           },
         ],
       },
-      options: {
+      // radar chart에 넣을 데이터
+      datacollection2: {
+        labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '대중교통🚦'],
+        datasets: [
+          {
+            label: '카테고리별 통계',
+            backgroundColor: 'rgba(179,181,198,0.2)',
+            borderColor: 'rgba(179,181,198,1)',
+            pointBackgroundColor: 'rgba(179,181,198,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(179,181,198,1)',
+
+            data: [
+              this.$store.state.rate.rating.environment,
+              this.$store.state.rate.rating.health,
+              this.$store.state.rate.rating.infra,
+              this.$store.state.rate.rating.safety,
+              this.$store.state.rate.rating.school,
+              this.$store.state.rate.rating.trans,
+            ],
+          },
+        ],
+      },
+      options1: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -208,6 +250,7 @@ export default {
     HorizontalBar,
     ReviewRegister,
     ReviewListItem,
+    RadarChart,
   },
   created() {
     // 해당 동에 대한 평균별점정보 가져오기
@@ -226,13 +269,17 @@ export default {
 </script>
 <style scoped>
 .firstClass {
-  padding-top: 30px;
   display: block;
-  height: 350px;
-  width: 350px;
-  margin-bottom: 50px;
+  height: 250px;
+  width: 250px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .v-application--wrap {
   min-height: 0;
+  color: orange;
+}
+.size {
+  /* display: inline-block; */
 }
 </style>

@@ -5,9 +5,10 @@
         <!-- table1, table2 -->
 
         <!-- <v-card> -->
-        <v-card-title style="height:80px">
-          인기 게시글 📃
+        <v-card-title style="height:80px" class="cardtitle">
+          🔥 인기 게시글 🔥
         </v-card-title>
+
         <v-data-table
           :headers="headers"
           :items="hotposts"
@@ -15,13 +16,18 @@
           @click:row="mvDetail"
           class="elevation-1 com"
           :hide-default-footer="true"
-        ></v-data-table>
+        >
+          <template v-slot:item.views="{ item }">
+            <v-chip :color="getColor(item.views)" dark>{{ item.views }}</v-chip>
+          </template>
+        </v-data-table>
+
         <!-- </v-card> -->
 
         <!-- end card -->
 
         <!-- <v-card> -->
-        <v-card-title style="height:80px">
+        <v-card-title style="height:80px" class="cardtitle">
           🔥 인기 게시판 🔥
         </v-card-title>
 
@@ -35,21 +41,22 @@
         >
           <template v-slot:item.count="{ item }">
             <v-chip :color="getColor(item.count)" dark>{{ item.count }}</v-chip>
-          </template></v-data-table
-        >
+          </template>
+        </v-data-table>
+
         <!-- </v-card> -->
       </v-col>
 
       <v-col cols="6" align="center">
         <!-- table3 -->
 
-        <v-card-title style="height:80px">
-          게시판 목록 👩🧑
+        <v-card-title style="height:80px" class="cardtitle">
+          🧑 게시판 목록 👩
           <v-spacer></v-spacer>
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
-            label="Search"
+            label="검색"
             single-line
             hide-details
           ></v-text-field>
@@ -159,7 +166,7 @@ export default {
     this.$store.dispatch('getHotposts');
     this.$store.dispatch('getHotcommunitys');
     this.$store.dispatch('getCommunitys');
-
+    console.log(this.hotposts);
     console.log(this.currentUser);
     console.log(this.communitys);
     // console.log(this.communitys[0]);
@@ -177,8 +184,8 @@ export default {
       this.$router.push(`/board/${row.gubun}/view/${row.id}`);
     },
     getColor(cnt) {
-      if (cnt > 5) return 'red';
-      else if (cnt > 3) return 'orange';
+      if (cnt > 10) return 'red';
+      else if (cnt > 5) return 'orange';
       else return 'green';
     },
     myMethod() {

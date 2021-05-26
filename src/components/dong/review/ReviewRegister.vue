@@ -3,74 +3,94 @@
 
   <!-- 끝 -->
 
-  <v-row align="center">
-    <v-col cols="3">
-      <div class="text-center">
-        <span>환경</span>
-        <v-rating
-          small
-          dense="true"
-          v-model="environment"
-          background-color="purple lighten-3"
-          color="purple"
-        ></v-rating>
-        <label>건강</label>
-        <v-rating
-          small
-          v-model="health"
-          background-color="pink lighten-3"
-          color="pink"
-          dense="true"
-        ></v-rating>
-        <label>인프라</label>
-        <v-rating
-          small
-          v-model="infra"
-          background-color="orange lighten-3"
-          color="orange"
-          dense="true"
-        ></v-rating>
-        <label>안전</label>
-        <v-rating
-          small
-          v-model="safety"
-          background-color="green lighten-3"
-          color="green"
-          dense="true"
-        ></v-rating>
-        <label>학군</label>
-        <v-rating
-          small
-          v-model="school"
-          background-color="green lighten-3"
-          color="green"
-          dense="true"
-        ></v-rating>
-        <label>교통</label>
-        <v-rating
-          small
-          v-model="trans"
-          background-color="indigo lighten-3"
-          color="indigo"
-          dense="true"
-        ></v-rating></div
-    ></v-col>
-    <v-col cols="9">
+  <v-row>
+    <!-- 별점시작 -->
+
+    <v-col cols="2">
       <v-card-text>
-        <h1>후기를 남겨주세요 ✍</h1>
+        <div class="float-left align">
+          <span>환경</span>
+          <v-rating
+            class="star"
+            small
+            dense="true"
+            v-model="environment"
+            background-color="purple lighten-3"
+            color="purple"
+          ></v-rating
+          ><br />
+          <label>건강</label>
+          <v-rating
+            class="star"
+            small
+            v-model="health"
+            background-color="pink lighten-3"
+            color="pink"
+            dense="true"
+          ></v-rating
+          ><br />
+          <label>인프라</label>
+          <v-rating
+            class="star"
+            small
+            v-model="infra"
+            background-color="orange lighten-3"
+            color="orange"
+            dense="true"
+          ></v-rating
+          ><br />
+          <label>안전</label>
+          <v-rating
+            class="star"
+            small
+            v-model="safety"
+            background-color="green lighten-3"
+            color="green"
+            dense="true"
+          ></v-rating
+          ><br />
+          <label>학군</label>
+          <v-rating
+            class="star"
+            small
+            v-model="school"
+            background-color="green lighten-3"
+            color="green"
+            dense="true"
+          ></v-rating
+          ><br />
+          <label>교통</label>
+          <v-rating
+            class="star"
+            small
+            v-model="trans"
+            background-color="indigo lighten-3"
+            color="indigo"
+            dense="true"
+          ></v-rating
+          ><br />
+        </div>
+      </v-card-text>
+    </v-col>
+
+    <!-- 별점끝 -->
+    <v-col cols="10">
+      <v-card-text>
+        <h3>후기를 남겨주세요 ✍</h3>
         <v-textarea
           height="150px"
           solo
           name="input-7-4"
-          label="입력하세요"
+          label="입력"
           v-model="content"
+          hide-details
         ></v-textarea>
-        <div align="center">
+        <div align="right">
           <v-btn
             :loading="loading3"
             :disabled="loading3"
             color="amber darken-1"
-            class="white--text"
+            class="white--text mt-2"
             @click="register"
           >
             등록
@@ -151,5 +171,12 @@ export default {
 <style scoped>
 .completed {
   text-decoration: line-through;
+}
+.star {
+  display: inline-block;
+}
+.align {
+  margin-left: 10px;
+  margin-top: 35px;
 }
 </style>
