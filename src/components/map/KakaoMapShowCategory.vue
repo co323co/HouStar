@@ -3,6 +3,12 @@
 <template>
   <!-- 지도를 담을 영역 -->
   <div class="map_wrap">
+    <div class="text-right" style="height: 22px">
+      <span v-if="isZero"> </span>
+      <v-alert border="right" dark color="orange" style="font-size: 13px; padding: 2px 20px"
+        >😥해당 구역에 검색 결과가 없습니다
+      </v-alert>
+    </div>
     <div id="map" style="height: 385px; position: relative; overflow: hidden"></div>
     <ul id="category">
       <li id="BK9" data-order="0">
@@ -38,6 +44,7 @@ import kakaoService from '@/core/services/kakao.service.js';
 export default {
   data() {
     return {
+      isZero: false,
       placeOverlay: null,
       currCategory: null,
       markers: [],
@@ -55,15 +62,6 @@ export default {
     marker_list: Array,
   },
   mounted() {
-    //실제 지도를 그리는 Javascript API를 불러오기
-    // if (window.kakao && window.kakao.maps) {
-    //   this.initMap();
-    // } else {
-    //   const script = document.createElement('script');
-    //   script.onload = () => kakao.maps.load(this.initMap);
-    //   script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${kakaoService.getKey()}`;
-    //   document.head.appendChild(script);
-    // }
     let initMap = this.initMap;
     window.kakao.maps.load(function () {
       // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
@@ -141,18 +139,18 @@ export default {
     placesSearchCB: function (data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
         // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
+        this.isZero = false;
         console.log('정상');
         this.displayPlaces(data);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
         console.log('정상 : 해당 구역에 검색 결과가 없습니다!');
+        this.isZero = true;
       } else if (status === kakao.maps.services.Status.ERROR) {
         // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
         console.log('에러');
         console.log(data);
         console.log(status);
-      } else {
-        console.log('???');
       }
     },
 

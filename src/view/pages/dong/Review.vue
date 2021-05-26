@@ -10,16 +10,16 @@
           <v-row align="center" class="ml-1">
             <!-- <div v-if="this.totalReviewCount != 0"> -->
             <span class="display-1 pa-0 mr-1"
-              ><b> {{ this.AvgRating.toFixed(1) }}</b>
+              ><b> {{ (this.rating.total * 1.0).toFixed(1) }}</b>
             </span>
 
             <star-rating
               :star-size="20"
               :inline="true"
-              v-if="AvgRating"
+              v-if="rating"
               :increment="0.01"
               :fixed-points="2"
-              :rating="AvgRating"
+              :rating="rating.total"
               read-only
               :show-rating="false"
             ></star-rating>
@@ -179,7 +179,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['totalReviewCount', 'reviews', 'reviewsbyuserid', 'AvgRating', 'rating']),
+    ...mapGetters(['totalReviewCount', 'reviews', 'reviewsbyuserid', 'rating']),
     ...mapGetters(['currentUser']),
   },
   data() {
@@ -241,11 +241,9 @@ export default {
   created() {
     // 해당 동에 대한 평균별점정보 가져오기
     this.$store.dispatch('getRating', this.$store.state.dongStore.Sidogugundong.dongCode);
-    console.log('AvgRating');
-    console.log(this.AvgRating);
-    console.log(this.rating);
-    console.log(this.rating.environment);
-    console.log('this.rating');
+    // console.log(this.$store.state.rate.rating);
+    // console.log(this.rating);
+    // console.log('this.rating');
     // 해당 동에 대한 모든 리뷰 다 가져오기.
     this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
     // 해당 동에 대한 로그인한 유저의 모든 리뷰 가져오기
@@ -297,7 +295,6 @@ export default {
         },
       ],
     };
-    this.AvgRating = this.$store.state.rate.rating.total;
   },
   mounted() {
     // 해당 동에 대한 평균별점정보 가져오기
