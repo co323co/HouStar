@@ -96,11 +96,17 @@
                 <v-container>
                   <v-row>
                     <v-col>
-                      <v-text-field
-                        placeholder="게시판 이름을 입력해주세요"
-                        :rules="[(v) => !!v || '빈 이름의 게시판은 만들 수 없습니다!']"
-                        v-model="communityName"
-                      ></v-text-field>
+                      <v-form
+                      ref="form"
+                      v-model="valid"
+                      lazy-validation
+                      >
+                        <v-text-field
+                          placeholder="게시판 이름을 입력해주세요"
+                          :rules="[(v) => !!v || '게시판 이름을 입력해주세요']"
+                          v-model="communityName"
+                        ></v-text-field>
+                      </v-form>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -109,10 +115,10 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">
+                <v-btn color="blue darken-1" text @click="close">
                   취소
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="[Close(), RegisterCommunity()]">
+                <v-btn  :disabled="!valid" color="blue darken-1" text @click="RegisterCommunity">
                   등록
                 </v-btn>
               </v-card-actions>
@@ -130,6 +136,7 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
+      valid: true,
       // 관리자일 때만 삭제
       // singleSelect: false,
       selected: [],
@@ -195,19 +202,22 @@ export default {
     },
     // 커뮤니티 등록
     RegisterCommunity() {
-      let val = {
-        name: this.communityName,
-      };
-      this.$store.dispatch('addCommunity', val);
-      console.log('this.communityName 등록하고옴');
-      this.communityName = '';
+      if(this.$refs.form.validate()){
+        let val = {
+          name: this.communityName,
+        };
+        this.$store.dispatch('addCommunity', val);
+        console.log('this.communityName 등록하고옴');
+        this.close();
+      }
       // 다시가져와줌
       //  this.$store.dispatch('getCommunitys');
       // console.log('this.communityName 다시가져옴');
     },
     // 모달 닫기
-    Close() {
+    close() {
       this.dialog = false;
+      this.$refs.form.reset()
     },
     rowClicked(val) {
       console.log(val);
