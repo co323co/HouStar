@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <v-card class="mx-auto pa-3" elevation="5" shaped>
+    <v-card class="mx-auto pa-3 rounded-card" elevation="5" shaped>
       <v-card-title>
         <h2 style="font-weight: bold">건강 관련 정보</h2>
       </v-card-title>
@@ -118,5 +118,8 @@ export default {
   text-align: center;
   font-size: 0.7em;
   color: #974e90;
+}
+.rounded-card {
+  border-radius: 50px;
 }
 </style>
