@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="6">
         <!-- table1, table2 -->
-
+        <!-- 민정이자동완성 왜 안되지///.. -->
         <!-- <v-card> -->
         <v-card-title style="height:80px" class="cardtitle">
           🔥 인기 게시글 🔥
@@ -98,7 +98,7 @@
                     <v-col>
                       <v-text-field
                         placeholder="게시판 이름을 입력해주세요"
-                        :rules="[v => !!v || '빈 이름의 게시판은 만들 수 없습니다!']"
+                        :rules="[(v) => !!v || '빈 이름의 게시판은 만들 수 없습니다!']"
                         v-model="communityName"
                       ></v-text-field>
                     </v-col>
@@ -200,7 +200,7 @@ export default {
       };
       this.$store.dispatch('addCommunity', val);
       console.log('this.communityName 등록하고옴');
-      this.communityName="";
+      this.communityName = '';
       // 다시가져와줌
       //  this.$store.dispatch('getCommunitys');
       // console.log('this.communityName 다시가져옴');
@@ -215,6 +215,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>
