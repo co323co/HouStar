@@ -1,6 +1,6 @@
 <!-- 상세정보 페이지 -->
 <template>
-  <v-container class="pa-6">
+  <v-container class="pa-3">
     <!-- 첫번째 행 -->
     <v-row>
       <!-- 1열 -->
