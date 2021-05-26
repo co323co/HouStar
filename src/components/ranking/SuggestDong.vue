@@ -1,6 +1,6 @@
 <template>
   <v-layout justify-center>
-    <v-card class="pa-9 mt-7 mb-3" elevation="2" shaped width="80%">
+    <v-card class="pa-9 mt-7 mb-3" elevation="2" shaped width="100%">
       <h2>추천 동네</h2>
       <!-- 사용자 정보 -->
       <div class="user_info mt-2">
@@ -77,16 +77,16 @@ export default {
     ...mapGetters(['currentUser']),
   },
   filters: {
-    ageRange: function(ageRange) {
+    ageRange: function (ageRange) {
       if (!ageRange) return '';
       if (ageRange == 'over') return '60대 이상';
       else return ageRange + '대';
     },
-    familyType: function(type) {
+    familyType: function (type) {
       if (!type) return '';
       else return type;
     },
-    list: function(list) {
+    list: function (list) {
       if (!list) return '';
       let str = '';
       for (let i = 0; i < list.length - 1; i++) {
@@ -106,7 +106,7 @@ export default {
         .then((rating_response) => {
           let rating_list = rating_response.data;
           // total 점수를 기준으로 내림차순 정렬
-          rating_list.sort(function(a, b) {
+          rating_list.sort(function (a, b) {
             return b.total - a.total;
           });
           //   console.log('age_range : ', rating_list);
@@ -129,7 +129,7 @@ export default {
         .then((rating_response) => {
           let rating_list = rating_response.data;
           // total 점수를 기준으로 내림차순 정렬
-          rating_list.sort(function(a, b) {
+          rating_list.sort(function (a, b) {
             return b.total - a.total;
           });
           //   console.log('family_type : ', rating_list);
@@ -151,7 +151,7 @@ export default {
         let rating_list = rating_response.data;
         // '유저의 선호태그들'만으로 '평점 합'을 구하고, 그걸 기준으로 내림차순 정렬
         let user_tag = this.currentUser.tag;
-        rating_list.sort(function(a, b) {
+        rating_list.sort(function (a, b) {
           let a_sum = 0;
           let b_sum = 0;
           //   해당 동의 태그들의 총 평점 합 구하기

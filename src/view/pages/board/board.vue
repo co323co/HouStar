@@ -1,6 +1,7 @@
-<template lang="">
-  <v-container>
-    <h1>{{ boardname }}</h1>
+<template>
+  <v-container class="pa-5">
+    <h1 class="mt-3">{{ boardname }}</h1>
+    <v-divider class="mb-5"></v-divider>
     <router-view />
   </v-container>
 </template>
@@ -19,4 +20,8 @@ export default {
   },
 };
 </script>
-<style lang=""></style>
+<style scoped>
+h1 {
+  font-family: BMHANNAPro !important;
+}
+</style>

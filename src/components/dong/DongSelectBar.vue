@@ -1,10 +1,10 @@
 <template lang="">
   <div>
     <!-- 시군구 select -->
-    <div class="indigo lighten-5 section pt-2 pb-2">
+    <div class="grey lighten-4 section pt-2 pb-2">
       <div class="sorting-filters text-center mt-10 d-flex justify-content-center">
         <div class="form-group mr-2">
-          <h2 class="mb-5">동네 구경하기</h2>
+          <h2 class="stitle mb-5">동네 구경하기</h2>
           <v-container>
             <v-row dense>
               <v-col cols="4">
@@ -124,5 +124,8 @@ export default {
 <style scoped>
 .v-list {
   background-color: white;
+}
+.stitle {
+  font-family: BMHANNAPro !important;
 }
 </style>

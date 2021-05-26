@@ -1,18 +1,24 @@
 <template lang="">
   <div class="regist">
-    <h1 class="underline">등록</h1>
-    <div class="regist_form">
-      <label for="title">제목</label>
-      <input type="text" id="title" name="title" v-model="title" ref="title" /><br />
-      <label for="content">내용</label>
-      <textarea
+    <h3>새 글 쓰기</h3>
+    <div class="my-5">
+      <v-text-field
+        type="text"
+        id="title"
+        name="title"
+        v-model="title"
+        ref="title"
+        placeholder="제목"
+      /><br />
+      <v-textarea
+        placeholder="본문"
         id="content"
         name="content"
         v-model="content"
         ref="content"
         cols="35"
         rows="5"
-      ></textarea
+      ></v-textarea
       ><br />
       <button @click="checkValue">등록</button>
       <button @click="moveList">목록</button>
@@ -82,8 +88,13 @@ export default {
 };
 </script>
 <style scoped>
+h3 {
+  font-family: BMHANNAPro;
+}
 .regist {
   padding: 10px;
+  background-color: antiquewhite;
+  border-radius: 1em;
 }
 .regist_form {
   text-align: left;

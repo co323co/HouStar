@@ -1,14 +1,17 @@
 <template>
   <div>
     <!-- 관리자가 아니면 공지사항게시판은 등록 못함 -->
-    <div v-if="gubun != 1 || currentUser.userid == `admin`" class="text-right">
-      <v-btn color="red lighten-3" class="ma-2" fab dark small @click="mvRegist">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </div>
-    <v-card class="pa-5">
+
+    <v-flex class="my-7">
       <!-- 검색 bar -->
-      <v-row>
+      <v-row class="mb-3">
+        <v-col>
+          <div v-if="gubun != 1 || currentUser.userid == `admin`" class="text-left">
+            <v-btn color="red lighten-3" class="ma-2" fab dark small @click="mvRegist">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+          </div>
+        </v-col>
         <v-spacer></v-spacer>
         <v-col cols="4">
           <v-text-field
@@ -20,7 +23,6 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-card-title> </v-card-title>
       <!-- 게시글 리스트 -->
       <v-data-table
         class="board"
@@ -34,7 +36,7 @@
           itemsPerPageText: '쪽수',
         }"
       ></v-data-table>
-    </v-card>
+    </v-flex>
   </div>
 </template>
 <script>

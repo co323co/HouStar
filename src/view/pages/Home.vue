@@ -4,10 +4,13 @@
     <banner />
     <!-- 동 셀렉스 박스 레이아웃 -->
     <dong-selectBar />
-    <!-- 추천 동네 레이아웃 -->
-    <suggest-dong />
-    <v-divider></v-divider>
-    <live-ranking-map />
+
+    <v-container>
+      <!-- 추천 동네 레이아웃 -->
+      <suggest-dong />
+      <v-divider></v-divider>
+      <live-ranking-map />
+    </v-container>
   </div>
 </template>
 <script>

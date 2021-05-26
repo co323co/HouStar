@@ -7,7 +7,6 @@
       hide-delimiter-background
       delimiter-icon="mdi-minus"
       :show-arrows-on-hover="true"
-      height="500"
       interval="4000"
       tag="#tag"
     >

@@ -1,12 +1,13 @@
 <template lang="">
   <v-layout class="pa-5">
-    <v-row style="text-align: center">
-      <v-col class="rank">
-        <div style="height: 30%"></div>
-        <live-ranking :dong_list="dong_list.slice(0, 5)" />
+    <v-row style="text-align: top">
+      <!-- 실시간 랭킹 부분 -->
+      <v-col cols="3" style="hegiht: 100%">
+        <live-ranking class="rank" :dong_list="dong_list.slice(0, 5)" />
       </v-col>
-      <v-col cols="8" class="first_dong_text">
-        <h2 class="mr-4">🥇 현재 1등</h2>
+      <!-- 맵 부분 -->
+      <v-col cols="8" class="first_dong_text" style="font-family: BMHANNAPro !important">
+        <h2 class="mr-4">📌 현재 1등</h2>
         <h1 v-if="dong_list[0]">{{ dong_list[0].dongName }}</h1>
         <v-divider></v-divider>
         <!-- 부모가 데이터 서버에서 다 받고 나서야 넘겨줌 -->
@@ -76,6 +77,8 @@ h2 {
 }
 .first_dong_text h1 {
   color: darkcyan;
-  font-weight: bold;
+}
+.rank {
+  height: 100%;
 }
 </style>

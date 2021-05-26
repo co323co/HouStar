@@ -11,8 +11,8 @@
       dark
       left
       fab
-      color="pink"
-      class="mt-9"
+      color="green"
+      class="mt-8"
     >
       <KTQuickUser></KTQuickUser>
     </v-btn>
@@ -20,31 +20,19 @@
       <v-container>
         <v-row align="center">
           <v-col>
-            <v-icon x-large color="black">mdi-home-modern</v-icon>
-            <router-link to="/">
-              <h2>Houstar</h2>
+            <router-link to="/" class="header_menu text-hover-primary align-middle">
+              <v-icon x-large color="black" style="vertical-align: middle">mdi-home-modern</v-icon>
+              <h2 style="vertical-align: middle">Houstar</h2>
             </router-link>
           </v-col>
           <v-col class="text-right">
-            <router-link to="/home" v-slot="{ href, navigate, isActive, isExactActive }">
-              <a :href="href" class="menu-link" @click="navigate">
-                <span class="menu-text"> HOME </span>
-              </a>
+            <router-link to="/home" class="header_menu text-hover-success">HOME </router-link>
+            <router-link to="/notice" class="header_menu text-hover-success">
+              공지사항
             </router-link>
-            <router-link to="/notice" v-slot="{ href, navigate, isActive, isExactActive }">
-              <a :href="href" @click="navigate">
-                <span> 공지사항 </span>
-              </a>
-            </router-link>
-            <router-link to="/qna" v-slot="{ href, navigate, isActive, isExactActive }">
-              <a :href="href" @click="navigate">
-                <span> QnA </span>
-              </a>
-            </router-link>
-            <router-link to="/community" v-slot="{ href, navigate, isActive, isExactActive }">
-              <a :href="href" class="menu-link" @click="navigate">
-                <span class="menu-text"> 커뮤니티 </span>
-              </a>
+            <router-link to="/qna" class="header_menu text-hover-success"> QnA </router-link>
+            <router-link to="/community" class="header_menu text-hover-success">
+              커뮤니티
             </router-link>
           </v-col>
         </v-row>
@@ -72,14 +60,20 @@ export default {
 .myHeader {
   color: rgb(255, 255, 255);
 }
-h2 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   padding: 0;
   margin: 0;
   display: inline-block;
+  color: darkcyan;
 }
-a span {
+.header_menu {
   margin-left: 45px;
   color: black;
   font-size: 1.2em;
+  font-family: BMHANNAPro !important;
 }
 </style>

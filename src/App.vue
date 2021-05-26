@@ -19,6 +19,7 @@
 // Main demo style scss
 @import 'assets/sass/style.vue';
 @import 'assets/css/board.css';
+@import 'assets/css/font.css';
 @import 'assets/css/community.css';
 
 // Check documentation for RTL css

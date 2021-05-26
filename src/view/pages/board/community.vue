@@ -36,7 +36,7 @@
           :items="hotcommunitys"
           :items-per-page="5"
           class="elevation-1 com"
-          @click:row="[rowClicked, mvList]"
+          @click:row="mvList"
           :hide-default-footer="true"
         >
           <template v-slot:item.count="{ item }">

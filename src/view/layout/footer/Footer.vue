@@ -1,6 +1,7 @@
 <template>
   <!-- begin:: Footer -->
   <div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
+    <v-divider></v-divider>
     <!--begin::Container-->
     <div
       class="d-flex flex-column flex-md-row align-items-center justify-content-between"
@@ -12,6 +13,7 @@
         <a
           href="http://keenthemes.com/metronic"
           target="_blank"
+          style="font-family: BMHANNAPro !important"
           class="text-dark-75 text-hover-primary"
           >SSAFY 이쁘니컴퍼니
         </a>
