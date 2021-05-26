@@ -60,10 +60,11 @@
 	</select>
 	
 	<select id="selectAllCommunity" resultType="Map">
-		select gubun, name, count(*) count 
-		from board 
-		right join board_name using(gubun)
-		group by gubun	
+		select gubun, name, ifnull(count,0) count from board_name
+		left join	(
+						select gubun, count(*) count 
+						from board 
+						group by gubun) cb using(gubun)
 	</select>
 	
 	<insert id="insertCommunity" parameterType="string">

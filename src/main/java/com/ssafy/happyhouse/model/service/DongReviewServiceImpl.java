@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,20 @@ public class DongReviewServiceImpl implements DongReviewService {
 
 	@Override
 	public Map<String, String> getRatingByDong(String dongcode) {
-		return sqlSession.getMapper(DongReviewMapper.class).getRatingByDong(dongcode);
+		Map<String, String> res = sqlSession.getMapper(DongReviewMapper.class).getRatingByDong(dongcode);
+		//만약 리뷰가 0개여서 평균 정보를 반환하지 못하면 0으로 찍어준다.
+		if(res==null) {
+			res = new HashMap<String, String>();
+			res.put("total", "0");
+			res.put("environment", "0");
+			res.put("school", "0");
+			res.put("safety", "0");
+			res.put("dongcode", dongcode);
+			res.put("trans", "0");
+			res.put("health", "0");
+			res.put("infra", "0");
+		}
+		return res;
 	}
 
 	@Override
