@@ -1,9 +1,6 @@
 <template>
-  <div class="regist">
-    <h3 class="mt-1 mb-3 ml-2">글 수정</h3>
+  <div>
     <div class="inputform">
-      <v-row class="btitle px-5 py-5">글 제목</v-row>
-      <v-divider></v-divider>
       <v-text-field
         type="text"
         id="title"
@@ -16,6 +13,7 @@
         class="pa-1 inputs"
         hide-details
       />
+      <v-divider></v-divider>
       <v-row class="pl-2">
         <v-col cols="12">
           <v-row no-gutters align="center">
@@ -29,24 +27,26 @@
         <v-spacer></v-spacer>
       </v-row>
       <v-divider></v-divider>
-      <v-row class="btitle px-5 py-5">내용</v-row> <v-divider></v-divider>
-      <v-textarea
-        placeholder="내용을 써주세요!"
-        id="content"
-        name="content"
-        v-model="content"
-        ref="content"
-        color="cyan lighten-3"
-        background-color="white"
-        class="pa-1 inputs"
-        hide-details
-      />
+      <div>
+        <v-textarea
+          rows="15"
+          placeholder="내용을 써주세요!"
+          id="content"
+          name="content"
+          v-model="content"
+          ref="content"
+          color="cyan lighten-3"
+          background-color="white"
+          class="pa-1 inputs"
+          hide-details
+        />
+      </div>
     </div>
 
     <v-flex class="pt-4 mb-2 text-right">
       <div v-if="userid == currentUser.userid || currentUser.userid == `admin`">
-        <v-btn @click="checkValue">수정</v-btn>
-        <v-btn @click="moveList" class="ml-2">목록</v-btn>
+        <v-btn text @click="checkValue">수정</v-btn>
+        <v-btn text @click="moveList" class="ml-2">목록</v-btn>
       </div>
     </v-flex>
   </div>
@@ -87,10 +87,10 @@ export default {
     checkValue() {
       let err = true;
       let msg = '';
-      !this.title && ((msg = 'title 입력해주세요'), (err = false), this.$refs.title.focus());
+      !this.title && ((msg = '제목을 입력해주세요'), (err = false), this.$refs.title.focus());
       err &&
         !this.content &&
-        ((msg = '내용 입력해주세요'), (err = false), this.$refs.content.focus());
+        ((msg = '내용을 입력해주세요'), (err = false), this.$refs.content.focus());
       if (!err) alert(msg);
       else this.modifyBook();
     },
@@ -107,18 +107,19 @@ export default {
           gubun: this.gubun,
         })
         .then(({ data }) => {
-          console.log('수정완료');
-          let msg = '수정 처리시 문제가 발생했습니다.';
-          if (data) {
-            msg = '수정이 완료되었습니다.';
+          if (!data) {
+            let msg = '수정 처리시 문제가 발생했습니다.';
+            alert(msg);
           }
-          alert(msg);
           // this.$router.push(`/board/${this.gubun}`);
-          this.$router.push(`/board/${this.gubun}/view/${this.id}`);
+          else this.$router.push(`/board/${this.gubun}/view/${this.id}`);
         });
     },
     moveList() {
-      this.$router.push(`/board/${this.gubun}`);
+      let res = confirm('\n수정 중인 내용이 사라집니다!\n목록으로 이동하시겠습니까?\n');
+      if (res) {
+        this.$router.push(`/board/${this.gubun}`);
+      }
     },
   },
 };
@@ -132,21 +133,25 @@ export default {
 h3 {
   font-family: BMHANNAPro;
 }
-.regist {
-  padding: 10px;
-  background-color: rgb(250, 242, 215);
-  border-radius: 10px;
-}
+
 .inputform {
   background-color: white;
   border-radius: 10px;
-  padding: 10px 10px;
+  /* padding: 10px 10px; */
 }
 .v-btn {
   font-size: 1.1em;
 }
 p {
   margin-bottom: 0;
+}
+
+.v-textarea textarea {
+  height: 500px !important;
+}
+
+#content {
+  height: 500px !important;
 }
 /* .inputs {
   background-color: palegreen;

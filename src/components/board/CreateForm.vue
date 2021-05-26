@@ -1,6 +1,6 @@
 <template lang="">
-  <div class="regist">
-    <h3 class="mt-1 mb-3">새 글 쓰기</h3>
+  <div>
+    <!-- <h3 class="mt-1 mb-3">새 글 쓰기</h3> -->
     <div class="inputform">
       <v-text-field
         type="text"
@@ -13,6 +13,7 @@
         background-color="white"
       />
       <v-textarea
+        rows="15"
         placeholder="내용을 써주세요!"
         id="content"
         name="content"
@@ -23,8 +24,8 @@
       />
     </div>
     <v-flex class="pt-4 mb-2 text-right">
-      <v-btn @click="checkValue">등록</v-btn>
-      <v-btn @click="moveList" class="ml-2">목록</v-btn>
+      <v-btn text @click="checkValue">등록</v-btn>
+      <v-btn text @click="moveList" class="ml-2">목록</v-btn>
     </v-flex>
   </div>
 </template>
@@ -75,17 +76,17 @@ export default {
           gubun: this.gubun,
         })
         .then(({ data }) => {
-          let msg = '등록 처리시 문제가 발생했습니다.';
-          if (data) {
-            msg = '등록이 완료되었습니다.';
-          }
-          alert(msg);
-          this.moveList();
+          if (!data) {
+            let msg = '등록 처리시 문제가 발생했습니다.';
+            alert(msg);
+          } else this.$router.push(`/board/${this.gubun}`);
         });
     },
     moveList() {
-      console.log(this.$route.params.gubun);
-      this.$router.push(`/board/${this.gubun}`);
+      let res = confirm('\n작성 중인 내용이 사라집니다!\n목록으로 이동하시겠습니까?\n');
+      if (res) {
+        this.$router.push(`/board/${this.gubun}`);
+      }
     },
   },
 };
@@ -94,15 +95,9 @@ export default {
 h3 {
   font-family: BMHANNAPro;
 }
-.regist {
-  padding: 10px;
-  background-color: rgb(250, 242, 215);
-  border-radius: 10px;
-}
+
 .inputform {
   background-color: white;
-  border-radius: 10px;
-  padding: 10px;
 }
 .v-btn {
   font-size: 1.1em;

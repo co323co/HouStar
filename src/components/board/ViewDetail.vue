@@ -19,17 +19,19 @@
       </v-row>
 
       <v-divider></v-divider>
-      <v-row class="pa-5" style="min-height: 300px"> {{ enterToBr(board.content) }}</v-row>
+      <v-row
+        class="pa-5"
+        style="min-height: 250px; font-size: 14px"
+        v-html="enterToBr(board.content)"
+      >
+      </v-row>
+      <div v-if="currentUser.userid == 'admin' || board.userid == currentUser.userid">
+        <v-flex class="text-right">
+          <v-btn text @click="mvmodify">수정</v-btn>
+          <v-btn text @click="deleteBook" class="ml-2">삭제</v-btn>
+        </v-flex>
+      </div>
       <v-divider></v-divider>
-    </div>
-    <div
-      v-if="currentUser.userid == 'admin' || board.userid == currentUser.userid"
-      style="padding-top: 15px"
-    >
-      <v-flex class="pt-4 mb-2 text-right">
-        <v-btn @click="mvmodify">수정</v-btn>
-        <v-btn @click="deleteBook" class="ml-2">삭제</v-btn>
-      </v-flex>
     </div>
   </div>
 </template>
@@ -61,7 +63,7 @@ export default {
       }
     },
     enterToBr(str) {
-      if (str) return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      if (str) return str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
     },
   },
 };

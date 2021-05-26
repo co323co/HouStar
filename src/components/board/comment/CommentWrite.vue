@@ -4,7 +4,7 @@
     <v-textarea v-model="content" solo></v-textarea>
     <v-row class="text-right">
       <v-spacer></v-spacer>
-      <v-col class="cbtn mb-3" cols="1">
+      <v-col class="cbtn mb-3 mr-1" cols="1">
         <button @click="regist">등록</button>
       </v-col>
     </v-row>

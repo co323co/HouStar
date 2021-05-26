@@ -2,8 +2,8 @@
   <div v-if="isLogin">
     <div>
       <KTHeader></KTHeader>
-
-      <div class="flex-row-fluid" background-color="white">
+      <!-- 메인 화면 -->
+      <div class="flex-row-fluid" background-color="white" style="min-height: 580px">
         <transition name="fade-in-up">
           <router-view :key="$route.fullPath" />
         </transition>
