@@ -23,7 +23,7 @@
 <script>
 import http from '@/core/services/http-common';
 import LiveRanking from '@/components/ranking/LiveRanking.vue';
-import KakaoMap from '@/components/map/KakaoMap.vue';
+import KakaoMap from '@/components/map/KakaoMapShowCategory.vue';
 
 export default {
   components: {
