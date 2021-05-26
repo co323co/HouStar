@@ -1,7 +1,7 @@
 <template lang="">
   <div class="regist">
-    <h3>새 글 쓰기</h3>
-    <div class="my-5">
+    <h3 class="mt-1 mb-3">새 글 쓰기</h3>
+    <div class="inputform">
       <v-text-field
         type="text"
         id="title"
@@ -9,20 +9,23 @@
         v-model="title"
         ref="title"
         placeholder="제목"
-      /><br />
+        color="cyan lighten-3"
+        background-color="white"
+      />
       <v-textarea
-        placeholder="본문"
+        placeholder="내용을 써주세요!"
         id="content"
         name="content"
         v-model="content"
         ref="content"
-        cols="35"
-        rows="5"
-      ></v-textarea
-      ><br />
-      <button @click="checkValue">등록</button>
-      <button @click="moveList">목록</button>
+        color="cyan lighten-3"
+        background-color="white"
+      />
     </div>
+    <v-flex class="pt-4 mb-2 text-right">
+      <v-btn text @click="checkValue">등록</v-btn>
+      <v-btn text @click="moveList">목록</v-btn>
+    </v-flex>
   </div>
 </template>
 <script>
@@ -93,26 +96,15 @@ h3 {
 }
 .regist {
   padding: 10px;
-  background-color: antiquewhite;
-  border-radius: 1em;
+  background-color: rgb(250, 242, 215);
+  border-radius: 10px;
 }
-.regist_form {
-  text-align: left;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
+.inputform {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
 }
-input,
-textarea,
-.view {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  color: #787878;
-  font-size: medium;
+.v-btn {
+  font-size: 1.1em;
 }
 </style>

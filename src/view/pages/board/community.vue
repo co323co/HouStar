@@ -97,23 +97,23 @@
                   <v-row>
                     <v-col>
                       <v-text-field
-                        label="게시판 등록"
-                        required
+                        placeholder="게시판 이름을 입력해주세요"
+                        :rules="[v => !!v || '빈 이름의 게시판은 만들 수 없습니다!']"
                         v-model="communityName"
                       ></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
-                <small> * 부적절한 게시판은 차후 삭제될 수 있습니다. </small>
+                <small style="font-size:11px"> * 부적절한 게시판은 차후 삭제될 수 있습니다. </small>
               </v-card-text>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="dialog = false">
-                  Close
+                  취소
                 </v-btn>
                 <v-btn color="blue darken-1" text @click="[Close(), RegisterCommunity()]">
-                  Register
+                  등록
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -200,7 +200,7 @@ export default {
       };
       this.$store.dispatch('addCommunity', val);
       console.log('this.communityName 등록하고옴');
-
+      this.communityName="";
       // 다시가져와줌
       //  this.$store.dispatch('getCommunitys');
       // console.log('this.communityName 다시가져옴');
@@ -215,4 +215,6 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+
+</style>
