@@ -21,16 +21,16 @@
       <v-divider></v-divider>
       <v-row class="pa-5"> {{ enterToBr(board.content) }}</v-row>
       <v-divider></v-divider>
-
-      <div
-        v-if="currentUser.userid == 'admin' || board.userid == currentUser.userid"
-        style="padding-top: 15px"
-      ></div>
     </div>
-    <v-flex class="pt-4 mb-2 text-right">
-      <v-btn @click="mvmodify">수정</v-btn>
-      <v-btn @click="deleteBook" class="ml-2">삭제</v-btn>
-    </v-flex>
+    <div
+      v-if="currentUser.userid == 'admin' || board.userid == currentUser.userid"
+      style="padding-top: 15px"
+    >
+      <v-flex class="pt-4 mb-2 text-right">
+        <v-btn @click="mvmodify">수정</v-btn>
+        <v-btn @click="deleteBook" class="ml-2">삭제</v-btn>
+      </v-flex>
+    </div>
   </div>
 </template>
 
