@@ -15,19 +15,34 @@
       <v-row class="rank mt-1 mx-1">
         <v-col v-if="suggest_dong.age_range && currentUser.age_range">
           <h5 class="mb-3">{{ currentUser.age_range | ageRange }} 취향저격 순위</h5>
-          <div v-for="(dong, idx) in suggest_dong.age_range" :key="idx" @click="moveInfo(dong)">
+          <div
+            v-if="dong"
+            v-for="(dong, idx) in suggest_dong.age_range"
+            :key="idx"
+            @click="moveInfo(dong)"
+          >
             <mouse-over :msg="icon_rank[idx] + ' ' + dong.dongName" />
           </div>
         </v-col>
         <v-col v-if="suggest_dong.family_type && currentUser.family_type">
           <h5 class="mb-3">{{ currentUser.family_type | familyType }} 취향저격 순위</h5>
-          <div v-for="(dong, idx) in suggest_dong.family_type" :key="idx" @click="moveInfo(dong)">
+          <div
+            v-for="(dong, idx) in suggest_dong.family_type"
+            :key="idx"
+            @click="moveInfo(dong)"
+            v-if="dong"
+          >
             <mouse-over :msg="icon_rank[idx] + ' ' + dong.dongName" />
           </div>
         </v-col>
         <v-col v-if="suggest_dong.tag && currentUser.tag">
           <h5 class="mb-3">{{ currentUser.tag | list }} 취향저격 순위</h5>
-          <div v-for="(dong, idx) in suggest_dong.tag" :key="idx" @click="moveInfo(dong)">
+          <div
+            v-for="(dong, idx) in suggest_dong.tag"
+            :key="idx"
+            @click="moveInfo(dong)"
+            v-if="dong"
+          >
             <mouse-over :msg="icon_rank[idx] + ' ' + dong.dongName" />
           </div>
         </v-col>
@@ -62,16 +77,16 @@ export default {
     ...mapGetters(['currentUser']),
   },
   filters: {
-    ageRange: function (ageRange) {
+    ageRange: function(ageRange) {
       if (!ageRange) return '';
       if (ageRange == 'over') return '60대 이상';
       else return ageRange + '대';
     },
-    familyType: function (type) {
+    familyType: function(type) {
       if (!type) return '';
       else return type;
     },
-    list: function (list) {
+    list: function(list) {
       if (!list) return '';
       let str = '';
       for (let i = 0; i < list.length - 1; i++) {
@@ -91,7 +106,7 @@ export default {
         .then((rating_response) => {
           let rating_list = rating_response.data;
           // total 점수를 기준으로 내림차순 정렬
-          rating_list.sort(function (a, b) {
+          rating_list.sort(function(a, b) {
             return b.total - a.total;
           });
           //   console.log('age_range : ', rating_list);
@@ -114,7 +129,7 @@ export default {
         .then((rating_response) => {
           let rating_list = rating_response.data;
           // total 점수를 기준으로 내림차순 정렬
-          rating_list.sort(function (a, b) {
+          rating_list.sort(function(a, b) {
             return b.total - a.total;
           });
           //   console.log('family_type : ', rating_list);
@@ -136,7 +151,7 @@ export default {
         let rating_list = rating_response.data;
         // '유저의 선호태그들'만으로 '평점 합'을 구하고, 그걸 기준으로 내림차순 정렬
         let user_tag = this.currentUser.tag;
-        rating_list.sort(function (a, b) {
+        rating_list.sort(function(a, b) {
           let a_sum = 0;
           let b_sum = 0;
           //   해당 동의 태그들의 총 평점 합 구하기
@@ -170,7 +185,10 @@ export default {
           //동코드로 SigugundongDto 찾아서 suggest_dong.tag 넣음, (사용자의 선호타입으로 찾은 추천 동 목록)
           if (rating_list.length <= i) return;
           http.get('/address/' + rating_list[i].dongcode).then((dong_resonse) => {
+            console.log('undi');
+            // console.log(dong_resonse.data);
             this.suggest_dong.tag.push(dong_resonse.data);
+            console.log(this.suggest_dong.tag);
           });
         }
       });

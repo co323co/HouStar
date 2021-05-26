@@ -2,7 +2,7 @@
   <div>
     <h4>🏆 실시간 전체 랭킹</h4>
     <div class="pa-5">
-      <div v-for="(dong, idx) in dong_list" :key="idx" @click="moveInfo(dong)">
+      <div v-for="(dong, idx) in dong_list" :key="idx" @click="moveInfo(dong)" v-if="dong">
         <mouse-over :msg="idx + 1 + `.  ` + dong.dongName" />
       </div>
     </div>
