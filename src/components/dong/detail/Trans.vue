@@ -4,9 +4,8 @@
       <v-card-title>
         <h2 style="font-weight: bold">대중교통</h2>
       </v-card-title>
+      <v-divider></v-divider>
       <v-card-subtitle class="ml-1" style="font-size: 1.2em">
-        {{ currentDongInfo.sidoName }}
-        {{ currentDongInfo.gugunName }}
         {{ currentDongInfo.dongName }}
         지하철 정보
       </v-card-subtitle>

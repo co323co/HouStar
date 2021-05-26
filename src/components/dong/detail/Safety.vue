@@ -4,9 +4,8 @@
       <v-card-title>
         <h2 style="font-weight: bold">안전 등급</h2>
       </v-card-title>
+      <v-divider></v-divider>
       <v-card-subtitle class="ml-1" style="font-size: 1.2em">
-        {{ currentDongInfo.sidoName }}
-        {{ currentDongInfo.gugunName }}
         {{ currentDongInfo.dongName }}
         안전 등급 정보
       </v-card-subtitle>
@@ -22,11 +21,11 @@
         <div v-if="show">
           <v-divider></v-divider>
           <div align="center">
-            <BarChart
+            <LineChart
               style="width: 300px; height: 300px"
-              v-if="datasets"
-              :labels="labels"
-              :datasets="datasets"
+              v-if="chartDataForLineChart"
+              :chart-data="chartDataForLineChart"
+              :options="optionsForLineChart"
             />
           </div>
         </div>
@@ -37,16 +36,18 @@
 <script>
 import { mapGetters } from 'vuex';
 import http from '@/core/services/http-common';
-import BarChart from '@/components/charts/BarChart.vue';
+// import BarChart from '@/components/charts/BarChart.vue';
+import LineChart from '@/components/charts/LineChart.vue';
 export default {
   components: {
-    BarChart,
+    // BarChart,
+    LineChart,
   },
   data() {
     return {
+      chartDataForLineChart: Object,
+      optionsForLineChart: Object,
       data: [],
-      labels: ['교통사고', '화재', '범죄', '생활안전', '자살', '감염병'],
-      datasets: null,
       //카드뷰 확장 트리거
       show: false,
     };
@@ -72,14 +73,36 @@ export default {
         this.data.push(response.data.epidemic);
         console.log('this.data 뽑을거임!!');
         console.log(this.data);
-        this.datasets = [
-          {
-            label: '안전 등급 분류',
-            backgroundColor: '#e481af',
-            data: this.data,
-            options: this.options,
+
+        this.chartDataForLineChart = {
+          labels: ['교통사고', '화재', '범죄', '생활안전', '자살', '감염병'],
+          datasets: [
+            {
+              label: '안전 등급 분류',
+              backgroundColor: 'rgb(239, 83, 80)',
+              pointBackgroundColor: 'rgb(239, 83, 80)',
+              fill: false,
+              borderColor: 'rgb(239, 83, 80)',
+              tension: 0.1,
+              data: this.data,
+            },
+          ],
+        };
+        this.optionsForLineChart = {
+          responsive: true,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                ticks: {
+                  beginAtZero: true,
+                  max: 5,
+                  min: 0,
+                },
+              },
+            ],
           },
-        ];
+        };
       });
 
     // console.log('this.datasets');

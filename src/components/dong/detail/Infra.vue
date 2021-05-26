@@ -6,9 +6,8 @@
           <div class="head">인프라</div>
         </h2>
       </v-card-title>
+      <v-divider></v-divider>
       <v-card-subtitle class="ml-1" style="font-size: 1.2em">
-        {{ currentDongInfo.sidoName }}
-        {{ currentDongInfo.gugunName }}
         {{ currentDongInfo.dongName }}
         상가 정보
       </v-card-subtitle>
@@ -24,7 +23,7 @@
         <div v-if="show">
           <v-divider></v-divider>
           <div align="center">
-            <BarChart
+            <PieChart
               style="width: 300px; height: 330px"
               v-if="datasets"
               :labels="labels"
@@ -39,23 +38,24 @@
 <script>
 import { mapGetters } from 'vuex';
 import http from '@/core/services/http-common';
-import BarChart from '@/components/charts/BarChart.vue';
+// import BarChart from '@/components/charts/BarChart.vue';
+import PieChart from '@/components/charts/PieChart.vue';
 export default {
   components: {
-    BarChart,
+    PieChart,
   },
   data() {
     return {
       data: [0, 0, 0, 0, 0, 0, 0, 0],
       labels: [
-        '관광/여가/오락',
-        '부동산',
-        '소매',
-        '생활서비스',
-        '숙박',
-        '스포츠',
-        '음식',
-        '학문/교육',
+        '관광/여가/오락🎠',
+        '부동산💼',
+        '소매🍜',
+        '생활서비스✅',
+        '숙박🏰',
+        '스포츠🚴‍♀️',
+        '음식🍒',
+        '학문/교육📙',
       ],
       datasets: null,
       //카드뷰 확장 트리거
@@ -80,10 +80,23 @@ export default {
           }
         }
       }
+      console.log(this.data);
+      console.log('이거 위에 상가정보임');
       this.datasets = [
         {
+          hoverOffset: 4,
+
           label: '상가 대분류',
-          backgroundColor: '#e481af',
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            '#AAD8FF',
+            '#AAD8FF',
+            '#AAD8FF',
+            '#FFD8FF',
+            '#00D8FF',
+          ],
           data: this.data,
         },
       ];
