@@ -49,11 +49,11 @@
     </v-card>
     <!-- 리뷰 셀렉트박스로 필터링하기 -->
     <div align="center" class="mt-10">
-      <p class="display-1 mr-1 ">
+      <p class="display-1 mr-1">
         <b>모아보기 ( 총 {{ show_list.length }} 명 )</b>
       </p>
     </div>
-    <v-row class=" justify-sm-center mt-2">
+    <v-row class="justify-sm-center mt-2 px-2">
       <v-col class="mx-2">
         <v-select
           hide-details="true"
@@ -90,6 +90,11 @@
           @change="changeAge()"
         ></v-select>
       </v-col>
+      <v-col cols="1" class="text-center">
+        <v-btn @click="reset" color="teal lighten-2" fab style="color: white">
+          <v-icon> mdi-eraser </v-icon>
+        </v-btn>
+      </v-col>
     </v-row>
 
     <!-- 리뷰 리스트 뿌리기 !!!!!!-->
@@ -103,7 +108,8 @@
     </v-row>
     <v-flex v-else>
       <v-container class="reviewback rounded-card text-center mt-5">
-        리뷰를 작성하지 않으면 볼 수 없습니다. 작성하시겠습니까?
+        <div class="mt-14"></div>
+        <div class="no">첫 리뷰를 작성해야 볼 수 있습니다!</div>
       </v-container>
     </v-flex>
   </v-container>
@@ -119,6 +125,12 @@ import ReviewRegister from '@/components/dong/review/ReviewRegister.vue';
 
 export default {
   methods: {
+    reset() {
+      this.show_list = this.reviews;
+      this.tag_val = null;
+      this.familyType_val = null;
+      this.ageRange_val = null;
+    },
     checkBar() {
       // 선호태그 감지
       if (this.tag_val) {
@@ -296,5 +308,10 @@ export default {
 }
 .rounded-card {
   border-radius: 50px;
+}
+.no {
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 1.4em;
 }
 </style>
