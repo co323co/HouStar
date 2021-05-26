@@ -4,7 +4,7 @@
     <v-card v-if="isReadOnly" max-width="1000">
       <v-card-title>
         <v-row v-if="review" class="mt-1" align="center">
-          <span v-if="review.userid" class="display-1 pa-0 mr-1 ml-3">
+          <span v-if="review.userid" class="display-1 pa-0 mr-1 ml-20">
             {{ review.userid }}
           </span>
 
@@ -23,7 +23,7 @@
       <v-divider></v-divider>
       <v-row align="center">
         <v-col cols="3">
-          <div class="">
+          <div class="justify">
             <label>환경</label>
             <v-rating
               class="star"
@@ -100,7 +100,7 @@
             value="review.content"
           ></v-textarea> -->
           <v-card-text>
-            <span class="subtitle-1"
+            <span class="comment"
               ><b> {{ review.content }}</b>
             </span>
           </v-card-text>
@@ -124,19 +124,26 @@
     <!-- 수정부분 -->
     <v-card class="mx-auto my-12" max-width="1000" v-else>
       <v-card-title>
-        <v-row v-if="review" class="mt-1">
-          <h2 v-if="review.userid" class="ml-3">{{ review.userid }} |</h2>
-          <h2 v-if="review.age_range">{{ review.age_range }}대 |</h2>
-          <h2 v-if="review.family_type">{{ review.family_type }} |</h2>
-          <h2 v-if="review.tag">
-            {{ review.tag | list }}
-          </h2>
+        <v-row v-if="review" class="mt-1" align="center">
+          <span v-if="review.userid" class="display-1 pa-0 mr-1 ml-20">
+            {{ review.userid }}
+          </span>
+
+          <span v-if="review.age_range" class="subtitle-1 ml-2"
+            ><b> {{ review.age_range }} 대 |</b>
+          </span>
+          <span v-if="review.family_type" class="subtitle-1"
+            ><b> {{ review.family_type }} </b> |
+          </span>
+          <span v-if="review.tag" class="subtitle-1 "
+            ><b> {{ review.tag | list }} </b>
+          </span>
         </v-row>
       </v-card-title>
       <v-divider></v-divider>
       <v-row align="center">
         <v-col cols="3">
-          <div class="text-center">
+          <div class="justify">
             <label>환경</label>
             <v-rating
               class="star"
@@ -207,8 +214,21 @@
         </v-col>
       </v-row>
       <v-card-text align="rignt" v-if="currentUser.userid == newReview.userid">
+        <v-btn tile color="success" @click="modifyReview">
+          <v-icon left>
+            mdi-pencil
+          </v-icon>
+          수정
+        </v-btn>
+        <v-btn tile color="error" class="ml-3" @click="undoModify">
+          <v-icon left>
+            mdi-pencil
+          </v-icon>
+          취소
+        </v-btn>
+        <!-- 
         <button @click="modifyReview">수정</button>
-        <button class="ml-3" @click="undoModify">취소</button>
+        <button class="ml-3" @click="undoModify">취소</button> -->
       </v-card-text>
     </v-card>
   </div>
@@ -343,5 +363,12 @@ export default {
 }
 .star {
   display: inline;
+}
+.justify {
+  text-align: left;
+  margin-left: 70px;
+}
+.comment {
+  font-size: large;
 }
 </style>
