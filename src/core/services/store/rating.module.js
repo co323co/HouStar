@@ -26,12 +26,19 @@ export default {
         .get('/dongreview/avg-rating/' + payload)
         .then(({ data }) => {
           // Rating.module 에 있는 rating 객체에 얻어온 평균평점 객체 넣음
+          // console.log('data');
+          // console.log(data);
+          // if (data) {
+          //   context.commit('setRating', 0);
+          // }
+
           context.commit('setRating', data);
           //context.commit('setAvgRating', data.total * 1.0);
           //this.$store.state.rate.rating = data;
           //this.totalRating = this.$store.state.rate.rating.total * 1.0;
         })
         .catch(({ response }) => {
+          this.AvgRating = 0.0;
           console.log(response);
         });
     },

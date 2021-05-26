@@ -7,10 +7,12 @@
         </v-card-title>
 
         <v-card-subtitle>
-          <v-row align="center" class="ml-1"
-            ><span class="display-1 pa-0 mr-1"
+          <v-row align="center" class="ml-1">
+            <!-- <div v-if="this.totalReviewCount != 0"> -->
+            <span class="display-1 pa-0 mr-1"
               ><b> {{ this.AvgRating.toFixed(1) }}</b>
             </span>
+
             <star-rating
               :star-size="20"
               :inline="true"
@@ -20,8 +22,8 @@
               :rating="AvgRating"
               read-only
               :show-rating="false"
-            ></star-rating
-          ></v-row>
+            ></star-rating>
+          </v-row>
         </v-card-subtitle>
       </div>
       <!-- 개별 차트 평균 뿌리기 -->
@@ -201,52 +203,11 @@ export default {
         { text: '그 이상', value: 'over' },
       ],
 
-      show_list: '',
-      totalRating: 0,
+      show_list: [],
       size: 'firstClass',
+      chartDataForBarChart: Object,
+      chartDataForRadarChart: Object,
 
-      chartDataForBarChart: {
-        labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '대중교통🚦'],
-        datasets: [
-          {
-            label: '카테고리별 통계',
-            backgroundColor: '#66BB6A',
-            barThickness: 7,
-            data: [
-              this.$store.state.rate.rating.environment,
-              this.$store.state.rate.rating.health,
-              this.$store.state.rate.rating.infra,
-              this.$store.state.rate.rating.safety,
-              this.$store.state.rate.rating.school,
-              this.$store.state.rate.rating.trans,
-            ],
-          },
-        ],
-      },
-      // radar chart에 넣을 데이터
-      chartDataForRadarChart: {
-        labels: ['환경', '건강', '인프라', '안전', '학군', '대중교통'],
-        datasets: [
-          {
-            label: '카테고리별 통계',
-            backgroundColor: 'rgba(27, 197, 189, 0.2)',
-            borderColor: '#1bc5bd',
-            // pointBackgroundColor: 'rgba(179,181,198,1)',
-            pointBorderColor: '#fff',
-            // pointHoverBackgroundColor: '#fff',
-            // pointHoverBorderColor: 'rgba(179,181,198,1)',
-
-            data: [
-              this.$store.state.rate.rating.environment,
-              this.$store.state.rate.rating.health,
-              this.$store.state.rate.rating.infra,
-              this.$store.state.rate.rating.safety,
-              this.$store.state.rate.rating.school,
-              this.$store.state.rate.rating.trans,
-            ],
-          },
-        ],
-      },
       optionsForBarChart: {
         legend: {
           display: false,
@@ -280,6 +241,8 @@ export default {
   created() {
     // 해당 동에 대한 평균별점정보 가져오기
     this.$store.dispatch('getRating', this.$store.state.dongStore.Sidogugundong.dongCode);
+    console.log('AvgRating');
+    console.log(this.AvgRating);
     console.log(this.rating);
     console.log(this.rating.environment);
     console.log('this.rating');
@@ -291,6 +254,65 @@ export default {
     // console.log(this.reviewsbyuserid.length);
     if (this.reviewsbyuserid.length != 0) this.isWrite = true;
     this.show_list = [...this.reviews];
+
+    this.chartDataForBarChart = {
+      labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '대중교통🚦'],
+      datasets: [
+        {
+          label: '카테고리별 통계',
+          backgroundColor: '#66BB6A',
+          barThickness: 7,
+          data: [
+            this.$store.state.rate.rating.environment,
+            this.$store.state.rate.rating.health,
+            this.$store.state.rate.rating.infra,
+            this.$store.state.rate.rating.safety,
+            this.$store.state.rate.rating.school,
+            this.$store.state.rate.rating.trans,
+          ],
+        },
+      ],
+    };
+    // radar chart에 넣을 데이터
+    this.chartDataForRadarChart = {
+      labels: ['환경', '건강', '인프라', '안전', '학군', '대중교통'],
+      datasets: [
+        {
+          label: '카테고리별 통계',
+          backgroundColor: 'rgba(27, 197, 189, 0.2)',
+          borderColor: '#1bc5bd',
+          // pointBackgroundColor: 'rgba(179,181,198,1)',
+          pointBorderColor: '#fff',
+          // pointHoverBackgroundColor: '#fff',
+          // pointHoverBorderColor: 'rgba(179,181,198,1)',
+
+          data: [
+            this.$store.state.rate.rating.environment,
+            this.$store.state.rate.rating.health,
+            this.$store.state.rate.rating.infra,
+            this.$store.state.rate.rating.safety,
+            this.$store.state.rate.rating.school,
+            this.$store.state.rate.rating.trans,
+          ],
+        },
+      ],
+    };
+    this.AvgRating = this.$store.state.rate.rating.total;
+  },
+  mounted() {
+    // 해당 동에 대한 평균별점정보 가져오기
+    // this.$store.dispatch('getRating', this.$store.state.dongStore.Sidogugundong.dongCode);
+    // console.log(this.rating);
+    // console.log(this.rating.environment);
+    // console.log('this.rating');
+    // // 해당 동에 대한 모든 리뷰 다 가져오기.
+    // this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
+    // // 해당 동에 대한 로그인한 유저의 모든 리뷰 가져오기
+    // this.$store.dispatch('getReviewsByUserId', this.currentUser.userid);
+    // // console.log('this.reviewsbyuserid.length');
+    // // console.log(this.reviewsbyuserid.length);
+    // if (this.reviewsbyuserid.length != 0) this.isWrite = true;
+    // this.show_list = [...this.reviews];
   },
 };
 </script>
