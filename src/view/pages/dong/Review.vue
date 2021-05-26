@@ -71,7 +71,7 @@
         </v-col>
       </v-row>
 
-      <!-- 리뷰 리스트 뿌리기 -->
+      <!-- 리뷰 리스트 뿌리기 !!!!!!-->
     </v-card>
     <v-row v-if="isWrite">
       <v-container class="reviewback">
