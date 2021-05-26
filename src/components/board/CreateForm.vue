@@ -23,8 +23,8 @@
       />
     </div>
     <v-flex class="pt-4 mb-2 text-right">
-      <v-btn text @click="checkValue">등록</v-btn>
-      <v-btn text @click="moveList">목록</v-btn>
+      <v-btn @click="checkValue">등록</v-btn>
+      <v-btn @click="moveList" class="ml-2">목록</v-btn>
     </v-flex>
   </div>
 </template>
