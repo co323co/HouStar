@@ -4,9 +4,8 @@
       <v-card-title>
         <h2 style="font-weight: bold">환경 오염</h2>
       </v-card-title>
+      <v-divider></v-divider>
       <v-card-subtitle class="ml-1" style="font-size: 1.2em">
-        {{ currentDongInfo.sidoName }}
-        {{ currentDongInfo.gugunName }}
         {{ currentDongInfo.dongName }}
         오염 시설 정보
       </v-card-subtitle>
@@ -47,7 +46,7 @@ export default {
     return {
       isZero: true,
       data: [0, 0, 0, 0],
-      labels: ['대기배출', '폐수배출', '기타수질원', '유목물판매'],
+      labels: ['대기배출☁', '폐수배출🌊', '기타수질원🤮', '유독물판매🤧'],
       datasets: null,
       //카드뷰 확장 트리거
       show: false,
@@ -79,6 +78,7 @@ export default {
         {
           label: '업소 분류',
           backgroundColor: '#974e90',
+          barThickness: 10,
           data: this.data,
         },
       ];
@@ -88,10 +88,16 @@ export default {
 </script>
 <style scoped>
 .zeroData {
-  padding: 30px;
+  padding: 130px 0px;
   text-align: center;
   font-size: 1.5em;
   font-weight: bold;
   color: #974e90;
+  height: 300px;
+  /* padding: 30px;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #974e90; */
 }
 </style>

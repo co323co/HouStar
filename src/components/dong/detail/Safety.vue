@@ -22,7 +22,7 @@
           <v-divider></v-divider>
           <div align="center">
             <LineChart
-              style="width: 300px; height: 300px"
+              style="width: 300px; height: 360px"
               v-if="chartDataForLineChart"
               :chart-data="chartDataForLineChart"
               :options="optionsForLineChart"
@@ -128,4 +128,8 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+canvas#line-chart {
+  margin-top: 30px;
+}
+</style>

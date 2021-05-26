@@ -31,7 +31,7 @@
           ></v-autocomplete>
           <!-- 스크롤바 시작 -->
           <div align="center" class="scroll">
-            <div style="overflow:scroll; width:350px; height:150px; text-align=left">
+            <div style="overflow:scroll; width:350px; height:240px; text-align=left">
               <div v-if="sshow">
                 <div v-for="(s, index) in showschoollist" :key="index">
                   <div class="">

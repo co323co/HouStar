@@ -108,7 +108,7 @@ export default {
 </script>
 <style scoped>
 .Data {
-  padding: 30px;
+  padding: 92px 30px;
   text-align: center;
   font-size: 1.3em;
   font-weight: bold;

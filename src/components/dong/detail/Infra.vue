@@ -24,7 +24,7 @@
           <v-divider></v-divider>
           <div align="center">
             <PieChart
-              style="width: 300px; height: 330px"
+              style="width: 300px; height: 370px"
               v-if="datasets"
               :labels="labels"
               :datasets="datasets"
@@ -85,14 +85,14 @@ export default {
         {
           label: '상가 대분류',
           backgroundColor: [
-            '#41B883',
-            '#E46651',
-            '#66BB6A',
-            '#EC407A',
-            '#FBC02D',
-            '#F4511E',
-            '#FFD8FF',
-            '#00D8FF',
+            '#26A69A',
+            '#80DEEA',
+            '#4FC3F7',
+            '#E6EE9C',
+            '#A5D6A7',
+            '#FFF9C4',
+            '#9FA8DA',
+            '#CFD8DC',
           ],
           data: this.data,
         },
