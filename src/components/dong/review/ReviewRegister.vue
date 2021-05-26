@@ -1,37 +1,87 @@
 <template>
-  <v-card class="mx-auto my-12" max-width="1000">
-    <v-row align="center">
-      <v-col>
-        <div class="text-center">
-          <label>환경</label>
-          <v-rating
-            v-model="environment"
-            background-color="purple lighten-3"
-            color="purple"
-          ></v-rating>
-          <label>건강</label>
-          <v-rating v-model="health" background-color="pink lighten-3" color="pink"></v-rating>
-          <label>인프라</label>
-          <v-rating v-model="infra" background-color="orange lighten-3" color="orange"></v-rating>
-          <label>안전</label>
-          <v-rating v-model="safety" background-color="green lighten-3" color="green"></v-rating>
-          <label>학군</label>
-          <v-rating v-model="school" background-color="green lighten-3" color="green"></v-rating>
-          <label>교통</label>
-          <v-rating
-            v-model="trans"
-            background-color="indigo lighten-3"
-            color="indigo"
-          ></v-rating></div
-      ></v-col>
-      <v-col>
-        <v-card-text align="rignt">
-          <v-textarea solo name="input-7-4" label="Solo textarea" v-model="content"></v-textarea>
-          <button @click="register">등록</button>
-        </v-card-text>
-      </v-col>
-    </v-row>
-  </v-card>
+  <!-- 시작 -->
+
+  <!-- 끝 -->
+
+  <v-row align="center">
+    <v-col cols="3">
+      <div class="text-center">
+        <span>환경</span>
+        <v-rating
+          small
+          dense="true"
+          v-model="environment"
+          background-color="purple lighten-3"
+          color="purple"
+        ></v-rating>
+        <label>건강</label>
+        <v-rating
+          small
+          v-model="health"
+          background-color="pink lighten-3"
+          color="pink"
+          dense="true"
+        ></v-rating>
+        <label>인프라</label>
+        <v-rating
+          small
+          v-model="infra"
+          background-color="orange lighten-3"
+          color="orange"
+          dense="true"
+        ></v-rating>
+        <label>안전</label>
+        <v-rating
+          small
+          v-model="safety"
+          background-color="green lighten-3"
+          color="green"
+          dense="true"
+        ></v-rating>
+        <label>학군</label>
+        <v-rating
+          small
+          v-model="school"
+          background-color="green lighten-3"
+          color="green"
+          dense="true"
+        ></v-rating>
+        <label>교통</label>
+        <v-rating
+          small
+          v-model="trans"
+          background-color="indigo lighten-3"
+          color="indigo"
+          dense="true"
+        ></v-rating></div
+    ></v-col>
+    <v-col cols="9">
+      <v-card-text>
+        <h1>후기를 남겨주세요 ✍</h1>
+        <v-textarea
+          height="150px"
+          solo
+          name="input-7-4"
+          label="입력하세요"
+          v-model="content"
+        ></v-textarea>
+        <div align="center">
+          <v-btn
+            :loading="loading3"
+            :disabled="loading3"
+            color="pink"
+            class="white--text"
+            @click="register"
+          >
+            등록
+            <v-icon right dark>
+              mdi-cloud-upload
+            </v-icon>
+          </v-btn>
+        </div>
+      </v-card-text>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

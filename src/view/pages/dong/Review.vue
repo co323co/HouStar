@@ -1,82 +1,89 @@
 <template lang="">
-  <v-app>
-    <v-container>
-      <v-card flat>
-        <v-toolbar flat class="mb-1">
-          <v-toolbar-title>
-            <h1 class="display-5 mt-4">전체 리뷰 ( {{ totalReviewCount }} 명 )</h1>
-          </v-toolbar-title>
-        </v-toolbar>
-        <!-- Total 별점 평균 뿌리기 -->
-        <v-flex>
-          <star-rating
-            :increment="0.01"
-            :fixed-points="2"
-            class="ml-5"
-            :rating="AvgRating"
-            read-only
-            show-rating
-          ></star-rating>
-        </v-flex>
-        <!-- 개별 차트 평균 뿌리기 -->
-        <v-flex>
-          <HorizontalBar :chart-data="datacollection" :class="size"></HorizontalBar>
-        </v-flex>
-        <!-- 리뷰 등록 -->
-        <v-flex>
-          <review-register />
-        </v-flex>
+  <v-container>
+    <v-card>
+      <v-toolbar class="mb-1" flat>
+        <h1 class="display-5 mt-4">전체 리뷰 ( {{ totalReviewCount }} 명 )</h1>
+      </v-toolbar>
+      <v-divider></v-divider>
+      <!-- Total 별점 평균 뿌리기 -->
+      <v-flex>
+        <star-rating
+          v-if="AvgRating"
+          :increment="0.01"
+          :fixed-points="2"
+          class="ml-5"
+          :rating="AvgRating"
+          read-only
+          show-rating
+        ></star-rating>
+      </v-flex>
+      <v-divider></v-divider>
+      <!-- 개별 차트 평균 뿌리기 -->
+      <div align="center">
+        <HorizontalBar
+          v-if="rating"
+          :chart-data="datacollection"
+          :class="size"
+          :options="options"
+        ></HorizontalBar>
+      </div>
+      <v-divider></v-divider>
+      <!-- 리뷰 등록 -->
 
-        <!-- 리뷰 셀렉트박스로 필터링하기 -->
+      <review-register />
+      <v-divider></v-divider>
 
-        <v-row class="no-gutters justify-sm-center">
-          <v-col class="mx-2">
-            <v-select
-              hint="선호 태그"
-              label="ALL"
-              v-model="tag_val"
-              :items="tags"
-              no-data-text="항목이 없습니다"
-              dense
-              @change="changeTag()"
-            ></v-select>
-          </v-col>
-          <v-col class="mx-2">
-            <v-select
-              hint="가구 타입"
-              label="ALL"
-              v-model="familyType_val"
-              :items="familyTypes"
-              no-data-text="항목이 없습니다"
-              dense
-              @change="changeFamilyType()"
-            ></v-select>
-          </v-col>
-          <v-col class="mx-2">
-            <v-select
-              hint="연령대"
-              label="ALL"
-              v-model="ageRange_val"
-              :items="ageRanges"
-              no-data-text="항목이 없습니다"
-              dense
-              @change="changeAge()"
-            ></v-select>
-          </v-col>
-        </v-row>
+      <!-- 리뷰 셀렉트박스로 필터링하기 -->
 
-        <!-- 리뷰 리스트 뿌리기 -->
-        <v-flex v-if="isWrite">
-          <v-container>
-            <review-list-item v-for="(review, idx) in show_list" :key="idx" :review="review" />
-          </v-container>
-        </v-flex>
-        <v-flex v-else>
-          <v-container> 리뷰를 작성하지 않으면 글을 볼 수 없습니다. </v-container>
-        </v-flex>
-      </v-card>
-    </v-container>
-  </v-app>
+      <v-row class=" justify-sm-center mt-5">
+        <v-col class="mx-2">
+          <v-select
+            hint="선호 태그"
+            label="ALL"
+            v-model="tag_val"
+            :items="tags"
+            no-data-text="항목이 없습니다"
+            solo
+            @change="changeTag()"
+          ></v-select>
+        </v-col>
+        <v-col class="mx-2">
+          <v-select
+            hint="가구 타입"
+            label="ALL"
+            v-model="familyType_val"
+            :items="familyTypes"
+            no-data-text="항목이 없습니다"
+            solo
+            @change="changeFamilyType()"
+          ></v-select>
+        </v-col>
+        <v-col class="mx-2">
+          <v-select
+            hint="연령대"
+            label="ALL"
+            v-model="ageRange_val"
+            :items="ageRanges"
+            no-data-text="항목이 없습니다"
+            solo
+            @change="changeAge()"
+          ></v-select>
+        </v-col>
+      </v-row>
+
+      <!-- 리뷰 리스트 뿌리기 -->
+    </v-card>
+    <v-row v-if="isWrite">
+      <v-container>
+        <h1 align="center" class="mt-5">리뷰 목록 ✍ 총 {{ show_list.length }} 명</h1>
+
+        <review-list-item v-for="(review, idx) in show_list" :key="idx" :review="review" />
+      </v-container>
+    </v-row>
+    <v-flex v-else>
+      <v-container> 리뷰를 작성하지 않으면 글을 볼 수 없습니다. </v-container>
+    </v-flex>
+  </v-container>
 </template>
 <script>
 import { mapGetters } from 'vuex';
@@ -167,7 +174,7 @@ export default {
         datasets: [
           {
             label: '전체 리뷰 통계',
-            backgroundColor: 'gray',
+            backgroundColor: 'pink',
             data: [
               this.$store.state.rate.rating.environment,
               this.$store.state.rate.rating.health,
@@ -178,6 +185,19 @@ export default {
             ],
           },
         ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
       },
     };
   },
@@ -190,6 +210,9 @@ export default {
   created() {
     // 해당 동에 대한 평균별점정보 가져오기
     this.$store.dispatch('getRating', this.$store.state.dongStore.Sidogugundong.dongCode);
+    console.log(this.rating);
+    console.log(this.rating.environment);
+    console.log('this.rating');
     // 해당 동에 대한 모든 리뷰 다 가져오기.
     this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
     // 해당 동에 대한 로그인한 유저의 모든 리뷰 가져오기
@@ -197,24 +220,14 @@ export default {
     if (this.reviewsbyuserid.length != 0) this.isWrite = true;
     this.show_list = [...this.reviews];
   },
-  // mounted() {
-  //   // 해당 동에 대한 평균별점정보 가져오기
-  //   this.$store.dispatch('getRating', this.$store.state.dongStore.Sidogugundong.dongCode);
-  //   // 해당 동에 대한 모든 리뷰 다 가져오기.
-  //   this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
-  //   // 해당 동에 대한 로그인한 유저의 모든 리뷰 가져오기
-  //   this.$store.dispatch('getReviewsByUserId', this.currentUser.userid);
-  //   if (this.reviewsbyuserid.length != 0) this.isWrite = true;
-  //   this.show_list = [...this.reviews];
-  // },
 };
 </script>
 <style scoped>
 .firstClass {
   padding-top: 30px;
   display: block;
-  height: 300px;
-  width: 300px;
+  height: 350px;
+  width: 350px;
   margin-bottom: 50px;
 }
 .v-application--wrap {

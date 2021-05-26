@@ -1,7 +1,7 @@
 <template>
   <!-- 보여주는부분 -->
-  <v-flex>
-    <v-card class="mx-auto my-12" max-width="1000" v-if="isReadOnly">
+  <div align="center" class="mt-5">
+    <v-card v-if="isReadOnly" style="background-color : pink" max-width="1000">
       <v-card-title>
         <v-row v-if="review">
           <p v-if="review.userid">{{ review.userid }} |</p>
@@ -13,10 +13,12 @@
         </v-row>
       </v-card-title>
       <v-row align="center">
-        <v-col>
+        <v-col cols="3">
           <div class="text-center">
             <label>환경</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.environment"
               background-color="purple lighten-3"
               color="purple"
@@ -24,6 +26,8 @@
             ></v-rating>
             <label>건강</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.health"
               background-color="pink lighten-3"
               color="pink"
@@ -31,6 +35,8 @@
             ></v-rating>
             <label>인프라</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.infra"
               background-color="orange lighten-3"
               color="orange"
@@ -38,6 +44,8 @@
             ></v-rating>
             <label>안전</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.safety"
               background-color="green lighten-3"
               color="green"
@@ -46,6 +54,8 @@
             ></v-rating>
             <label>학군</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.school"
               background-color="green lighten-3"
               color="green"
@@ -53,13 +63,22 @@
             ></v-rating>
             <label>대중교통</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.trans"
               background-color="indigo lighten-3"
               color="indigo"
               readonly
             ></v-rating></div
         ></v-col>
-        <v-col>
+        <v-col cols="9">
+          <!-- <v-textarea
+            readonly
+            solo
+            name="input-7-4"
+            label="Solo textarea"
+            value="review.content"
+          ></v-textarea> -->
           <v-card-text>
             {{ review.content }}
           </v-card-text>
@@ -71,7 +90,7 @@
       </v-card-text>
     </v-card>
     <!-- 수정부분 -->
-    <v-card class="mx-auto my-12" max-width="1000" v-else>
+    <v-card class="mx-auto my-12" max-width="1000" v-else style="background-color : pink">
       <v-card-title>
         <v-row v-if="review">
           <p v-if="review.userid">{{ review.userid }} |</p>
@@ -83,46 +102,58 @@
         </v-row>
       </v-card-title>
       <v-row align="center">
-        <v-col>
+        <v-col cols="3">
           <div class="text-center">
             <label>환경</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.environment"
               background-color="purple lighten-3"
               color="purple"
             ></v-rating>
             <label>건강</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.health"
               background-color="pink lighten-3"
               color="pink"
             ></v-rating>
             <label>인프라</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.infra"
               background-color="orange lighten-3"
               color="orange"
             ></v-rating>
             <label>안전</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.safety"
               background-color="green lighten-3"
               color="green"
             ></v-rating>
             <label>학군</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.school"
               background-color="green lighten-3"
               color="green"
             ></v-rating>
             <label>대중교통</label>
             <v-rating
+              small
+              dense="true"
               v-model="newReview.trans"
               background-color="indigo lighten-3"
               color="indigo"
             ></v-rating></div
         ></v-col>
-        <v-col>
+        <v-col cols="9">
           <v-textarea
             outlined
             name="input-7-4"
@@ -136,7 +167,7 @@
         <button class="ml-3" @click="undoModify">취소</button>
       </v-card-text>
     </v-card>
-  </v-flex>
+  </div>
 </template>
 
 <script>
