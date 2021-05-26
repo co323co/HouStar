@@ -1,6 +1,6 @@
 <!-- 상세정보 페이지 -->
 <template>
-  <div class="pa-6">
+  <v-container class="pa-6">
     <!-- 첫번째 행 -->
     <v-row>
       <!-- 1열 -->
@@ -31,7 +31,7 @@
         <environment />
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 <script>
 import Infra from '@/components/dong/detail/Infra.vue';

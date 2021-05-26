@@ -4,14 +4,13 @@
     <v-card v-if="isReadOnly" style="background-color : pink" max-width="1000">
       <v-card-title>
         <v-row v-if="review">
-          <h1 v-if="review.userid" class="ml-3">{{ review.userid }} |</h1>
-          <h1 v-if="review.age_range">{{ review.age_range }}대 |</h1>
-          <h1 v-if="review.family_type">{{ review.family_type }} |</h1>
-          <h1 v-if="review.tag">
+          <h2 v-if="review.userid" class="ml-3">{{ review.userid }} |</h2>
+          <h2 v-if="review.age_range">{{ review.age_range }}대 |</h2>
+          <h2 v-if="review.family_type">{{ review.family_type }} |</h2>
+          <h2 v-if="review.tag">
             {{ review.tag | list }}
-          </h1>
+          </h2>
         </v-row>
-        <v-divider></v-divider>
       </v-card-title>
       <v-row align="center">
         <v-col cols="3">
