@@ -44,7 +44,7 @@
     </div>
 
     <v-flex class="pt-4 mb-2 text-right">
-      <div v-if="userid == currentUser.userid">
+      <div v-if="userid == currentUser.userid || currentUser.userid == `admin`">
         <v-btn @click="checkValue">수정</v-btn>
         <v-btn @click="moveList" class="ml-2">목록</v-btn>
       </div>
