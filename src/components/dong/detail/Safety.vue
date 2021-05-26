@@ -98,6 +98,24 @@ export default {
                   beginAtZero: true,
                   max: 5,
                   min: 0,
+                  stepSize: 1,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  zeroLineColor: 'black',
+                  zeroLineWidth: 2,
+                },
+                ticks: {
+                  min: 0,
+                  max: 6500,
+                  stepSize: 1,
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Density in kg/m3',
                 },
               },
             ],
