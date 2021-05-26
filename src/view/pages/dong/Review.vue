@@ -197,6 +197,16 @@ export default {
     if (this.reviewsbyuserid.length != 0) this.isWrite = true;
     this.show_list = [...this.reviews];
   },
+  // mounted() {
+  //   // 해당 동에 대한 평균별점정보 가져오기
+  //   this.$store.dispatch('getRating', this.$store.state.dongStore.Sidogugundong.dongCode);
+  //   // 해당 동에 대한 모든 리뷰 다 가져오기.
+  //   this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
+  //   // 해당 동에 대한 로그인한 유저의 모든 리뷰 가져오기
+  //   this.$store.dispatch('getReviewsByUserId', this.currentUser.userid);
+  //   if (this.reviewsbyuserid.length != 0) this.isWrite = true;
+  //   this.show_list = [...this.reviews];
+  // },
 };
 </script>
 <style scoped>

@@ -145,12 +145,11 @@ import { mapActions, mapGetters } from 'vuex';
 import http from '@/core/services/http-common';
 export default {
   computed: {
+    ...mapGetters(['totalReviewCount', 'reviews', 'reviewsbyuserid', 'AvgRating', 'rating']),
     ...mapGetters(['currentUser']),
   },
   beforeMount() {
     this.convertTagToList();
-    //  console.log('mounted rrrrrr');
-    //  console.log(this.review.tag);
   },
   data() {
     return {
@@ -160,8 +159,8 @@ export default {
     };
   },
   created() {
-    console.log('this.review');
-    console.log(this.review);
+    // console.log('this.review');
+    // console.log(this.review);
     this.newReview = {
       content: this.review.content,
       dongcode: this.review.dongcode,
@@ -173,7 +172,7 @@ export default {
       trans: this.review.trans * 1,
       userid: this.review.userid,
     };
-    console.log(this.newReview);
+    //  console.log(this.newReview);
   },
   props: ['review'],
   methods: {
@@ -185,9 +184,6 @@ export default {
       this.isReadOnly = false;
     },
     modifyReview() {
-      //axios로 수정 + readonly로 바꾸기
-      // console.log('수정버튼누름');
-      // console.log(this.review.userid);
       http
         .put('/dongreview', {
           content: this.newReview.content,
@@ -208,12 +204,9 @@ export default {
           alert(msg);
 
           // store에 있는거 갱신해주기
-          this.$store.dispatch(
-            'review/getReviews',
-            this.$store.state.dongStore.Sidogugundong.dongCode
-          );
+          this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
           // user가 새글을 입력했는지 갱신해주기
-          this.$store.dispatch('review/getReviewsByUserId', this.currentUser.userid);
+          this.$store.dispatch('getReviewsByUserId', this.currentUser.userid);
           //다시 읽기전용으로 바꿔주기
           this.isReadOnly = true;
         });
@@ -228,12 +221,9 @@ export default {
         alert(msg);
 
         // store에 있는거 갱신해주기
-        this.$store.dispatch(
-          'review/getReviews',
-          this.$store.state.dongStore.Sidogugundong.dongCode
-        );
+        this.$store.dispatch('getReviews', this.$store.state.dongStore.Sidogugundong.dongCode);
         // user가 새글을 입력했는지 갱신해주기
-        this.$store.dispatch('review/getReviewsByUserId', this.currentUser.userid);
+        this.$store.dispatch('getReviewsByUserId', this.currentUser.userid);
         //다시 읽기전용으로 바꿔주기
         this.isReadOnly = true;
       });
