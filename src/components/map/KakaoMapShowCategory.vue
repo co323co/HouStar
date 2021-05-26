@@ -4,10 +4,26 @@
   <!-- 지도를 담을 영역 -->
   <div class="map_wrap">
     <div class="text-right" style="height: 22px">
-      <span v-if="isZero"> </span>
-      <v-alert border="right" dark color="orange" style="font-size: 13px; padding: 2px 20px"
-        >😥해당 구역에 검색 결과가 없습니다
-      </v-alert>
+      <v-expand-transition>
+        <v-alert
+          v-show="isZero"
+          border="right"
+          dark
+          color="orange"
+          style="font-size: 13px; padding: 2px 20px"
+          >😥 해당 구역에 검색 결과가 없습니다
+        </v-alert>
+      </v-expand-transition>
+      <v-expand-transition>
+        <v-alert
+          v-show="!isZero"
+          border="right"
+          dark
+          color="green"
+          style="font-size: 13px; padding: 2px 20px"
+          >😁 검색 성공
+        </v-alert>
+      </v-expand-transition>
     </div>
     <div id="map" style="height: 385px; position: relative; overflow: hidden"></div>
     <ul id="category">
@@ -77,7 +93,7 @@ export default {
         //지도의 중심좌표. 위도, 경도
         center: new kakao.maps.LatLng(this.init_pos.lat, this.init_pos.lng),
         //지도의 레벨(확대, 축소 정도)
-        level: 3,
+        level: 4,
       };
       // console.log(this.marker_list);
       //지도 생성 및 객체 리턴

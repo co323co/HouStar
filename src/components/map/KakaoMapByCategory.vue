@@ -9,7 +9,7 @@
     </div>
     <!-- {{ subway_list }} -->
     <!-- 지도를 담을 영역 -->
-    <div id="map" style="height: 330px; width: 300px"></div>
+    <div id="map_c" style="height: 330px; width: 300px"></div>
   </div>
 </template>
 
@@ -29,8 +29,12 @@ export default {
     };
   },
   mounted() {
+    console.log('kakaomapByCategory 마운트');
+
     let initMap = this.initMap;
     window.kakao.maps.load(function () {
+      console.log('kakaomapByCategory onload');
+
       // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
       initMap();
     });
@@ -38,7 +42,7 @@ export default {
   methods: {
     initMap() {
       // console.log('this.init_pos', this.init_pos);
-      var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+      var mapContainer = document.getElementById('map_c'), // 지도를 표시할 div
         mapOption = {
           // center: new kakao.maps.LatLng(37.564343, 126.947613), // 지도의 중심좌표
           center: new kakao.maps.LatLng(this.init_pos.lat, this.init_pos.lng),

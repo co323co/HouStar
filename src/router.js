@@ -21,16 +21,16 @@ export default new Router({
           component: () => import('@/view/pages/dong/Info.vue'),
           // redirect 해줘야 상위 라우터에 액세스 할때 기본 하위 경로가 로드된다.
           redirect: {
-            name: 'detail',
+            name: 'review',
           },
           children: [
             {
-              path: '',
+              path: '/detail',
               name: 'detail',
               component: () => import('@/view/pages/dong/Detail.vue'),
             },
             {
-              path: '/review',
+              path: '/',
               name: 'review',
               component: () => import('@/view/pages/dong/Review.vue'),
             },

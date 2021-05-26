@@ -19,9 +19,9 @@
     <v-flex>
       <v-row class="info_nav pa-3" style="justify-content: center">
         <v-divider vertical></v-divider>
-        <router-link :to="{ name: 'detail' }">상세정보</router-link>
-        <v-divider vertical></v-divider>
         <router-link :to="{ name: 'review' }">리뷰</router-link>
+        <v-divider vertical></v-divider>
+        <router-link :to="{ name: 'detail' }">상세정보</router-link>
         <v-divider vertical></v-divider>
       </v-row>
       <v-divider></v-divider>

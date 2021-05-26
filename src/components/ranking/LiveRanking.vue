@@ -2,7 +2,7 @@
   <div>
     <v-card class="rank ma-auto">
       <!-- <v-card class="mx-auto" max-width="400"> -->
-      <v-img class="white--text align-end" height="200px" src="media/banner/old/house3.jpg">
+      <v-img class="white--text align-end" height="225px" src="media/banner/old/house3.jpg">
         <!-- src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" -->
         <v-card-title>Top 5 실시간 </v-card-title>
       </v-img>

@@ -2,7 +2,7 @@
 
 <template>
   <!-- 지도를 담을 영역 -->
-  <div id="map" style="height: 400px"></div>
+  <div id="map_d" style="height: 400px"></div>
 </template>
 
 <script>
@@ -28,24 +28,27 @@ export default {
     // }
     let initMap = this.initMap;
     window.kakao.maps.load(function () {
+      console.log('kakaomap 로드완료');
       // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
       initMap();
     });
   },
   methods: {
     initMap() {
+      console.log('kakaomap init');
       //지도를 담을 영역의 DOM 레퍼런스
-      const container = document.querySelector('#map');
+      const container = document.querySelector('#map_d');
       ///지도를 생성할 때 필요한 기본 옵션
       const options = {
         //지도의 중심좌표. 위도, 경도
         center: new kakao.maps.LatLng(this.init_pos.lat, this.init_pos.lng),
         //지도의 레벨(확대, 축소 정도)
-        level: 3,
+        level: 4,
       };
       // console.log(this.marker_list);
       //지도 생성 및 객체 리턴
       const map = new kakao.maps.Map(container, options);
+      console.log('kakaomap 지도생성');
 
       let imageSrc = 'media/svg/icons/Map/Marker.png';
       this.marker_list.forEach((marker) => {

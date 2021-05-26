@@ -49,6 +49,7 @@ export default {
   created() {
     // console.log(this.currentDongInfo);
     // map props 설정
+    console.log('trans created');
     http.get('/address/pos/dong/' + this.currentDongInfo.dongCode).then((response) => {
       let pos = response.data;
       // console.log('pos', pos);
