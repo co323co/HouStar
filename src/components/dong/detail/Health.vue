@@ -4,9 +4,8 @@
       <v-card-title>
         <h2 style="font-weight: bold">건강 관련 정보</h2>
       </v-card-title>
+      <v-divider></v-divider>
       <v-card-subtitle class="ml-1" style="font-size: 1.2em">
-        {{ currentDongInfo.sidoName }}
-        {{ currentDongInfo.gugunName }}
         {{ currentDongInfo.dongName }}
         건강 관련 정보
       </v-card-subtitle>
@@ -113,10 +112,11 @@ export default {
   text-align: center;
   font-size: 1.3em;
   font-weight: bold;
+  margin-left: 25px;
 }
 .zeroData {
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.7em;
   color: #974e90;
 }
 </style>

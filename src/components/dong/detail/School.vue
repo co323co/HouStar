@@ -4,9 +4,8 @@
       <v-card-title>
         <h2 style="font-weight: bold">학군 정보</h2>
       </v-card-title>
+      <v-divider></v-divider>
       <v-card-subtitle class="ml-1" style="font-size: 1.2em">
-        {{ currentDongInfo.sidoName }}
-        {{ currentDongInfo.gugunName }}
         {{ currentDongInfo.dongName }}
         학군 정보
       </v-card-subtitle>
@@ -22,7 +21,7 @@
         <div v-if="show">
           <v-divider></v-divider>
           <v-autocomplete
-            no-data-text="항목이 없습니다"
+            no-data-text="학교 종류를 선택해주세요"
             v-model="schoolType"
             :items="schoolTypes"
             label="학교 종류 선택"
@@ -31,26 +30,28 @@
             @change="getSchool()"
           ></v-autocomplete>
           <!-- 스크롤바 시작 -->
-          <div style="overflow:scroll; width:300px; height:150px; text-align=left">
-            <div v-if="sshow">
-              <div v-for="(s, index) in showschoollist" :key="index">
-                <div class="">
-                  <div>
-                    {{ s.schoolName }}
+          <div align="center" class="scroll">
+            <div style="overflow:scroll; width:350px; height:150px; text-align=left">
+              <div v-if="sshow">
+                <div v-for="(s, index) in showschoollist" :key="index">
+                  <div class="">
+                    <div>
+                      {{ s.schoolName }}
+                    </div>
+                    <div>
+                      {{ s.adres }}
+                    </div>
+                    <div>
+                      <a href="#" @click.prevent="onClickRedirect(s.link)">{{ s.link }} </a>
+                    </div>
+                    <hr />
                   </div>
-                  <div>
-                    {{ s.adres }}
-                  </div>
-                  <div>
-                    <a href="#" @click.prevent="onClickRedirect(s.link)">{{ s.link }} </a>
-                  </div>
-                  <hr />
                 </div>
               </div>
-            </div>
-            <div class="pa-3 zeroData" align="center">
-              <div v-if="showschoollist.length == 0">
-                😥 해당 동에 학교가 없습니다!
+              <div class="pa-3 zeroData" align="center">
+                <div v-if="showschoollist.length == 0">
+                  😥 해당 동에 데이터가 없습니다!
+                </div>
               </div>
             </div>
           </div>
@@ -213,5 +214,8 @@ export default {
   font-size: 1.2em;
   font-weight: bold;
   color: #974e90;
+}
+.scroll {
+  width: 100%;
 }
 </style>
