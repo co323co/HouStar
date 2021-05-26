@@ -4,19 +4,21 @@
     <v-card v-if="isReadOnly" style="background-color : pink" max-width="1000">
       <v-card-title>
         <v-row v-if="review">
-          <p v-if="review.userid">{{ review.userid }} |</p>
-          <p v-if="review.age_range">{{ review.age_range }}대 |</p>
-          <p v-if="review.family_type">{{ review.family_type }} |</p>
-          <p v-if="review.tag">
+          <h1 v-if="review.userid" class="ml-3">{{ review.userid }} |</h1>
+          <h1 v-if="review.age_range">{{ review.age_range }}대 |</h1>
+          <h1 v-if="review.family_type">{{ review.family_type }} |</h1>
+          <h1 v-if="review.tag">
             {{ review.tag | list }}
-          </p>
+          </h1>
         </v-row>
+        <v-divider></v-divider>
       </v-card-title>
       <v-row align="center">
         <v-col cols="3">
-          <div class="text-center">
+          <div class="">
             <label>환경</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.environment"
@@ -24,8 +26,10 @@
               color="purple"
               readonly
             ></v-rating>
+            <br />
             <label>건강</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.health"
@@ -33,8 +37,10 @@
               color="pink"
               readonly
             ></v-rating>
+            <br />
             <label>인프라</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.infra"
@@ -42,8 +48,10 @@
               color="orange"
               readonly
             ></v-rating>
+            <br />
             <label>안전</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.safety"
@@ -52,8 +60,10 @@
               rea
               readonly
             ></v-rating>
+            <br />
             <label>학군</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.school"
@@ -61,8 +71,10 @@
               color="green"
               readonly
             ></v-rating>
+            <br />
             <label>대중교통</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.trans"
@@ -85,8 +97,18 @@
         </v-col>
       </v-row>
       <v-card-text align="rignt" v-if="currentUser.userid == review.userid">
-        <button @click="activeModify">수정</button>
-        <button class="ml-3" @click="deleteReview">제거</button>
+        <v-btn tile color="success" @click="activeModify">
+          <v-icon left>
+            mdi-pencil
+          </v-icon>
+          수정
+        </v-btn>
+        <v-btn tile color="error" class="ml-3" @click="deleteReview">
+          <v-icon left>
+            mdi-pencil
+          </v-icon>
+          제거
+        </v-btn>
       </v-card-text>
     </v-card>
     <!-- 수정부분 -->
@@ -106,6 +128,7 @@
           <div class="text-center">
             <label>환경</label>
             <v-rating
+              class="star"
               small
               dense="true"
               v-model="newReview.environment"
@@ -296,5 +319,8 @@ export default {
 <style scoped>
 .completed {
   text-decoration: line-through;
+}
+.star {
+  display: inline;
 }
 </style>
