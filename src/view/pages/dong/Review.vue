@@ -43,17 +43,22 @@
     </v-card>
     <!-- <v-divider></v-divider> -->
     <!-- 리뷰 등록 -->
-
-    <review-register />
-    <v-divider></v-divider>
-
+    <v-card class="mt-10 rounded-card">
+      <review-register />
+      <v-divider></v-divider>
+    </v-card>
     <!-- 리뷰 셀렉트박스로 필터링하기 -->
-
-    <v-row class=" justify-sm-center mt-5">
+    <div align="center" class="mt-10">
+      <p class="display-1 mr-1 ">
+        <b>모아보기 ( 총 {{ show_list.length }} 명 )</b>
+      </p>
+    </div>
+    <v-row class=" justify-sm-center mt-2">
       <v-col class="mx-2">
         <v-select
+          hide-details="true"
           hint="선호 태그"
-          label="ALL"
+          label="선호 태그"
           v-model="tag_val"
           :items="tags"
           no-data-text="항목이 없습니다"
@@ -63,8 +68,9 @@
       </v-col>
       <v-col class="mx-2">
         <v-select
+          hide-details="true"
           hint="가구 타입"
-          label="ALL"
+          label="가구 타입"
           v-model="familyType_val"
           :items="familyTypes"
           no-data-text="항목이 없습니다"
@@ -74,8 +80,9 @@
       </v-col>
       <v-col class="mx-2">
         <v-select
+          hide-details="true"
           hint="연령대"
-          label="ALL"
+          label="연령대"
           v-model="ageRange_val"
           :items="ageRanges"
           no-data-text="항목이 없습니다"
@@ -88,14 +95,14 @@
     <!-- 리뷰 리스트 뿌리기 !!!!!!-->
 
     <v-row v-if="isWrite">
-      <v-container class="reviewback">
-        <h1 align="center" class="mt-10">리뷰 목록 ✍ 총 {{ show_list.length }} 명</h1>
+      <v-container class="reviewback rounded-card">
+        <!-- <h1 align="center" class="">리뷰 목록 ✍</h1> -->
 
         <review-list-item v-for="(review, idx) in show_list" :key="idx" :review="review" />
       </v-container>
     </v-row>
     <v-flex v-else>
-      <v-container class="reviewback">
+      <v-container class="reviewback rounded-card">
         리뷰를 작성하지 않으면 글을 볼 수 없습니다.
       </v-container>
     </v-flex>
