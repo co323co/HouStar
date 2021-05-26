@@ -3,13 +3,20 @@
   <div align="center" class="mt-5">
     <v-card v-if="isReadOnly" max-width="1000">
       <v-card-title>
-        <v-row v-if="review" class="mt-1">
-          <h2 v-if="review.userid" class="ml-3">{{ review.userid }} |</h2>
-          <h2 v-if="review.age_range">{{ review.age_range }}대 |</h2>
-          <h2 v-if="review.family_type">{{ review.family_type }} |</h2>
-          <h2 v-if="review.tag">
-            {{ review.tag | list }}
-          </h2>
+        <v-row v-if="review" class="mt-1" align="center">
+          <span v-if="review.userid" class="display-1 pa-0 mr-1 ml-3">
+            {{ review.userid }}
+          </span>
+
+          <span v-if="review.age_range" class="subtitle-1 ml-2"
+            ><b> {{ review.age_range }} 대 |</b>
+          </span>
+          <span v-if="review.family_type" class="subtitle-1"
+            ><b> {{ review.family_type }} </b> |
+          </span>
+          <span v-if="review.tag" class="subtitle-1 "
+            ><b> {{ review.tag | list }} </b>
+          </span>
         </v-row>
       </v-card-title>
 
@@ -93,7 +100,9 @@
             value="review.content"
           ></v-textarea> -->
           <v-card-text>
-            {{ review.content }}
+            <span class="subtitle-1"
+              ><b> {{ review.content }}</b>
+            </span>
           </v-card-text>
         </v-col>
       </v-row>

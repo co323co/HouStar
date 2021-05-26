@@ -1,62 +1,64 @@
 <template lang="">
   <v-container>
-    <v-card>
-      <!-- <v-toolbar class="" flat> -->
-      <v-card-title>
-        <h3>전체 리뷰 통계( {{ totalReviewCount }}명 )</h3>
-      </v-card-title>
-      <!-- </v-toolbar> -->
+    <v-card class="rounded-card">
+      <div class="ml-9 pl-20 pt-3">
+        <v-card-title>
+          <h3>전체 리뷰 통계( {{ totalReviewCount }}명 )</h3>
+        </v-card-title>
 
-      <!-- <v-divider></v-divider> -->
-      <!-- Total 별점 평균 뿌리기 -->
-
-      <v-card-subtitle>
-        <v-row align="center" class="ml-1"
-          ><span class="display-1 pa-0">
-            {{ this.AvgRating.toFixed(1) }}
-          </span>
-          <star-rating
-            :inline="true"
-            v-if="AvgRating"
-            :increment="0.01"
-            :fixed-points="2"
-            :rating="AvgRating"
-            read-only
-            :show-rating="false"
-          ></star-rating
-        ></v-row>
-      </v-card-subtitle>
-      <v-divider></v-divider>
+        <v-card-subtitle>
+          <v-row align="center" class="ml-1"
+            ><span class="display-1 pa-0 mr-1"
+              ><b> {{ this.AvgRating.toFixed(1) }}</b>
+            </span>
+            <star-rating
+              :star-size="20"
+              :inline="true"
+              v-if="AvgRating"
+              :increment="0.01"
+              :fixed-points="2"
+              :rating="AvgRating"
+              read-only
+              :show-rating="false"
+            ></star-rating
+          ></v-row>
+        </v-card-subtitle>
+      </div>
       <!-- 개별 차트 평균 뿌리기 -->
       <div align="center">
-        <v-row>
+        <v-row class="pa-3">
           <v-col cols="6">
             <HorizontalBar
               v-if="rating"
-              :chart-data="datacollection1"
+              :chart-data="chartDataForBarChart"
               :class="size"
-              :options="options1"
-            ></HorizontalBar>
-          </v-col>
+              :options="optionsForBarChart"
+            ></HorizontalBar> </v-col
+          ><v-divider vertical></v-divider>
           <v-col cols="6">
-            <RadarChart v-if="rating" :chart-data="datacollection2" :class="size">
+            <RadarChart v-if="rating" :chart-data="chartDataForRadarChart" :class="size">
             </RadarChart> </v-col
         ></v-row>
       </div>
     </v-card>
     <!-- <v-divider></v-divider> -->
     <!-- 리뷰 등록 -->
-
-    <review-register />
-    <v-divider></v-divider>
-
+    <v-card class="mt-10 rounded-card">
+      <review-register />
+      <v-divider></v-divider>
+    </v-card>
     <!-- 리뷰 셀렉트박스로 필터링하기 -->
-
-    <v-row class=" justify-sm-center mt-5">
+    <div align="center" class="mt-10">
+      <p class="display-1 mr-1 ">
+        <b>모아보기 ( 총 {{ show_list.length }} 명 )</b>
+      </p>
+    </div>
+    <v-row class=" justify-sm-center mt-2">
       <v-col class="mx-2">
         <v-select
+          hide-details="true"
           hint="선호 태그"
-          label="ALL"
+          label="선호 태그"
           v-model="tag_val"
           :items="tags"
           no-data-text="항목이 없습니다"
@@ -66,8 +68,9 @@
       </v-col>
       <v-col class="mx-2">
         <v-select
+          hide-details="true"
           hint="가구 타입"
-          label="ALL"
+          label="가구 타입"
           v-model="familyType_val"
           :items="familyTypes"
           no-data-text="항목이 없습니다"
@@ -77,8 +80,9 @@
       </v-col>
       <v-col class="mx-2">
         <v-select
+          hide-details="true"
           hint="연령대"
-          label="ALL"
+          label="연령대"
           v-model="ageRange_val"
           :items="ageRanges"
           no-data-text="항목이 없습니다"
@@ -91,14 +95,14 @@
     <!-- 리뷰 리스트 뿌리기 !!!!!!-->
 
     <v-row v-if="isWrite">
-      <v-container class="reviewback">
-        <h1 align="center" class="mt-10">리뷰 목록 ✍ 총 {{ show_list.length }} 명</h1>
+      <v-container class="reviewback rounded-card">
+        <!-- <h1 align="center" class="">리뷰 목록 ✍</h1> -->
 
         <review-list-item v-for="(review, idx) in show_list" :key="idx" :review="review" />
       </v-container>
     </v-row>
     <v-flex v-else>
-      <v-container class="reviewback">
+      <v-container class="reviewback rounded-card">
         리뷰를 작성하지 않으면 글을 볼 수 없습니다.
       </v-container>
     </v-flex>
@@ -189,12 +193,13 @@ export default {
       totalRating: 0,
       size: 'firstClass',
 
-      datacollection1: {
+      chartDataForBarChart: {
         labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '대중교통🚦'],
         datasets: [
           {
             label: '카테고리별 통계',
-            backgroundColor: '#B2EBF2',
+            backgroundColor: '#66BB6A',
+            barThickness: 7,
             data: [
               this.$store.state.rate.rating.environment,
               this.$store.state.rate.rating.health,
@@ -207,17 +212,17 @@ export default {
         ],
       },
       // radar chart에 넣을 데이터
-      datacollection2: {
-        labels: ['환경🌎', '건강💊', '인프라🍙', '안전🚔', '학군🎒', '대중교통🚦'],
+      chartDataForRadarChart: {
+        labels: ['환경', '건강', '인프라', '안전', '학군', '대중교통'],
         datasets: [
           {
             label: '카테고리별 통계',
-            backgroundColor: 'rgba(179,181,198,0.2)',
-            borderColor: 'rgba(179,181,198,1)',
-            pointBackgroundColor: 'rgba(179,181,198,1)',
+            backgroundColor: 'rgba(27, 197, 189, 0.2)',
+            borderColor: '#1bc5bd',
+            // pointBackgroundColor: 'rgba(179,181,198,1)',
             pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(179,181,198,1)',
+            // pointHoverBackgroundColor: '#fff',
+            // pointHoverBorderColor: 'rgba(179,181,198,1)',
 
             data: [
               this.$store.state.rate.rating.environment,
@@ -230,7 +235,15 @@ export default {
           },
         ],
       },
-      options1: {
+      optionsForBarChart: {
+        legend: {
+          display: false,
+        },
+        elements: {
+          bar: {
+            borderWidth: 1,
+          },
+        },
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -270,8 +283,8 @@ export default {
 <style scoped>
 .firstClass {
   display: block;
-  height: 250px;
-  width: 250px;
+  height: 200px;
+  width: 400px;
   margin-bottom: 10px;
   margin-top: 10px;
 }
@@ -279,7 +292,7 @@ export default {
   min-height: 0;
   color: orange;
 }
-.size {
-  /* display: inline-block; */
+.rounded-card {
+  border-radius: 50px;
 }
 </style>

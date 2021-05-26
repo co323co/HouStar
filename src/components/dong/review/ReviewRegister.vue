@@ -77,19 +77,22 @@
     <v-col cols="10">
       <v-card-text>
         <h3>후기를 남겨주세요 ✍</h3>
+
+        <!-- 여기시작 -->
         <v-textarea
-          height="150px"
-          solo
+          filled
           name="input-7-4"
           label="입력"
           v-model="content"
           hide-details
         ></v-textarea>
+        <!-- 여기끝 -->
+
         <div align="right">
           <v-btn
             :loading="loading3"
             :disabled="loading3"
-            color="amber darken-1"
+            color="teal lighten-2"
             class="white--text mt-2"
             @click="register"
           >
