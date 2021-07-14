@@ -76,15 +76,42 @@
 
 ## 🎞 페이지 소개 
 
-#### - 메인페이지 <br/>
+
+#### - 메인페이지, 사용자 추천 동네 랭킹, 총 랭킹, 랭킹1위 주변 상권 정보 표시 <br/>
 ![image](https://user-images.githubusercontent.com/86418158/125574224-2047eae4-460e-418f-8be5-b239e5ecba9a.png)
-#### - 메인페이지 <br/>
-#### - 메인페이지 <br/>
-#### - 메인페이지 <br/>
-#### - 메인페이지 <br/>
-#### - 메인페이지 <br/>
-#### - 메인페이지 <br/>
-#### - 메인페이지 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125576643-af94e843-0710-42b5-89f5-79696f24ab28.png)
+
+#### - 업종별 가게 위치 검색 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125575492-3d97bbe2-6726-4d75-8160-390519ffd2ff.png)
+
+#### - 회원가입 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125574473-ad66afb7-5723-4f75-a6e5-1b74c6511079.png)
+#### - 비밀번호 찾기 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125574655-6dbd44be-aba4-45ef-af73-8abf28441ce8.png)
+
+#### - 동네 리뷰 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125575029-b7e335b2-8a30-4cf0-95b8-c4b91ff91bd4.png)
+![image](https://user-images.githubusercontent.com/86418158/125575151-6953ba18-b420-4dbd-86ee-b8594afbbccc.png)
+
+#### - 리뷰 필터링 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125575385-dbe695ab-8a39-4967-81aa-07ddb4ede769.png)
+
+#### - 상세정보 페이지 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125575690-cd468a85-a140-4a3d-a7c3-1fb54c96ba37.png)
+
+#### - 더보기 눌러 동네의 정보 확인 가능 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125575788-a496d5a3-8c3d-46b1-9932-58ca2bb678dd.png)
+![image](https://user-images.githubusercontent.com/86418158/125575834-af6df40c-675c-49eb-b189-34f4f1dcb659.png)
+
+#### - 게시판 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125576769-b97666c0-72ea-4de3-9d4d-129fd920e013.png)
+#### - 글보기,수정,삭제 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125576842-7796cb65-b027-4187-93d2-eb0dfd7b0795.png)
+![image](https://user-images.githubusercontent.com/86418158/125576869-e3420568-3aaf-4652-9d79-ccc2c8d6431d.png)
+
+#### - 게시판 생성 <br/>
+![image](https://user-images.githubusercontent.com/86418158/125576289-91658a0a-bd4f-4fbd-adc1-71db5226dccb.png)
+
 
 * ## 👩🏻‍💻👩🏻‍💻 개발자
 > 김민정 [https://github.com/co323co] <br/>
