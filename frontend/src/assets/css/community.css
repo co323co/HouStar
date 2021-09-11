@@ -1,0 +1,15 @@
+.cardtitle {
+  font-size: 1.2em !important;
+  font-weight: bold !important;
+}
+.com th {
+  font-size: 1em !important;
+  color: rgb(238, 160, 58) !important;
+}
+.com td {
+  font-size: 1.1em !important;
+}
+.reviewback {
+  background-color: gainsboro !important;
+  padding-bottom: 80px !important;
+}

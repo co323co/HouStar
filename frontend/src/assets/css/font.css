@@ -1,0 +1,8 @@
+@font-face {
+  font-family: BMHANNAPro;
+  src: url('/media/font/BMHANNAPro.ttf') format('truetype');
+}
+
+body {
+  font-family: BMHANNAPro !important;
+}

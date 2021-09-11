@@ -1,0 +1,14 @@
+.board table thead th {
+  font-size: 1em !important;
+  color: rgb(238, 160, 58) !important;
+}
+.board table tbody td {
+  font-size: 1.1em !important;
+}
+.board .v-data-footer {
+  font-size: 12px !important;
+}
+/* 페이지 쪽수 고르는 select box// */
+.v-select__selection--comma {
+  font-size: 13px !important;
+}

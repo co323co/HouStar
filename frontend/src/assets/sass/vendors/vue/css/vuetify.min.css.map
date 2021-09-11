@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,AAAC,CACF,OAAO,CAAE,gBAAgB,CACzB,aAAa,CAAE,cAAc,CAC7B,gBAAgB,CAAE,sBAAsB,CAC3C",
+    "sources": [
+        "../vuetify/vuetify.scss"
+    ],
+    "names": [],
+    "file": "vuetify.min.css"
+}
