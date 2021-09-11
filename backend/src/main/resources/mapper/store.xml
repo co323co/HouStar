@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.happyhouse.model.mapper.StoreMapper">
+	<!-- 
+	동코드로(법정동코드 ex 1111012900) 
+	법정동명 경도 위도 상권업종대분류명 도로명주소 상호명을 
+	martDto에 담아서 반환 
+	-->
+	<select id="getinfo" parameterType="string" resultType="storeDto">
+		select name, type, dongname, dongcode, address, lat, lng
+		from store_view
+		where dongcode = #{dongcode}
+	</select>
+	
+</mapper>	

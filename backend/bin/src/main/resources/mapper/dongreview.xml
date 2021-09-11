@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.ssafy.happyhouse.model.mapper.DongReviewMapper">
+
+	<select id="getDongReview" parameterType="string"
+		resultType="DongReviewDto">
+		select
+		dongcode,userid,infra,trans,safety,health,school,environment,content
+		from dong_review
+		where userid = #{userid};
+	</select>
+
+	<select id="getDongReviewList" parameterType="string"
+		resultType="DongReviewDto">
+		select
+		dongcode,userid,infra,trans,safety,health,school,environment,content
+		from dong_review
+		where dongcode = #{dongcode};
+	</select>
+
+	<insert id="insert" parameterType="DongReviewDto">
+		insert into dong_review
+		values
+		(#{dongcode},#{userid},#{infra},#{trans},#{safety},#{health},#{school},#{environment},#{content})
+	</insert>
+
+	<delete id="delete" parameterType="string">
+		delete from dong_review
+		where
+		userid = #{userid}
+	</delete>
+
+	<update id="update" parameterType="DongReviewDto">
+		update dong_review
+		set infra =
+		#{infra},trans = #{trans},safety = #{safety},health =#{health},
+		school
+		= #{school},environment = #{environment},
+		content = #{content}
+		where
+		userid = #{userid}
+	</update>
+
+	<select id="getInfraAvg" parameterType="string"
+		resultType="double">
+		select round(avg(infra),1)
+		from dong_review
+		where dongcode = #{dongcode};
+	</select>
+
+	<select id="getTransAvg" parameterType="string"
+		resultType="double">
+		select round(avg(trans),1)
+		from dong_review
+		where dongcode = #{dongcode};
+	</select>
+
+	<select id="getSaftyAvg" parameterType="string"
+		resultType="double">
+		select round(avg(safety),1)
+		from dong_review
+		where dongcode = #{dongcode};
+	</select>
+
+	<select id="getHealthAvg" parameterType="string"
+		resultType="double">
+		select round(avg(health),1)
+		from dong_review
+		where dongcode = #{dongcode};
+	</select>
+
+	<select id="getSchoolAvg" parameterType="string"
+		resultType="double">
+		select round(avg(school),1)
+		from dong_review
+		where dongcode = #{dongcode};
+	</select>
+
+	<select id="getEnvironmentAvg" parameterType="string"
+		resultType="double">
+		select round(avg(environment),1)
+		from dong_review
+		where dongcode = #{dongcode};
+	</select>
+
+</mapper>

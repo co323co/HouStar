@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.ssafy.happyhouse.model.mapper.DongReviewMapper">
+
+	<select id="getReviewAll" resultType="Map">
+		SELECT dongcode, userid, tag, concat(age_range) age_range, family_type, concat(infra) infra, concat(trans) trans, concat(safety) safety, concat(health) health, concat(school) school, concat(environment) environment, content
+		FROM dong_review
+		JOIN members USING(userid);
+	</select>
+	
+	<select id="getReviewByDong" parameterType="String" resultType="Map">
+		SELECT dongcode, userid, tag, concat(age_range) age_range, family_type, concat(infra) infra, concat(trans) trans, concat(safety) safety, concat(health) health, concat(school) school, concat(environment) environment, content
+		FROM dong_review
+		JOIN members USING(userid)
+		WHERE dongcode = #{dongcode};
+	</select>
+	
+	<select id="getReviewByUser" parameterType="string" resultType="DongReviewDto">
+		select
+			dongcode,userid,infra,trans,safety,health,school,environment,content
+		from dong_review
+		where userid = #{userid};
+	</select>
+	
+	<select id="getRatingAll" resultType="Map">
+		SELECT	R1.dongcode,
+				CONCAT((R1.infra + R1.trans + R1.safety + R1.health + R1.school + R1.environment)/6) as total, 
+				CONCAT(R1.infra) infra, CONCAT(R1.trans) trans, CONCAT(R1.safety) safety, CONCAT(R1.health) health, CONCAT(R1.school) school, CONCAT(R1.environment) environment
+		FROM	dong_rating R1
+		JOIN	dong_rating R2 USING(dongcode)
+	</select>
+	<!--일치하는 조건의 사용자가 쓴 리뷰로만 통계를 내서 각 동별 별점 정보를 반환한다. map에 있는 칼럼 조건으로 검사  ex) { age_range:20 } -->
+	<select id="getRatingByType" parameterType="Map" resultType="Map">
+		SELECT	dongcode, 
+				CONCAT((R1.infra + R1.trans + R1.safety + R1.health + R1.school + R1.environment)/6) as total, 
+				CONCAT(R1.infra) infra, CONCAT(R1.trans) trans, CONCAT(R1.safety) safety, CONCAT(R1.health) health, CONCAT(R1.school) school, CONCAT(R1.environment) environment
+						FROM (	
+								SELECT dongcode, AVG(infra) infra, AVG(trans) trans, AVG(safety) safety, AVG(health) health, AVG(school) school, AVG(environment) environment 
+								FROM dong_review R
+								JOIN members M USING(userid)
+								WHERE true
+								<if test='age_range!=null'>
+	                                AND	M.age_range=#{age_range}
+								</if>
+								<if test='family_type!=null'>
+	                                AND M.family_type=#{family_type}
+								</if>
+								GROUP BY dongcode ) R1 
+		JOIN  	
+		(	
+			SELECT dongcode, AVG(infra) infra, AVG(trans) trans, AVG(safety) safety, AVG(health) health, AVG(school) school, AVG(environment) environment 
+			FROM dong_review R
+			JOIN members M USING(userid)
+			WHERE true
+			<if test='age_range != null'>
+                            AND	M.age_range=#{age_range}
+			</if>
+			<if test='family_type != null'>
+                            AND M.family_type=#{family_type}
+			</if>
+			GROUP BY dongcode	) R2 USING(dongcode)
+	</select>
+	
+	<select id="getRatingByDong" parameterType="String" resultType="Map">
+		SELECT	R1.dongcode,
+				CONCAT((R1.infra + R1.trans + R1.safety + R1.health + R1.school + R1.environment)/6) as total, 
+				CONCAT(R1.infra) infra, CONCAT(R1.trans) trans, CONCAT(R1.safety) safety, CONCAT(R1.health) health, CONCAT(R1.school) school, CONCAT(R1.environment) environment
+		FROM	dong_rating R1
+		JOIN	dong_rating R2 USING(dongcode)
+		WHERE 	R1.dongcode = #{dongcode};
+	</select>
+
+	<insert id="insert" parameterType="DongReviewDto">
+		insert into dong_review
+		values
+		(#{dongcode},#{userid},#{infra},#{trans},#{safety},#{health},#{school},#{environment},#{content})
+	</insert>
+
+	<delete id="delete" parameterType="string">
+		delete from dong_review
+		where
+		userid = #{userid}
+	</delete>
+
+	<update id="update" parameterType="DongReviewDto">
+		update dong_review
+		set infra =
+		#{infra},trans = #{trans},safety = #{safety},health =#{health},
+		school
+		= #{school},environment = #{environment},
+		content = #{content}
+		where
+		userid = #{userid}
+	</update>
+
+
+</mapper>

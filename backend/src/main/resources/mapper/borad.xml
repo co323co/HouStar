@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.BoardMapper">
+	
+	<select id="listByBid" parameterType="map" resultType="BoardDto">
+			select id, title, content, userid, regtime, views, gubun
+			from board 
+			where gubun = #{gubun}
+			<if test="word != null and word != ''">
+					and title like concat('%', #{word}, '%')
+			</if>
+			order by id desc
+	</select>
+	
+	
+	<select id="select" parameterType="int" resultType="BoardDto">
+		select id, title, content, userid, regtime, views, gubun
+		from board
+		where id = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="BoardDto">
+		insert into board (title, content, userid, regtime, views, gubun)
+		values (#{title}, #{content}, #{userid}, now(), #{views}, #{gubun})
+	</insert>
+	<update id="update" parameterType="BoardDto">
+		update board
+		set title = #{title}, content = #{content}, views = #{views}, gubun = #{gubun} 
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from board
+		where id = #{id}
+	</delete>
+	
+	
+	<select id="findNameByGubun" parameterType="int" resultType="String">
+		select name
+		from board_name
+		where gubun = #{gubun}
+	</select>
+	
+	<!-- 인기 게시글 -->
+	<select id="getBoardsByView" resultType="BoardDto">
+		select id, title, content, userid, regtime, views, gubun
+		from board
+		order by views desc limit 5;
+	</select>
+	
+	<!-- board_name table  -->
+	<select id="getCommunityRanking" resultType="Map">
+		select gubun, name, count(*) count 
+		from board 
+		right join board_name using(gubun)
+		group by gubun 
+		order by count desc limit 5;	
+	</select>
+	
+	<select id="selectAllCommunity" resultType="Map">
+		select gubun, name, ifnull(count,0) count from board_name
+		left join	(
+						select gubun, count(*) count 
+						from board 
+						group by gubun) cb using(gubun)
+	</select>
+	
+	<insert id="insertCommunity" parameterType="string">
+		insert into board_name (name) values (#{name});
+	</insert>
+	
+	<update id="updateCommunity" parameterType="map">
+		update board_name
+		set name = #{name}
+		where gubun = #{gubun}
+	</update>
+	
+	<delete id="deleteCommunity" parameterType="int">
+		delete from board_name 
+		where gubun = #{gubun}
+	</delete>
+	
+	
+</mapper>
